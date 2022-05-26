@@ -1,17 +1,26 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components'; //use styles/theme.js everywhere you want
-import { GlobalStyle } from 'assets/styles/GlobalStyle';
-import { theme } from 'assets/styles/theme';
-import { Wrapper } from './Root.styles';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import About from 'components/templates/About/About';
+import AccountSettings from 'components/templates/AccountSettings/AccountSettings';
+import AllProducts from 'components/templates/AllProducts/AllProducts';
+import Basket from 'components/templates/Basket/Basket';
+import Home from 'components/templates/Home/Home';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
-import AddUser from './AddUser';
-import DashBoard from './DashBoard';
-import UsersProvider from 'providers/UsersProvider';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const Root = () => {
     return (
-        <h1>Hello World</h1>
+        <BrowserRouter>
+            <MainTemplate>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/allProducts" element={<AllProducts />} />
+                    <Route path="/accountSettings" element={<AccountSettings />} />
+                    <Route path="/basket" element={<Basket />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+                <h1>Hello world</h1>
+            </MainTemplate>
+        </BrowserRouter>
     );
 };
 export default Root;
