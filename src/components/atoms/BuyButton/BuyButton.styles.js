@@ -17,7 +17,8 @@ export const StyledButton = styled.button`
     margin-bottom: 4%;
 
     &:hover {
-        color: ${({ theme }) => theme.colors.success};
-        border: 1px solid ${({ theme }) => theme.colors.success};
+        background-color: ${({ theme }) => theme.colors.lightPurple};
+        color: ${({ theme }) => theme.colors.white};
+        border: 1px solid ${({ theme }) => theme.colors.error};
     }
 `;
