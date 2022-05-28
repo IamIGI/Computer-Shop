@@ -13,7 +13,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 //----------------------------------------------------------------------------
   
-  body {
+
+body {
+    background-color: white;
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -22,5 +24,6 @@ export const GlobalStyle = createGlobalStyle`
   
   a, button {
     font-family: 'Montserrat', sans-serif;
-  }
+  } 
+
 `;
