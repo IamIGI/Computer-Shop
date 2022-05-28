@@ -5,21 +5,29 @@ import Basket from 'components/templates/Basket/Basket';
 import Home from 'components/templates/Home/Home';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import React from 'react';
+import { theme } from 'assets/styles/theme';
+import { ThemeProvider } from 'styled-components'; //use styles/theme.js everywhere you want
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { GlobalStyle } from 'assets/styles/GlobalStyle';
+import { Wrapper } from './Root.styles';
 
 const Root = () => {
     return (
         <BrowserRouter>
-            <MainTemplate>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/allProducts" element={<AllProducts />} />
-                    <Route path="/accountSettings" element={<AccountSettings />} />
-                    <Route path="/basket" element={<Basket />} />
-                    <Route path="/about" element={<About />} />
-                </Routes>
-                <h1>Hello world</h1>
-            </MainTemplate>
+            <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <MainTemplate>
+                    <Wrapper>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/allProducts" element={<AllProducts />} />
+                            <Route path="/accountSettings" element={<AccountSettings />} />
+                            <Route path="/basket" element={<Basket />} />
+                            <Route path="/about" element={<About />} />
+                        </Routes>
+                    </Wrapper>
+                </MainTemplate>
+            </ThemeProvider>
         </BrowserRouter>
     );
 };
