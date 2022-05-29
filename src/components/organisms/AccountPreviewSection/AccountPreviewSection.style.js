@@ -9,3 +9,7 @@ export const Wrapper = styled.div`
     text-align: center;
     justify-content: center;
 `;
+
+export const Separator = styled.hr`
+    width: 70%;
+`;

@@ -10,6 +10,8 @@ import { ThemeProvider } from 'styled-components'; //use styles/theme.js everywh
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { Wrapper } from './Root.styles';
+import { products } from 'data/Products';
+import Product from 'components/templates/Product/Product';
 
 const Root = () => {
     return (
@@ -24,6 +26,9 @@ const Root = () => {
                             <Route path="/accountSettings" element={<AccountSettings />} />
                             <Route path="/basket" element={<Basket />} />
                             <Route path="/about" element={<About />} />
+                            {products.map((item) => (
+                                <Route path={`/product/${item.code}`} element={<Product product={item} />} />
+                            ))}
                         </Routes>
                     </Wrapper>
                 </MainTemplate>
