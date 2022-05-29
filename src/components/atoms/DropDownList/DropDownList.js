@@ -3,7 +3,6 @@ import { DropDownList, Title } from './DropDownList.style';
 import { useState } from 'react';
 
 const DropDownCheckbox = ({ filterData }) => {
-    console.log(filterData.filters);
     const [item, setItem] = useState(filterData.filters);
     return (
         <>

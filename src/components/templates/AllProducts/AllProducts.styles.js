@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     height: 100%;
@@ -13,7 +14,7 @@ export const Products = styled.div`
     height: 100%;
     width: 100%;
     grid-column: 2/3;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -30,6 +31,13 @@ export const Products = styled.div`
 `;
 
 export const ProductWrapper = styled.div`
+    a,
+    a:hover,
+    a:visited,
+    a:active {
+        color: inherit;
+        text-decoration: none;
+    }
     justify-content: left;
     text-align: left;
     margin: 15px 15px;
@@ -102,4 +110,8 @@ export const StyledRecord = styled.li`
         height: 1px;
         background-color: ${({ theme }) => theme.colors.grey};
     }
+`;
+
+export const Link = styled(NavLink)`
+    text-decoration: none;
 `;
