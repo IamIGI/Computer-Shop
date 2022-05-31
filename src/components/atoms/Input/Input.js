@@ -11,6 +11,6 @@ export const Input = styled.input`
     padding-right: 10px;
 
     &:hover {
-        border: 1px solid ${({ theme }) => theme.colors.darkPurple};
+        border: 1px solid ${({ theme }) => theme.colors.success};
     }
 `;

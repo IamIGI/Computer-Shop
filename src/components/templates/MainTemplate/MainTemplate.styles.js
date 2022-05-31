@@ -7,6 +7,5 @@ export const Wrapper = styled.div`
     display: grid;
     grid-template-rows: 125px 1fr 60px;
     grid-template-columns: 5% 1fr 300px 5%;
-    border: 1px dotted brown;
     /* overflow-y: hidden; */
 `;
