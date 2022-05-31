@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, Nav, SiteTitle, StyledLink } from './NavBar.styles';
+import { Wrapper, Nav, SiteTitle, StyledLink, List } from './NavBar.styles';
 import { NavLink } from 'react-router-dom';
 import { VscArchive, VscMilestone, VscAccount, VscVm, VscInspect } from 'react-icons/vsc';
 
@@ -17,33 +17,39 @@ const NavBar = () => {
     return (
         <Wrapper>
             <Nav>
-                <NavLink to="/">
-                    <SiteTitle>
-                        {' '}
-                        <span>
-                            <VscVm />
-                        </span>
-                        Computer Shop
-                    </SiteTitle>
-                </NavLink>
-                <ul>
+                <SiteTitle to="/">
+                    {' '}
+                    <span>
+                        <VscVm />
+                    </span>
+                    Computer Shop
+                </SiteTitle>
+                <List>
                     <CustomLink to="/allProducts">
-                        <VscInspect />
+                        <span>
+                            <VscInspect />
+                        </span>
                         Products
                     </CustomLink>
                     <CustomLink to="/accountSettings">
-                        {' '}
-                        <VscAccount /> Konto
+                        <span>
+                            <VscAccount />
+                        </span>
+                        Konto
                     </CustomLink>
                     <CustomLink to="/basket">
-                        {' '}
-                        <VscArchive /> Basket
+                        <span>
+                            <VscArchive />
+                        </span>
+                        Basket
                     </CustomLink>
                     <CustomLink to="/about">
-                        {' '}
-                        <VscMilestone /> About
+                        <span>
+                            <VscMilestone />
+                        </span>
+                        About
                     </CustomLink>
-                </ul>
+                </List>
             </Nav>
         </Wrapper>
     );

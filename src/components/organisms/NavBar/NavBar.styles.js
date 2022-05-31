@@ -14,7 +14,7 @@ export const Nav = styled.nav`
     background-color: white;
     height: 55px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px -10px rgba(0, 0, 0, 0.6);
+
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -33,25 +33,34 @@ export const Nav = styled.nav`
         text-decoration: none;
         display: flex;
         align-items: center;
-        /* padding: 0.25rem; */
     }
 `;
 
-export const SiteTitle = styled.a`
+export const SiteTitle = styled(NavLink)`
     padding: 3px;
     padding-right: 20px;
     border-radius: 15px 0 0 15px;
     font-size: ${({ theme }) => theme.fontSize.xxl};
-    background-color: ${({ theme }) => theme.colors.grey};
+    background-color: ${({ theme }) => theme.colors.lightPurple};
 
     span {
         padding-top: 10px;
         margin-left: 10px;
         margin-right: 10px;
     }
-    &:hover {
+    :hover {
+        background-color: ${({ theme }) => theme.colors.grey};
+
         span {
-            color: ${({ theme }) => theme.colors.lightOrangePro};
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+
+    &.active {
+        border-bottom: 2px solid ${({ theme }) => theme.colors.successDark};
+
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
         }
     }
 `;
@@ -59,15 +68,36 @@ export const SiteTitle = styled.a`
 export const StyledLink = styled(NavLink)`
     margin-top: 10px;
     font-size: ${({ theme }) => theme.fontSize.xl};
-    /* border-radius: 15px; */
-    box-shadow: 0 20px 2px -16px ${({ theme }) => theme.colors.lightDarkPro};
     padding: 0.25rem;
 
+    span {
+        margin-right: 5px;
+    }
+
     &:hover {
-        box-shadow: 0 20px 2px -16px ${({ theme }) => theme.colors.lightOrangePro};
+        border-bottom: 2px solid ${({ theme }) => theme.colors.success};
     }
 
     &.active {
-        box-shadow: 0 20px 2px -16px ${({ theme }) => theme.colors.OrangePro};
+        border-bottom: 2px solid ${({ theme }) => theme.colors.successDark};
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+
+    :hover {
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+`;
+
+export const List = styled.ul`
+    li {
+        :not(:first-child) {
+            padding-left: 50px;
+            border-left: 2px solid ${({ theme }) => theme.colors.grey};
+            /* border: 1px solid red; */
+        }
     }
 `;
