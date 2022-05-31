@@ -12,6 +12,14 @@ export const products = [
             'https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/3/pr_2021_3_9_12_16_36_358_07.jpg',
             'https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/3/pr_2021_3_9_12_16_25_594_01.jpg',
         ],
+
+        prevDataProduct: {
+            processor: 'Intel Core i5-11500H',
+            ram: '16GB',
+            graphic_card: 'Intel UHD Graphic',
+            screen_size: '15.6',
+        },
+
         description: [
             {
                 image: 'https://allegro.stati.pl/AllegroIMG/PRODUCENCI/DELL/Latitude-5521/dell-latitude-5521-porty.jpg',
@@ -142,7 +150,7 @@ export const products = [
                 description: '24 miesiące (gwarancja producenta)',
             },
             producent_code: {
-                description: 'Leopard | GP66 11UG-279XPL',
+                description: 'Leopard|GP66 11UG-279XPL',
             },
             Xigi_code: {
                 description: '677333',

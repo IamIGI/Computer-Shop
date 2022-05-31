@@ -1,10 +1,18 @@
 import React from 'react';
-import { LiDesc, LiName, List, LiWrapper } from './SpecificationList.style';
+import { LiDesc, LiName, List, LiWrapper, DescWrapper, IconTitle, ContentTitle, Line } from './SpecificationList.style';
+import { VscBook } from 'react-icons/vsc';
 
 const SpecificationList = ({ product }) => {
     const PS = product.specification;
     return (
         <>
+            <DescWrapper>
+                <IconTitle>
+                    <VscBook />
+                </IconTitle>
+                <ContentTitle>Specyfikacja</ContentTitle>
+                <Line />
+            </DescWrapper>
             <List>
                 <li>
                     <LiWrapper>

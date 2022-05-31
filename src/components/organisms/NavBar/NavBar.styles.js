@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const Wrapper = styled.div`
     grid-row: 1/1;
     grid-column: 1/5;
-    border: 1px solid pink;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
     padding: 2%;
     box-sizing: border-box;
     margin: 0;

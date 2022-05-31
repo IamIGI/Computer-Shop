@@ -5,7 +5,8 @@ export const Wrapper = styled.div`
     height: 100%;
     width: 100%;
     grid-column: 1/2;
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    border-right: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
 export const Title = styled.p`
