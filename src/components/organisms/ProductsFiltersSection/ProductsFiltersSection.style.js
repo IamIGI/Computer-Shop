@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     height: 100%;
     width: 100%;
     grid-column: 1/2;
-    /* border: 1px solid green; */
+    padding-right: 30px;
     border-right: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 

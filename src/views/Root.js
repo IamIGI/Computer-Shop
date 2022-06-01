@@ -12,6 +12,8 @@ import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { Wrapper } from './Root.styles';
 import { products } from 'data/Products';
 import Product from 'components/templates/Product/Product';
+import AccountSettingsSettings from 'components/organisms/AccountSettingsSettings/AccountSettingsSettings';
+import AccountSettingsOrders from 'components/organisms/AccountSettingsOrders/AccountSettingsOrders';
 
 const Root = () => {
     return (
@@ -21,11 +23,12 @@ const Root = () => {
                 <MainTemplate>
                     <Wrapper>
                         <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/allProducts" element={<AllProducts />} />
-                            <Route path="/accountSettings" element={<AccountSettings />} />
-                            <Route path="/basket" element={<Basket />} />
-                            <Route path="/about" element={<About />} />
+                            <Route path="" element={<Home />} />
+                            <Route path="allProducts" element={<AllProducts />} />
+                            <Route path="/accountSettings/Settings" element={<AccountSettingsSettings />} />
+                            <Route path="accountSettings/Orders" element={<AccountSettingsOrders />} />
+                            <Route path="basket" element={<Basket />} />
+                            <Route path="about" element={<About />} />
                             {products.map((item) => (
                                 <Route path={`/product/${item.code}`} element={<Product product={item} />} />
                             ))}

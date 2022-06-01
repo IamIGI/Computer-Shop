@@ -30,7 +30,7 @@ const NavBar = () => {
                         </span>
                         Products
                     </CustomLink>
-                    <CustomLink to="/accountSettings">
+                    <CustomLink to="accountSettings/Settings">
                         <span>
                             <VscAccount />
                         </span>
