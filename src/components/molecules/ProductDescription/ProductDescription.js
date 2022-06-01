@@ -1,19 +1,11 @@
-import { Separator } from 'components/organisms/AccountPreviewSection/AccountPreviewSection.style';
 import React from 'react';
-import { BsJustifyRight } from 'react-icons/bs';
+import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { VscBook } from 'react-icons/vsc';
-import { ContentTitle, DescWrapper, IconTitle, Line } from './ProductDescription.style';
 
 const ProductDescription = ({ product }) => {
     return (
         <>
-            <DescWrapper>
-                <IconTitle>
-                    <VscBook />
-                </IconTitle>
-                <ContentTitle>Opis </ContentTitle>
-                <Line />
-            </DescWrapper>
+            <SectionDescription title={'Opis'} icon={<VscBook />} />
             {product.description.map((item) => (
                 <>
                     <h3>{item.title}</h3>

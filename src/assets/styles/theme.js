@@ -1,7 +1,8 @@
 export const theme = {
     colors: {
         white: '#FFFFFF',
-        lightGrey: '#F7F8FA',
+        lightLightGrey: '#c7c6c3',
+        lightGrey: '#bfbfbf',
         grey: '#C0C7D6',
         darkGrey: '#737C8E',
         black: '#111111',
@@ -17,6 +18,7 @@ export const theme = {
         lightOrangePro: '#fcb040',
     },
     fontSize: {
+        omegaBigBrother: '100px',
         omegaBig: '50px',
         xxl: '34px',
         xl: '24px',

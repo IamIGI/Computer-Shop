@@ -1,6 +1,5 @@
 import React from 'react';
 import { Wrapper, Nav, SiteTitle, StyledLink, List } from './NavBar.styles';
-import { NavLink } from 'react-router-dom';
 import { VscArchive, VscMilestone, VscAccount, VscVm, VscInspect } from 'react-icons/vsc';
 
 function CustomLink({ to, children, ...props }) {

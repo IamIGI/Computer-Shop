@@ -1,6 +1,5 @@
 // https://www.npmjs.com/package/react-responsive-carousel
 import React from 'react';
-import Carousel from 'nuka-carousel';
 import { Carousel_ } from './CarouselAtom.style';
 
 const CarouselAtom = ({ images }) => {
