@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const HotShootWrapper = styled.div`
-    border: 1px solid orange;
     width: 100%;
     height: 100%;
     grid-column: 1/2;
@@ -9,7 +8,8 @@ export const HotShootWrapper = styled.div`
 `;
 
 export const RightTopWrapper = styled.div`
-    border: 1px solid black;
+    padding-top: 20px;
+    padding-right: 20px;
     width: 100%;
     height: 100%;
     grid-column: 2/2;
@@ -18,7 +18,6 @@ export const RightTopWrapper = styled.div`
 `;
 
 export const Advertisement = styled.div`
-    border: 3px solid green;
     width: 100%; //change carousel library, that one is .... no comment
     height: 100%;
     grid-row: 1/2;
@@ -30,7 +29,6 @@ export const Advertisement = styled.div`
 `;
 
 export const Recommended = styled.div`
-    border: 1px solid blue;
     width: 100%;
     height: 100%;
     grid-row: 2/2;

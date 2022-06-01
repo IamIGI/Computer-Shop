@@ -6,7 +6,4 @@ export const Wrapper = styled.div`
     padding-top: 24px;
     display: flex;
     justify-content: space-evenly;
-
-    /* align-content: center; */
-    /* flex-direction: row; */
 `;

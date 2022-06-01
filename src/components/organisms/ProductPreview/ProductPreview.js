@@ -4,9 +4,8 @@ import BuyButton from 'components/atoms/BuyButton/BuyButton';
 
 let Show = '';
 const ProductPreview = ({ products, allProducts }) => {
-    {
-        allProducts === 'yes' ? (Show = products.length) : (Show = 2);
-    }
+    allProducts === 'yes' ? (Show = products.length) : (Show = 2);
+
     return (
         <>
             {products.map((item, index) => (

@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
     border-radius: 20px;
     display: grid;
     grid-template-rows: 0.65fr 0.35fr;
-    background-color: ${({ theme }) => theme.colors.lightPurple}; ;
+    background-color: ${({ theme }) => theme.colors.lightPurple};
 `;
 
 export const TopWrapper = styled.div`
@@ -25,14 +25,6 @@ export const BottomWrapper = styled.div`
 export const DescriptionContent = styled.div`
     padding-left: 30px;
     grid-column: 1/2;
-    h2 {
-    }
-    p {
-    }
-    input {
-    }
-    button {
-    }
 `;
 
 export const Icon = styled.div`

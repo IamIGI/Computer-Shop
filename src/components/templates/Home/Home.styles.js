@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: 670px 1fr 300px;
+    grid-template-rows: 690px 1fr 300px;
     overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
@@ -17,7 +17,6 @@ export const Wrapper = styled.div`
 `;
 
 export const TopWrapper = styled.div`
-    border: 1px solid red;
     width: 100%;
     height: 100%;
     grid-row: 1/2;
@@ -25,7 +24,6 @@ export const TopWrapper = styled.div`
     grid-template-columns: 430px 1fr;
 `;
 export const MidWrapper = styled.div`
-    border: 1px solid blue;
     width: 100%;
     height: 100%;
     grid-row: 2/3;
@@ -33,7 +31,7 @@ export const MidWrapper = styled.div`
     grid-template-columns: 1fr 430px;
 `;
 export const BottomWrapper = styled.div`
-    border: 1px solid green;
+    margin-top: 50px;
     width: 100%;
     height: 100%;
     grid-row: 3/3;
