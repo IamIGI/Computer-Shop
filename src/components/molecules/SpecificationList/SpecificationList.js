@@ -1,18 +1,13 @@
 import React from 'react';
 import { LiDesc, LiName, List, LiWrapper, DescWrapper, IconTitle, ContentTitle, Line } from './SpecificationList.style';
-import { VscBook } from 'react-icons/vsc';
+import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
+import { VscListUnordered } from 'react-icons/vsc';
 
 const SpecificationList = ({ product }) => {
     const PS = product.specification;
     return (
         <>
-            <DescWrapper>
-                <IconTitle>
-                    <VscBook />
-                </IconTitle>
-                <ContentTitle>Specyfikacja</ContentTitle>
-                <Line />
-            </DescWrapper>
+            <SectionDescription title={'Specyfikacja'} icon={<VscListUnordered />} />
             <List>
                 <li>
                     <LiWrapper>

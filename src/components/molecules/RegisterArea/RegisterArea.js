@@ -3,8 +3,9 @@ import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
 import styled from 'styled-components';
-import { Bottom } from 'components/templates/AllProducts/AllProducts.styles';
+
 import { BsFillCaretUpFill } from 'react-icons/bs';
+import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.styles';
 
 const Wrapper = styled.div`
     display: flex;
