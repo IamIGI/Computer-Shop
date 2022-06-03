@@ -1,10 +1,15 @@
+import AccountMenu from 'components/molecules/AccountMenu/AccountMenu';
 import React from 'react';
+import { LeftWrapper, RightWrapper, Wrapper } from './AccountSettings.styles';
 
-const AccountSettings = () => {
+const AccountSettings = ({ children }) => {
     return (
-        <>
-            <h1>Konto</h1>
-        </>
+        <Wrapper>
+            <LeftWrapper>
+                <AccountMenu />
+            </LeftWrapper>
+            <RightWrapper>{children}</RightWrapper>
+        </Wrapper>
     );
 };
 
