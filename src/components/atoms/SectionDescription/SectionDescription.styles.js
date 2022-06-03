@@ -15,6 +15,7 @@ export const ContentTitle = styled.div`
     padding-top: 7px;
     margin-left: 30px;
     font-size: ${({ theme }) => theme.fontSize.xxl};
+    /* width: 50%; */
 `;
 
 export const Line = styled.div`

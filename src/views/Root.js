@@ -26,7 +26,7 @@ const Root = () => {
                             <Route path="" element={<Home />} />
                             <Route path="allProducts" element={<AllProducts />} />
                             <Route path="/accountSettings/Settings" element={<AccountSettingsSettings />} />
-                            <Route path="accountSettings/Orders" element={<AccountSettingsOrders />} />
+                            <Route path="/accountSettings/Orders" element={<AccountSettingsOrders />} />
                             <Route path="basket" element={<Basket />} />
                             <Route path="about" element={<About />} />
                             {products.map((item) => (

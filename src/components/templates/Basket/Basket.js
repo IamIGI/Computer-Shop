@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Basket = () => {
     return (
@@ -9,5 +8,4 @@ const Basket = () => {
     );
 };
 
-Basket.propTypes = {};
 export default Basket;

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
-    justify-content: center;
-    text-align: center; ;
+    display: flex;
+    padding-top: 4%;
+    /* text-align: center; */
+    flex-direction: column;
 `;

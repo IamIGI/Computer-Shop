@@ -24,12 +24,14 @@ export const RightWrapper = styled.div`
     display: flex;
     justify-content: left;
     flex-direction: column;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `;
-
-// export const AccountMenu = styled.div``;
-
-export const AccountData = styled.div``;
-
-export const AccountEntitlements = styled.div``;
-
-export const DeleteAccount = styled.div``;

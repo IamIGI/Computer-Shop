@@ -16,9 +16,24 @@ export const StyledLink = styled(NavLink)`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     div {
         margin-right: 10px;
+    }
+    border-bottom: 1px solid white;
+
+    :hover {
+        border-bottom: 1px solid ${({ theme }) => theme.colors.success};
+        span {
+            color: ${({ theme }) => theme.colors.success};
+        }
+    }
+
+    &.active {
+        border-bottom: 1px solid ${({ theme }) => theme.colors.success};
+        span {
+            color: ${({ theme }) => theme.colors.success};
+        }
     }
 `;
 

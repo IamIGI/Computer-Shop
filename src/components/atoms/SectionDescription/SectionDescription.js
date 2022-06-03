@@ -13,5 +13,4 @@ const SectionDescription = ({ title, icon }) => {
     );
 };
 
-SectionDescription.propTypes = {};
 export default SectionDescription;
