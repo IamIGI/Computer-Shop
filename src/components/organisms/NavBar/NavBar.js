@@ -21,7 +21,7 @@ const NavBar = () => {
                     <span>
                         <VscVm />
                     </span>
-                    Computer Shop
+                    HotShoot
                 </SiteTitle>
                 <List>
                     <CustomLink to="/allProducts">
