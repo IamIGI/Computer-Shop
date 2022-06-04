@@ -44,7 +44,6 @@ function RegisterArea(props) {
     return (
         <Wrapper>
             <form
-                className="create-note"
                 onSubmit={(event) => {
                     setInput('');
                     event.preventDefault();

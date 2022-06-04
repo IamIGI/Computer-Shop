@@ -21,7 +21,7 @@ export const ContentTitle = styled.div`
 export const Line = styled.div`
     margin-left: 30px;
     margin-right: 30px;
-    width: 95%;
+    width: 75%;
     margin-bottom: 40px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey}; ;
 `;
