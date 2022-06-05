@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Bottom, Link, StyledList, StyledRecord, Top, Wrapper } from './ProductPreview.styles';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 
+const baseURL = 'http://localhost:5000/products';
 let Show = '';
-const ProductPreview = ({ products, allProducts }) => {
-    allProducts === 'yes' ? (Show = products.length) : (Show = 2);
+const ProductPreview = ({ allProducts }) => {
+    //API section---------------------
+    const [products, setProducts] = useState([]);
 
+    useEffect(() => {
+        axios
+            .get(baseURL)
+            .then(({ data }) => {
+                setProducts(data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+    //--------------------------------------------
+    allProducts === 'yes' ? (Show = products.length) : (Show = 2);
     return (
         <>
             {products.map((item, index) => (
