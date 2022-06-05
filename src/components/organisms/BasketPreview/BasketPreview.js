@@ -22,7 +22,6 @@ const BasketPreview = () => {
                                 <p>5799,00zl</p>
                             </PriceArea>
                         </Section>
-                        <Line />
                     </li>
                     <li>
                         <Section>
@@ -40,7 +39,6 @@ const BasketPreview = () => {
                                 <p>5799,00zl</p>
                             </PriceArea>
                         </Section>
-                        <Line />
                     </li>
                 </List>
             </Wrapper>

@@ -5,14 +5,12 @@ export const Wrapper = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 500px;
-    border: 1px solid red;
 `;
 
 export const Main = styled.div`
     width: 100%;
     height: 100%;
     grid-column: 1/2;
-    border: 1px solid blue;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -34,10 +32,19 @@ export const Prev = styled.div`
     width: 100%;
     height: 100%;
     grid-column: 2/2;
-    border: 1px solid green;
+    border-left: 1px solid grey;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `;
 
 export const PrevWrapper = styled.div`
@@ -45,5 +52,5 @@ export const PrevWrapper = styled.div`
     width: 460px;
     height: auto;
     border: 1px solid grey;
-    border-radius: 30px;
+    border-radius: 40px;
 `;

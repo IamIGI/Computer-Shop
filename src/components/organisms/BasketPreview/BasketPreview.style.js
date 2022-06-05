@@ -45,13 +45,9 @@ export const PriceArea = styled.div`
 
 export const List = styled.div`
     list-style: none;
-    li {
-        margin: 2px 0;
-    }
-`;
 
-export const Line = styled.div`
-    margin-left: 10%;
-    width: 80%;
-    border-top: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    li:not(:last-child) {
+        /* margin: 2px 0; */
+        border-bottom: 1px solid grey;
+    }
 `;
