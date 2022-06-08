@@ -23,8 +23,6 @@ const ProductPreview = ({ allProducts }) => {
         <>
             {products.map((item, index) => (
                 <>
-                    {/* {console.log(products.length)} */}
-
                     {index < Show && (
                         <Link to={`/product/${item.code}`}>
                             <Wrapper>

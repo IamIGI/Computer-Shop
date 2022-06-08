@@ -30,7 +30,6 @@ const Root = () => {
     }, []);
     return (
         <>
-            {console.log(products)}
             {products === null ? (
                 <h1>Loading</h1>
             ) : (
