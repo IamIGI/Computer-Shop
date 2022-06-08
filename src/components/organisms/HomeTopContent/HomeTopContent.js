@@ -13,7 +13,6 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { AiOutlineHeart } from 'react-icons/ai';
 
 const HomeTopContent = () => {
-    console.log(products[0].img);
     return (
         <>
             <HotShootWrapper>

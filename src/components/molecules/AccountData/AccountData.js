@@ -32,44 +32,25 @@ const AccountData = () => {
                 <SectionChange>
                     <LabelArea>Imię</LabelArea>
                     <InputLocal onChange={handleChangesInput} value={inputValue.name} name="name" disabled="true" />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Imie', value: inputValue.name }])}>
-                        Zmień
-                    </ButtonLocal>
+                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Imie', value: inputValue.name }])}>Zmień</ButtonLocal>
                 </SectionChange>
 
                 <SectionChange>
                     <LabelArea>Nazwisko</LabelArea>
-                    <InputLocal
-                        onChange={handleChangesInput}
-                        value={inputValue.forname}
-                        name="forname"
-                        disabled="true"
-                    />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Nazwisko', value: inputValue.forname }])}>
-                        Zmień
-                    </ButtonLocal>
+                    <InputLocal onChange={handleChangesInput} value={inputValue.forname} name="forname" disabled="true" />
+                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Nazwisko', value: inputValue.forname }])}>Zmień</ButtonLocal>
                 </SectionChange>
 
                 <SectionChange>
                     <LabelArea>Email</LabelArea>
                     <InputLocal onChange={handleChangesInput} value={inputValue.email} name="email" disabled="true" />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Email', value: inputValue.email }])}>
-                        Zmień
-                    </ButtonLocal>
+                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Email', value: inputValue.email }])}>Zmień</ButtonLocal>
                 </SectionChange>
 
                 <SectionChange>
                     <LabelArea>Hasło</LabelArea>
-                    <InputLocal
-                        onChange={handleChangesInput}
-                        value={inputValue.password}
-                        name="password"
-                        type="password"
-                        disabled="true"
-                    />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Hasło', value: inputValue.password }])}>
-                        Zmień
-                    </ButtonLocal>
+                    <InputLocal onChange={handleChangesInput} value={inputValue.password} name="password" type="password" disabled="true" />
+                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'Hasło', value: inputValue.password }])}>Zmień</ButtonLocal>
                 </SectionChange>
 
                 <Modal open={isOpen} onClose={() => setIsOpen([false, {}])}>
