@@ -21,6 +21,7 @@ function LoginArea(props) {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({
         resolver: yupResolver(loginSchema),
     });
@@ -35,6 +36,8 @@ function LoginArea(props) {
                 console.log(data);
             })
             .catch((err) => console.log(err));
+
+        reset({ email: '', password: '' });
     };
     return (
         <div>
@@ -45,7 +48,7 @@ function LoginArea(props) {
                         <Input placeholder="E-mail (wymagane)" {...register('email')} />
                         <p>{errors.email && 'Niepoprawny Email'}</p>
                         <Input placeholder="Hasło (wymagane)" {...register('password')} />
-                        <p>{errors.password && 'min: 4 max: 5 chars'}</p>
+                        <p>{errors.password && 'min: 4 max: 5 znaków'}</p>
                         <Button type="submit"> Zaloguj sie </Button>
 
                         <WrapButton onClick={expand}>

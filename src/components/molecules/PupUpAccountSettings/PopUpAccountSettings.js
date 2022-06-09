@@ -7,6 +7,7 @@ import { accountSettingsEmail, accountSettingsStringField, accountSettingsPasswo
 
 const baseURL = `http://localhost:5000/userSettingsData`;
 let schema = '';
+let viewedName = '';
 
 const PopUpAccountSettings = ({ name, value }) => {
     const [inputValue, setInput] = useState('');
@@ -17,16 +18,20 @@ const PopUpAccountSettings = ({ name, value }) => {
     }
 
     switch (name) {
-        case 'Imie':
+        case 'firstName':
+            viewedName = 'Imie';
             schema = accountSettingsStringField;
             break;
-        case 'Nazwisko':
+        case 'lastName':
+            viewedName = 'Nazwisko';
             schema = accountSettingsStringField;
             break;
-        case 'Email':
+        case 'email':
+            viewedName = 'E-mail';
             schema = accountSettingsEmail;
             break;
-        case 'Hasło':
+        case 'hashedPassword':
+            viewedName = 'Hasło';
             schema = accountSettingsPassword;
             break;
         default:
@@ -45,6 +50,7 @@ const PopUpAccountSettings = ({ name, value }) => {
         console.log(editedField, password);
         axios
             .post(baseURL, {
+                fieldName: name,
                 email: 'igorigi1998@gmail.com',
                 edited: editedField,
                 hashedPassword: password,
@@ -60,7 +66,7 @@ const PopUpAccountSettings = ({ name, value }) => {
             <Wrapper>
                 <Title>
                     <h3>
-                        <span> Edytuj:</span> {name}
+                        <span> Edytuj:</span> {viewedName}
                     </h3>
                 </Title>
                 <FormSection>
