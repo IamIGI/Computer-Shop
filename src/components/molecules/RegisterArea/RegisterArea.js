@@ -14,6 +14,7 @@ const baseURL = `http://localhost:5000/register`;
 function RegisterArea(props) {
     const [isExpanded, setExpanded] = useState('false');
     const [emailStatus, setEmailStatus] = useState(false); //100 - okey, 101 - emailTaken
+    const [agreeToShopRules, setAgreeToShopRules] = useState(false);
 
     function expand() {
         isExpanded === 'false' ? setExpanded('true') : setExpanded('false');
@@ -24,28 +25,43 @@ function RegisterArea(props) {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({
         resolver: yupResolver(registerSchema),
     });
 
     const onSubmit = (data) => {
-        axios
-            .post(baseURL, {
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email,
-                hashedPassword: data.password,
-            })
-            .then(({ data }) => {
-                console.log(data);
-                if (data === 101) {
-                    // console.log('here');
-                    setEmailStatus(true);
-                } else {
-                    setEmailStatus(false);
-                }
-            })
-            .catch((err) => console.log(err));
+        if (data.shopRules === false) {
+            setAgreeToShopRules(true);
+        } else {
+            console.log(data);
+            axios
+                .post(baseURL, {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    hashedPassword: data.password,
+                    shopRules: data.shopRules,
+                    emailEnlistments: false,
+                    smsEnlistments: false,
+                    phoneEnlistments: false,
+                    adjustedOffersEnlistments: false,
+                })
+                .then(({ data }) => {
+                    console.log(data);
+                    if (data === 101) {
+                        // console.log('here');
+                        setEmailStatus(true);
+                    } else {
+                        setEmailStatus(false);
+                    }
+                })
+                .catch((err) => console.log(err));
+
+            setAgreeToShopRules(false);
+
+            reset({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '', shopRules: false });
+        }
     };
 
     return (
@@ -66,10 +82,11 @@ function RegisterArea(props) {
                         <Input placeholder="Powtórz hasło (wymagane)" {...register('confirmPassword')} />
                         <p>{errors.confirmPassword && 'Hasła musza się powtarzać'}</p>
 
-                        {/* <BottomRegister>
-                            <Checkbox onChange={handleChangesInput} value={inputValue} type="checkbox" />
+                        <BottomRegister>
+                            <Checkbox type="checkbox" {...register('shopRules')} />
                             <p>Akceptuj regulamin sklepu</p>
-                        </BottomRegister> */}
+                        </BottomRegister>
+                        <p>{agreeToShopRules && 'Zaakceptuj regulamin sklepu'}</p>
 
                         <Button type="submit"> Załóż konto! </Button>
                         <WrapButton onClick={expand}>

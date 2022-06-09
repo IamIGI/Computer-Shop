@@ -1,6 +1,7 @@
 import React from 'react';
 import { Description, Icon, Section, Wrapper } from './DeliveryPreview.style';
-import { BsTruck, BsInboxes, BsBoxSeam } from 'react-icons/bs';
+import { BsTruck, BsBoxSeam } from 'react-icons/bs';
+import { FaCashRegister } from 'react-icons/fa';
 
 const DeliveryPreview = () => {
     return (
@@ -13,6 +14,15 @@ const DeliveryPreview = () => {
                     <Description>
                         <h5>Sposób dostawy:</h5>
                         <p>Kurier-InPost,UPS,FedEX, DTS</p>
+                    </Description>
+                </Section>
+                <Section>
+                    <Icon>
+                        <FaCashRegister />
+                    </Icon>
+                    <Description>
+                        <h5>Sposób płatności:</h5>
+                        <p>Płatnośc Online</p>
                     </Description>
                 </Section>
                 <Section>

@@ -1,33 +1,38 @@
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import React, { useState } from 'react';
+import React from 'react';
 import { Wrapper, SectionTitle, LabelArea, SectionChange, CheckboxLocal } from './AccountEntitlements.style';
 import { GiStamper } from 'react-icons/gi';
 import { Button } from 'components/atoms/Button/Button';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { accountSettingsEnlistments } from 'data/FormSchema';
+import axios from 'axios';
 
-const initialConsentValue = {
-    offers: false,
-    sms: false,
-    phone: false,
-    matched: false,
-};
+const baseURL = `http://localhost:5000/userSettingsEnlistments`;
 
 const AccountEntitlements = () => {
-    const [checkboxs, setCheckboxs] = useState(initialConsentValue);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(accountSettingsEnlistments),
+    });
 
-    const handleCheckboxChange = (event) => {
-        const { name } = event.target;
-
-        setCheckboxs((prevValue) => {
-            return {
-                ...prevValue,
-                [name]: !prevValue[name],
-            };
-        });
-    };
-
-    const setChanges = (event) => {
-        console.log(checkboxs);
-        event.preventDefault(); //do not refresh website
+    const onSubmit = (data) => {
+        console.log(data);
+        axios
+            .post(baseURL, {
+                accountEmail: 'wojak@gmail.com',
+                email: data.email,
+                sms: data.sms,
+                phone: data.phone,
+                adjustedOffers: data.adjustedOffers,
+            })
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -36,46 +41,24 @@ const AccountEntitlements = () => {
                 <SectionDescription title={'Zgody'} icon={<GiStamper />} />
             </SectionTitle>
             <Wrapper>
-                <form onSubmit={setChanges}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <SectionChange>
-                        <CheckboxLocal
-                            type="checkbox"
-                            name="offers"
-                            value={checkboxs.offers}
-                            onChange={handleCheckboxChange}
-                        />
-                        <LabelArea>
-                            Chcę otrzymywać informacje o aktualnych ofertach oraz promocjach w wiadomości e‑mail
-                        </LabelArea>
+                        <CheckboxLocal type="checkbox" {...register('email')} />
+                        <LabelArea>Chcę otrzymywać informacje o aktualnych ofertach oraz promocjach w wiadomości e‑mail</LabelArea>
                     </SectionChange>
                     <SectionChange>
-                        <CheckboxLocal
-                            type="checkbox"
-                            name="sms"
-                            value={checkboxs.sms}
-                            onChange={handleCheckboxChange}
-                        />
+                        <CheckboxLocal type="checkbox" {...register('sms')} />
                         <LabelArea>Chcę otrzymywać wiadomości SMS.</LabelArea>
                     </SectionChange>
                     <SectionChange>
-                        <CheckboxLocal
-                            type="checkbox"
-                            name="phone"
-                            value={checkboxs.phone}
-                            onChange={handleCheckboxChange}
-                        />
+                        <CheckboxLocal type="checkbox" {...register('phone')} />
                         <LabelArea>Chcę otrzymywać informacje telefonicznie</LabelArea>
                     </SectionChange>
                     <SectionChange>
-                        <CheckboxLocal
-                            type="checkbox"
-                            name="matched"
-                            value={checkboxs.matched}
-                            onChange={handleCheckboxChange}
-                        />
+                        <CheckboxLocal type="checkbox" {...register('adjustedOffers')} />
                         <LabelArea>Chcę otrzymywać ofertę dopasowaną do moich potrzeb</LabelArea>
                     </SectionChange>
-                    <Button>Zapisz Zgody</Button>
+                    <Button type="submit">Zapisz Zgody</Button>
                 </form>
             </Wrapper>
         </>

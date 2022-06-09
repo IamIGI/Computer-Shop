@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ButtonWrapper, Description, Section, Title, Wrapper, SectionTitle } from './AccountDangerSection.style';
 import { Button } from 'components/atoms/Button/Button';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { FiAlertCircle } from 'react-icons/fi';
+import Modal from 'components/atoms/Modal/Modal';
+import PopUpAccountDelete from '../PupUpAccountDelete/PopUpAccountDelete';
 
 const AccountDangerSection = () => {
+    const [isOpen, setIsOpen] = useState([false, { DataName: '', value: '' }]);
+
     return (
         <>
             <SectionTitle>
@@ -17,8 +21,8 @@ const AccountDangerSection = () => {
                     </Title>
                     <Description>
                         <p>
-                            Dzięki tej opcji możesz wylogować się z naszej strony i aplikacji na wszystkich
-                            przeglądarkach i urządzeniach jednocześnie – również na tym, którego teraz używasz.
+                            Dzięki tej opcji możesz wylogować się z naszej strony i aplikacji na wszystkich przeglądarkach i urządzeniach jednocześnie
+                            – również na tym, którego teraz używasz.
                         </p>
                     </Description>
                     <ButtonWrapper>
@@ -31,19 +35,21 @@ const AccountDangerSection = () => {
                     </Title>
                     <Description>
                         <p>
-                            DJeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na
-                            pewno chcesz to zrobić – Twojego konta nie będziemy mogli przywrócić.
+                            Jeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na pewno chcesz to zrobić – Twojego
+                            konta nie będziemy mogli przywrócić.
                         </p>
                         <p>
-                            Jeśli chcesz zachować swoje konto, ale nie chcesz dostawać od nas wiadomości – odznacz zgody
-                            w ustawieniach powiadomień. Usuń konto
+                            Jeśli chcesz zachować swoje konto, ale nie chcesz dostawać od nas wiadomości – odznacz zgody w ustawieniach powiadomień.
                         </p>
                     </Description>
                     <ButtonWrapper>
-                        <Button>Usuń konto</Button>
+                        <Button onClick={() => setIsOpen([true, { DataName: 'DeleteAccount', value: 'password' }])}>Usuń konto</Button>
                     </ButtonWrapper>
                 </Section>
             </Wrapper>
+            <Modal open={isOpen} onClose={() => setIsOpen([false, {}])}>
+                <PopUpAccountDelete name={isOpen[1].DataName} />
+            </Modal>
         </>
     );
 };

@@ -4,9 +4,7 @@ import { Button } from '../Button/Button';
 export const Wrapper = styled.div`
     width: 300px;
     position: 'fixed';
-    top: 50%;
-    left: 50%;
-    transform: translate(70%, -110%);
+    transform: translate(70%, -120%);
     /* transform: translate(20%, -150%); */
     background-color: white;
     /* padding: 50px; */
