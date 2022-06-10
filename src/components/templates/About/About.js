@@ -1,54 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const productCode = 734914;
-
-const baseURL_ALL = 'http://localhost:5000/products';
-const baseURL_SPECIFIC = `http://localhost:5000/product/${productCode}`;
+import React from 'react';
 
 //TEST ZONE
 
 const About = () => {
-    const [product, setProducts] = useState(null);
-    // console.log(products === null);
-
-    // useEffect(() => {
-    //     axios
-    //         .get(baseURL_ALL)
-    //         .then(({ data }) => {
-    //             setProducts(data);
-    //         })
-    //         .catch((err) => console.log(err));
-    // }, []);
-
-    useEffect(() => {
-        axios
-            .get(baseURL_SPECIFIC)
-            .then(({ data }) => {
-                // console.log(data);
-                setProducts(data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+    //remove item from local storage
+    localStorage.removeItem('productInfo');
+    // try read again, but return null
+    const wartosc = JSON.parse(localStorage.getItem('productInfo'));
+    if (wartosc === null) {
+        console.log('Wartosc jest nullem');
+    } else {
+        console.log(wartosc.products);
+    }
 
     return (
         <>
-            {product === null ? (
-                <>
-                    {console.log(product)}
-                    <h1>Loading</h1>
-                </>
-            ) : (
-                <>
-                    {console.log(product)}
-                    {product.name}
-                    {product.price}
-                    {product.specification.processor.description}
-                    <h1>About</h1>
-                    {/* <p>{products[0].specification.processor.description}</p>
-                    <p>{products[0].img[2]}</p> */}
-                </>
-            )}
+            <h1>About</h1>
         </>
     );
 };

@@ -2,6 +2,10 @@ import React from 'react';
 import { BuyButton, NumberInput, Separator, Wrapper } from './ProductBuyContent.style';
 
 const ProductBuyContent = ({ product }) => {
+    //WriteToLocalStorage
+    const productInfo = { products: [305671, 302112] };
+    localStorage.setItem('productInfo', JSON.stringify(productInfo));
+
     return (
         <>
             <Wrapper>

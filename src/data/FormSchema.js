@@ -57,3 +57,14 @@ export const accountSettingsDelete = yup
         confirmPassword: yup.string().min(4).max(15).required(),
     })
     .required();
+
+export const recipientDetails = yup
+    .object({
+        name: yup.string().required(),
+        street: yup.string().required(),
+        zipCode: yup.string().required(),
+        place: yup.string().required(),
+        email: yup.string().email().required(),
+        phone: yup.number().required(),
+    })
+    .required();
