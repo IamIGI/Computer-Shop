@@ -5,26 +5,21 @@ import { FaRegBuilding } from 'react-icons/fa';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { MdOutlineDeliveryDining } from 'react-icons/md';
 
-const initDeliveryCheckboxes = { deliveryMan: false, atTheSalon: false, locker: false };
+// const initDeliveryCheckboxes = { deliveryMan: false, atTheSalon: false, locker: false };
 
-const DeliveryOptions = () => {
-    const [deliveryCheckboxes, setDeliveryCheckboxes] = useState(initDeliveryCheckboxes);
-
+const DeliveryOptions = ({ initDeliveryCheckboxesOpt, deliveryCheckboxesOpt, setDeliveryCheckboxesOpt }) => {
     const setState = ({ target }) => {
         let setValue = '';
         const { name } = target;
-        if (deliveryCheckboxes[name] === true) {
+        if (deliveryCheckboxesOpt[name] === true) {
             setValue = false;
-            console.log('here');
         } else {
             setValue = true;
         }
-        setDeliveryCheckboxes(() => {
-            return { ...initDeliveryCheckboxes, [name]: setValue };
+        setDeliveryCheckboxesOpt(() => {
+            return { ...initDeliveryCheckboxesOpt, [name]: setValue };
         });
     };
-
-    console.log(deliveryCheckboxes);
 
     return (
         <>
@@ -33,7 +28,7 @@ const DeliveryOptions = () => {
             </SectionTitle>
             <Wrapper>
                 <Section>
-                    <CheckboxLocal type="checkbox" name="deliveryMan" checked={deliveryCheckboxes.deliveryMan} onClick={setState} />
+                    <CheckboxLocal type="checkbox" name="deliveryMan" checked={deliveryCheckboxesOpt.deliveryMan} onClick={setState} />
                     <Description>
                         <h4>Kurier – InPost, UPS, FedEx, DTS bezpłatnie</h4>
                         <p>Zamówienie dostaniesz: wtorek, 7.06</p>
@@ -43,7 +38,7 @@ const DeliveryOptions = () => {
                     </Icon>
                 </Section>
                 <Section>
-                    <CheckboxLocal type="checkbox" name="atTheSalon" checked={deliveryCheckboxes.atTheSalon} onChange={setState} />
+                    <CheckboxLocal type="checkbox" name="atTheSalon" checked={deliveryCheckboxesOpt.atTheSalon} onClick={setState} />
                     <Description>
                         <h4>Odbiór w salonie HotShoot</h4>
                         <p>Aktualna możliwośc odbioru, tylko: Kraków, ul. Czarnowiejska 66 Budynek B5</p>
@@ -53,7 +48,7 @@ const DeliveryOptions = () => {
                     </Icon>
                 </Section>
                 <Section>
-                    <CheckboxLocal type="checkbox" name="locker" checked={deliveryCheckboxes.locker} onChange={setState} />
+                    <CheckboxLocal type="checkbox" name="locker" checked={deliveryCheckboxesOpt.locker} onClick={setState} />
                     <Description>
                         <h4>Paczkomat 24/7</h4>
                         <p>Aktualna możliwośc odbioru, tylko: Paczkomat KRA35A Reymonta 17 Kraków</p>
