@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { DescriptionArea, ImageArea, PriceArea, Section, Wrapper, List, Icon, DescriptionAreaMissing } from './BasketPreview.style';
+import {
+    DescriptionArea,
+    ImageArea,
+    PriceArea,
+    Section,
+    Wrapper,
+    List,
+    Icon,
+    DescriptionAreaMissing,
+    DescriptionBottom,
+    StyledButton,
+} from './BasketPreview.style';
 import axios from 'axios';
 import { BsBasket3 } from 'react-icons/bs';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { MdDataSaverOff, MdImportExport } from 'react-icons/md';
 
-let array = [];
-
+let basketInit = null;
 const BasketPreview = () => {
+    if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
+        basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
+    }
     const [theProducts, setProducts] = useState([]);
-
-    //pobieranie listy produktow
-    const basket = JSON.parse(localStorage.getItem('productsInBasket'));
+    const [basket, setBasket] = useState(basketInit);
 
     useEffect(() => {
         if (basket !== null) {
             Promise.all(
-                basket.products.map((code) => {
-                    console.log(code);
+                basket.map((code) => {
                     const baseURL = `http://localhost:5000/product/${code}`;
                     axios
                         .get(baseURL)
                         .then(({ data }) => {
-                            // array.push({ name: data.name, prevImg: data.prevImg, price: data.price, code: data.code });
                             const item = { name: data.name, prevImg: data.prevImg, price: data.price, code: data.code };
                             setProducts((prevItems) => {
                                 return [...prevItems, item];
@@ -32,9 +43,30 @@ const BasketPreview = () => {
         }
     }, []);
 
-    if (theProducts !== []) {
-        console.log(theProducts);
-    }
+    const deleteProduct = (code) => {
+        console.log('Usuwanie');
+
+        let oldBasket = JSON.parse(localStorage.getItem('productsInBasket')).products;
+        console.log(oldBasket.length);
+
+        if (oldBasket.length === 1) {
+            console.log('here');
+            localStorage.removeItem('productsInBasket');
+            setBasket(null);
+        } else {
+            let temp = oldBasket.filter((item) => {
+                return item !== code;
+            });
+            let newBasket = { products: temp };
+            localStorage.setItem('productsInBasket', JSON.stringify(newBasket));
+        }
+
+        setProducts((prevItems) => {
+            return prevItems.filter((item) => {
+                return item.code !== code;
+            });
+        });
+    };
 
     return (
         <>
@@ -69,16 +101,24 @@ const BasketPreview = () => {
                                     </>
                                 ) : (
                                     <>
-                                        {theProducts.map((item) => (
+                                        {theProducts.map((item, index) => (
                                             <>
-                                                <li key={item.code}>
+                                                <li key={index} id={index}>
                                                     <Section>
                                                         <ImageArea>
                                                             <img src={item.prevImg} alt="Product img" />
                                                         </ImageArea>
                                                         <DescriptionArea>
                                                             <h4>{item.name}</h4>
-                                                            <p>1 szt.</p>
+                                                            <DescriptionBottom>
+                                                                <div>1 szt.</div>
+                                                                <div>
+                                                                    <StyledButton onClick={() => deleteProduct(item.code)}>
+                                                                        {/* you give all the props, f.e: onClick given in UsersListItem */}
+                                                                        <AiOutlineDelete />
+                                                                    </StyledButton>
+                                                                </div>
+                                                            </DescriptionBottom>
                                                         </DescriptionArea>
                                                         <PriceArea>
                                                             <p>{item.price},00 zł</p>
