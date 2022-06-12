@@ -13,6 +13,7 @@ import Product from 'components/templates/Product/Product';
 import AccountSettingsSettings from 'components/organisms/AccountSettingsSettings/AccountSettingsSettings';
 import AccountSettingsOrders from 'components/organisms/AccountSettingsOrders/AccountSettingsOrders';
 import axios from 'axios';
+import UserProvider from 'context/UserContext';
 
 const baseURL = 'http://localhost:5000/products';
 

@@ -2,12 +2,12 @@ import React from 'react';
 import { FinishSection, List, ListSection, LocalButton, Name, Price, Section, Wrapper } from './PaymentPreview.style';
 
 const PaymentPreview = ({ priceToPay, setFinishOrder }) => {
-    // const finishHandler = () => {
-    //     console.log('Zakoncz Platnosc');
-    //     setFinishOrder(() => {
-    //         return true;
-    //     });
-    // };
+    const finishHandler = () => {
+        console.log('Klinieto: Zakoncz Platnosc');
+        setFinishOrder(() => {
+            return true;
+        });
+    };
 
     return (
         <>
@@ -41,15 +41,7 @@ const PaymentPreview = ({ priceToPay, setFinishOrder }) => {
                     </List>
                 </Section>
                 <FinishSection>
-                    <LocalButton
-                        onClick={() => {
-                            setFinishOrder(() => {
-                                return true;
-                            });
-                        }}
-                    >
-                        Zakończ
-                    </LocalButton>
+                    <LocalButton onClick={finishHandler}>Zakończ</LocalButton>
                 </FinishSection>
             </Wrapper>
         </>

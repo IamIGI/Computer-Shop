@@ -1,20 +1,14 @@
-import React from 'react';
+import { UserContext } from 'context/UserContext';
+import React, { useContext } from 'react';
 
 //TEST ZONE
 
 const About = () => {
-    //remove item from local storage
-    localStorage.removeItem('productsInBasket');
-    // try read again, but return null
-    const wartosc = JSON.parse(localStorage.getItem('productsInBasket'));
-    if (wartosc === null) {
-        console.log('Wartosc jest nullem');
-    } else {
-        console.log(wartosc.products);
-    }
-
+    const { userData } = useContext(UserContext);
+    console.log(userData);
     return (
         <>
+            {userData.userLogged}
             <h1>About</h1>
         </>
     );

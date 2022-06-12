@@ -6,6 +6,7 @@ import PaymentOptions from 'components/organisms/PaymentOptions/PaymentOptions';
 import React, { useEffect, useState } from 'react';
 import { Wrapper, Main, Prev, PrevWrapper } from './Basket.styles';
 import PaymentPreview from 'components/organisms/PaymentPreview/PaymentPreview';
+import axios from 'axios';
 
 const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
 const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
@@ -17,15 +18,25 @@ const initRecipientDetails = {
     email: '',
     phone: '',
 };
+let basketInit = null;
+
+const baseURL = `http://localhost:5000/order`;
+
 const Basket = () => {
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useState(initDeliveryCheckboxesOpt);
     const [deliveryCheckboxesPay, setDeliveryCheckboxesPay] = useState(initDeliveryCheckboxesPay);
     const [orderData, setOrderData] = useState(initRecipientDetails);
     const [priceToPay, setPriceToPay] = useState(0);
     const { street } = orderData;
+    const [theProducts, setProducts] = useState([]);
     const [productsInBasket, setProductsInBasket] = useState(null);
     const [orderDocument, setOrderDocument] = useState(null);
     const [finishOrder, setFinishOrder] = useState(false);
+
+    if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
+        basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
+    }
+    const [basket, setBasket] = useState(basketInit);
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -65,8 +76,6 @@ const Basket = () => {
                 recipientDetails: orderData,
             },
         };
-        console.log('Podglad dokumentu');
-        console.log(orderTemplateDocument);
 
         //check is it document ready to send
 
@@ -74,12 +83,38 @@ const Basket = () => {
         const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;
         const { email } = recipientDetails;
 
-        console.log(finishOrder);
+        //main statement
+        if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
+            if (finishOrder === true) {
+                axios
+                    .post(baseURL, {
+                        orderTemplateDocument,
+                    })
+                    .then(({ data }) => {
+                        console.log(data);
+                    })
+                    .catch((err) => console.log(err));
 
-        if (finishOrder === true && price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
-            console.log('Dokument wysłany');
+                // let userExists = JSON.parse(localStorage.getItem('user'));
+                // if (userExists !== null) {
+                //     console.log(userExists.userLogged);
+                // }
+
+                //clearData
+
+                localStorage.removeItem('productsInBasket');
+                setBasket(null);
+                setProducts([]);
+                setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
+                setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
+                setOrderData(initRecipientDetails);
+
+                setFinishOrder(false);
+            }
+        } else {
+            setFinishOrder(false);
         }
-    }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, productsInBasket]);
+    }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, productsInBasket, finishOrder]);
 
     return (
         <Wrapper>
@@ -98,7 +133,14 @@ const Basket = () => {
             </Main>
             <Prev>
                 <PrevWrapper>
-                    <BasketPreview setPriceToPay={setPriceToPay} setProductsInBasket={setProductsInBasket} />
+                    <BasketPreview
+                        setPriceToPay={setPriceToPay}
+                        setProductsInBasket={setProductsInBasket}
+                        theProducts={theProducts}
+                        setProducts={setProducts}
+                        basket={basket}
+                        setBasket={setBasket}
+                    />
                     <DeliveryPreview
                         deliveryCheckboxesPay={deliveryCheckboxesPay}
                         deliveryCheckboxesOpt={deliveryCheckboxesOpt}
