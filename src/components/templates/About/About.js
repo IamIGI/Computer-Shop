@@ -4,9 +4,9 @@ import React from 'react';
 
 const About = () => {
     //remove item from local storage
-    localStorage.removeItem('productInfo');
+    localStorage.removeItem('productsInBasket');
     // try read again, but return null
-    const wartosc = JSON.parse(localStorage.getItem('productInfo'));
+    const wartosc = JSON.parse(localStorage.getItem('productsInBasket'));
     if (wartosc === null) {
         console.log('Wartosc jest nullem');
     } else {
