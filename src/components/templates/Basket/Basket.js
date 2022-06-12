@@ -21,8 +21,9 @@ const Basket = () => {
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useState(initDeliveryCheckboxesOpt);
     const [deliveryCheckboxesPay, setDeliveryCheckboxesPay] = useState(initDeliveryCheckboxesPay);
     const [orderData, setOrderData] = useState(initRecipientDetails);
-
+    const [priceToPay, setPriceToPay] = useState(0);
     const { street } = orderData;
+
     return (
         <Wrapper>
             <Main>
@@ -40,13 +41,13 @@ const Basket = () => {
             </Main>
             <Prev>
                 <PrevWrapper>
-                    <BasketPreview />
+                    <BasketPreview setPriceToPay={setPriceToPay} />
                     <DeliveryPreview
                         deliveryCheckboxesPay={deliveryCheckboxesPay}
                         deliveryCheckboxesOpt={deliveryCheckboxesOpt}
                         orderStreet={street}
                     />
-                    <PaymentPreview />
+                    <PaymentPreview priceToPay={priceToPay} />
                 </PrevWrapper>
             </Prev>
         </Wrapper>

@@ -14,10 +14,9 @@ import {
 import axios from 'axios';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { MdDataSaverOff, MdImportExport } from 'react-icons/md';
 
 let basketInit = null;
-const BasketPreview = () => {
+const BasketPreview = ({ setPriceToPay }) => {
     if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
         basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
     }
@@ -44,15 +43,14 @@ const BasketPreview = () => {
     }, []);
 
     const deleteProduct = (code) => {
-        console.log('Usuwanie');
-
         let oldBasket = JSON.parse(localStorage.getItem('productsInBasket')).products;
-        console.log(oldBasket.length);
 
         if (oldBasket.length === 1) {
-            console.log('here');
             localStorage.removeItem('productsInBasket');
             setBasket(null);
+            setPriceToPay(() => {
+                return 0;
+            });
         } else {
             let temp = oldBasket.filter((item) => {
                 return item !== code;
@@ -68,13 +66,22 @@ const BasketPreview = () => {
         });
     };
 
+    useEffect(() => {
+        let temp = 0;
+        theProducts.map((item) => {
+            temp += item.price;
+        });
+        setPriceToPay(() => {
+            return temp;
+        });
+    }, [theProducts]);
+
     return (
         <>
             <Wrapper>
                 <List>
                     {basket === null ? (
                         <>
-                            {console.log('Brak produktow')}
                             <Section>
                                 <Icon>
                                     <BsBasket3 />
@@ -86,7 +93,6 @@ const BasketPreview = () => {
                         </>
                     ) : (
                         <>
-                            {console.log('Produkty w koszyku')}
                             <>
                                 {theProducts === [] ? (
                                     <>
