@@ -51,13 +51,13 @@ const showDeliveryMethod = (deliveryCheckboxesOpt) => {
 
     switch (deliveryOptionOpt) {
         case 'deliveryMan':
-            deliveryDescriptionOpt = 'Płatność online';
+            deliveryDescriptionOpt = 'Kurier';
             break;
         case 'atTheSalon':
-            deliveryDescriptionOpt = 'Karta płatnicza online';
+            deliveryDescriptionOpt = 'Odbiór w salonie';
             break;
         case 'locker':
-            deliveryDescriptionOpt = 'Przelew gotówkowy';
+            deliveryDescriptionOpt = 'Paczkomat 24/7';
             break;
 
         default:

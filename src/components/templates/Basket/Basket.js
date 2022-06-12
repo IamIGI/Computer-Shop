@@ -3,7 +3,7 @@ import DeliveryOptions from 'components/organisms/DeliveryOptions/DeliveryOption
 import OrderForm from 'components/organisms/OderForm/OderForm';
 import DeliveryPreview from 'components/organisms/DeliveryPreview/DeliveryPreview';
 import PaymentOptions from 'components/organisms/PaymentOptions/PaymentOptions';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wrapper, Main, Prev, PrevWrapper } from './Basket.styles';
 import PaymentPreview from 'components/organisms/PaymentPreview/PaymentPreview';
 
@@ -23,6 +23,63 @@ const Basket = () => {
     const [orderData, setOrderData] = useState(initRecipientDetails);
     const [priceToPay, setPriceToPay] = useState(0);
     const { street } = orderData;
+    const [productsInBasket, setProductsInBasket] = useState(null);
+    const [orderDocument, setOrderDocument] = useState(null);
+    const [finishOrder, setFinishOrder] = useState(false);
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    useEffect(() => {
+        //make orderDocument
+        //temp variables
+        let tempOpt = '';
+        let tempPay = '';
+        let orderDocument = '';
+        let orderTemplateDocument = {};
+        //logic---------------------------
+        Object.values(deliveryCheckboxesOpt).map((x, index) => {
+            if (x === true) {
+                tempOpt = Object.keys(deliveryCheckboxesOpt)[index];
+            }
+        });
+
+        Object.values(deliveryCheckboxesPay).map((x, index) => {
+            if (x === true) {
+                tempPay = Object.keys(deliveryCheckboxesPay)[index];
+            }
+        });
+
+        const orderCode = getRandomInt(0, 1000000);
+
+        orderTemplateDocument = {
+            orderCode: orderCode,
+            products: productsInBasket,
+            transactionInfo: {
+                deliveryMethod: tempOpt,
+                paymentMethod: tempPay,
+                price: priceToPay,
+                recipientDetails: orderData,
+            },
+        };
+        console.log('Podglad dokumentu');
+        console.log(orderTemplateDocument);
+
+        //check is it document ready to send
+
+        const { transactionInfo } = orderTemplateDocument;
+        const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;
+        const { email } = recipientDetails;
+
+        console.log(finishOrder);
+
+        if (finishOrder === true && price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
+            console.log('Dokument wysłany');
+        }
+    }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, productsInBasket]);
 
     return (
         <Wrapper>
@@ -41,13 +98,13 @@ const Basket = () => {
             </Main>
             <Prev>
                 <PrevWrapper>
-                    <BasketPreview setPriceToPay={setPriceToPay} />
+                    <BasketPreview setPriceToPay={setPriceToPay} setProductsInBasket={setProductsInBasket} />
                     <DeliveryPreview
                         deliveryCheckboxesPay={deliveryCheckboxesPay}
                         deliveryCheckboxesOpt={deliveryCheckboxesOpt}
                         orderStreet={street}
                     />
-                    <PaymentPreview priceToPay={priceToPay} />
+                    <PaymentPreview priceToPay={priceToPay} setFinishOrder={setFinishOrder} />
                 </PrevWrapper>
             </Prev>
         </Wrapper>
