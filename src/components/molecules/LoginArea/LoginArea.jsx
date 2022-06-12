@@ -32,8 +32,12 @@ function LoginArea(props) {
                 email: data.email,
                 hashedPassword: data.password,
             })
-            .then(({ data }) => {
-                console.log(data);
+            .then(({ data: response }) => {
+                if (response.login === 100) {
+                    console.log('Autoryzacja uzytkownika');
+                    let userData = { userLogged: data.email };
+                    localStorage.setItem('user', JSON.stringify(userData));
+                }
             })
             .catch((err) => console.log(err));
 

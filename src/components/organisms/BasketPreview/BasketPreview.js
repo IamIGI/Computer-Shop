@@ -15,14 +15,7 @@ import axios from 'axios';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-let basketInit = null;
-const BasketPreview = ({ setPriceToPay, setProductsInBasket }) => {
-    if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
-        basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
-    }
-    const [theProducts, setProducts] = useState([]);
-    const [basket, setBasket] = useState(basketInit);
-
+const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts, basket, setBasket }) => {
     useEffect(() => {
         if (basket !== null) {
             Promise.all(
