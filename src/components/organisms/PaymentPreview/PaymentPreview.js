@@ -1,7 +1,7 @@
 import React from 'react';
 import { FinishSection, List, ListSection, LocalButton, Name, Price, Section, Wrapper } from './PaymentPreview.style';
 
-const PaymentPreview = () => {
+const PaymentPreview = ({ priceToPay }) => {
     return (
         <>
             <Wrapper>
@@ -10,7 +10,7 @@ const PaymentPreview = () => {
                         <li>
                             <ListSection>
                                 <Name>Wartość koszyka</Name>
-                                <Price>5 799,00zł</Price>
+                                <Price>{priceToPay},00zł</Price>
                             </ListSection>
                         </li>
                         <li>
@@ -28,7 +28,7 @@ const PaymentPreview = () => {
                         <li>
                             <ListSection>
                                 <Name>Podsumowanie </Name>
-                                <Price>5 808,99zł</Price>
+                                <Price>{priceToPay + 9.99} zł</Price>
                             </ListSection>
                         </li>
                     </List>

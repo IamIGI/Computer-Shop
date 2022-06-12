@@ -98,7 +98,7 @@ const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt, orderSt
                     </Icon>
                     <Description>
                         <h5>Miejsce dostarczenia:</h5>
-                        <p>{orderStreet}</p>
+                        {orderStreet === '' ? <p>Wypełnij formularz</p> : <p>{orderStreet}</p>}
                     </Description>
                 </Section>
                 <Section>
