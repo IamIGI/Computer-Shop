@@ -16,7 +16,7 @@ import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 let basketInit = null;
-const BasketPreview = ({ setPriceToPay }) => {
+const BasketPreview = ({ setPriceToPay, setProductsInBasket }) => {
     if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
         basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
     }
@@ -73,6 +73,10 @@ const BasketPreview = ({ setPriceToPay }) => {
         });
         setPriceToPay(() => {
             return temp;
+        });
+
+        setProductsInBasket(() => {
+            return theProducts;
         });
     }, [theProducts]);
 
