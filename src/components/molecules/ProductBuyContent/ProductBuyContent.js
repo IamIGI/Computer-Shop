@@ -2,16 +2,23 @@ import React from 'react';
 import { BuyButton, NumberInput, Separator, Wrapper } from './ProductBuyContent.style';
 
 const ProductBuyContent = ({ product }) => {
-    //WriteToLocalStorage
-    const productInfo = { products: [305671, 302112] };
-    localStorage.setItem('productInfo', JSON.stringify(productInfo));
+    const addProduct = () => {
+        let basket = JSON.parse(localStorage.getItem('productsInBasket'));
+        if (basket == null) {
+            let addedProduct = { products: [product.code] };
+            localStorage.setItem('productsInBasket', JSON.stringify(addedProduct));
+        } else {
+            basket.products.push(product.code);
+            localStorage.setItem('productsInBasket', JSON.stringify(basket));
+        }
+    };
 
     return (
         <>
             <Wrapper>
                 <h1>{product.price},00 zł</h1>
                 <NumberInput placeholder="1" />
-                <BuyButton>Dodaj do koszyka</BuyButton>
+                <BuyButton onClick={addProduct}>Dodaj do koszyka</BuyButton>
                 <p>
                     Wydłużony czas dostawy <br />
                     <a>

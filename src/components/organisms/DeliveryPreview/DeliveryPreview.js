@@ -1,7 +1,8 @@
 import React from 'react';
 import { Description, Icon, Section, Wrapper } from './DeliveryPreview.style';
-import { BsTruck, BsBoxSeam } from 'react-icons/bs';
+import { BsTruck, BsCalendarEvent } from 'react-icons/bs';
 import { FaCashRegister } from 'react-icons/fa';
+import { GrHomeRounded } from 'react-icons/gr';
 
 const showPaymentMethod = (deliveryCheckboxesPay) => {
     let deliveryOptionPay = '';
@@ -67,7 +68,7 @@ const showDeliveryMethod = (deliveryCheckboxesOpt) => {
     return deliveryDescriptionOpt;
 };
 
-const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt }) => {
+const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt, orderStreet }) => {
     let deliveryDescriptionPay = showPaymentMethod(deliveryCheckboxesPay);
     let deliveryDescriptionOpt = showDeliveryMethod(deliveryCheckboxesOpt);
     return (
@@ -93,10 +94,19 @@ const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt }) => {
                 </Section>
                 <Section>
                     <Icon>
-                        <BsBoxSeam />
+                        <GrHomeRounded />
                     </Icon>
                     <Description>
-                        <h5>Zamówienie dostaniesz:</h5>
+                        <h5>Miejsce dostarczenia:</h5>
+                        <p>{orderStreet}</p>
+                    </Description>
+                </Section>
+                <Section>
+                    <Icon>
+                        <BsCalendarEvent />
+                    </Icon>
+                    <Description>
+                        <h5>Data dostarczenia:</h5>
                         <p>pojutrze, 7.06</p>
                     </Description>
                 </Section>

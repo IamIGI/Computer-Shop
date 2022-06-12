@@ -22,11 +22,7 @@ const Basket = () => {
     const [deliveryCheckboxesPay, setDeliveryCheckboxesPay] = useState(initDeliveryCheckboxesPay);
     const [orderData, setOrderData] = useState(initRecipientDetails);
 
-    //read from localStorage
-    const wartosc = JSON.parse(localStorage.getItem('productInfo'));
-    console.log(wartosc.products);
-
-    // console.log(orderData);
+    const { street } = orderData;
     return (
         <Wrapper>
             <Main>
@@ -45,7 +41,11 @@ const Basket = () => {
             <Prev>
                 <PrevWrapper>
                     <BasketPreview />
-                    <DeliveryPreview deliveryCheckboxesPay={deliveryCheckboxesPay} deliveryCheckboxesOpt={deliveryCheckboxesOpt} />
+                    <DeliveryPreview
+                        deliveryCheckboxesPay={deliveryCheckboxesPay}
+                        deliveryCheckboxesOpt={deliveryCheckboxesOpt}
+                        orderStreet={street}
+                    />
                     <PaymentPreview />
                 </PrevWrapper>
             </Prev>

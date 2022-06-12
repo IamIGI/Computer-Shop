@@ -51,3 +51,18 @@ export const List = styled.div`
         border-bottom: 1px solid grey;
     }
 `;
+
+export const Icon = styled.div`
+    justify-content: center;
+    text-align: center;
+    margin: 25px 44px;
+    font-size: ${({ theme }) => theme.fontSize.xxl};
+`;
+
+export const DescriptionAreaMissing = styled.div`
+    margin-right: 20px;
+    margin-top: 12px;
+    p {
+        color: ${({ theme }) => theme.colors.darkGrey};
+    }
+`;

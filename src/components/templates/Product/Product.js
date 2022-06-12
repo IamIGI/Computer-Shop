@@ -24,7 +24,6 @@ const Product = ({ code }) => {
             <>
                 {product === null ? (
                     <>
-                        {console.log(product)}
                         <h1>Loading</h1>
                     </>
                 ) : (
