@@ -23,7 +23,7 @@ const AccountEntitlements = () => {
         console.log(data);
         axios
             .post(baseURL, {
-                accountEmail: 'wojak@gmail.com',
+                accountEmail: 'igorigi1998@gmail.com',
                 email: data.email,
                 sms: data.sms,
                 phone: data.phone,
