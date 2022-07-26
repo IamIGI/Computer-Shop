@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 
-export const UserContext = React.createContext();
+export const UserContext = createContext();
+let value = {};
 
 const UserProvider = ({ children }) => {
-    let value = {
-        userData: null,
-    };
+    const [userAuth, setUserAuth] = useState(() => {
+        const localData = localStorage.getItem('user');
+        console.log(localData);
+        return localData ? JSON.parse(localData) : 'no User authenticated';
+    });
+    // const [userAuth, setUserAuth] = useState('peach');
 
-    let userExists = JSON.parse(localStorage.getItem('user'));
-    if (userExists !== null) {
-        // console.log(userExists.userLogged);
-        value = {
-            userData: userExists,
-        };
-    } else {
-        value = {
-            userData: null,
-        };
-    }
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(userAuth));
+        // setUserAuth(userData ? userData : null);
+    }, [userAuth]);
 
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+    return <UserContext.Provider value={{ userAuth, setUserAuth }}>{children}</UserContext.Provider>;
 };
 export default UserProvider;
