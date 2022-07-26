@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import { Bottom, Link, StyledList, StyledRecord, Top, Wrapper } from './ProductPreview.styles';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
-
-const baseURL = 'http://localhost:5000/products';
+import ProductsApi from 'api/products';
+import axios from 'axios';
+const baseURL = 'http://localhost:5000/products/';
 let Show = '';
 const ProductPreview = ({ allProducts }) => {
     //API section---------------------
     const [products, setProducts] = useState([]);
 
+    // useEffect(() => {
+    //     axios
+    //         .get('baseURL')
+    //         .then(({ data }) => {
+    //             setProducts(data);
+    //         })
+    //         .catch((err) => console.log(err));
+    // }, []);
+
     useEffect(() => {
-        axios
-            .get(baseURL)
-            .then(({ data }) => {
-                setProducts(data);
-            })
-            .catch((err) => console.log(err));
+        const fetchProducts = async () => {
+            try {
+                const response = await ProductsApi.get('/all');
+                // const response = await axios.get('http://localhost:5000/products/all');
+                setProducts(response.data);
+            } catch (err) {
+                if (err.response) {
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        };
+
+        fetchProducts();
     }, []);
     //--------------------------------------------
     allProducts === 'yes' ? (Show = products.length) : (Show = 2);

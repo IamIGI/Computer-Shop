@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { BsFillCaretUpFill } from 'react-icons/bs';
@@ -7,11 +7,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from 'data/FormSchema';
 import axios from 'axios';
+import { UserContext } from 'context/UserContext';
 
 const baseURL = `http://localhost:5000/login`;
 
 function LoginArea(props) {
     const [isExpanded, setExpanded] = useState('false');
+    const { userAuth, setUserAuth } = useContext(UserContext);
 
     function expand() {
         isExpanded === 'false' ? setExpanded('true') : setExpanded('false');
@@ -36,7 +38,8 @@ function LoginArea(props) {
                 if (response.login === 100) {
                     console.log('Autoryzacja uzytkownika');
                     let userData = { userLogged: data.email };
-                    localStorage.setItem('user', JSON.stringify(userData));
+                    // localStorage.setItem('user', JSON.stringify(userData));
+                    setUserAuth(JSON.stringify(userData));
                 }
             })
             .catch((err) => console.log(err));

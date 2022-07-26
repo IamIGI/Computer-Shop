@@ -4,11 +4,14 @@ import React, { useContext } from 'react';
 //TEST ZONE
 
 const About = () => {
-    const { userData } = useContext(UserContext);
-    console.log(userData);
+    const { userAuth, setUserAuth } = useContext(UserContext);
+    console.log(userAuth);
+    // console.log(userAuth ? userAuth : 'no user logged in');
+    // setUserAuth('Igor')
+
+    // localStorage.removeItem('user');
     return (
         <>
-            {userData.userLogged}
             <h1>About</h1>
         </>
     );

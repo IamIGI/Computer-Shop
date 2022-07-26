@@ -1,98 +1,308 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
-import { WrapButton, Wrapper, BottomRegister } from './RegisterArea.style';
+import { WrapButton, Wrapper, BottomRegister, ErrMsg, UnValid, Instructions, Hide } from './RegisterArea.style';
 import { BsFillCaretUpFill } from 'react-icons/bs';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from 'data/FormSchema';
-import axios from 'axios';
+import axios from '../../../api/axios';
+import { BiX, BiInfoCircle } from 'react-icons/bi';
 
-const baseURL = `http://localhost:5000/register`;
+const NAME_REGEX = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const EMAIL_REGEX =
+    /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
+const REGISTER_URL = '/register';
 
 function RegisterArea(props) {
-    const [isExpanded, setExpanded] = useState('false');
-    const [emailStatus, setEmailStatus] = useState(false); //100 - okey, 101 - emailTaken
-    const [agreeToShopRules, setAgreeToShopRules] = useState(false);
+    const [expanded, setExpanded] = useState('false');
+    const [shopRules, setAgreeToShopRules] = useState(false);
 
-    function expand() {
-        isExpanded === 'false' ? setExpanded('true') : setExpanded('false');
-    }
+    const errRef = useRef();
 
-    //form logic
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm({
-        resolver: yupResolver(registerSchema),
-    });
+    const [firstName, setFirstName] = useState('');
+    const [validFirstName, setValidFirstName] = useState(false);
+    const [firstNameFocus, setFirstNameFocus] = useState(false);
 
-    const onSubmit = (data) => {
-        if (data.shopRules === false) {
-            setAgreeToShopRules(true);
-        } else {
-            console.log(data);
-            axios
-                .post(baseURL, {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                    hashedPassword: data.password,
-                    shopRules: data.shopRules,
+    const [lastName, setLastName] = useState('');
+    const [validLastName, setValidLastName] = useState(false);
+    const [lastNameFocus, setLastNameFocus] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [EmailFocus, setEmailFocus] = useState(false);
+
+    const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(false);
+    const [pwdFocus, setPwdFocus] = useState(false);
+
+    const [matchPwd, setMatchPwd] = useState('');
+    const [validMatchPwd, setValidMatchPwd] = useState(false);
+    const [matchPwdFocus, setMatchPwdFocus] = useState(false);
+
+    const [errMsg, setErrMsg] = useState('');
+
+    useEffect(() => {
+        setValidFirstName(NAME_REGEX.test(firstName));
+    }, [firstName]);
+
+    useEffect(() => {
+        setValidLastName(NAME_REGEX.test(lastName));
+    }, [lastName]);
+
+    useEffect(() => {
+        setValidEmail(EMAIL_REGEX.test(email));
+    }, [email]);
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+        setValidMatchPwd(pwd === matchPwd);
+    }, [pwd, matchPwd]);
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [firstName, lastName, email, pwd, matchPwd]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const v1 = NAME_REGEX.test(firstName);
+        const v2 = NAME_REGEX.test(lastName);
+        const v3 = EMAIL_REGEX.test(email);
+        const v4 = PWD_REGEX.test(pwd);
+        const v5 = shopRules;
+
+        if (!v1 || !v2 || !v3 || !v4) {
+            setErrMsg('Niepoprawne dane');
+            console.log(v1, v2, v3, v4);
+            return;
+        } else if (!v5) {
+            setErrMsg('Zaakceptuj regulamin sklepu');
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                REGISTER_URL,
+                JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    hashedPassword: pwd,
+                    shopRules,
                     emailEnlistments: false,
                     smsEnlistments: false,
                     phoneEnlistments: false,
                     adjustedOffersEnlistments: false,
-                })
-                .then(({ data }) => {
-                    console.log(data);
-                    if (data === 101) {
-                        // console.log('here');
-                        setEmailStatus(true);
-                    } else {
-                        setEmailStatus(false);
-                    }
-                })
-                .catch((err) => console.log(err));
+                }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true,
+                }
+            );
+            console.log(response?.data);
 
-            setAgreeToShopRules(false);
-
-            reset({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '', shopRules: false });
+            //clear
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPwd('');
+            setMatchPwd('');
+            setAgreeToShopRules('false');
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('Brak łączyności z serwerem');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Email jest już używany');
+            } else {
+                console.log(err);
+                setErrMsg('Nieznany błąd');
+            }
+            errRef.current.focus();
         }
     };
 
     return (
         <Wrapper>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                {isExpanded === 'false' && <Button onClick={expand}> Rejestracja </Button>}
-                {isExpanded === 'true' && (
-                    <>
-                        <Input placeholder="Imię (wymagane)" {...register('firstName')} />
-                        <p>{errors.firstName && 'Uzupełnij pole: imie'}</p>
-                        <Input placeholder="Nazwisko (wymagane)" {...register('lastName')} />
-                        <p>{errors.lastName && 'Uzupełnij pole: Nazwisko'}</p>
-                        <Input placeholder="E-mail (wymagane)" {...register('email')} />
-                        <p>{errors.email && 'Niepoprawny Email'}</p>
-                        <p>{emailStatus && 'Podany email jest już używany'}</p>
-                        <Input placeholder="Hasło (wymagane)" {...register('password')} />
-                        <p>{errors.password && 'min: 4 max: 5 chars'}</p>
-                        <Input placeholder="Powtórz hasło (wymagane)" {...register('confirmPassword')} />
-                        <p>{errors.confirmPassword && 'Hasła musza się powtarzać'}</p>
+            <form onSubmit={handleSubmit}>
+                {expanded && <Button onClick={() => setExpanded(!expanded)}> Rejestracja </Button>}
+                {!expanded && (
+                    <section>
+                        <div ref={errRef}>
+                            {' '}
+                            {errMsg && (
+                                <>
+                                    <ErrMsg aria-live="assertive">{errMsg}</ErrMsg>
+                                </>
+                            )}
+                        </div>
 
+                        <Input
+                            type="text"
+                            id="firstName"
+                            placeholder="Imie (wymagane)"
+                            autoComplete="off"
+                            onChange={(e) => setFirstName(e.target.value)}
+                            value={firstName}
+                            required
+                            aria-invalid={validFirstName ? 'false' : 'true'}
+                            aria-describedby="firstNameField"
+                            onFocus={() => setFirstNameFocus(true)}
+                            onBlur={() => setFirstNameFocus(false)}
+                        />
+                        <label htmlFor="firstName">
+                            {validFirstName || !firstName ? (
+                                <Hide></Hide>
+                            ) : (
+                                <UnValid>
+                                    <BiX />
+                                </UnValid>
+                            )}
+                        </label>
+                        {firstNameFocus && firstName && !validFirstName && (
+                            <Instructions>
+                                <BiInfoCircle />
+                                Tylko litery
+                            </Instructions>
+                        )}
+                        <Input
+                            type="text"
+                            id="lastName"
+                            placeholder="Nazwisko (wymagane)"
+                            autoComplete="off"
+                            onChange={(e) => setLastName(e.target.value)}
+                            value={lastName}
+                            required
+                            aria-invalid={validLastName ? 'false' : 'true'}
+                            aria-describedby="lastNameField"
+                            onFocus={() => setLastNameFocus(true)}
+                            onBlur={() => setLastNameFocus(false)}
+                        />
+                        <label htmlFor="lastName">
+                            {validLastName || !lastName ? (
+                                <Hide>
+                                    {' '}
+                                    <p>sa</p>
+                                </Hide>
+                            ) : (
+                                <UnValid>
+                                    <BiX />
+                                </UnValid>
+                            )}
+                        </label>
+                        {lastNameFocus && lastName && !validLastName && (
+                            <Instructions>
+                                <BiInfoCircle />
+                                Tylko litery
+                            </Instructions>
+                        )}
+
+                        <Input
+                            type="text"
+                            id="email"
+                            placeholder="Email (wymagane)"
+                            value={email}
+                            autoComplete="off"
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            aria-invalid={validEmail ? 'false' : 'true'}
+                            aria-describedby="EmailField"
+                            onFocus={() => setEmailFocus(true)}
+                            onBlur={() => setEmailFocus(false)}
+                        />
+                        <label htmlFor="email">
+                            {validEmail || !email ? (
+                                <Hide></Hide>
+                            ) : (
+                                <UnValid>
+                                    <BiX />
+                                </UnValid>
+                            )}
+                        </label>
+                        {EmailFocus && email && !validEmail && (
+                            <Instructions>
+                                <BiInfoCircle />
+                                Email jest nie poprawny.
+                            </Instructions>
+                        )}
+
+                        <Input
+                            type="password"
+                            id="password"
+                            placeholder="Haslo (wymagane)"
+                            autoComplete="off"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                            aria-invalid={validPwd ? 'false' : 'true'}
+                            aria-describedby="PwdField"
+                            onFocus={() => setPwdFocus(true)}
+                            onBlur={() => setPwdFocus(false)}
+                        />
+                        <label htmlFor="password">
+                            {validPwd || !pwd ? (
+                                <Hide></Hide>
+                            ) : (
+                                <UnValid>
+                                    <BiX />
+                                </UnValid>
+                            )}
+                        </label>
+                        {pwdFocus && pwd && !validPwd && (
+                            <Instructions>
+                                <BiInfoCircle />
+                                8-24 znaków. <br />
+                                Muszą zawierać małe i duże litery, <br />
+                                liczby oraz znaki specjalne.
+                            </Instructions>
+                        )}
+
+                        <Input
+                            type="password"
+                            id="passwordMatch"
+                            placeholder="Powtórz hasło (wymagane)"
+                            autoComplete="off"
+                            onChange={(e) => setMatchPwd(e.target.value)}
+                            value={matchPwd}
+                            required
+                            aria-invalid={validMatchPwd ? 'false' : 'true'}
+                            aria-describedby="MatchPwdField"
+                            onFocus={() => setMatchPwdFocus(true)}
+                            onBlur={() => setMatchPwdFocus(false)}
+                        />
+                        <label htmlFor="passwordMatch">
+                            {validMatchPwd || !matchPwd ? (
+                                <Hide></Hide>
+                            ) : (
+                                <UnValid>
+                                    <BiX />
+                                </UnValid>
+                            )}
+                        </label>
+                        {matchPwdFocus && !validMatchPwd && (
+                            <Instructions>
+                                <BiInfoCircle />
+                                Hasła muszą być takie same
+                            </Instructions>
+                        )}
                         <BottomRegister>
-                            <Checkbox type="checkbox" {...register('shopRules')} />
+                            <Checkbox type="checkbox" onChange={() => setAgreeToShopRules(!shopRules)} />
                             <p>Akceptuj regulamin sklepu</p>
                         </BottomRegister>
-                        <p>{agreeToShopRules && 'Zaakceptuj regulamin sklepu'}</p>
 
-                        <Button type="submit"> Załóż konto! </Button>
-                        <WrapButton onClick={expand}>
+                        <Button
+                        // disabled={
+                        //     !validFirstName || !validLastName || !validEmail || !validPwd || !validMatchPwd
+                        //         ? true
+                        //         : false
+                        // }
+                        >
+                            {' '}
+                            Załóż konto!{' '}
+                        </Button>
+                        <WrapButton onClick={() => setExpanded(!expanded)}>
                             <BsFillCaretUpFill />
                         </WrapButton>
-                    </>
+                    </section>
                 )}
             </form>
         </Wrapper>
