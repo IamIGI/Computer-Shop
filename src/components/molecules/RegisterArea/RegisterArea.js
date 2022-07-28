@@ -135,8 +135,8 @@ function RegisterArea(props) {
                                 </>
                             )}
                         </div>
-
                         <Input
+                            style={validFirstName || !firstName ? {} : { border: '1px solid red' }}
                             type="text"
                             id="firstName"
                             placeholder="Imie (wymagane)"
@@ -149,22 +149,9 @@ function RegisterArea(props) {
                             onFocus={() => setFirstNameFocus(true)}
                             onBlur={() => setFirstNameFocus(false)}
                         />
-                        <label htmlFor="firstName">
-                            {validFirstName || !firstName ? (
-                                <Hide></Hide>
-                            ) : (
-                                <UnValid>
-                                    <BiX />
-                                </UnValid>
-                            )}
-                        </label>
-                        {firstNameFocus && firstName && !validFirstName && (
-                            <Instructions>
-                                <BiInfoCircle />
-                                Tylko litery
-                            </Instructions>
-                        )}
+                        {firstNameFocus && firstName && !validFirstName && <Instructions>Tylko litery</Instructions>}
                         <Input
+                            style={validLastName || !lastName ? {} : { border: '1px solid red' }}
                             type="text"
                             id="lastName"
                             placeholder="Nazwisko (wymagane)"
@@ -177,26 +164,9 @@ function RegisterArea(props) {
                             onFocus={() => setLastNameFocus(true)}
                             onBlur={() => setLastNameFocus(false)}
                         />
-                        <label htmlFor="lastName">
-                            {validLastName || !lastName ? (
-                                <Hide>
-                                    {' '}
-                                    <p>sa</p>
-                                </Hide>
-                            ) : (
-                                <UnValid>
-                                    <BiX />
-                                </UnValid>
-                            )}
-                        </label>
-                        {lastNameFocus && lastName && !validLastName && (
-                            <Instructions>
-                                <BiInfoCircle />
-                                Tylko litery
-                            </Instructions>
-                        )}
-
+                        {lastNameFocus && lastName && !validLastName && <Instructions>Tylko litery</Instructions>}
                         <Input
+                            style={validEmail || !email ? {} : { border: '1px solid red' }}
                             type="text"
                             id="email"
                             placeholder="Email (wymagane)"
@@ -209,23 +179,9 @@ function RegisterArea(props) {
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
                         />
-                        <label htmlFor="email">
-                            {validEmail || !email ? (
-                                <Hide></Hide>
-                            ) : (
-                                <UnValid>
-                                    <BiX />
-                                </UnValid>
-                            )}
-                        </label>
-                        {EmailFocus && email && !validEmail && (
-                            <Instructions>
-                                <BiInfoCircle />
-                                Email jest nie poprawny.
-                            </Instructions>
-                        )}
-
+                        {EmailFocus && email && !validEmail && <Instructions>Email jest nie poprawny.</Instructions>}
                         <Input
+                            style={validPwd || !pwd ? {} : { border: '1px solid red' }}
                             type="password"
                             id="password"
                             placeholder="Haslo (wymagane)"
@@ -238,25 +194,15 @@ function RegisterArea(props) {
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
-                        <label htmlFor="password">
-                            {validPwd || !pwd ? (
-                                <Hide></Hide>
-                            ) : (
-                                <UnValid>
-                                    <BiX />
-                                </UnValid>
-                            )}
-                        </label>
                         {pwdFocus && pwd && !validPwd && (
                             <Instructions>
-                                <BiInfoCircle />
                                 8-24 znaków. <br />
                                 Muszą zawierać małe i duże litery, <br />
                                 liczby oraz znaki specjalne.
                             </Instructions>
                         )}
-
                         <Input
+                            style={validMatchPwd || !matchPwd ? {} : { border: '1px solid red' }}
                             type="password"
                             id="passwordMatch"
                             placeholder="Powtórz hasło (wymagane)"
@@ -269,32 +215,17 @@ function RegisterArea(props) {
                             onFocus={() => setMatchPwdFocus(true)}
                             onBlur={() => setMatchPwdFocus(false)}
                         />
-                        <label htmlFor="passwordMatch">
-                            {validMatchPwd || !matchPwd ? (
-                                <Hide></Hide>
-                            ) : (
-                                <UnValid>
-                                    <BiX />
-                                </UnValid>
-                            )}
-                        </label>
-                        {matchPwdFocus && !validMatchPwd && (
-                            <Instructions>
-                                <BiInfoCircle />
-                                Hasła muszą być takie same
-                            </Instructions>
-                        )}
+                        {matchPwdFocus && !validMatchPwd && <Instructions>Hasła muszą być takie same</Instructions>}
                         <BottomRegister>
                             <Checkbox type="checkbox" onChange={() => setAgreeToShopRules(!shopRules)} />
                             <p>Akceptuj regulamin sklepu</p>
                         </BottomRegister>
-
                         <Button
-                        // disabled={
-                        //     !validFirstName || !validLastName || !validEmail || !validPwd || !validMatchPwd
-                        //         ? true
-                        //         : false
-                        // }
+                            disabled={
+                                !validFirstName || !validLastName || !validEmail || !validPwd || !validMatchPwd
+                                    ? true
+                                    : false
+                            }
                         >
                             {' '}
                             Załóż konto!{' '}
