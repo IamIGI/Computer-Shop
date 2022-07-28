@@ -1,6 +1,8 @@
 import AccountPreviewSection from 'components/organisms/AccountPreviewSection/AccountPreviewSection';
 import NavBar from 'components/organisms/NavBar/NavBar';
-import UserProvider from 'context/UserContext';
+import { theme } from 'assets/styles/theme';
+import { ThemeProvider } from 'styled-components'; //use styles/theme.js everywhere you want
+import { AuthProvider } from 'context/AuthProvider';
 import React from 'react';
 import Footer from '../Footer/Footer';
 import { Wrapper } from './MainTemplate.styles';
@@ -9,12 +11,14 @@ const MainTemplate = ({ children }) => {
     return (
         <>
             <Wrapper>
-                <UserProvider>
-                    <NavBar />
-                    {children}
-                    <AccountPreviewSection />
-                    <Footer />
-                </UserProvider>
+                <ThemeProvider theme={theme}>
+                    <AuthProvider>
+                        <NavBar />
+                        {children}
+                        <AccountPreviewSection />
+                        <Footer />
+                    </AuthProvider>
+                </ThemeProvider>
             </Wrapper>
         </>
     );
