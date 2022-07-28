@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
-import { WrapButton, Wrapper, BottomRegister, ErrMsg, UnValid, Instructions, Hide } from './RegisterArea.style';
+import { WrapButton, Wrapper, BottomRegister, ErrMsg, Instructions } from './RegisterArea.style';
 import { BsFillCaretUpFill } from 'react-icons/bs';
 import axios from '../../../api/axios';
-import { BiX, BiInfoCircle } from 'react-icons/bi';
 
 const NAME_REGEX = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -30,7 +29,7 @@ function RegisterArea(props) {
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
-    const [EmailFocus, setEmailFocus] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -179,7 +178,7 @@ function RegisterArea(props) {
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
                         />
-                        {EmailFocus && email && !validEmail && <Instructions>Email jest nie poprawny.</Instructions>}
+                        {emailFocus && email && !validEmail && <Instructions>Email jest nie poprawny.</Instructions>}
                         <Input
                             style={validPwd || !pwd ? {} : { border: '1px solid red' }}
                             type="password"

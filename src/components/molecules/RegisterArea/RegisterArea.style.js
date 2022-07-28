@@ -38,10 +38,6 @@ export const UnValid = styled.span`
     color: ${({ theme }) => theme.colors.error};
 `;
 
-export const Hide = styled.span`
-    display: none;
-`;
-
 export const Instructions = styled.div`
     justify-content: center;
     text-align: center;
