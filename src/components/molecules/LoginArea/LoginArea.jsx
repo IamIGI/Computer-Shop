@@ -1,20 +1,20 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { BsFillCaretUpFill } from 'react-icons/bs';
 import { WrapButton, ErrMsg, Instructions } from './LoginArea.style';
+import useAuth from '../../../hooks/useAuth';
+
 import axios from '../../../api/axios';
-import AuthContext from 'context/AuthProvider';
+const LOGIN_URL = '/auth';
 
 const EMAIL_REGEX =
     /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-const LOGIN_URL = '/auth';
-
 function LoginArea() {
-    const [expanded, setExpanded] = useState('false');
+    const { setAuth } = useAuth();
 
-    const { setAuth } = useContext(AuthContext);
+    const [expanded, setExpanded] = useState('false');
     const errRef = useRef();
 
     const [email, setEmail] = useState('');
