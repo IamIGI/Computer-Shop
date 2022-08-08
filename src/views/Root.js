@@ -3,13 +3,15 @@ import AllProducts from 'components/templates/AllProducts/AllProducts';
 import Basket from 'components/templates/Basket/Basket';
 import Home from 'components/templates/Home/Home';
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { GlobalStyle } from 'assets/styles/GlobalStyle';
-import { Wrapper } from './Root.styles';
+import AdminSettings from 'components/templates/AdminSettings/AdminSettings';
+import EditorSettings from 'components/templates/EditorSettings/EditorSettings';
 import Product from 'components/templates/Product/Product';
 import AccountSettingsSettings from 'components/organisms/AccountSettingsSettings/AccountSettingsSettings';
 import AccountSettingsOrders from 'components/organisms/AccountSettingsOrders/AccountSettingsOrders';
+
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Wrapper } from './Root.styles';
 import axios from 'axios';
 
 const baseURL = 'http://localhost:5000/products';
@@ -32,7 +34,6 @@ const Root = () => {
                 <h1>Loading</h1>
             ) : (
                 <BrowserRouter>
-                    <GlobalStyle />
                     <MainTemplate>
                         <Wrapper>
                             <Routes>
@@ -45,6 +46,8 @@ const Root = () => {
                                 {products.map((item) => (
                                     <Route path={`/product/${item.code}`} element={<Product code={item.code} />} />
                                 ))}
+                                <Route path="AdminSettings" element={<AdminSettings />} />
+                                <Route path="EditorSettings" element={<EditorSettings />} />
                             </Routes>
                         </Wrapper>
                     </MainTemplate>

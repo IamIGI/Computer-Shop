@@ -3,6 +3,7 @@ import { Wrapper, TopWrapper, BottomWrapper } from './Product.styles';
 import ProductTopContent from 'components/organisms/ProductTopContent/ProductTopContent';
 import ProductBottomContent from 'components/organisms/ProductBottomContent/ProductBottomContent';
 import axios from 'axios';
+import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
 // const productCode = 734914;
 
@@ -22,9 +23,9 @@ const Product = ({ code }) => {
     return (
         <Wrapper>
             <>
-                {product === null ? (
+                {!product ? (
                     <>
-                        <h1>Loading</h1>
+                        <LoadingAnimation />
                     </>
                 ) : (
                     <>
