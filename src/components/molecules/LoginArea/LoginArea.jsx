@@ -43,7 +43,7 @@ function LoginArea() {
             });
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
+            const roles = response?.data?.role;
             setAuth({ email, pwd, roles, accessToken });
             setEmail('');
             setPwd('');
