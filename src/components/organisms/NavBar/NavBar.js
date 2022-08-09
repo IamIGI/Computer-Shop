@@ -1,6 +1,11 @@
 import React from 'react';
 import { Wrapper, Nav, SiteTitle, StyledLink, List } from './NavBar.styles';
 import { VscArchive, VscMilestone, VscAccount, VscVm, VscInspect } from 'react-icons/vsc';
+import useAuth from 'hooks/useAuth';
+
+//move to env
+const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
+const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
 
 function CustomLink({ to, children, ...props }) {
     return (
@@ -13,6 +18,7 @@ function CustomLink({ to, children, ...props }) {
 }
 
 const NavBar = () => {
+    const { auth } = useAuth();
     return (
         <Wrapper>
             <Nav>
@@ -24,6 +30,25 @@ const NavBar = () => {
                     HotShoot
                 </SiteTitle>
                 <List>
+                    {auth?.roles?.find((role) => Admin_entitlements === role) && (
+                        <CustomLink to="/adminSettings">
+                            <span>
+                                <VscInspect />
+                            </span>
+                            Admin
+                        </CustomLink>
+                    )}
+                    {auth?.roles?.find((role) => Editor_entitlements === role) && (
+                        <>
+                            <CustomLink to="/editorSettings">
+                                <span>
+                                    <VscInspect />
+                                </span>
+                                Editor
+                            </CustomLink>
+                        </>
+                    )}
+
                     <CustomLink to="/allProducts">
                         <span>
                             <VscInspect />
