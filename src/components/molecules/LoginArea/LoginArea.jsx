@@ -45,7 +45,6 @@ function LoginArea() {
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.role;
             const userName = response?.data?.userName;
-            console.log(response.data);
             setAuth({ userName, email, pwd, roles, accessToken });
             setEmail('');
             setPwd('');

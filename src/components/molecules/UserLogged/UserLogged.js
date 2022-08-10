@@ -9,8 +9,6 @@ const UserLogged = () => {
     const logout = useLogout();
     const navigate = useNavigate();
 
-    console.log(auth);
-
     const signOut = async () => {
         await logout();
         navigate('');

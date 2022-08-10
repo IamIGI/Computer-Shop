@@ -5,7 +5,6 @@ const useLogout = () => {
     const { setAuth } = useAuth();
 
     const logout = async () => {
-        console.log('Logging out');
         setAuth({});
         try {
             const response = await axios('/logout', { withCredentials: true });
