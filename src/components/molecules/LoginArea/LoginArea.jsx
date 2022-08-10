@@ -44,10 +44,11 @@ function LoginArea() {
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.role;
-            setAuth({ email, pwd, roles, accessToken });
+            const userName = response?.data?.userName;
+            console.log(response.data);
+            setAuth({ userName, email, pwd, roles, accessToken });
             setEmail('');
             setPwd('');
-            console.log('Logged successfully ended !!');
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('Brak łącznośći z serwerem');
