@@ -45,6 +45,7 @@ const Basket = () => {
     const [basket, setBasket] = useState(basketInit);
 
     useEffect(() => {
+        let isMounted = true;
         //make orderDocument
         //temp variables
         let tempOpt = '';
@@ -94,7 +95,7 @@ const Basket = () => {
                         navigate('/', { state: { from: location }, replace: true });
                     }
                 };
-                sendUserOrder();
+                isMounted && sendUserOrder();
                 //clearData
 
                 localStorage.removeItem('productsInBasket');
@@ -108,6 +109,9 @@ const Basket = () => {
         } else {
             setFinishOrder(false);
         }
+        return () => {
+            isMounted = false;
+        };
     }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, productsInBasket, finishOrder]);
 
     return (

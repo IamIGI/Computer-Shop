@@ -2,16 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { BsFillCaretUpFill } from 'react-icons/bs';
-import { WrapButton, ErrMsg, Instructions } from './LoginArea.style';
+import { WrapButton, ErrMsg, Instructions, Wrapper, BottomLogin } from './LoginArea.style';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../../api/axios';
+import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
 
 const EMAIL_REGEX =
     /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
 function LoginArea() {
-    const { setAuth } = useAuth();
+    //#Added
+    const { setAuth, persist, setPersist } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -43,13 +45,12 @@ function LoginArea() {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true,
             });
-            console.log(response?.data);
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.role;
+            const roles = response?.data?.roles;
             const userName = response?.data?.userName;
             const id = response?.data?.id;
-            console.log(roles);
-            setAuth({ id, userName, email, pwd, roles, accessToken });
+            //delete That pwd later
+            setAuth({ id, userName, email, roles, accessToken });
             setEmail('');
             setPwd('');
             navigate(from, { replace: true });
@@ -70,8 +71,17 @@ function LoginArea() {
         }
     };
 
+    //#Added
+    const togglePersist = () => {
+        setPersist((prev) => !prev);
+    };
+
+    useEffect(() => {
+        localStorage.setItem('persist', persist);
+    }, [persist]);
+    //--
     return (
-        <section>
+        <Wrapper>
             <div ref={errRef}>
                 {' '}
                 {errMsg && (
@@ -106,6 +116,11 @@ function LoginArea() {
                             value={pwd}
                             required
                         />
+                        <BottomLogin>
+                            <Checkbox type="checkbox" id="persist" onChange={togglePersist} checked={persist} />
+                            {/* <label htmlFor="persist">Zaufaj temu urządzeniu</label> */}
+                            <p>Zaufaj temu urządzeniu</p>
+                        </BottomLogin>
                         <Button> Zaloguj sie </Button>
                         <WrapButton onClick={() => setExpanded(!expanded)}>
                             <BsFillCaretUpFill />
@@ -113,7 +128,7 @@ function LoginArea() {
                     </>
                 )}
             </form>
-        </section>
+        </Wrapper>
     );
 }
 

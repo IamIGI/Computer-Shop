@@ -6,12 +6,12 @@ import { Separator, Wrapper } from './AccountPreviewSection.style';
 
 const AccountPreviewSection = () => {
     const { auth } = useAuth();
-
+    console.log(auth);
     return (
         <>
             <Wrapper>
                 <p>Account section</p>
-                {auth?.email ? (
+                {auth?.accessToken ? (
                     <UserLogged />
                 ) : (
                     <>

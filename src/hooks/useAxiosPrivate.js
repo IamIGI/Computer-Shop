@@ -6,7 +6,6 @@ import useAuth from './useAuth';
 const useAxiosPrivate = () => {
     const refresh = useRefreshToken();
     const { auth } = useAuth();
-    // console.log(auth);
 
     useEffect(() => {
         const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -27,7 +26,6 @@ const useAxiosPrivate = () => {
                 //check is the server denied access, if yes refresh token and send again with axiosPrivate
                 if (error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
-                    console.log('Waiting for token refresh');
                     const newAccessToken = await refresh();
                     console.log('Token refreshed. Saving new access token');
                     //save new token
