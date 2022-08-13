@@ -17,6 +17,7 @@ import axios from 'axios';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RequireAuth from 'components/molecules/RequireAuth/RequireAuth';
+import PersistLogin from 'providers/PersistLogin';
 
 const baseURL = 'http://localhost:5000/products';
 
@@ -48,30 +49,34 @@ const Root = () => {
                         <Wrapper>
                             <Routes>
                                 {/* public routes */}
-                                <Route path="" element={<Home />} />
-                                <Route path="allProducts" element={<AllProducts />} />
-                                <Route path="about" element={<About />} />
-                                {products.map((item) => (
-                                    <Route path={`/product/${item.code}`} element={<Product code={item.code} />} />
-                                ))}
-                                <Route path="*" element={<MissingPage />} />
-                                <Route path="unauthorized" element={<Unauthorized />} />
+                                <Route element={<PersistLogin />}>
+                                    <Route path="" element={<Home />} />
+                                    <Route path="allProducts" element={<AllProducts />} />
+                                    <Route path="about" element={<About />} />
+                                    {products.map((item) => (
+                                        <Route path={`/product/${item.code}`} element={<Product code={item.code} />} />
+                                    ))}
+                                    <Route path="*" element={<MissingPage />} />
+                                    <Route path="unauthorized" element={<Unauthorized />} />
 
-                                {/* protected routes */}
+                                    {/* protected routes */}
 
-                                <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
-                                    <Route path="adminSettings" element={<AdminSettings />} />
-                                    <Route path="/accountSettings/Settings" element={<AccountSettingsSettings />} />
-                                    <Route path="/accountSettings/Orders" element={<AccountSettingsOrders />} />
-                                    <Route path="basket" element={<Basket />} />
-                                </Route>
+                                    <Route
+                                        element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}
+                                    >
+                                        <Route path="adminSettings" element={<AdminSettings />} />
+                                        <Route path="/accountSettings/Settings" element={<AccountSettingsSettings />} />
+                                        <Route path="/accountSettings/Orders" element={<AccountSettingsOrders />} />
+                                        <Route path="basket" element={<Basket />} />
+                                    </Route>
 
-                                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                                    <Route path="adminSettings" element={<AdminSettings />} />
-                                </Route>
+                                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                                        <Route path="adminSettings" element={<AdminSettings />} />
+                                    </Route>
 
-                                <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
-                                    <Route path="editorSettings" element={<EditorSettings />} />
+                                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
+                                        <Route path="editorSettings" element={<EditorSettings />} />
+                                    </Route>
                                 </Route>
                             </Routes>
                         </Wrapper>

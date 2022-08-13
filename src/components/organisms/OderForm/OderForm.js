@@ -29,7 +29,6 @@ const OrderForm = ({ initRecipientDetails, orderData, setOrderData }) => {
         });
         reset({ name: ``, street: '', zipCode: '', place: '', email: '', phone: '' });
     };
-    // console.log(orderData);
     return (
         <>
             ``
