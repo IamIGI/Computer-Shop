@@ -45,7 +45,6 @@ const Basket = () => {
     const [basket, setBasket] = useState(basketInit);
 
     useEffect(() => {
-        const controller = new AbortController();
         //make orderDocument
         //temp variables
         let tempOpt = '';
@@ -86,9 +85,7 @@ const Basket = () => {
             if (finishOrder === true) {
                 const sendUserOrder = async () => {
                     try {
-                        const response = await axiosPrivate.post(`order/make`, orderTemplateDocument, {
-                            signal: controller.signal,
-                        });
+                        const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
                         console.log(response.data);
                     } catch (err) {
                         console.log(err);
@@ -107,7 +104,6 @@ const Basket = () => {
                 setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
                 setOrderData(initRecipientDetails);
                 setFinishOrder(false);
-                // controller.abort();
             }
         } else {
             setFinishOrder(false);
