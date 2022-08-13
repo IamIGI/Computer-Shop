@@ -26,7 +26,7 @@ const ProductPreview = ({ allProducts }) => {
         //##DEV ---- timeout
         setTimeout(() => {
             fetchProducts();
-        }, 1000);
+        }, 500);
     }, []);
 
     //--------------------------------------------

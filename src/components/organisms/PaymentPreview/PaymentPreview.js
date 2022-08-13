@@ -3,7 +3,6 @@ import { FinishSection, List, ListSection, LocalButton, Name, Price, Section, Wr
 
 const PaymentPreview = ({ priceToPay, setFinishOrder }) => {
     const finishHandler = () => {
-        console.log('Klinieto: Zakoncz Platnosc');
         setFinishOrder(() => {
             return true;
         });

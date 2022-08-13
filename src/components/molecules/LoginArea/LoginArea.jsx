@@ -4,15 +4,17 @@ import { Button } from 'components/atoms/Button/Button';
 import { BsFillCaretUpFill } from 'react-icons/bs';
 import { WrapButton, ErrMsg, Instructions } from './LoginArea.style';
 import useAuth from '../../../hooks/useAuth';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../../api/axios';
-const LOGIN_URL = '/auth';
 
 const EMAIL_REGEX =
     /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
 function LoginArea() {
     const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const [expanded, setExpanded] = useState('false');
     const errRef = useRef();
@@ -37,17 +39,20 @@ function LoginArea() {
         e.preventDefault();
 
         try {
-            const response = await axios.post(LOGIN_URL, JSON.stringify({ email, hashedPassword: pwd }), {
+            const response = await axios.post('/auth', JSON.stringify({ email, hashedPassword: pwd }), {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true,
             });
-            console.log(JSON.stringify(response?.data));
+            console.log(response?.data);
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.role;
             const userName = response?.data?.userName;
-            setAuth({ userName, email, pwd, roles, accessToken });
+            const id = response?.data?.id;
+            console.log(roles);
+            setAuth({ id, userName, email, pwd, roles, accessToken });
             setEmail('');
             setPwd('');
+            navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('Brak łącznośći z serwerem');

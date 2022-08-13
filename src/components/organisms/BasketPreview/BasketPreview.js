@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
     DescriptionArea,
     ImageArea,
@@ -11,27 +11,32 @@ import {
     DescriptionBottom,
     StyledButton,
 } from './BasketPreview.style';
-import axios from 'axios';
+import ProductsApi from 'api/products';
+
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts, basket, setBasket }) => {
     useEffect(() => {
         if (basket !== null) {
-            Promise.all(
-                basket.map((code) => {
-                    const baseURL = `http://localhost:5000/product/${code}`;
-                    axios
-                        .get(baseURL)
-                        .then(({ data }) => {
-                            const item = { name: data.name, prevImg: data.prevImg, price: data.price, code: data.code };
-                            setProducts((prevItems) => {
-                                return [...prevItems, item];
-                            });
-                        })
-                        .catch((err) => console.log(err));
-                })
-            );
+            basket.map(async (Product_code) => {
+                try {
+                    const response = await ProductsApi.get(`/${Product_code}`);
+
+                    const { name, prevImg, price, code } = response.data;
+                    setProducts((prevItems) => {
+                        return [...prevItems, { name, prevImg, price, code }];
+                    });
+                } catch (err) {
+                    if (err.response) {
+                        console.log(err.response.data);
+                        console.log(err.response.status);
+                        console.log(err.response.headers);
+                    } else {
+                        console.log(`Error: ${err.message}`);
+                    }
+                }
+            });
         }
     }, []);
 
@@ -116,7 +121,9 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
                                                             <DescriptionBottom>
                                                                 <div>1 szt.</div>
                                                                 <div>
-                                                                    <StyledButton onClick={() => deleteProduct(item.code)}>
+                                                                    <StyledButton
+                                                                        onClick={() => deleteProduct(item.code)}
+                                                                    >
                                                                         {/* you give all the props, f.e: onClick given in UsersListItem */}
                                                                         <AiOutlineDelete />
                                                                     </StyledButton>
