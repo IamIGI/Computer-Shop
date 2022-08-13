@@ -6,7 +6,10 @@ import PaymentOptions from 'components/organisms/PaymentOptions/PaymentOptions';
 import React, { useEffect, useState } from 'react';
 import { Wrapper, Main, Prev, PrevWrapper } from './Basket.styles';
 import PaymentPreview from 'components/organisms/PaymentPreview/PaymentPreview';
-import axios from 'axios';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import useAuth from '../../../hooks/useAuth';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useLogout from 'hooks/useLogout';
 
 const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
 const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
@@ -20,9 +23,13 @@ const initRecipientDetails = {
 };
 let basketInit = null;
 
-const baseURL = `http://localhost:5000/order`;
-
 const Basket = () => {
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const logout = useLogout();
+
+    const { auth } = useAuth();
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useState(initDeliveryCheckboxesOpt);
     const [deliveryCheckboxesPay, setDeliveryCheckboxesPay] = useState(initDeliveryCheckboxesPay);
     const [orderData, setOrderData] = useState(initRecipientDetails);
@@ -30,7 +37,6 @@ const Basket = () => {
     const { street } = orderData;
     const [theProducts, setProducts] = useState([]);
     const [productsInBasket, setProductsInBasket] = useState(null);
-    const [orderDocument, setOrderDocument] = useState(null);
     const [finishOrder, setFinishOrder] = useState(false);
 
     if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
@@ -38,18 +44,12 @@ const Basket = () => {
     }
     const [basket, setBasket] = useState(basketInit);
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
-
     useEffect(() => {
+        const controller = new AbortController();
         //make orderDocument
         //temp variables
         let tempOpt = '';
         let tempPay = '';
-        let orderDocument = '';
         let orderTemplateDocument = {};
         //logic---------------------------
         Object.values(deliveryCheckboxesOpt).map((x, index) => {
@@ -64,10 +64,7 @@ const Basket = () => {
             }
         });
 
-        const orderCode = getRandomInt(0, 1000000);
-
         orderTemplateDocument = {
-            orderCode: orderCode,
             products: productsInBasket,
             transactionInfo: {
                 deliveryMethod: tempOpt,
@@ -75,6 +72,7 @@ const Basket = () => {
                 price: priceToPay,
                 recipientDetails: orderData,
             },
+            user: auth.id,
         };
 
         //check is it document ready to send
@@ -86,20 +84,20 @@ const Basket = () => {
         //main statement
         if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
             if (finishOrder === true) {
-                axios
-                    .post(baseURL, {
-                        orderTemplateDocument,
-                    })
-                    .then(({ data }) => {
-                        console.log(data);
-                    })
-                    .catch((err) => console.log(err));
-
-                // let userExists = JSON.parse(localStorage.getItem('user'));
-                // if (userExists !== null) {
-                //     console.log(userExists.userLogged);
-                // }
-
+                const sendUserOrder = async () => {
+                    try {
+                        const response = await axiosPrivate.post(`order/make`, orderTemplateDocument, {
+                            signal: controller.signal,
+                        });
+                        console.log(response.data);
+                    } catch (err) {
+                        console.log(err);
+                        await logout();
+                        console.log(auth);
+                        navigate('/', { state: { from: location }, replace: true });
+                    }
+                };
+                sendUserOrder();
                 //clearData
 
                 localStorage.removeItem('productsInBasket');
@@ -108,8 +106,8 @@ const Basket = () => {
                 setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
                 setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
                 setOrderData(initRecipientDetails);
-
                 setFinishOrder(false);
+                // controller.abort();
             }
         } else {
             setFinishOrder(false);
@@ -129,7 +127,11 @@ const Basket = () => {
                     deliveryCheckboxesPay={deliveryCheckboxesPay}
                     setDeliveryCheckboxesPay={setDeliveryCheckboxesPay}
                 />
-                <OrderForm initRecipientDetails={initRecipientDetails} orderData={orderData} setOrderData={setOrderData} />
+                <OrderForm
+                    initRecipientDetails={initRecipientDetails}
+                    orderData={orderData}
+                    setOrderData={setOrderData}
+                />
             </Main>
             <Prev>
                 <PrevWrapper>

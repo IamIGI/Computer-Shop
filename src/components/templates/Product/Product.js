@@ -26,7 +26,7 @@ const Product = ({ code }) => {
 
         setTimeout(() => {
             fetchProduct();
-        }, 1000);
+        }, 500);
     }, []);
 
     return (
