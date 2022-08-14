@@ -7,13 +7,15 @@ import useAuth from '../../../hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../../api/axios';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
+import useInput from 'hooks/useInput';
+import useToggle from 'hooks/useToggle';
 
 const EMAIL_REGEX =
     /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
 function LoginArea() {
-    //#Added
-    const { setAuth, persist, setPersist } = useAuth();
+    const { setAuth } = useAuth();
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -21,12 +23,16 @@ function LoginArea() {
     const [expanded, setExpanded] = useState('false');
     const errRef = useRef();
 
-    const [email, setEmail] = useState('');
+    const [email, resetEmail, emailAttribs] = useInput('email', '');
     const [validEmail, setValidEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
+    const [pwdFocus, setPwdFocus] = useState(false);
     const [errMsg, setErrMsg] = useState('');
+    const [isCapsLockOn, setIsCapsLockOn] = useState(false);
+
+    const [check, toggleCheck] = useToggle('persist', false);
 
     //clearErrors
     useEffect(() => {
@@ -37,21 +43,21 @@ function LoginArea() {
         setValidEmail(EMAIL_REGEX.test(email));
     }, [email]);
 
+    //send Form
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
+            resetEmail(); //working - fix, cuz get reset everytime...
             const response = await axios.post('/auth', JSON.stringify({ email, hashedPassword: pwd }), {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true,
             });
+            //resetEmail(); //don't work
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             const userName = response?.data?.userName;
             const id = response?.data?.id;
-            //delete That pwd later
             setAuth({ id, userName, email, roles, accessToken });
-            setEmail('');
             setPwd('');
             navigate(from, { replace: true });
         } catch (err) {
@@ -71,15 +77,15 @@ function LoginArea() {
         }
     };
 
-    //#Added
-    const togglePersist = () => {
-        setPersist((prev) => !prev);
+    //Check if capsLock is up
+    const checkCapsLock = (event) => {
+        if (event.getModifierState('CapsLock')) {
+            setIsCapsLockOn(true);
+        } else {
+            setIsCapsLockOn(false);
+        }
     };
 
-    useEffect(() => {
-        localStorage.setItem('persist', persist);
-    }, [persist]);
-    //--
     return (
         <Wrapper>
             <div ref={errRef}>
@@ -100,8 +106,7 @@ function LoginArea() {
                             type="text"
                             id="email"
                             autoComplete="off"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
+                            {...emailAttribs}
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
                             required
@@ -110,15 +115,19 @@ function LoginArea() {
                         <Input
                             placeholder="Hasło (wymagane)"
                             type="password"
+                            name="pwd"
                             id="pwd"
                             autoComplete="off"
                             onChange={(e) => setPwd(e.target.value)}
+                            onFocus={() => setPwdFocus(true)}
+                            onBlur={() => setPwdFocus(false)}
                             value={pwd}
+                            onKeyUp={checkCapsLock}
                             required
                         />
+                        {isCapsLockOn && pwdFocus && pwd && <Instructions>Caps Lock jest wciśnięty</Instructions>}
                         <BottomLogin>
-                            <Checkbox type="checkbox" id="persist" onChange={togglePersist} checked={persist} />
-                            {/* <label htmlFor="persist">Zaufaj temu urządzeniu</label> */}
+                            <Checkbox type="checkbox" onChange={toggleCheck} checked={check} />
                             <p>Zaufaj temu urządzeniu</p>
                         </BottomLogin>
                         <Button> Zaloguj sie </Button>

@@ -5,6 +5,8 @@ import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
 import { WrapButton, Wrapper, BottomRegister, ErrMsg, Instructions } from './RegisterArea.style';
 import { BsFillCaretUpFill } from 'react-icons/bs';
 import axios from '../../../api/axios';
+import useInput from 'hooks/useInput';
+import useToggle from 'hooks/useToggle';
 
 const NAME_REGEX = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -13,21 +15,20 @@ const EMAIL_REGEX =
 
 const REGISTER_URL = '/register';
 
-function RegisterArea(props) {
+function RegisterArea() {
     const [expanded, setExpanded] = useState('false');
-    const [shopRules, setAgreeToShopRules] = useState(false);
 
     const errRef = useRef();
 
-    const [firstName, setFirstName] = useState('');
+    const [firstName, resetFirstName, firstNameAttribs] = useInput('firstName', '');
     const [validFirstName, setValidFirstName] = useState(false);
     const [firstNameFocus, setFirstNameFocus] = useState(false);
 
-    const [lastName, setLastName] = useState('');
+    const [lastName, resetLastName, lastNameAttribs] = useInput('lastName', '');
     const [validLastName, setValidLastName] = useState(false);
     const [lastNameFocus, setLastNameFocus] = useState(false);
 
-    const [email, setEmail] = useState('');
+    const [email, resetEmail, emailAttribs] = useInput('email', '');
     const [validEmail, setValidEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
@@ -38,6 +39,10 @@ function RegisterArea(props) {
     const [matchPwd, setMatchPwd] = useState('');
     const [validMatchPwd, setValidMatchPwd] = useState(false);
     const [matchPwdFocus, setMatchPwdFocus] = useState(false);
+
+    const [isCapsLockOn, setIsCapsLockOn] = useState(false);
+
+    const [shopRules, setAgreeToShopRules] = useToggle('ShopRulesRegister', false);
 
     const [errMsg, setErrMsg] = useState('');
 
@@ -101,9 +106,9 @@ function RegisterArea(props) {
             console.log(response?.data);
 
             //clear
-            setFirstName('');
-            setLastName('');
-            setEmail('');
+            resetFirstName('');
+            resetLastName('');
+            resetEmail('');
             setPwd('');
             setMatchPwd('');
             setAgreeToShopRules('false');
@@ -117,6 +122,15 @@ function RegisterArea(props) {
                 setErrMsg('Nieznany błąd');
             }
             errRef.current.focus();
+        }
+    };
+
+    //Check if capsLock is up
+    const checkCapsLock = (event) => {
+        if (event.getModifierState('CapsLock')) {
+            setIsCapsLockOn(true);
+        } else {
+            setIsCapsLockOn(false);
         }
     };
 
@@ -140,8 +154,7 @@ function RegisterArea(props) {
                             id="firstName"
                             placeholder="Imie (wymagane)"
                             autoComplete="off"
-                            onChange={(e) => setFirstName(e.target.value)}
-                            value={firstName}
+                            {...firstNameAttribs}
                             required
                             aria-invalid={validFirstName ? 'false' : 'true'}
                             aria-describedby="firstNameField"
@@ -155,8 +168,7 @@ function RegisterArea(props) {
                             id="lastName"
                             placeholder="Nazwisko (wymagane)"
                             autoComplete="off"
-                            onChange={(e) => setLastName(e.target.value)}
-                            value={lastName}
+                            {...lastNameAttribs}
                             required
                             aria-invalid={validLastName ? 'false' : 'true'}
                             aria-describedby="lastNameField"
@@ -169,9 +181,8 @@ function RegisterArea(props) {
                             type="text"
                             id="email"
                             placeholder="Email (wymagane)"
-                            value={email}
                             autoComplete="off"
-                            onChange={(e) => setEmail(e.target.value)}
+                            {...emailAttribs}
                             required
                             aria-invalid={validEmail ? 'false' : 'true'}
                             aria-describedby="EmailField"
@@ -192,6 +203,7 @@ function RegisterArea(props) {
                             aria-describedby="PwdField"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
+                            onKeyUp={checkCapsLock}
                         />
                         {pwdFocus && pwd && !validPwd && (
                             <Instructions>
@@ -213,10 +225,14 @@ function RegisterArea(props) {
                             aria-describedby="MatchPwdField"
                             onFocus={() => setMatchPwdFocus(true)}
                             onBlur={() => setMatchPwdFocus(false)}
+                            onKeyUp={checkCapsLock}
                         />
                         {matchPwdFocus && !validMatchPwd && <Instructions>Hasła muszą być takie same</Instructions>}
+                        {(matchPwdFocus || pwdFocus) && isCapsLockOn && (
+                            <Instructions>Caps Lock jest wciśnięty</Instructions>
+                        )}
                         <BottomRegister>
-                            <Checkbox type="checkbox" onChange={() => setAgreeToShopRules(!shopRules)} />
+                            <Checkbox type="checkbox" onChange={setAgreeToShopRules} checked={shopRules} />
                             <p>Akceptuj regulamin sklepu</p>
                         </BottomRegister>
                         <Button
