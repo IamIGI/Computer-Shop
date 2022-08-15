@@ -1,7 +1,7 @@
 export const theme = {
     colors: {
         white: '#FFFFFF',
-        lightLightGrey: '#c7c6c3',
+        lightLightGrey: '#ededed',
         lightGrey: '#bfbfbf',
         grey: '#C0C7D6',
         darkGrey: '#737C8E',
@@ -22,6 +22,7 @@ export const theme = {
         omegaBig: '50px',
         xxl: '34px',
         xl: '24px',
+        l_plus: '19px',
         l: '17px',
         m_plus: '14px',
         m: '12px',
