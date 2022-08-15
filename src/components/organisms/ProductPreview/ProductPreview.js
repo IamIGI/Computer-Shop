@@ -29,6 +29,8 @@ const ProductPreview = ({ allProducts }) => {
         }, 500);
     }, []);
 
+    console.log(products);
+
     //--------------------------------------------
     allProducts === 'yes' ? (Show = products.length) : (Show = 2);
     return (
