@@ -29,7 +29,7 @@ const ProductPreview = ({ allProducts }) => {
         }, 500);
     }, []);
 
-    console.log(products);
+    console.log(products); //to delete
 
     //--------------------------------------------
     allProducts === 'yes' ? (Show = products.length) : (Show = 2);
