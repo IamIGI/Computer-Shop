@@ -49,6 +49,8 @@ const Basket = () => {
 
     if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
         basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
+    } else {
+        basketInit = null;
     }
     const [basket, setBasket] = useState(basketInit);
 
@@ -73,6 +75,7 @@ const Basket = () => {
         });
 
         orderTemplateDocument = {
+            status: 1, //all orders have to start from "In realization" status
             products: productsInBasket,
             transactionInfo: {
                 deliveryMethod: tempOpt,

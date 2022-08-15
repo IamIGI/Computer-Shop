@@ -19,13 +19,13 @@ import { AiOutlineDelete } from 'react-icons/ai';
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts, basket, setBasket }) => {
     useEffect(() => {
         if (basket !== null) {
-            basket.map(async (Product_code) => {
+            basket.map(async (product_Id) => {
                 try {
-                    const response = await ProductsApi.get(`/${Product_code}`);
+                    const response = await ProductsApi.get(`/${product_Id}`);
 
-                    const { name, prevImg, price, code } = response.data;
+                    const { name, prevImg, price, _id } = response.data;
                     setProducts((prevItems) => {
-                        return [...prevItems, { name, prevImg, price, code }];
+                        return [...prevItems, { name, prevImg, price, _id }];
                     });
                 } catch (err) {
                     if (err.response) {
@@ -40,7 +40,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
         }
     }, []);
 
-    const deleteProduct = (code) => {
+    const deleteProduct = (_id) => {
         let oldBasket = JSON.parse(localStorage.getItem('productsInBasket')).products;
 
         if (oldBasket.length === 1) {
@@ -51,7 +51,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
             });
         } else {
             let temp = oldBasket.filter((item) => {
-                return item !== code;
+                return item !== _id;
             });
             let newBasket = { products: temp };
             localStorage.setItem('productsInBasket', JSON.stringify(newBasket));
@@ -59,7 +59,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
 
         setProducts((prevItems) => {
             return prevItems.filter((item) => {
-                return item.code !== code;
+                return item._id !== _id;
             });
         });
     };
@@ -122,7 +122,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
                                                                 <div>1 szt.</div>
                                                                 <div>
                                                                     <StyledButton
-                                                                        onClick={() => deleteProduct(item.code)}
+                                                                        onClick={() => deleteProduct(item._id)}
                                                                     >
                                                                         {/* you give all the props, f.e: onClick given in UsersListItem */}
                                                                         <AiOutlineDelete />

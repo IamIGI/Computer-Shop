@@ -184,7 +184,7 @@ const SpecificationList = ({ product }) => {
                         <LiName>
                             <span>Kod sklepu</span>
                         </LiName>
-                        <LiDesc>{PS.Xigi_code.description}</LiDesc>
+                        <LiDesc>{product._id}</LiDesc>
                     </LiWrapper>
                 </li>
             </List>
