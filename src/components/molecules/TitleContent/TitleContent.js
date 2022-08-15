@@ -7,7 +7,7 @@ const TitleContent = ({ product }) => {
             <h1>{product.name}</h1>
             <p>
                 od: <span>{product.brand}</span> | kod producenta: {product.specification.producent_code.description} |{' '}
-                {product.specification.Xigi_code.description}{' '}
+                {product._id}{' '}
             </p>
         </Wrapper>
     );

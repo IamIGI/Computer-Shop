@@ -54,7 +54,7 @@ const Root = () => {
                                     <Route path="allProducts" element={<AllProducts />} />
                                     <Route path="about" element={<About />} />
                                     {products.map((item) => (
-                                        <Route path={`/product/${item.code}`} element={<Product code={item.code} />} />
+                                        <Route path={`/product/${item._id}`} element={<Product code={item._id} />} />
                                     ))}
                                     <Route path="*" element={<MissingPage />} />
                                     <Route path="unauthorized" element={<Unauthorized />} />

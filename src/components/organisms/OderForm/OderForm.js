@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SectionTitle, Wrapper, InputLocal, ButtonWrapper } from './OrderForm.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { CgUserList } from 'react-icons/cg';
@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { recipientDetails } from 'data/FormSchema';
 
-const OrderForm = ({ initRecipientDetails, orderData, setOrderData }) => {
+const OrderForm = ({ setOrderData }) => {
     //form logic
     const {
         register,
@@ -27,8 +27,9 @@ const OrderForm = ({ initRecipientDetails, orderData, setOrderData }) => {
             email: data.email,
             phone: data.phone,
         });
-        reset({ name: ``, street: '', zipCode: '', place: '', email: '', phone: '' });
+        reset({ name: '', street: '', zipCode: '', place: '', email: '', phone: '' });
     };
+
     return (
         <>
             ``
