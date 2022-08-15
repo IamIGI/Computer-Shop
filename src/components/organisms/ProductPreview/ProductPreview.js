@@ -42,7 +42,7 @@ const ProductPreview = ({ allProducts }) => {
                     {products.map((item, index) => (
                         <>
                             {index < Show && (
-                                <Link to={`/product/${item.code}`} key={index}>
+                                <Link to={`/product/${item._id}`} key={index}>
                                     <Wrapper>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />

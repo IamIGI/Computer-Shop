@@ -10,6 +10,7 @@ import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useLogout from 'hooks/useLogout';
+import useMultiCheckboxMemory from 'hooks/useMultiCheckboxMemory';
 
 const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
 const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
@@ -30,9 +31,16 @@ const Basket = () => {
     const logout = useLogout();
 
     const { auth } = useAuth();
-    const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useState(initDeliveryCheckboxesOpt);
-    const [deliveryCheckboxesPay, setDeliveryCheckboxesPay] = useState(initDeliveryCheckboxesPay);
-    const [orderData, setOrderData] = useState(initRecipientDetails);
+    // const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useState(initDeliveryCheckboxesOpt);
+    const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useMultiCheckboxMemory(
+        'deliveryMethod',
+        initDeliveryCheckboxesOpt
+    );
+    const [deliveryCheckboxesPay, setDeliveryCheckboxesPay] = useMultiCheckboxMemory(
+        'paymentMethod',
+        initDeliveryCheckboxesPay
+    );
+    const [orderData, setOrderData] = useMultiCheckboxMemory('orderForm', initRecipientDetails);
     const [priceToPay, setPriceToPay] = useState(0);
     const { street } = orderData;
     const [theProducts, setProducts] = useState([]);
@@ -127,11 +135,7 @@ const Basket = () => {
                     deliveryCheckboxesPay={deliveryCheckboxesPay}
                     setDeliveryCheckboxesPay={setDeliveryCheckboxesPay}
                 />
-                <OrderForm
-                    initRecipientDetails={initRecipientDetails}
-                    orderData={orderData}
-                    setOrderData={setOrderData}
-                />
+                <OrderForm setOrderData={setOrderData} />
             </Main>
             <Prev>
                 <PrevWrapper>

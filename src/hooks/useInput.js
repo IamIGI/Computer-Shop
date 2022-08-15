@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
 
 const useInput = (key, initValue) => {
@@ -12,10 +11,6 @@ const useInput = (key, initValue) => {
         value,
         onChange: (e) => setValue(e.target.value),
     };
-
-    useEffect(() => {
-        console.log(value);
-    }, [value]);
 
     return [value, reset, attributeObj];
 };
