@@ -10,6 +10,7 @@ import {
     ProductDescription,
     ProductImage,
     Line,
+    Link,
     TitleSection,
     Wrapper,
     ProductImageSmall,
@@ -23,9 +24,11 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import { BsBox } from 'react-icons/bs';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { SectionTitle } from 'components/molecules/AccountData/AccountData.style';
+import useOrder from 'hooks/useOrder';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
+    const { setOrderItem } = useOrder();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -132,6 +135,10 @@ const AccountSettingsOrders = () => {
         countPageButtons.push(i);
     }
 
+    const goToOrderItem = (order) => {
+        setOrderItem(order);
+    };
+
     return (
         <AccountSettings>
             <Wrapper>
@@ -148,40 +155,49 @@ const AccountSettingsOrders = () => {
                             <>
                                 {orderHistory.map((item, index) => (
                                     <>
-                                        <OrderContent>
-                                            <OrderDescription>
-                                                <h4>{getStatus(item.status)}</h4>
-                                                {/* <br /> */}
-                                                <DateDecorator>{getDate(item.transactionInfo.date)}</DateDecorator>
-                                                nr {item._id}
-                                                <br />
-                                                <h4>{item.transactionInfo.price} zł</h4>
-                                                {/* <br /> */}
-                                            </OrderDescription>
-                                            <OrderProducts>
-                                                {item.products.map((product, index) => (
-                                                    <>
-                                                        {item.products.length > 1 ? (
-                                                            <ProductImageSmall>
-                                                                <img src={product.prevImg} alt="images of product" />
-                                                            </ProductImageSmall>
-                                                        ) : (
-                                                            <>
-                                                                <ProductImage>
+                                        <Link
+                                            onClick={() => goToOrderItem(item)}
+                                            to={`/accountSettings/orders/history/${item._id}`}
+                                            key={index}
+                                        >
+                                            <OrderContent>
+                                                <OrderDescription>
+                                                    <h4>{getStatus(item.status)}</h4>
+                                                    {/* <br /> */}
+                                                    <DateDecorator>{getDate(item.transactionInfo.date)}</DateDecorator>
+                                                    nr {item._id}
+                                                    <br />
+                                                    <h4>{item.transactionInfo.price} zł</h4>
+                                                    {/* <br /> */}
+                                                </OrderDescription>
+                                                <OrderProducts>
+                                                    {item.products.map((product, index) => (
+                                                        <>
+                                                            {item.products.length > 1 ? (
+                                                                <ProductImageSmall>
                                                                     <img
                                                                         src={product.prevImg}
                                                                         alt="images of product"
                                                                     />
-                                                                </ProductImage>
-                                                                <ProductDescription>
-                                                                    <p>{product.name}</p>
-                                                                </ProductDescription>
-                                                            </>
-                                                        )}
-                                                    </>
-                                                ))}
-                                            </OrderProducts>
-                                        </OrderContent>
+                                                                </ProductImageSmall>
+                                                            ) : (
+                                                                <>
+                                                                    <ProductImage>
+                                                                        <img
+                                                                            src={product.prevImg}
+                                                                            alt="images of product"
+                                                                        />
+                                                                    </ProductImage>
+                                                                    <ProductDescription>
+                                                                        <p>{product.name}</p>
+                                                                    </ProductDescription>
+                                                                </>
+                                                            )}
+                                                        </>
+                                                    ))}
+                                                </OrderProducts>
+                                            </OrderContent>
+                                        </Link>
                                     </>
                                 ))}
                             </>

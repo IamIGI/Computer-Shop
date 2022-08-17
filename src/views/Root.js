@@ -19,6 +19,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RequireAuth from 'components/molecules/RequireAuth/RequireAuth';
 import PersistLogin from 'providers/PersistLogin';
 
+import useOrder from 'hooks/useOrder';
+import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
+
 const baseURL = 'http://localhost:5000/products';
 
 const ROLES = {
@@ -30,6 +33,7 @@ const ROLES = {
 const Root = () => {
     //API section---------------------
     const [products, setProducts] = useState(null);
+    const { orderItem } = useOrder();
 
     useEffect(() => {
         axios
@@ -39,6 +43,7 @@ const Root = () => {
             })
             .catch((err) => console.log(err));
     }, []);
+
     return (
         <>
             {products === null ? (
@@ -67,6 +72,10 @@ const Root = () => {
                                         <Route path="adminSettings" element={<AdminSettings />} />
                                         <Route path="/accountSettings/Settings" element={<AccountSettingsSettings />} />
                                         <Route path="/accountSettings/Orders" element={<AccountSettingsOrders />} />
+                                        <Route
+                                            path={`/accountSettings/orders/history/${orderItem._id}`}
+                                            element={<AccountOrderHistoryItem />}
+                                        />
                                         <Route path="basket" element={<Basket />} />
                                     </Route>
 

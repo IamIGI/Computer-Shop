@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -135,4 +136,8 @@ export const PageButton = styled.div`
         box-shadow: 1px 1px 12px 1px ${({ theme }) => theme.colors.grey};
         cursor: pointer;
     }
+`;
+
+export const Link = styled(NavLink)`
+    text-decoration: none;
 `;
