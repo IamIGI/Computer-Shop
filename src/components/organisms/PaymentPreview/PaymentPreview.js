@@ -1,7 +1,7 @@
 import React from 'react';
 import { FinishSection, List, ListSection, LocalButton, Name, Price, Section, Wrapper } from './PaymentPreview.style';
 
-const PaymentPreview = ({ priceToPay, setFinishOrder }) => {
+const PaymentPreview = ({ priceToPay, setFinishOrder, priceForDelivery }) => {
     const finishHandler = () => {
         setFinishOrder(() => {
             return true;
@@ -16,13 +16,13 @@ const PaymentPreview = ({ priceToPay, setFinishOrder }) => {
                         <li>
                             <ListSection>
                                 <Name>Wartość koszyka</Name>
-                                <Price>{priceToPay},00zł</Price>
+                                <Price>{priceToPay},00 zł</Price>
                             </ListSection>
                         </li>
                         <li>
                             <ListSection>
                                 <Name>Dostawa</Name>
-                                <Price>9,99zł</Price>
+                                <Price>{priceForDelivery} zł</Price>
                             </ListSection>
                         </li>
                         <li>
@@ -34,7 +34,7 @@ const PaymentPreview = ({ priceToPay, setFinishOrder }) => {
                         <li>
                             <ListSection>
                                 <Name>Podsumowanie </Name>
-                                <Price>{priceToPay + 9.99} zł</Price>
+                                <Price>{priceToPay + priceForDelivery} zł</Price>
                             </ListSection>
                         </li>
                     </List>
