@@ -11,6 +11,7 @@ import useAuth from '../../../hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useLogout from 'hooks/useLogout';
 import useMultiCheckboxMemory from 'hooks/useMultiCheckboxMemory';
+import { Prices } from 'data/Prices';
 
 const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
 const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
@@ -46,6 +47,7 @@ const Basket = () => {
     const [theProducts, setProducts] = useState([]);
     const [productsInBasket, setProductsInBasket] = useState(null);
     const [finishOrder, setFinishOrder] = useState(false);
+    const [priceForDelivery, setPriceForDelivery] = useState();
 
     if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
         basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
@@ -74,13 +76,30 @@ const Basket = () => {
             }
         });
 
+        switch (tempOpt) {
+            case 'deliveryMan':
+                setPriceForDelivery(Prices.deliveryMan);
+                break;
+            case 'atTheSalon':
+                setPriceForDelivery(Prices.atTheSalon);
+                break;
+            case 'locker':
+                setPriceForDelivery(Prices.locker);
+                break;
+
+            default:
+                setPriceForDelivery(0.0);
+                break;
+        }
+
+        const finalPrice = priceToPay + priceForDelivery;
         orderTemplateDocument = {
             status: 1, //all orders have to start from "In realization" status
             products: productsInBasket,
             transactionInfo: {
                 deliveryMethod: tempOpt,
                 paymentMethod: tempPay,
-                price: priceToPay,
+                price: finalPrice,
                 recipientDetails: orderData,
             },
             user: auth.id,
@@ -155,7 +174,11 @@ const Basket = () => {
                         deliveryCheckboxesOpt={deliveryCheckboxesOpt}
                         orderStreet={street}
                     />
-                    <PaymentPreview priceToPay={priceToPay} setFinishOrder={setFinishOrder} />
+                    <PaymentPreview
+                        priceToPay={priceToPay}
+                        setFinishOrder={setFinishOrder}
+                        priceForDelivery={priceForDelivery}
+                    />
                 </PrevWrapper>
             </Prev>
         </Wrapper>
