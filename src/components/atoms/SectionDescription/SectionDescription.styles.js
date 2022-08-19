@@ -17,11 +17,25 @@ export const ContentTitle = styled.div`
     font-size: ${({ theme }) => theme.fontSize.xxl};
     /* width: 50%; */
 `;
+export const ContentDescription = styled.div`
+    padding-top: 17px;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    margin-left: 30px;
+    font-size: ${({ theme }) => theme.fontSize.xl};
+`;
 
 export const Line = styled.div`
     margin-left: 30px;
     margin-right: 30px;
     width: 75%;
     margin-bottom: 40px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey}; ;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
+`;
+
+export const LineWithDescription = styled.div`
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 20%;
+    margin-bottom: 40px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;

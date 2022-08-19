@@ -1,13 +1,14 @@
 import React from 'react';
-import { ContentTitle, IconTitle, Line, Wrapper } from './SectionDescription.styles';
+import { ContentDescription, ContentTitle, IconTitle, Line, Wrapper } from './SectionDescription.styles';
 
-const SectionDescription = ({ title, icon }) => {
+const SectionDescription = ({ title, icon, description }) => {
     return (
         <>
             <Wrapper>
                 <IconTitle>{icon}</IconTitle>
                 <ContentTitle>{title} </ContentTitle>
-                <Line />
+                <ContentDescription>{description}</ContentDescription>
+                {description ? <></> : <Line />}
             </Wrapper>
         </>
     );

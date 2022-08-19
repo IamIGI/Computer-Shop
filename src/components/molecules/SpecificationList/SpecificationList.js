@@ -1,5 +1,5 @@
 import React from 'react';
-import { LiDesc, LiName, List, LiWrapper, DescWrapper, IconTitle, ContentTitle, Line } from './SpecificationList.style';
+import { LiDesc, LiName, List, LiWrapper } from './SpecificationList.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { VscListUnordered } from 'react-icons/vsc';
 
