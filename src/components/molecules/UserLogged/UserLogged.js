@@ -30,7 +30,6 @@ const UserLogged = () => {
     const signOut = async () => {
         setBasketItems([]);
         await logout();
-        // navigate('');
     };
 
     return (
