@@ -230,55 +230,6 @@ const AccountOrderHistoryItem = ({ orderId }) => {
                     </ul>
                 </SummarySection>
             </Wrapper>
-            {/* <p>{orderItem._id}</p>
-            <p>{orderItem.transactionInfo.date}</p>
-
-            <p>
-                <b>Dostawa:</b> <br />
-                {orderItem.transactionInfo.deliveryMethod}
-            </p>
-            <p>
-                <b>Adres odbioru:</b> <br />
-                {orderItem.transactionInfo.recipientDetails.place}
-            </p>
-            <p>{orderItem.transactionInfo.recipientDetails.street}</p>
-            <p>{orderItem.transactionInfo.recipientDetails.zipCode}</p>
-            <p>
-                <b>Dane odbiorcy:</b> <br />
-                {orderItem.transactionInfo.recipientDetails.name}
-            </p>
-            <p>tel.{orderItem.transactionInfo.recipientDetails.phone}</p>
-            <p>e-mail: {orderItem.transactionInfo.recipientDetails.email}</p>
-            <p>
-                <b>Platnosc</b>: <br />
-                {orderItem.transactionInfo.paymentMethod}
-            </p>
-            <p>
-                <b>Dane do faktury</b> <br />
-                {orderItem.transactionInfo.recipientDetails.place}
-            </p>
-            <p>
-                {orderItem.transactionInfo.recipientDetails.zipCode} {orderItem.transactionInfo.recipientDetails.street}
-            </p>
-            <p>
-                <b>Zamówienie:</b>{' '}
-            </p>
-            {orderItem.products.map((product, index) => (
-                <>
-                    <img src={product.prevImg} alt="images of product" />
-                    <p>{product.name}</p>
-                    <p>{product.price}</p>
-                </>
-            ))}
-            <p>
-                <b>Podsumowanie</b>
-                <br />
-            </p>
-            <p>
-                <b>Wartość koszyka:</b> <br />{' '}
-            </p>
-            <p>Koszt dostawy: {deliveryCost(orderItem.transactionInfo.deliveryMethod)} zł</p>
-            <p>Razem: {orderItem.transactionInfo.price}</p> */}
         </AccountSettings>
     );
 };
