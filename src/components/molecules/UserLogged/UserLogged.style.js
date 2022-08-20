@@ -33,7 +33,6 @@ export const List = styled.ul`
 export const StyledLink = styled(NavLink)`
     text-decoration: none;
     width: 83%;
-
     color: black;
     display: flex;
     flex-direction: row;
@@ -59,6 +58,33 @@ export const StyledLink = styled(NavLink)`
     }
 `;
 
+export const LogoutLink = styled(NavLink)`
+    text-decoration: none;
+    width: 83%;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    div {
+        margin-right: 10px;
+    }
+    border-bottom: 1px solid white;
+
+    span {
+        font-size: 24px;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    :hover {
+        border-bottom: 1px solid ${({ theme }) => theme.colors.success};
+        span {
+            color: ${({ theme }) => theme.colors.success};
+        }
+    }
+`;
+
 export const NavDescription = styled.div`
     padding-bottom: 4px;
 `;
@@ -67,5 +93,5 @@ export const Line = styled.div`
     /* margin-left: 15%;
     width: 70%; */
     margin-bottom: 20px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey}; ;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;

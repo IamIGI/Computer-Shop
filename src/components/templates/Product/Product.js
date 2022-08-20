@@ -5,10 +5,15 @@ import ProductBottomContent from 'components/organisms/ProductBottomContent/Prod
 import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
+let waitForFetch = false;
+
 const Product = ({ code }) => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        waitForFetch = true;
+
         const fetchProduct = async () => {
             try {
                 const response = await ProductsApi.get(`/${code}`);
@@ -22,17 +27,19 @@ const Product = ({ code }) => {
                     console.log(`Error: ${err.message}`);
                 }
             }
+            waitForFetch = false;
         };
 
-        setTimeout(() => {
-            fetchProduct();
-        }, 500);
-    }, []);
+        fetchProduct();
+    }, [code]);
+
+    //Work when element is rendered
+    document.getElementById('Top') && document.getElementById('Top').scrollIntoView({ behavior: 'smooth' });
 
     return (
         <Wrapper>
             <>
-                {!product ? (
+                {waitForFetch || !product ? (
                     <>
                         <LoadingAnimation />
                     </>

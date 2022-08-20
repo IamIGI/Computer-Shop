@@ -29,8 +29,6 @@ const ProductPreview = ({ allProducts }) => {
         }, 500);
     }, []);
 
-    console.log(products); //to delete
-
     //--------------------------------------------
     allProducts === 'yes' ? (Show = products.length) : (Show = 2);
     return (
@@ -44,7 +42,7 @@ const ProductPreview = ({ allProducts }) => {
                     {products.map((item, index) => (
                         <>
                             {index < Show && (
-                                <Link to={`/product/${item._id}`} key={index}>
+                                <Link to={`/product/${item._id}`} key={item._id}>
                                     <Wrapper>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />
