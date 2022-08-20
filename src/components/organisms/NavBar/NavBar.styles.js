@@ -37,10 +37,10 @@ export const Nav = styled.nav`
 `;
 
 export const SiteTitle = styled(NavLink)`
-    padding: 3px;
+    padding: 15px;
     padding-right: 20px;
     border-radius: 15px 0 0 15px;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
+    font-size: ${({ theme }) => theme.fontSize.omegaBig};
     background-color: ${({ theme }) => theme.colors.lightPurple};
 
     span {
@@ -67,7 +67,7 @@ export const SiteTitle = styled(NavLink)`
 
 export const StyledLink = styled(NavLink)`
     margin-top: 10px;
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSize.xxl};
     padding: 0.25rem;
 
     span {

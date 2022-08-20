@@ -2,15 +2,14 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-    height: 300px; //delete after
     margin-top: 2%;
-    margin-left: 5%;
-    width: 90%;
-    border-radius: 25px;
+    width: 100%;
 `;
 
 export const StyledLink = styled(NavLink)`
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.xl};
+    width: 90%;
+    margin-right: 5%;
     text-decoration: none;
     color: black;
     display: flex;
@@ -41,6 +40,12 @@ export const List = styled.ul`
     list-style: none;
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    li: {
+        margin: 0;
+        padding: 0;
+    }
 `;
 
 export const Nav = styled.nav``;
