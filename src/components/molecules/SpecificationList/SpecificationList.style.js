@@ -12,20 +12,21 @@ export const List = styled.ul`
 
 export const LiWrapper = styled.div`
     display: flex;
-    flex-direction: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
     padding: 7px 0;
 `;
 
 export const LiName = styled.div`
-    width: 400px;
-    padding-left: 100px;
+    width: 35%;
+    padding-left: 7%;
     /* border: 1px solid green; */
 `;
 export const LiDesc = styled.div`
-    width: 600px;
+    width: 40%;
     /* border: 1px solid blue; */
     p {
-        line-height: 10px;
+        line-height: 12px;
     }
 `;
 

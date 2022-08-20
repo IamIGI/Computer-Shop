@@ -35,7 +35,7 @@ const NavBar = () => {
                             <span>
                                 <VscInspect />
                             </span>
-                            Admin
+                            Administrator
                         </CustomLink>
                     )}
                     {auth?.roles?.find((role) => Editor_entitlements === role) && (
@@ -44,7 +44,7 @@ const NavBar = () => {
                                 <span>
                                     <VscInspect />
                                 </span>
-                                Editor
+                                Edytor
                             </CustomLink>
                         </>
                     )}
@@ -53,7 +53,7 @@ const NavBar = () => {
                         <span>
                             <VscInspect />
                         </span>
-                        Products
+                        Produkty
                     </CustomLink>
                     <CustomLink to="accountSettings/Settings">
                         <span>
@@ -65,13 +65,13 @@ const NavBar = () => {
                         <span>
                             <VscArchive />
                         </span>
-                        Basket
+                        Koszyk
                     </CustomLink>
                     <CustomLink to="/about">
                         <span>
                             <VscMilestone />
                         </span>
-                        About
+                        O Nas
                     </CustomLink>
                 </List>
             </Nav>
