@@ -20,7 +20,7 @@ export const theme = {
     fontSize: {
         omegaBigBrother: '100px',
         omegaBig: '50px',
-        xxl: '34px',
+        xxl: '32px',
         xl: '24px',
         l_plus: '19px',
         l: '17px',

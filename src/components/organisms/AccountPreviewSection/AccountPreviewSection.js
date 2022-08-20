@@ -9,7 +9,6 @@ const AccountPreviewSection = () => {
     return (
         <>
             <Wrapper>
-                <p>Account section</p>
                 {auth?.accessToken ? (
                     <UserLogged />
                 ) : (

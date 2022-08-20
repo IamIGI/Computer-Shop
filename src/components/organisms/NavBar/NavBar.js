@@ -55,12 +55,6 @@ const NavBar = () => {
                         </span>
                         Produkty
                     </CustomLink>
-                    <CustomLink to="accountSettings/Settings">
-                        <span>
-                            <VscAccount />
-                        </span>
-                        Konto
-                    </CustomLink>
                     <CustomLink to="/basket">
                         <span>
                             <VscArchive />
