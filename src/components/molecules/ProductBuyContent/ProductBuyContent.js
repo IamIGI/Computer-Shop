@@ -1,8 +1,13 @@
 import React from 'react';
 import { BuyButton, NumberInput, Separator, Wrapper } from './ProductBuyContent.style';
+import useBasket from 'hooks/useBasket';
 
 const ProductBuyContent = ({ product }) => {
+    const { setBasketItems } = useBasket();
     const addProduct = () => {
+        setBasketItems((prevItems) => {
+            return [...prevItems, { prevImg: product.prevImg, _id: product._id }]; //later add then number of bought product at once.
+        });
         let basket = JSON.parse(localStorage.getItem('productsInBasket'));
         if (basket == null) {
             let addedProduct = { products: [product._id] };

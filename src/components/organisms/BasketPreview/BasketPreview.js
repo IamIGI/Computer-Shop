@@ -12,11 +12,12 @@ import {
     StyledButton,
 } from './BasketPreview.style';
 import ProductsApi from 'api/products';
-
+import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts, basket, setBasket }) => {
+    const { setBasketItems } = useBasket();
     useEffect(() => {
         if (basket !== null) {
             basket.map(async (product_Id) => {
@@ -56,6 +57,12 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
             let newBasket = { products: temp };
             localStorage.setItem('productsInBasket', JSON.stringify(newBasket));
         }
+
+        setBasketItems((prevItems) => {
+            return prevItems.filter((item) => {
+                return item._id !== _id;
+            });
+        });
 
         setProducts((prevItems) => {
             return prevItems.filter((item) => {
