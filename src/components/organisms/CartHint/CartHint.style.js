@@ -18,11 +18,11 @@ export const TitleSection = styled.div`
     background-color: ${({ theme }) => theme.colors.lightLightGrey};
 `;
 
-export const Number = styled.div`
+export const Quantity = styled.div`
     border-radius: 50%;
     height: 40px;
     width: 40px;
-    background-color: green;
+    background-color: ${({ theme }) => theme.colors.successDark};
     color: white;
     font-weight: 700;
     padding-top: 7px;
@@ -32,10 +32,24 @@ export const Number = styled.div`
     top: -12px;
 `;
 
+export const ProductQuantity = styled.div`
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: ${({ theme }) => theme.colors.success};
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 5px;
+    position: absolute;
+    right: -12px;
+    top: -12px;
+`;
+
 export const ProductsSection = styled.div`
     width: 100%;
     height: 100%;
-    padding: 2% 9%;
+    padding: 3% 9%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -43,6 +57,7 @@ export const ProductsSection = styled.div`
 `;
 
 export const Image = styled.div`
+    position: relative;
     margin: 3%;
     height: 80px;
     width: auto;
@@ -63,5 +78,6 @@ export const Image = styled.div`
 `;
 
 export const Link = styled(NavLink)`
+    color: black;
     text-decoration: none;
 `;

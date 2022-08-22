@@ -1,7 +1,5 @@
 import React from 'react';
-import { Button } from 'components/atoms/Button/Button';
 import useLogout from 'hooks/useLogout';
-import { useNavigate } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
 import {
     Wrapper,
@@ -17,7 +15,6 @@ import {
 } from './UserLogged.style';
 import { VscAccount } from 'react-icons/vsc';
 import { BsPerson } from 'react-icons/bs';
-import { BiLogOutCircle } from 'react-icons/bi';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import CartHint from 'components/organisms/CartHint/CartHint';
 import useBasket from 'hooks/useBasket';
@@ -25,7 +22,6 @@ const UserLogged = () => {
     const { auth } = useAuth();
     const { setBasketItems } = useBasket();
     const logout = useLogout();
-    const navigate = useNavigate();
 
     const signOut = async () => {
         setBasketItems([]);

@@ -116,12 +116,6 @@ export const ProductElement = styled.div`
     justify-content: flex-start;
 `;
 
-export const Line = styled.div`
-    width: 100%;
-    margin-bottom: 3%;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
-`;
-
 export const ProductImage = styled.div`
     height: 120px;
     width: auto;
@@ -132,6 +126,7 @@ export const ProductImage = styled.div`
 `;
 
 export const ProductDescription = styled.div`
+    width: 70%;
     padding-top: 1%;
     justify-content: center;
     text-align: left;
@@ -144,6 +139,17 @@ export const ProductDescription = styled.div`
     p:last-child {
         font-weight: 700;
     }
+`;
+
+export const ProductQuantity = styled.div`
+    margin: 20px 0;
+    padding-left: 2%;
+    padding-top: 27px;
+    text-align: right;
+    justify-content: right;
+    align-items: right;
+    border-left: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
 `;
 
 export const SummarySection = styled.div`
@@ -170,4 +176,10 @@ export const SummarySection = styled.div`
     li:last-child {
         font-weight: 700;
     }
+`;
+
+export const Line = styled.div`
+    width: 100%;
+    margin-bottom: 3%;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;

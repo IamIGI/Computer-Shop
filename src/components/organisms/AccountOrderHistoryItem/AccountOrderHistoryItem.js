@@ -20,6 +20,7 @@ import {
     ProductElement,
     ProductImage,
     ProductDescription,
+    ProductQuantity,
 } from './AccountOrderHistoryItem.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BsBox } from 'react-icons/bs';
@@ -204,6 +205,7 @@ const AccountOrderHistoryItem = ({ orderId }) => {
                                 <p>{product.name}</p>
                                 <p>{product.price} zł</p>
                             </ProductDescription>
+                            <ProductQuantity>{product.quantity} szt.</ProductQuantity>
                         </ProductElement>
                     ))}
                 </ProductSection>
