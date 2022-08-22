@@ -11,50 +11,27 @@ import {
     DescriptionBottom,
     StyledButton,
 } from './BasketPreview.style';
-import ProductsApi from 'api/products';
 import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { Link } from '../CartHint/CartHint.style';
 
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts, basket, setBasket }) => {
-    const { setBasketItems } = useBasket();
-    useEffect(() => {
-        if (basket !== null) {
-            basket.map(async (product_Id) => {
-                try {
-                    const response = await ProductsApi.get(`/${product_Id}`);
-
-                    const { name, prevImg, price, _id } = response.data;
-                    setProducts((prevItems) => {
-                        return [...prevItems, { name, prevImg, price, _id }];
-                    });
-                } catch (err) {
-                    if (err.response) {
-                        console.log(err.response.data);
-                        console.log(err.response.status);
-                        console.log(err.response.headers);
-                    } else {
-                        console.log(`Error: ${err.message}`);
-                    }
-                }
-            });
-        }
-    }, []);
+    const { basketItems, setBasketItems } = useBasket();
 
     const deleteProduct = (_id) => {
-        let oldBasket = JSON.parse(localStorage.getItem('productsInBasket')).products;
+        let oldBasket = JSON.parse(localStorage.getItem('basketItems'));
 
         if (oldBasket.length === 1) {
-            localStorage.removeItem('productsInBasket');
+            localStorage.removeItem('basketItems');
             setBasket(null);
             setPriceToPay(() => {
                 return 0;
             });
         } else {
-            let temp = oldBasket.filter((item) => {
-                return item !== _id;
+            let newBasket = oldBasket.filter((item) => {
+                return item._id !== _id;
             });
-            let newBasket = { products: temp };
             localStorage.setItem('productsInBasket', JSON.stringify(newBasket));
         }
 
@@ -73,23 +50,23 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
 
     useEffect(() => {
         let temp = 0;
-        theProducts.map((item) => {
-            temp += item.price;
+        basketItems.map((item) => {
+            temp += item.price * item.quantity;
         });
         setPriceToPay(() => {
             return temp;
         });
 
         setProductsInBasket(() => {
-            return theProducts;
+            return basketItems;
         });
-    }, [theProducts]);
+    }, [basketItems]);
 
     return (
         <>
             <Wrapper>
                 <List>
-                    {basket === null ? (
+                    {basketItems.length === 0 ? (
                         <>
                             <Section>
                                 <Icon>
@@ -102,51 +79,34 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
                         </>
                     ) : (
                         <>
-                            <>
-                                {theProducts === [] ? (
-                                    <>
+                            {basketItems.map((item, index) => (
+                                <>
+                                    <li key={index} id={index}>
                                         <Section>
-                                            <Icon>
-                                                <BsBasket3 />
-                                            </Icon>
-                                            <DescriptionAreaMissing>
-                                                <h4>Ładowanie </h4>
-                                            </DescriptionAreaMissing>
+                                            <ImageArea>
+                                                <img src={item.prevImg} alt="Product img" />
+                                            </ImageArea>
+                                            <DescriptionArea>
+                                                <Link to={`/product/${item._id}`} key={item._id}>
+                                                    <h4>{item.name}</h4>
+                                                </Link>
+                                                <DescriptionBottom>
+                                                    <div>{item.quantity} szt.</div>
+                                                    <div>
+                                                        <StyledButton onClick={() => deleteProduct(item._id)}>
+                                                            {/* you give all the props, f.e: onClick given in UsersListItem */}
+                                                            <AiOutlineDelete />
+                                                        </StyledButton>
+                                                    </div>
+                                                </DescriptionBottom>
+                                            </DescriptionArea>
+                                            <PriceArea>
+                                                <p>{item.price},00 zł</p>
+                                            </PriceArea>
                                         </Section>
-                                    </>
-                                ) : (
-                                    <>
-                                        {theProducts.map((item, index) => (
-                                            <>
-                                                <li key={index} id={index}>
-                                                    <Section>
-                                                        <ImageArea>
-                                                            <img src={item.prevImg} alt="Product img" />
-                                                        </ImageArea>
-                                                        <DescriptionArea>
-                                                            <h4>{item.name}</h4>
-                                                            <DescriptionBottom>
-                                                                <div>1 szt.</div>
-                                                                <div>
-                                                                    <StyledButton
-                                                                        onClick={() => deleteProduct(item._id)}
-                                                                    >
-                                                                        {/* you give all the props, f.e: onClick given in UsersListItem */}
-                                                                        <AiOutlineDelete />
-                                                                    </StyledButton>
-                                                                </div>
-                                                            </DescriptionBottom>
-                                                        </DescriptionArea>
-                                                        <PriceArea>
-                                                            <p>{item.price},00 zł</p>
-                                                        </PriceArea>
-                                                    </Section>
-                                                </li>
-                                            </>
-                                        ))}
-                                    </>
-                                )}
-                            </>
+                                    </li>
+                                </>
+                            ))}
                         </>
                     )}
                 </List>

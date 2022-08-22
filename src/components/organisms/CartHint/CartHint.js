@@ -1,10 +1,19 @@
-import { ProductsSection, Wrapper, Image, TitleSection, Number, Link } from './CartHint.style';
+import { ProductsSection, Wrapper, Image, TitleSection, Quantity, Link, ProductQuantity } from './CartHint.style';
 import { Button } from 'components/atoms/Button/Button';
 
 import useBasket from 'hooks/useBasket';
 
 const CartHint = () => {
     const { basketItems } = useBasket();
+    console.log(basketItems);
+
+    const getQuantityOfItems = () => {
+        let temp = 0;
+        basketItems.map((item) => {
+            temp += item.quantity;
+        });
+        return temp;
+    };
 
     return (
         <>
@@ -14,13 +23,14 @@ const CartHint = () => {
                 <>
                     <Wrapper>
                         <TitleSection>
-                            <Number>{basketItems.length}</Number>
+                            <Quantity>{getQuantityOfItems()}</Quantity>
                             Koszyk
                         </TitleSection>
 
                         <ProductsSection>
                             {basketItems.map((item) => (
                                 <Image key={item._id}>
+                                    <ProductQuantity>{item.quantity}</ProductQuantity>
                                     <Link to={`/product/${item._id}`} key={item._id}>
                                         <img src={item.prevImg} alt="images of product" />
                                     </Link>
