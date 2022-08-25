@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Wrapper, TopWrapper, BottomWrapper } from './Product.styles';
+import { Wrapper, TopWrapper, MidWrapper, BottomWrapper } from './Product.styles';
 import ProductTopContent from 'components/organisms/ProductTopContent/ProductTopContent';
 import ProductBottomContent from 'components/organisms/ProductBottomContent/ProductBottomContent';
 import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import Comments from 'components/organisms/Comments/Comments';
 
 let waitForFetch = false;
 
@@ -48,8 +49,11 @@ const Product = ({ code }) => {
                         <TopWrapper id="Top">
                             <ProductTopContent product={product} />
                         </TopWrapper>
-                        <BottomWrapper>
+                        <MidWrapper>
                             <ProductBottomContent product={product} />
+                        </MidWrapper>
+                        <BottomWrapper>
+                            <Comments productId={product._id} />
                         </BottomWrapper>
                     </>
                 )}

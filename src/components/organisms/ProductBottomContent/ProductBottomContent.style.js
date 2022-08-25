@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 
 export const MenuSector = styled.div`
-    height: 100%;
+    height: 100px;
     width: 100%;
-    grid-row: 1/2;
 `;
 
 export const AboutProductSector = styled.div`
     height: 100%;
     width: 100%;
-    grid-row: 2/2;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 `;
 
 export const Description = styled.div`
