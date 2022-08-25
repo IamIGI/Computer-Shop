@@ -11,6 +11,7 @@ const ProductMenu = () => {
                 </a>
                 <a href="#Description">Opis</a>
                 <a href="#Specification">Specyfikacja</a>
+                <a href="#Opinions">Opinie</a>
             </Wrapper>
         </>
     );

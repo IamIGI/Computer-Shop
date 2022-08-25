@@ -3,8 +3,10 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-rows: 600px 1fr;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 
     overflow-y: scroll;
     &::-webkit-scrollbar {
@@ -19,16 +21,20 @@ export const Wrapper = styled.div`
 export const TopWrapper = styled.div`
     height: 100%;
     width: 100%;
-    grid-row: 1/2;
     display: grid;
     grid-template-columns: 630px 1fr;
 `;
 
+export const MidWrapper = styled.div`
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+`;
+
 export const BottomWrapper = styled.div`
-    /* border: 1px solid orange; */
     height: 100%;
     width: 100%;
-    grid-row: 2/2;
-    display: grid;
-    grid-template-rows: 100px 1fr;
 `;
