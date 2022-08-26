@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 
-export const Wrapper = styled.div`
-    width: 300px;
+export const OutsideWrapper = styled.div`
     position: 'fixed';
-    transform: translate(70%, -120%);
-    /* transform: translate(20%, -150%); */
+    width: 300px;
+    transform: translate(40vw, -60vh);
     background-color: white;
-    /* padding: 50px; */
-    z-index: 3;
+    /* z-index: 1000; */
     border: 1px solid grey;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+`;
+
+export const InsideWrapper = styled.div`
+    position: relative;
 `;
 
 export const Overlay = styled.div`
@@ -22,8 +24,8 @@ export const Overlay = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* z-index: 1000; */
 `;
 
 export const ButtonWrap = styled.div`
@@ -32,13 +34,20 @@ export const ButtonWrap = styled.div`
     border-bottom-right-radius: 30px;
 `;
 
-export const ButtonLocal = styled(Button)`
-    margin-left: 20px;
-    background-color: ${({ theme }) => theme.colors.success};
+export const Close = styled.div`
+    position: absolute;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    padding-left: 16px;
+    padding-top: 16px;
+    font-size: 19px;
+    top: 5px;
+    right: 5px;
 
     &:hover {
         color: black;
-        background-color: ${({ theme }) => theme.colors.successDark};
+        background-color: ${({ theme }) => theme.colors.grey};
     }
 `;

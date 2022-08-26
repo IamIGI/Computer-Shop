@@ -17,11 +17,7 @@ export const Title = styled.div`
     border-top-right-radius: 25px;
     text-align: left;
     padding-left: 10%;
-
-    span {
-        font-weight: 400;
-        color: red;
-    }
+    color: red;
 `;
 
 export const FormSection = styled.div``;

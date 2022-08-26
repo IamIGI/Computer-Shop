@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    z-index: 1;
+    /* z-index: 1; */
 
     input {
         display: block;
