@@ -12,7 +12,6 @@ const ProductPreview = ({ allProducts }) => {
         const fetchProducts = async () => {
             try {
                 const response = await ProductsApi.get('/all');
-                console.log(response.data);
                 setProducts(response.data);
             } catch (err) {
                 if (err.response) {
