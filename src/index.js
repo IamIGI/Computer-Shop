@@ -8,9 +8,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
     <BasketProvider>
-    <OrderProvider>
-        <Root />
-    </OrderProvider>
+        <OrderProvider>
+            <Root />
+        </OrderProvider>
     </BasketProvider>
     // </React.StrictMode>
 );

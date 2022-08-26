@@ -6,10 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSettingsEmail, accountSettingsStringField, accountSettingsPassword } from 'data/FormSchema';
 
 const baseURL = `http://localhost:5000/userSettingsData`;
-let schema = '';
-let viewedName = '';
 
 const PopUpAccountSettings = ({ name, value }) => {
+    let schema = '';
+    let viewedName = '';
     const [inputValue, setInput] = useState('');
 
     function handleChangesInput(event) {
@@ -72,7 +72,12 @@ const PopUpAccountSettings = ({ name, value }) => {
                 <FormSection>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
-                            <InputLocal onChange={handleChangesInput} name="name" placeholder={value} {...register('editedField')} />
+                            <InputLocal
+                                onChange={handleChangesInput}
+                                name="name"
+                                placeholder={value}
+                                {...register('editedField')}
+                            />
                         </div>
                         <p>{errors.editedField && 'Niepoprawny dane'}</p>
                         <div>

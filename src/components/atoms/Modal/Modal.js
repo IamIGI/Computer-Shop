@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { GrClose } from 'react-icons/gr';
 
-import { ButtonLocal, ButtonWrap, Overlay, Wrapper } from './Modal.styles';
+import { Close, InsideWrapper, Overlay, OutsideWrapper } from './Modal.styles';
 
-const Modal = ({ open, children, onClose }) => {
+export default function Modal({ open, children, onClose }) {
     if (!open[0]) return null;
-    // return ReactDOM.createPortal(
-    return (
+
+    return ReactDOM.createPortal(
         <>
-            <Overlay />
-            <Wrapper>
-                <div>{children}</div>
-                <ButtonWrap>
-                    <ButtonLocal onClick={onClose}>Zamnknij okno</ButtonLocal>
-                </ButtonWrap>
-            </Wrapper>
+            <Overlay onClick={onClose} />
+            <OutsideWrapper>
+                <InsideWrapper>
+                    <Close onClick={onClose}>
+                        <GrClose />
+                    </Close>
 
-            {/* </>
-         document.getElementById('portal') */}
-        </>
+                    <div>{children}</div>
+                </InsideWrapper>
+            </OutsideWrapper>
+        </>,
+        document.getElementById('portal')
     );
-};
-
-export default Modal;
+}

@@ -1,49 +1,24 @@
 import { Wrapper } from './Comments.style';
 import { useState, useEffect } from 'react';
-import { getAllComments } from 'api/comments';
+import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useComments from 'hooks/useComments';
-import useAverageScore from 'hooks/useAverageScore';
+
+import { BiCommentDetail } from 'react-icons/bi';
+import ProductAverageScore from 'components/molecules/ProductAverageScore/ProductAverageScore';
 
 const Comments = ({ productId }) => {
     const [comments, getComments, waitForFetchComments] = useComments(productId);
-    const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(productId);
+
     useEffect(() => {
         getComments();
-        getAverageScore();
     }, []);
 
     return (
         <Wrapper id="Opinions">
-            <p>AverageScore Section </p>
-            {waitForFetchAS ? (
-                <>
-                    <LoadingAnimation />
-                </>
-            ) : Object.keys(averageScore).length == 0 ? (
-                <>
-                    <p>Brak Ocen</p>
-                </>
-            ) : (
-                <>
-                    <ul>
-                        <li>
-                            {averageScore.averageScore_View} - {averageScore.averageScore_Stars}
-                        </li>
-                        <li>
-                            {' '}
-                            <ul>
-                                <li>One: {averageScore.eachScore.one}</li>
-                                <li>Two: {averageScore.eachScore.two}</li>
-                                <li>Three: {averageScore.eachScore.three}</li>
-                                <li>Four: {averageScore.eachScore.four}</li>
-                                <li>Five: {averageScore.eachScore.five}</li>
-                                <li>Six: {averageScore.eachScore.six}</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </>
-            )}
+            <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
+
+            <ProductAverageScore productId={productId} />
 
             <p>CommentsSection</p>
             {waitForFetchComments ? (

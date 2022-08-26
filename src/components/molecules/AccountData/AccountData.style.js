@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     display: inline-grid;
     flex-direction: column;
     justify-content: flex-start;
-    z-index: 1;
+    /* z-index: 1; */
 `;
 
 export const SectionTitle = styled.div`

@@ -50,9 +50,7 @@ const PopUpAccountDelete = ({ name }) => {
         <>
             <Wrapper>
                 <Title>
-                    <h3>
-                        <span> Uwaga: </span> {viewedName}
-                    </h3>
+                    <h3>{viewedName}</h3>
                 </Title>
                 <FormSection>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,7 +58,12 @@ const PopUpAccountDelete = ({ name }) => {
                             <InputLocal name="name" placeholder="hasło" {...register('password')} />
                         </div>
                         <div>
-                            <InputLocal name="password" placeholder="Podaj hasło ponownie" type="password" {...register('confirmPassword')} />
+                            <InputLocal
+                                name="password"
+                                placeholder="Podaj hasło ponownie"
+                                type="password"
+                                {...register('confirmPassword')}
+                            />
                         </div>
                         <p>{errors.password && 'Hasło min:4 max:15 znaków'}</p>
                         <p>{passwordDiff && 'Hasła nie są takie same'}</p>
