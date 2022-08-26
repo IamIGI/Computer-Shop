@@ -2,27 +2,51 @@ import { Wrapper } from './Comments.style';
 import { useState, useEffect } from 'react';
 import { getAllComments } from 'api/comments';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import useComments from 'hooks/useComments';
+import useAverageScore from 'hooks/useAverageScore';
 
 const Comments = ({ productId }) => {
-    const [waitForFetch, setWaitForFetch] = useState(false);
-    const [comments, setComment] = useState([]);
-
-    //get all comments
+    const [comments, getComments, waitForFetchComments] = useComments(productId);
+    const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(productId);
     useEffect(() => {
-        setWaitForFetch(true);
-        const fetchComment = async () => {
-            setComment(await getAllComments(productId));
-        };
-
-        fetchComment();
-        setWaitForFetch(false);
+        getComments();
+        getAverageScore();
     }, []);
 
-    // console.log(comments[0].confirmed);
     return (
         <Wrapper id="Opinions">
+            <p>AverageScore Section </p>
+            {waitForFetchAS ? (
+                <>
+                    <LoadingAnimation />
+                </>
+            ) : Object.keys(averageScore).length == 0 ? (
+                <>
+                    <p>Brak Ocen</p>
+                </>
+            ) : (
+                <>
+                    <ul>
+                        <li>
+                            {averageScore.averageScore_View} - {averageScore.averageScore_Stars}
+                        </li>
+                        <li>
+                            {' '}
+                            <ul>
+                                <li>One: {averageScore.eachScore.one}</li>
+                                <li>Two: {averageScore.eachScore.two}</li>
+                                <li>Three: {averageScore.eachScore.three}</li>
+                                <li>Four: {averageScore.eachScore.four}</li>
+                                <li>Five: {averageScore.eachScore.five}</li>
+                                <li>Six: {averageScore.eachScore.six}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </>
+            )}
+
             <p>CommentsSection</p>
-            {waitForFetch ? (
+            {waitForFetchComments ? (
                 <>
                     <LoadingAnimation />
                 </>
