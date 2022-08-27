@@ -21,8 +21,8 @@ const AccountDangerSection = () => {
                     </Title>
                     <Description>
                         <p>
-                            Dzięki tej opcji możesz wylogować się z naszej strony i aplikacji na wszystkich przeglądarkach i urządzeniach jednocześnie
-                            – również na tym, którego teraz używasz.
+                            Dzięki tej opcji możesz wylogować się z naszej strony i aplikacji na wszystkich
+                            przeglądarkach i urządzeniach jednocześnie – również na tym, którego teraz używasz.
                         </p>
                     </Description>
                     <ButtonWrapper>
@@ -35,19 +35,22 @@ const AccountDangerSection = () => {
                     </Title>
                     <Description>
                         <p>
-                            Jeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na pewno chcesz to zrobić – Twojego
-                            konta nie będziemy mogli przywrócić.
+                            Jeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na
+                            pewno chcesz to zrobić – Twojego konta nie będziemy mogli przywrócić.
                         </p>
                         <p>
-                            Jeśli chcesz zachować swoje konto, ale nie chcesz dostawać od nas wiadomości – odznacz zgody w ustawieniach powiadomień.
+                            Jeśli chcesz zachować swoje konto, ale nie chcesz dostawać od nas wiadomości – odznacz zgody
+                            w ustawieniach powiadomień.
                         </p>
                     </Description>
                     <ButtonWrapper>
-                        <Button onClick={() => setIsOpen([true, { DataName: 'DeleteAccount', value: 'password' }])}>Usuń konto</Button>
+                        <Button onClick={() => setIsOpen([true, { DataName: 'DeleteAccount', value: 'password' }])}>
+                            Usuń konto
+                        </Button>
                     </ButtonWrapper>
                 </Section>
             </Wrapper>
-            <Modal open={isOpen} onClose={() => setIsOpen([false, {}])}>
+            <Modal position={[40, -80]} width={300} open={isOpen} onClose={() => setIsOpen([false, {}])}>
                 <PopUpAccountDelete name={isOpen[1].DataName} />
             </Modal>
         </>

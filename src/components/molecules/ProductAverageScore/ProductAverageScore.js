@@ -1,17 +1,22 @@
-import { Wrapper } from './ProductAverageScore.style';
-import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import useAverageScore from 'hooks/useAverageScore';
-import { useEffect } from 'react';
+import { NumberOfOpinions, Score, Stars, Wrapper } from './ProductAverageScore.style';
 
-const ProductAverageScore = ({ productId }) => {
-    const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(productId);
-
-    useEffect(() => {
-        getAverageScore();
-    }, []);
-
+import Star from 'components/atoms/Star/Star';
+const ProductAverageScore = ({ averageScore }) => {
     return (
         <Wrapper>
+            <Score>
+                {averageScore.averageScore_View}
+                <span>/6</span>
+            </Score>
+            <Stars>
+                <Star opinionRating={averageScore.averageScore_Stars} rate={1} />
+                <Star opinionRating={averageScore.averageScore_Stars} rate={2} />
+                <Star opinionRating={averageScore.averageScore_Stars} rate={3} />
+                <Star opinionRating={averageScore.averageScore_Stars} rate={4} />
+                <Star opinionRating={averageScore.averageScore_Stars} rate={5} />
+                <Star opinionRating={averageScore.averageScore_Stars} rate={6} />
+            </Stars>
+            <NumberOfOpinions>({averageScore.numberOfComments} opinii)</NumberOfOpinions>
             {/* <p>AverageScore Section </p>
             {waitForFetchAS ? (
                 <>

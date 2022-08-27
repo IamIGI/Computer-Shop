@@ -19,7 +19,6 @@ const ProductBottomContent = ({ product }) => {
                 <Specification id="Specification">
                     <SpecificationList product={product} />
                 </Specification>
-                <Separator />
             </AboutProductSector>
         </>
     );
