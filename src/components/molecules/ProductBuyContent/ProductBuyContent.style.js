@@ -33,6 +33,7 @@ export const BuyButton = styled(Button)`
     background-color: green;
 
     &:hover {
+        cursor: pointer;
         background-color: ${({ theme }) => theme.colors.success};
     }
 `;

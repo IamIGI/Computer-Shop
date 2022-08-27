@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { Button } from '../Button/Button';
 
 export const OutsideWrapper = styled.div`
     position: 'fixed';
-    width: 300px;
-    transform: translate(40vw, -60vh);
+    width: ${({ width }) => `${width}px`};
+    transform: ${({ position }) => `translate(${position[0]}vw, ${position[1]}vh)`};
     background-color: white;
     /* z-index: 1000; */
     border: 1px solid grey;

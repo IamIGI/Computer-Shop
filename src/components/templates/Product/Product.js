@@ -53,7 +53,11 @@ const Product = ({ code }) => {
                             <ProductBottomContent product={product} />
                         </MidWrapper>
                         <BottomWrapper>
-                            <Comments productId={product._id} />
+                            <Comments
+                                productId={product._id}
+                                productName={product.name}
+                                productPrevImg={product.prevImg}
+                            />
                         </BottomWrapper>
                     </>
                 )}

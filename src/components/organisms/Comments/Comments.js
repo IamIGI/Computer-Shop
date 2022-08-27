@@ -1,13 +1,13 @@
 import { Wrapper } from './Comments.style';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { Separator } from 'components/atoms/Separator/Separator';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useComments from 'hooks/useComments';
-
 import { BiCommentDetail } from 'react-icons/bi';
-import ProductAverageScore from 'components/molecules/ProductAverageScore/ProductAverageScore';
+import ProductSummary from '../ProductSummary/ProductSummary';
 
-const Comments = ({ productId }) => {
+const Comments = ({ productId, productName, productPrevImg }) => {
     const [comments, getComments, waitForFetchComments] = useComments(productId);
 
     useEffect(() => {
@@ -17,9 +17,10 @@ const Comments = ({ productId }) => {
     return (
         <Wrapper id="Opinions">
             <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
-
-            <ProductAverageScore productId={productId} />
-
+            <ProductSummary productId={productId} productName={productName} productPrevImg={productPrevImg} />
+            <Separator />
+            <p>FilterSection</p>
+            <Separator />
             <p>CommentsSection</p>
             {waitForFetchComments ? (
                 <>
