@@ -22,47 +22,54 @@ import StarRating from 'components/atoms/StarRating/StarRating';
 import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 
-const PopUpAddComment = ({ name, prevImg, productId }) => {
+const PopUpAddComment = ({ name, prevImg, productId, onClose }) => {
+    const alertInit = [false, { userName: '', opinion: '', rating: '' }];
+
     const { auth } = useAuth();
     const [rating, setRating] = useState(0);
     const [userName, setUserName] = useState('');
     const [opinion, setOpinion] = useState('');
     const [sendComment, setSendComment] = useState(false);
-    const [alert, setAlert] = useState([false, '']);
+    const [alert, setAlert] = useState(alertInit);
 
     useEffect(() => {
-        setAlert([false, '']);
-        console.log(`userName: ${userName.length} \n opinion: ${opinion.length} \n rating: ${rating} `);
-        userName.length === 0 && setAlert(true, 'Brakujące pole - Podpis');
-        opinion.length <= 10 && setAlert(true, 'Brakujące pole - Opinia (min. 10 znaków)');
-        rating === 0 && setAlert(true, 'Minimalna ocena to 1');
-    }, [sendComment]);
+        console.log('here');
+        if (sendComment) {
+            console.log('here2');
+            if (userName.length !== 0 && opinion.length > 10 && rating !== 0) {
+                const sendData = async () => {
+                    const data = {
+                        productId,
+                        userId: auth.id,
+                        userName,
+                        content: {
+                            rating,
+                            description: opinion,
+                        },
+                    };
+                    console.log(`Data send successfully : ${data}`);
+                };
 
-    if (sendComment) {
-        // setAlert([false, '']);
-
-        console.log(`Alert: ${alert}`);
-        if (alert[0]) {
-            setAlert([false, '']);
-            setSendComment(false);
-        } else {
-            const data = {
-                productId,
-                userId: auth.id,
-                userName,
-                content: {
-                    rating,
-                    description: opinion,
-                },
-            };
-            console.log(data);
-
-            setOpinion('');
-            setUserName('');
-            setRating('');
-            setSendComment(false);
+                sendData();
+                setAlert(alertInit);
+                setSendComment(false);
+                onClose();
+            } else {
+                console.log('Data is bad');
+                setAlert([...alert, (alert[0] = true)]);
+                userName.length === 0
+                    ? setAlert([...alert, (alert[1].userName = 'Brakujące pole - Podpis')])
+                    : setAlert([...alert, (alert[1].userName = '')]);
+                opinion.length <= 10
+                    ? setAlert([...alert, (alert[1].opinion = 'Brakujące pole - Opinia (min. 10 znaków)')])
+                    : setAlert([...alert, (alert[1].opinion = '')]);
+                rating === 0
+                    ? setAlert([...alert, (alert[1].rating = 'Minimalna ocena to 1')])
+                    : setAlert([...alert, (alert[1].rating = '')]);
+                setSendComment(false);
+            }
         }
-    }
+    }, [sendComment]);
 
     const handleRating = (value) => {
         setRating(value);
@@ -114,7 +121,25 @@ const PopUpAddComment = ({ name, prevImg, productId }) => {
                             <p>Dodaj opinię</p>
                         </BuyButton>
                     </div>
-                    {alert[0] ? <Alert>{alert[1]}</Alert> : <></>}
+                    {alert[0] ? (
+                        <Alert>
+                            {alert[1].userName !== '' && (
+                                <>
+                                    {alert[1].userName}
+                                    <br />
+                                </>
+                            )}
+                            {alert[1].opinion !== '' && (
+                                <>
+                                    {alert[1].opinion}
+                                    <br />
+                                </>
+                            )}
+                            {alert[1].rating !== '' && <>{alert[1].rating}</>}
+                        </Alert>
+                    ) : (
+                        <></>
+                    )}
                 </AddComment>
             </WrapperInside>
         </WrapperOutside>
