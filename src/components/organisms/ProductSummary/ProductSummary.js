@@ -1,7 +1,7 @@
 import ProductAverageScore from 'components/molecules/ProductAverageScore/ProductAverageScore';
 import ProductEachScore from 'components/molecules/ProductEachScore/ProductEachScore';
 import React from 'react';
-import useAverageScore from 'hooks/useAverageScore';
+import useAverageScore from 'hooks/comments/useAverageScore';
 import { NoComments, Wrapper } from './ProductSummary.style';
 import { useState, useEffect } from 'react';
 import ProductAddComment from 'components/molecules/ProductAddComment/ProductAddComment';
@@ -9,14 +9,16 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import { BsArrowRight } from 'react-icons/bs';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpAddComment from 'components/molecules/PopUpAddComment/PopUpAddComment';
+import useProduct from 'hooks/useProduct';
 
-const ProductSummary = ({ productId, productName, productPrevImg }) => {
-    const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(productId);
+const ProductSummary = ({ handleRefresh, refresh, comments }) => {
+    const { product } = useProduct();
+    const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(product._id);
     const [isOpen, setIsOpen] = useState([false]);
 
     useEffect(() => {
         getAverageScore();
-    }, []);
+    }, [refresh]);
 
     const handleOpen = () => {
         setIsOpen([true]);
@@ -47,13 +49,14 @@ const ProductSummary = ({ productId, productName, productPrevImg }) => {
                     )}
                 </>
             )}
-            <ProductAddComment productName={productName} handleOpen={handleOpen} />
+            <ProductAddComment productName={product.name} handleOpen={handleOpen} comments={comments} />
             <Modal position={[25, -86]} width={700} open={isOpen} onClose={() => setIsOpen([false])}>
                 <PopUpAddComment
                     onClose={() => setIsOpen([false])}
-                    name={productName}
-                    prevImg={productPrevImg}
-                    productId={productId}
+                    name={product.name}
+                    prevImg={product.prevImg}
+                    productId={product._id}
+                    handleRefresh={handleRefresh}
                 />
             </Modal>
         </Wrapper>

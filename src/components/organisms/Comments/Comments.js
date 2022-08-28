@@ -1,23 +1,30 @@
 import { Wrapper } from './Comments.style';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Separator } from 'components/atoms/Separator/Separator';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import useComments from 'hooks/useComments';
+import useComments from 'hooks/comments/useComments';
 import { BiCommentDetail } from 'react-icons/bi';
 import ProductSummary from '../ProductSummary/ProductSummary';
+import useProduct from 'hooks/useProduct';
 
-const Comments = ({ productId, productName, productPrevImg }) => {
-    const [comments, getComments, waitForFetchComments] = useComments(productId);
+const Comments = () => {
+    const { product } = useProduct();
+    const [comments, getComments, waitForFetchComments] = useComments(product._id);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         getComments();
-    }, []);
+    }, [refresh]);
+
+    const handleRefresh = () => {
+        setRefresh(!refresh);
+    };
 
     return (
         <Wrapper id="Opinions">
             <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
-            <ProductSummary productId={productId} productName={productName} productPrevImg={productPrevImg} />
+            <ProductSummary refresh={refresh} handleRefresh={handleRefresh} comments={comments} />
             <Separator />
             <p>FilterSection</p>
             <Separator />

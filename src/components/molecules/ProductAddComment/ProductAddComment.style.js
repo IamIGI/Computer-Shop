@@ -22,3 +22,8 @@ export const AddComment = styled.div`
         font-size: 20px;
     }
 `;
+
+export const Icon = styled.div`
+    margin-top: 5px;
+    font-size: ${({ theme }) => theme.fontSize.omegaBig};
+`;

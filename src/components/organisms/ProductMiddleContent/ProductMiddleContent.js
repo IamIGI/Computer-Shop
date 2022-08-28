@@ -2,10 +2,11 @@ import { Separator } from 'components/atoms/Separator/Separator';
 import ProductDescription from 'components/molecules/ProductDescription/ProductDescription';
 import ProductMenu from 'components/molecules/ProductMenu/ProductMenu';
 import SpecificationList from 'components/molecules/SpecificationList/SpecificationList';
-import React from 'react';
-import { AboutProductSector, Description, MenuSector, Specification } from './ProductBottomContent.style';
+import { AboutProductSector, Description, MenuSector, Specification } from './ProductMIddleContent.style';
+import useProduct from 'hooks/useProduct';
 
-const ProductBottomContent = ({ product }) => {
+const ProductMiddleContent = () => {
+    const { product } = useProduct();
     return (
         <>
             <MenuSector>
@@ -24,5 +25,4 @@ const ProductBottomContent = ({ product }) => {
     );
 };
 
-ProductBottomContent.propTypes = {};
-export default ProductBottomContent;
+export default ProductMiddleContent;

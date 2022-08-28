@@ -21,13 +21,14 @@ import { useEffect, useState } from 'react';
 import StarRating from 'components/atoms/StarRating/StarRating';
 import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
+import { sendCommentAPI } from 'api/comments';
 
-const PopUpAddComment = ({ name, prevImg, productId, onClose }) => {
+const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) => {
     const alertInit = [false, { userName: '', opinion: '', rating: '' }];
 
     const { auth } = useAuth();
     const [rating, setRating] = useState(0);
-    const [userName, setUserName] = useState('');
+    const [userName, setUserName] = useState(Boolean(auth.userName) ? auth.userName : '');
     const [opinion, setOpinion] = useState('');
     const [sendComment, setSendComment] = useState(false);
     const [alert, setAlert] = useState(alertInit);
@@ -40,14 +41,19 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose }) => {
                 const sendData = async () => {
                     const data = {
                         productId,
-                        userId: auth.id,
+                        userId: Boolean(auth.id) ? auth.id : '',
                         userName,
                         content: {
                             rating,
                             description: opinion,
                         },
                     };
-                    console.log(`Data send successfully : ${data}`);
+
+                    console.log(data);
+                    const response = await sendCommentAPI(data);
+                    console.log(response);
+                    console.log(`Data send successfully`);
+                    handleRefresh();
                 };
 
                 sendData();
