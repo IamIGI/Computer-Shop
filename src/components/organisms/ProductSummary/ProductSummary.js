@@ -49,7 +49,12 @@ const ProductSummary = ({ productId, productName, productPrevImg }) => {
             )}
             <ProductAddComment productName={productName} handleOpen={handleOpen} />
             <Modal position={[25, -86]} width={700} open={isOpen} onClose={() => setIsOpen([false])}>
-                <PopUpAddComment name={productName} prevImg={productPrevImg} productId={productId} />
+                <PopUpAddComment
+                    onClose={() => setIsOpen([false])}
+                    name={productName}
+                    prevImg={productPrevImg}
+                    productId={productId}
+                />
             </Modal>
         </Wrapper>
     );

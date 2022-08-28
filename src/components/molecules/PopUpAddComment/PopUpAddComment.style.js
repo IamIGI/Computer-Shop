@@ -144,6 +144,7 @@ export const AddComment = styled.div`
 `;
 
 export const Alert = styled.div`
-    margin-top: 5%;
+    border-radius: 10px;
+    margin-top: 15px;
     margin-left: 2%;
 `;
