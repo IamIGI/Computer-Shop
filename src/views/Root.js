@@ -22,6 +22,8 @@ import PersistLogin from 'providers/PersistLogin';
 import useOrder from 'hooks/useOrder';
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
 
+import useProduct from 'hooks/useProduct';
+
 const baseURL = 'http://localhost:5000/products';
 
 const ROLES = {
@@ -34,6 +36,7 @@ const Root = () => {
     //API section---------------------
     const [products, setProducts] = useState(null);
     const { orderItem } = useOrder();
+    const { product } = useProduct();
 
     useEffect(() => {
         axios
@@ -58,9 +61,8 @@ const Root = () => {
                                     <Route path="" element={<Home />} />
                                     <Route path="allProducts" element={<AllProducts />} />
                                     <Route path="about" element={<About />} />
-                                    {products.map((item) => (
-                                        <Route path={`/product/${item._id}`} element={<Product code={item._id} />} />
-                                    ))}
+                                    <Route path={`/product/${product._id}`} element={<Product code={product._id} />} />
+
                                     <Route path="*" element={<MissingPage />} />
                                     <Route path="unauthorized" element={<Unauthorized />} />
 
@@ -70,8 +72,8 @@ const Root = () => {
                                         element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}
                                     >
                                         <Route path="adminSettings" element={<AdminSettings />} />
-                                        <Route path="/accountSettings/Settings" element={<AccountSettingsSettings />} />
-                                        <Route path="/accountSettings/Orders" element={<AccountSettingsOrders />} />
+                                        <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
+                                        <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
                                         <Route
                                             path={`/accountSettings/orders/history/${orderItem._id}`}
                                             element={<AccountOrderHistoryItem />}

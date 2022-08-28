@@ -5,7 +5,7 @@ import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
 let Show = '';
-const ProductPreview = ({ allProducts }) => {
+const ProductPreview = ({ goToProduct, allProducts }) => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const ProductPreview = ({ allProducts }) => {
                     {products.map((item, index) => (
                         <>
                             {index < Show && (
-                                <Link to={`/product/${item._id}`} key={item._id}>
+                                <Link onClick={() => goToProduct(item)} to={`/product/${item._id}`} key={item._id}>
                                     <Wrapper>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />

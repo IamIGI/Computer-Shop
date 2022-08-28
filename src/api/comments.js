@@ -36,3 +36,18 @@ export const getProductAverageScore = async (productId) => {
     }
     return;
 };
+
+export const sendCommentAPI = async (data) => {
+    try {
+        const response = await commentApi.post('/add', data);
+        return response.data;
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+        } else {
+            console.log(`Error: ${err.message}`);
+        }
+    }
+};

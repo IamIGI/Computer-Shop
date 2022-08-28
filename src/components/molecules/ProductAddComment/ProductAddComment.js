@@ -1,7 +1,26 @@
-import { AddComment, Description, Wrapper } from './ProductAddComment.style';
+import { AddComment, Description, Wrapper, Icon } from './ProductAddComment.style';
 import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
+import useAuth from 'hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { FiThumbsUp } from 'react-icons/fi';
 
-const ProductAddComment = ({ productName, handleOpen }) => {
+const ProductAddComment = ({ productName, handleOpen, comments }) => {
+    const { auth } = useAuth();
+    const [userAlreadyCommented, setUserAlreadyCommented] = useState(false);
+
+    useEffect(() => {
+        console.log('Search user');
+        console.log(auth.id);
+        console.log(comments);
+        for (let i = 0; i < comments.length; i++) {
+            if (comments[i].userId === auth.id) {
+                console.log('disable button');
+                setUserAlreadyCommented(true);
+                break;
+            }
+        }
+    }, [comments]);
+
     return (
         <Wrapper>
             <Description>
@@ -9,9 +28,18 @@ const ProductAddComment = ({ productName, handleOpen }) => {
                 <p>Oceń {productName} i pomóż innym w wyborze</p>
             </Description>
             <AddComment>
-                <BuyButton onClick={handleOpen}>
-                    <p>Dodaj opinię</p>
-                </BuyButton>
+                {userAlreadyCommented ? (
+                    <>
+                        <p>Dziękujemy za opinię </p>
+                        <Icon>
+                            <FiThumbsUp />
+                        </Icon>
+                    </>
+                ) : (
+                    <BuyButton onClick={handleOpen}>
+                        <p>Dodaj opinię</p>
+                    </BuyButton>
+                )}
             </AddComment>
         </Wrapper>
     );
