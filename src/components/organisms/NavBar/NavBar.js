@@ -1,6 +1,6 @@
 import React from 'react';
 import { Wrapper, Nav, SiteTitle, StyledLink, List } from './NavBar.styles';
-import { VscArchive, VscMilestone, VscAccount, VscVm, VscInspect } from 'react-icons/vsc';
+import { VscArchive, VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
 import useAuth from 'hooks/useAuth';
 
 //move to env

@@ -13,7 +13,6 @@ const Comments = () => {
     const { product } = useProduct();
     const [comments, getComments, waitForFetchComments] = useComments(product._id);
     const { comments: commentsArray, length: commentsSize } = comments;
-    console.log(commentsArray, commentsSize);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
@@ -41,7 +40,12 @@ const Comments = () => {
                         <>
                             <Separator />
                             <p>FilterSection</p>
-                            <CommentItem commentsArray={commentsArray} commentsSize={commentsSize} />
+                            <CommentItem
+                                commentsArray={commentsArray}
+                                commentsSize={commentsSize}
+                                productId={product._id}
+                                handleRefresh={handleRefresh}
+                            />
                         </>
                     )}
                 </>

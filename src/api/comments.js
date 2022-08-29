@@ -51,3 +51,19 @@ export const sendCommentAPI = async (data) => {
         }
     }
 };
+
+export const addLike = async (data) => {
+    try {
+        const response = await commentApi.post('/like', data);
+        return response.data;
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+            return err.response.status;
+        } else {
+            console.log(`Error: ${err.message}`);
+        }
+    }
+};

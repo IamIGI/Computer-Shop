@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-    grid-row: 1/1;
+    grid-row: 1/2;
     grid-column: 1/5;
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
-    padding: 2%;
+    margin-top: 40px;
+    padding: 0 4%;
     box-sizing: border-box;
-    margin: 0;
 `;
 
 export const Nav = styled.nav`

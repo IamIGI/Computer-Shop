@@ -97,6 +97,7 @@ export const Dot = styled.div`
 `;
 
 export const Opinion = styled.div`
+    line-height: 22px;
     padding: 1% 0;
 `;
 
@@ -127,4 +128,17 @@ export const Icon3 = styled.div`
 export const LikeNumber = styled.div`
     padding-top: 7px;
     padding-left: 4px;
+`;
+
+export const Alert = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    color: ${({ theme }) => theme.colors.error};
+    margin: 6px 0 0 15px;
+`;
+
+export const Icon4 = styled.div`
+    margin: 3px 0 0 5px;
 `;
