@@ -9,12 +9,10 @@ const ProductAverageScore = ({ averageScore }) => {
                 <span>/6</span>
             </Score>
             <Stars>
-                <Star opinionRating={averageScore.averageScore_Stars} rate={1} />
-                <Star opinionRating={averageScore.averageScore_Stars} rate={2} />
-                <Star opinionRating={averageScore.averageScore_Stars} rate={3} />
-                <Star opinionRating={averageScore.averageScore_Stars} rate={4} />
-                <Star opinionRating={averageScore.averageScore_Stars} rate={5} />
-                <Star opinionRating={averageScore.averageScore_Stars} rate={6} />
+                {[...Array(6)].map((star, index) => {
+                    index += 1;
+                    return <Star opinionRating={averageScore.averageScore_Stars} rate={index} />;
+                })}
             </Stars>
             <NumberOfOpinions>({averageScore.numberOfComments} opinii)</NumberOfOpinions>
             {/* <p>AverageScore Section </p>
