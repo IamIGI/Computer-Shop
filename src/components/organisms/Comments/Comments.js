@@ -7,10 +7,13 @@ import useComments from 'hooks/comments/useComments';
 import { BiCommentDetail } from 'react-icons/bi';
 import ProductSummary from '../ProductSummary/ProductSummary';
 import useProduct from 'hooks/useProduct';
+import CommentItem from 'components/molecules/CommentItem/CommentItem';
 
 const Comments = () => {
     const { product } = useProduct();
     const [comments, getComments, waitForFetchComments] = useComments(product._id);
+    const { comments: commentsArray, length: commentsSize } = comments;
+    console.log(commentsArray, commentsSize);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
@@ -25,35 +28,21 @@ const Comments = () => {
         <Wrapper id="Opinions">
             <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
             <ProductSummary refresh={refresh} handleRefresh={handleRefresh} comments={comments} />
-            <Separator />
-            <p>FilterSection</p>
-            <Separator />
-            <p>CommentsSection</p>
+
             {waitForFetchComments ? (
                 <>
                     <LoadingAnimation />
                 </>
             ) : (
                 <>
-                    {comments.length === 0 ? (
-                        <p>Brak komentarzy</p>
+                    {commentsSize === 0 ? (
+                        <></>
                     ) : (
-                        <ul>
-                            {comments.map((item, index) => (
-                                <div key={item._id}>
-                                    <li>
-                                        Imie: {item.userName} - {item.confirmed && 'Potwierdzony'}
-                                    </li>
-                                    <li>
-                                        Ocena: {item.content.rating} - {item.date} <br /> {item.content.description}{' '}
-                                    </li>
-                                    <li>
-                                        Bilans lików: {item.likes.up} - {item.likes.down}{' '}
-                                    </li>
-                                    <p>----------------------</p>
-                                </div>
-                            ))}
-                        </ul>
+                        <>
+                            <Separator />
+                            <p>FilterSection</p>
+                            <CommentItem commentsArray={commentsArray} commentsSize={commentsSize} />
+                        </>
                     )}
                 </>
             )}

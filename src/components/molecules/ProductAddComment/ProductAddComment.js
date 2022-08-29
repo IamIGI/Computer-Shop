@@ -10,16 +10,14 @@ const ProductAddComment = ({ productName, handleOpen, comments }) => {
 
     useEffect(() => {
         console.log('Search user');
-        console.log(auth.id);
-        console.log(comments);
         for (let i = 0; i < comments.length; i++) {
-            if (comments[i].userId === auth.id) {
+            if (comments.comments[i].userId === auth.id) {
                 console.log('disable button');
                 setUserAlreadyCommented(true);
                 break;
             }
         }
-    }, [comments]);
+    }, [comments.comments]);
 
     return (
         <Wrapper>

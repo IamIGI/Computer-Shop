@@ -18,6 +18,7 @@ export const TitleSection = styled.div`
 export const Icon = styled.div`
     margin-top: 3px;
     margin-right: 10px;
+    font-size: 35px;
 `;
 
 export const Title = styled.div``;
