@@ -50,8 +50,19 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) =
                     };
 
                     console.log(data);
-                    const response = await sendCommentAPI(data);
-                    console.log(response);
+                    try {
+                        const response = await sendCommentAPI(data);
+                        console.log(response);
+                    } catch (err) {
+                        if (err.response) {
+                            console.log(err.response.data);
+                            console.log(err.response.status);
+                            console.log(err.response.headers);
+                        } else {
+                            console.log(`Error: ${err.message}`);
+                        }
+                    }
+
                     console.log(`Data send successfully`);
                     handleRefresh();
                 };
