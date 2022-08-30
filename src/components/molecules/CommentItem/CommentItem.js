@@ -21,6 +21,8 @@ import {
     LikeNumber,
     Alert,
     Icon4,
+    NoOpinionsLeft,
+    UnWrap,
 } from './CommentItem.style';
 import { BsPerson, BsCheckCircle } from 'react-icons/bs';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
@@ -34,6 +36,7 @@ import { useState } from 'react';
 const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) => {
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
+    const [readMore, setReadMore] = useState(false);
 
     const onLikeComment = async (value) => {
         const data = {
@@ -62,6 +65,21 @@ const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) 
                 console.log(`Error: ${err.message}`);
             }
         }
+    };
+
+    const readMoreSplit = (comment) => {
+        let opinionSplit = [];
+        opinionSplit.push(comment.substr(0, 300));
+        comment.substr(300, 2000) !== '' && opinionSplit.push(comment.substr(300, 2000));
+        return opinionSplit;
+    };
+
+    const checkBreakLine = (comment) => {
+        return comment.split('也').map((sentence) => (
+            <>
+                {sentence} <br />
+            </>
+        ));
     };
 
     return (
@@ -105,7 +123,24 @@ const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) 
 
                                 <Date> {comment.date}</Date>
                             </ContentData>
-                            <Opinion>{comment.content.description} </Opinion>
+                            <Opinion>
+                                {readMoreSplit(comment.content.description).length === 1 ? (
+                                    <>{checkBreakLine(readMoreSplit(comment.content.description)[0])}</>
+                                ) : (
+                                    <>
+                                        {checkBreakLine(readMoreSplit(comment.content.description)[0])}
+                                        <UnWrap onClick={() => setReadMore(!readMore)}>
+                                            {!readMore && '...Rozwiń dalej'}
+                                        </UnWrap>
+                                        {readMore && (
+                                            <>
+                                                {checkBreakLine(readMoreSplit(comment.content.description)[1])}
+                                                <UnWrap onClick={() => setReadMore(!readMore)}>Zwiń</UnWrap>
+                                            </>
+                                        )}
+                                    </>
+                                )}
+                            </Opinion>
                             <CommentScore>
                                 <ScoreDescription>Czy ta opinia była pomocna?</ScoreDescription>{' '}
                                 <Icon3 onClick={() => onLikeComment([true, comment])}>
@@ -133,6 +168,9 @@ const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) 
                     </CommentSection>
                 </>
             ))}
+            <NoOpinionsLeft>
+                <p>Koniec opinii</p>
+            </NoOpinionsLeft>
         </Wrapper>
     );
 };

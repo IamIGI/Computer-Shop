@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     margin: 2% 7%;
+    padding-bottom: 25px;
 `;
 
 export const NumberOfComments = styled.div``;
@@ -83,17 +84,17 @@ export const StarsWrapper = styled.div`
     width: 150px;
     font-size: ${({ theme }) => theme.fontSize.m};
     padding-top: 8px;
-    margin-right: 2%;
+    margin-right: 1%;
 `;
 
 export const Date = styled.div`
     padding-top: 14px;
-    margin-left: 2%;
+    margin-left: 1%;
     font-size: ${({ theme }) => theme.fontSize.l};
 `;
 export const Dot = styled.div`
-    margin-top: -10px;
-    font-size: ${({ theme }) => theme.fontSize.omegaBig};
+    margin-top: 2px;
+    font-size: ${({ theme }) => theme.fontSize.xxl};
 `;
 
 export const Opinion = styled.div`
@@ -141,4 +142,17 @@ export const Alert = styled.div`
 
 export const Icon4 = styled.div`
     margin: 3px 0 0 5px;
+`;
+
+export const NoOpinionsLeft = styled.div`
+    text-align: center;
+    margin: 20px 0;
+`;
+
+export const UnWrap = styled.div`
+    color: ${({ theme }) => theme.colors.darkGrey};
+    :hover {
+        color: black;
+        cursor: pointer;
+    }
 `;

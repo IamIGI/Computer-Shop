@@ -148,3 +148,14 @@ export const Alert = styled.div`
     margin-top: 15px;
     margin-left: 2%;
 `;
+
+export const OpinionSection = styled.div`
+    position: relative;
+`;
+
+export const NumOfChars = styled.div`
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    color: ${({ theme }) => theme.colors.darkGrey};
+`;

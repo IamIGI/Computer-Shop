@@ -16,6 +16,8 @@ import {
     Input,
     UserDescription,
     Alert,
+    OpinionSection,
+    NumOfChars,
 } from './PopUpAddComment.style';
 import { useEffect, useState } from 'react';
 import StarRating from 'components/atoms/StarRating/StarRating';
@@ -32,6 +34,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) =
     const [opinion, setOpinion] = useState('');
     const [sendComment, setSendComment] = useState(false);
     const [alert, setAlert] = useState(alertInit);
+    const [countChar, setCountChar] = useState(0);
 
     useEffect(() => {
         console.log('here');
@@ -45,7 +48,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) =
                         userName,
                         content: {
                             rating,
-                            description: opinion,
+                            description: opinion.replace(/\n/g, '也'),
                         },
                     };
 
@@ -131,7 +134,16 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) =
                 ) : (
                     <></>
                 )}
-                <TextArea placeholder="Opinia" value={opinion} onChange={(e) => setOpinion(e.target.value)}></TextArea>
+                <OpinionSection>
+                    <TextArea
+                        placeholder="Opinia"
+                        value={opinion}
+                        onChange={(e) => setOpinion(e.target.value)}
+                        maxLength={2000}
+                        onChangeCapture={(e) => setCountChar(e.target.value.length)}
+                    />
+                    <NumOfChars>{countChar}/2000</NumOfChars>
+                </OpinionSection>
                 <AddComment>
                     <div>
                         <BuyButton onClick={() => setSendComment(true)}>
