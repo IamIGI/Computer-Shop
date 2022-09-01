@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Wrapper, TopWrapper, MidWrapper, BottomWrapper } from './Product.styles';
 import ProductTopContent from 'components/organisms/ProductTopContent/ProductTopContent';
 import ProductMiddleContent from 'components/organisms/ProductMiddleContent/ProductMiddleContent';
-import ProductsApi from 'api/products';
 import useProduct from 'hooks/useProduct';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import Comments from 'components/organisms/Comments/Comments';

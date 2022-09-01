@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     text-align: center;
+    justify-content: center;
+    align-items: center;
     margin: auto;
 `;
 

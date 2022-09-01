@@ -15,13 +15,13 @@ import React, { useState, useEffect } from 'react';
 import { Wrapper } from './Root.styles';
 import axios from 'axios';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import RequireAuth from 'components/molecules/RequireAuth/RequireAuth';
 import PersistLogin from 'providers/PersistLogin';
 
 import useOrder from 'hooks/useOrder';
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
-
+import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useProduct from 'hooks/useProduct';
 
 const baseURL = 'http://localhost:5000/products';
@@ -50,49 +50,43 @@ const Root = () => {
     return (
         <>
             {products === null ? (
-                <h1>Loading</h1>
+                <LoadingAnimation />
             ) : (
-                <BrowserRouter>
-                    <MainTemplate>
-                        <Wrapper>
-                            <Routes>
-                                {/* public routes */}
-                                <Route element={<PersistLogin />}>
-                                    <Route path="" element={<Home />} />
-                                    <Route path="allProducts" element={<AllProducts />} />
-                                    <Route path="about" element={<About />} />
-                                    <Route path={`/product/${product._id}`} element={<Product code={product._id} />} />
+                <Wrapper>
+                    <Routes>
+                        {/* public routes */}
+                        <Route element={<PersistLogin />}>
+                            <Route path="" element={<Home />} />
+                            <Route path="allProducts" element={<AllProducts />} />
+                            <Route path="about" element={<About />} />
+                            <Route path={`/product/${product._id}`} element={<Product code={product._id} />} />
 
-                                    <Route path="*" element={<MissingPage />} />
-                                    <Route path="unauthorized" element={<Unauthorized />} />
+                            <Route path="*" element={<MissingPage />} />
+                            <Route path="unauthorized" element={<Unauthorized />} />
 
-                                    {/* protected routes */}
+                            {/* protected routes */}
 
-                                    <Route
-                                        element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}
-                                    >
-                                        <Route path="adminSettings" element={<AdminSettings />} />
-                                        <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
-                                        <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
-                                        <Route
-                                            path={`/accountSettings/orders/history/${orderItem._id}`}
-                                            element={<AccountOrderHistoryItem />}
-                                        />
-                                        <Route path="basket" element={<Basket />} />
-                                    </Route>
+                            <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
+                                <Route path="adminSettings" element={<AdminSettings />} />
+                                <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
+                                <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
+                                <Route
+                                    path={`/accountSettings/orders/history/${orderItem._id}`}
+                                    element={<AccountOrderHistoryItem />}
+                                />
+                                <Route path="basket" element={<Basket />} />
+                            </Route>
 
-                                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                                        <Route path="adminSettings" element={<AdminSettings />} />
-                                    </Route>
+                            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                                <Route path="adminSettings" element={<AdminSettings />} />
+                            </Route>
 
-                                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
-                                        <Route path="editorSettings" element={<EditorSettings />} />
-                                    </Route>
-                                </Route>
-                            </Routes>
-                        </Wrapper>
-                    </MainTemplate>
-                </BrowserRouter>
+                            <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
+                                <Route path="editorSettings" element={<EditorSettings />} />
+                            </Route>
+                        </Route>
+                    </Routes>
+                </Wrapper>
             )}
         </>
     );
