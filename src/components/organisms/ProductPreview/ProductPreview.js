@@ -3,10 +3,13 @@ import { Bottom, Link, StyledList, StyledRecord, Top, Wrapper } from './ProductP
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import useProduct from 'hooks/useProduct';
 
 let Show = '';
 const ProductPreview = ({ goToProduct, allProducts }) => {
     const [products, setProducts] = useState([]);
+    const { setProduct } = useProduct();
+    // setProduct(product);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -24,13 +27,14 @@ const ProductPreview = ({ goToProduct, allProducts }) => {
             }
         };
         //##DEV ---- timeout
-        setTimeout(() => {
-            fetchProducts();
-        }, 500);
+        // setTimeout(() => {
+        //     fetchProducts();
+        // }, 500);
+        fetchProducts();
     }, []);
 
     //--------------------------------------------
-    allProducts === 'yes' ? (Show = products.length) : (Show = 2);
+    allProducts === 'yes' ? (Show = products.length) : (Show = 3);
     return (
         <>
             {products.length === 0 ? (
@@ -42,7 +46,7 @@ const ProductPreview = ({ goToProduct, allProducts }) => {
                     {products.map((item, index) => (
                         <>
                             {index < Show && (
-                                <Link onClick={() => goToProduct(item)} to={`/product/${item._id}`} key={item._id}>
+                                <Link onClick={() => setProduct(item)} to={`/product/${item._id}`} key={item._id}>
                                     <Wrapper>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />
