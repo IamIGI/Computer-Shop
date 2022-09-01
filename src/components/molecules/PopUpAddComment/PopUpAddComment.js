@@ -25,7 +25,7 @@ import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 import { sendCommentAPI } from 'api/comments';
 
-const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) => {
+const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments, handleRefreshProductSummary }) => {
     const alertInit = [false, { userName: '', opinion: '', rating: '' }];
 
     const { auth } = useAuth();
@@ -67,7 +67,8 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefresh }) =
                     }
 
                     console.log(`Data send successfully`);
-                    handleRefresh();
+                    handleRefreshComments();
+                    handleRefreshProductSummary();
                 };
 
                 sendData();
