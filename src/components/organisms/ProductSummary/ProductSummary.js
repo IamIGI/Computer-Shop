@@ -10,18 +10,26 @@ import { BsArrowRight } from 'react-icons/bs';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpAddComment from 'components/molecules/PopUpAddComment/PopUpAddComment';
 import useProduct from 'hooks/useProduct';
+import useComments from 'hooks/comments/useComments';
 
-const ProductSummary = ({ handleRefresh, refresh, comments }) => {
+const ProductSummary = ({ handleRefreshComments }) => {
     const { product } = useProduct();
     const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(product._id);
+    const [comments, getComments] = useComments(product._id);
     const [isOpen, setIsOpen] = useState([false]);
+    const [refreshProductSummary, setRefreshProductSummary] = useState();
 
     useEffect(() => {
+        getComments();
         getAverageScore();
-    }, [refresh]);
+    }, [refreshProductSummary]);
 
     const handleOpen = () => {
         setIsOpen([true]);
+    };
+
+    const handleRefreshProductSummary = () => {
+        setRefreshProductSummary(!refreshProductSummary);
     };
 
     return (
@@ -56,7 +64,8 @@ const ProductSummary = ({ handleRefresh, refresh, comments }) => {
                     name={product.name}
                     prevImg={product.prevImg}
                     productId={product._id}
-                    handleRefresh={handleRefresh}
+                    handleRefreshComments={handleRefreshComments}
+                    handleRefreshProductSummary={handleRefreshProductSummary}
                 />
             </Modal>
         </Wrapper>

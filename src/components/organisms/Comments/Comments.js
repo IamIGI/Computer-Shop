@@ -11,45 +11,21 @@ import CommentItem from 'components/molecules/CommentItem/CommentItem';
 
 const Comments = () => {
     const { product } = useProduct();
-    const [comments, getComments, waitForFetchComments] = useComments(product._id);
-    const { comments: commentsArray, length: commentsSize } = comments;
-    const [refresh, setRefresh] = useState(false);
+    const [refreshComments, setRefreshComments] = useState(false);
 
-    useEffect(() => {
-        getComments();
-    }, [refresh]);
-
-    const handleRefresh = () => {
-        setRefresh(!refresh);
+    const handleRefreshComments = () => {
+        setRefreshComments(!refreshComments);
     };
 
     return (
         <Wrapper id="Opinions">
             <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
-            <ProductSummary refresh={refresh} handleRefresh={handleRefresh} comments={comments} />
-
-            {waitForFetchComments ? (
-                <>
-                    <LoadingAnimation />
-                </>
-            ) : (
-                <>
-                    {commentsSize === 0 ? (
-                        <></>
-                    ) : (
-                        <>
-                            <Separator />
-                            <p>FilterSection</p>
-                            <CommentItem
-                                commentsArray={commentsArray}
-                                commentsSize={commentsSize}
-                                productId={product._id}
-                                handleRefresh={handleRefresh}
-                            />
-                        </>
-                    )}
-                </>
-            )}
+            <ProductSummary handleRefreshComments={handleRefreshComments} />
+            <CommentItem
+                productId={product._id}
+                refreshComments={refreshComments}
+                handleRefreshComments={handleRefreshComments}
+            />
         </Wrapper>
     );
 };

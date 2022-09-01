@@ -31,12 +31,19 @@ import Star from 'components/atoms/Star/Star';
 import useAuth from 'hooks/useAuth';
 import { addLike } from 'api/comments';
 import { Separator } from 'components/atoms/Separator/Separator';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useComments from 'hooks/comments/useComments';
+import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
-const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) => {
+const CommentItem = ({ productId, refreshComments, handleRefreshComments }) => {
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
     const [readMore, setReadMore] = useState(false);
+    const [comments, getComments, waitForFetchComments] = useComments(productId);
+    const { comments: commentsArray, length: commentsSize } = comments;
+    useEffect(() => {
+        getComments();
+    }, [refreshComments]);
 
     const onLikeComment = async (value) => {
         const data = {
@@ -51,11 +58,14 @@ const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) 
         try {
             const response = await addLike(data);
             console.log(response);
-            response === 403
-                ? setNotLoggedIn([true, value[1]._id, 'Musisz być zalogowany'])
-                : response === 405
-                ? setNotLoggedIn([true, value[1]._id, 'Możesz tylko zmienić swój wybór'])
-                : handleRefresh();
+            if (response === 403) {
+                setNotLoggedIn([true, value[1]._id, 'Musisz być zalogowany']);
+            } else if (response === 405) {
+                setNotLoggedIn([true, value[1]._id, 'Możesz tylko zmienić swój wybór']);
+            } else {
+                setNotLoggedIn([false, '']);
+                handleRefreshComments();
+            }
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
@@ -84,93 +94,115 @@ const CommentItem = ({ commentsArray, commentsSize, productId, handleRefresh }) 
 
     return (
         <Wrapper>
-            <NumberOfComments>
-                <p>
-                    Wyniki: {commentsSize} z {commentsSize}
-                </p>
-            </NumberOfComments>
-            <Separator />
-            {commentsArray.map((comment) => (
+            {waitForFetchComments ? (
                 <>
-                    <CommentSection key={comment._id}>
-                        <UserData>
-                            <UserDataDescription>
-                                <Icon1>
-                                    <BsPerson />
-                                </Icon1>
-                                <UserName>{comment.userName}</UserName>
-                            </UserDataDescription>
-                            <UserDataApproved>
-                                {comment.confirmed && (
-                                    <>
-                                        <Icon2>
-                                            <BsCheckCircle />
-                                        </Icon2>
-                                        <ApprovedDescription>Potwierdzony zakup</ApprovedDescription>
-                                    </>
-                                )}
-                            </UserDataApproved>
-                        </UserData>
-                        <ContentSection>
-                            <ContentData>
-                                <StarsWrapper>
-                                    {[...Array(6)].map((star, index) => {
-                                        index += 1;
-                                        return <Star opinionRating={comment.content.rating} rate={index} />;
-                                    })}
-                                </StarsWrapper>
-                                <Dot>&#x2022;</Dot>
-
-                                <Date> {comment.date}</Date>
-                            </ContentData>
-                            <Opinion>
-                                {readMoreSplit(comment.content.description).length === 1 ? (
-                                    <>{checkBreakLine(readMoreSplit(comment.content.description)[0])}</>
-                                ) : (
-                                    <>
-                                        {checkBreakLine(readMoreSplit(comment.content.description)[0])}
-                                        <UnWrap onClick={() => setReadMore(!readMore)}>
-                                            {!readMore && '...Rozwiń dalej'}
-                                        </UnWrap>
-                                        {readMore && (
-                                            <>
-                                                {checkBreakLine(readMoreSplit(comment.content.description)[1])}
-                                                <UnWrap onClick={() => setReadMore(!readMore)}>Zwiń</UnWrap>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </Opinion>
-                            <CommentScore>
-                                <ScoreDescription>Czy ta opinia była pomocna?</ScoreDescription>{' '}
-                                <Icon3 onClick={() => onLikeComment([true, comment])}>
-                                    <AiOutlineLike />
-                                </Icon3>
-                                <LikeNumber>{comment.likes.up}</LikeNumber>
-                                <Icon3 onClick={() => onLikeComment([false, comment])}>
-                                    <AiOutlineDislike />
-                                </Icon3>
-                                <LikeNumber>{comment.likes.down}</LikeNumber>
-                                <Alert>
-                                    {notLoggedIn[0] && notLoggedIn[1] === comment._id ? (
-                                        <>
-                                            <>{notLoggedIn[2]}</>
-                                            <Icon4>
-                                                <ImSad />
-                                            </Icon4>
-                                        </>
-                                    ) : (
-                                        <></>
-                                    )}
-                                </Alert>
-                            </CommentScore>
-                        </ContentSection>
-                    </CommentSection>
+                    <LoadingAnimation />
                 </>
-            ))}
-            <NoOpinionsLeft>
-                <p>Koniec opinii</p>
-            </NoOpinionsLeft>
+            ) : (
+                <>
+                    {commentsSize === 0 ? (
+                        <></>
+                    ) : (
+                        <>
+                            <p>FilterSection</p>
+                            <Separator />
+                            <NumberOfComments>
+                                <p>
+                                    Wyniki: {commentsSize} z {commentsSize}
+                                </p>
+                            </NumberOfComments>
+                            <Separator />
+                            {commentsArray.map((comment) => (
+                                <>
+                                    <CommentSection key={comment._id}>
+                                        <UserData>
+                                            <UserDataDescription>
+                                                <Icon1>
+                                                    <BsPerson />
+                                                </Icon1>
+                                                <UserName>{comment.userName}</UserName>
+                                            </UserDataDescription>
+                                            <UserDataApproved>
+                                                {comment.confirmed && (
+                                                    <>
+                                                        <Icon2>
+                                                            <BsCheckCircle />
+                                                        </Icon2>
+                                                        <ApprovedDescription>Potwierdzony zakup</ApprovedDescription>
+                                                    </>
+                                                )}
+                                            </UserDataApproved>
+                                        </UserData>
+                                        <ContentSection>
+                                            <ContentData>
+                                                <StarsWrapper>
+                                                    {[...Array(6)].map((star, index) => {
+                                                        index += 1;
+                                                        return (
+                                                            <Star opinionRating={comment.content.rating} rate={index} />
+                                                        );
+                                                    })}
+                                                </StarsWrapper>
+                                                <Dot>&#x2022;</Dot>
+
+                                                <Date> {comment.date}</Date>
+                                            </ContentData>
+                                            <Opinion>
+                                                {readMoreSplit(comment.content.description).length === 1 ? (
+                                                    <>{checkBreakLine(readMoreSplit(comment.content.description)[0])}</>
+                                                ) : (
+                                                    <>
+                                                        {checkBreakLine(readMoreSplit(comment.content.description)[0])}
+                                                        <UnWrap onClick={() => setReadMore(!readMore)}>
+                                                            {!readMore && '...Rozwiń dalej'}
+                                                        </UnWrap>
+                                                        {readMore && (
+                                                            <>
+                                                                {checkBreakLine(
+                                                                    readMoreSplit(comment.content.description)[1]
+                                                                )}
+                                                                <UnWrap onClick={() => setReadMore(!readMore)}>
+                                                                    Zwiń
+                                                                </UnWrap>
+                                                            </>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </Opinion>
+                                            <CommentScore>
+                                                <ScoreDescription>Czy ta opinia była pomocna?</ScoreDescription>{' '}
+                                                <Icon3 onClick={() => onLikeComment([true, comment])}>
+                                                    <AiOutlineLike />
+                                                </Icon3>
+                                                <LikeNumber>{comment.likes.up}</LikeNumber>
+                                                <Icon3 onClick={() => onLikeComment([false, comment])}>
+                                                    <AiOutlineDislike />
+                                                </Icon3>
+                                                <LikeNumber>{comment.likes.down}</LikeNumber>
+                                                <Alert>
+                                                    {notLoggedIn[0] && notLoggedIn[1] === comment._id ? (
+                                                        <>
+                                                            <>{notLoggedIn[2]}</>
+                                                            <Icon4>
+                                                                <ImSad />
+                                                            </Icon4>
+                                                        </>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </Alert>
+                                            </CommentScore>
+                                        </ContentSection>
+                                    </CommentSection>
+                                </>
+                            ))}
+                        </>
+                    )}
+                    <NoOpinionsLeft>
+                        <p>Koniec opinii</p>
+                    </NoOpinionsLeft>
+                </>
+            )}
         </Wrapper>
     );
 };
