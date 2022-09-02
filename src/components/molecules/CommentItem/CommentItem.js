@@ -35,6 +35,7 @@ import { useState, useEffect } from 'react';
 import useProduct from 'hooks/useProduct';
 import useComments from 'hooks/comments/useComments';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import CommentFilters from '../CommentFilters/CommentFilters';
 
 const CommentItem = ({ refreshComments, handleRefreshComments }) => {
     const { product } = useProduct();
@@ -108,13 +109,8 @@ const CommentItem = ({ refreshComments, handleRefreshComments }) => {
                         <></>
                     ) : (
                         <>
-                            <p>FilterSection</p>
-                            <Separator />
-                            <NumberOfComments>
-                                <p>
-                                    Wyniki: {commentsSize} z {commentsSize}
-                                </p>
-                            </NumberOfComments>
+                            <CommentFilters commentsSize={commentsSize} />
+
                             <Separator />
                             {commentsArray.map((comment) => (
                                 <>

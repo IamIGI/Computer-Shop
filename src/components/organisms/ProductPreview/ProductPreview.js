@@ -20,7 +20,6 @@ let Show = '';
 const ProductPreview = ({ goToProduct, allProducts }) => {
     const [products, setProducts] = useState([]);
     const { setProduct } = useProduct();
-    // setProduct(product);
 
     useEffect(() => {
         const fetchProducts = async () => {
