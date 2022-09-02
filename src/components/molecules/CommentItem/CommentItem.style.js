@@ -5,8 +5,6 @@ export const Wrapper = styled.div`
     padding-bottom: 25px;
 `;
 
-export const NumberOfComments = styled.div``;
-
 export const CommentSection = styled.div`
     width: 91%;
     display: flex;

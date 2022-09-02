@@ -75,6 +75,7 @@ export const Rating = styled.div`
 `;
 
 export const Opinions = styled.div`
+    color: black;
     padding-top: 5px;
     font-size: ${({ theme }) => theme.fontSize.l};
 `;
