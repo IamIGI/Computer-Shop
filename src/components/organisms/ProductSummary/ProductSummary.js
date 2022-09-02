@@ -15,7 +15,8 @@ import useComments from 'hooks/comments/useComments';
 const ProductSummary = ({ handleRefreshComments }) => {
     const { product } = useProduct();
     const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(product._id);
-    const [comments, getComments] = useComments(product._id);
+    const dataInit = { productId: product._id, filters: { rating: 0, confirmed: 2 }, sortBy: 'date' };
+    const [comments, getComments] = useComments(dataInit);
     const [isOpen, setIsOpen] = useState([false]);
     const [refreshProductSummary, setRefreshProductSummary] = useState();
 

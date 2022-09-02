@@ -13,25 +13,6 @@ const Product = ({ code }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        // waitForFetch = true;
-
-        // const fetchProduct = async () => {
-        //     try {
-        //         const response = await ProductsApi.get(`/${code}`);
-        //         setProduct(response.data);
-        //     } catch (err) {
-        //         if (err.response) {
-        //             console.log(err.response.data);
-        //             console.log(err.response.status);
-        //             console.log(err.response.headers);
-        //         } else {
-        //             console.log(`Error: ${err.message}`);
-        //         }
-        //     }
-        //     waitForFetch = false;
-        // };
-
-        // fetchProduct();
     }, [code]);
 
     //Work when element is rendered

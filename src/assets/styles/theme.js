@@ -25,7 +25,7 @@ export const theme = {
         l_plus: '19px',
         l: '17px',
         m_plus: '14px',
-        m: '12px',
+        m: '13px',
         s: '11px',
     },
 };

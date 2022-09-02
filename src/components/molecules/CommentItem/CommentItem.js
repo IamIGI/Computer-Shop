@@ -32,22 +32,26 @@ import useAuth from 'hooks/useAuth';
 import { addLike } from 'api/comments';
 import { Separator } from 'components/atoms/Separator/Separator';
 import { useState, useEffect } from 'react';
+import useProduct from 'hooks/useProduct';
 import useComments from 'hooks/comments/useComments';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
-const CommentItem = ({ productId, refreshComments, handleRefreshComments }) => {
+const CommentItem = ({ refreshComments, handleRefreshComments }) => {
+    const { product } = useProduct();
+    const dataInit = { productId: product._id, filters: { rating: 0, confirmed: 2 }, sortBy: 'date' };
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
     const [readMore, setReadMore] = useState(false);
-    const [comments, getComments, waitForFetchComments] = useComments(productId);
+    const [comments, getComments, waitForFetchComments] = useComments(dataInit);
     const { comments: commentsArray, length: commentsSize } = comments;
+
     useEffect(() => {
         getComments();
     }, [refreshComments]);
 
     const onLikeComment = async (value) => {
         const data = {
-            productId,
+            productId: product._id,
             commentId: value[1]._id,
             userId: Boolean(auth.id) ? auth.id : '',
             likes: {

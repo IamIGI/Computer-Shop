@@ -3,7 +3,7 @@ import { Button } from 'components/atoms/Button/Button';
 import { Input } from 'components/atoms/Input/Input';
 
 export const Wrapper = styled.div`
-    width: 260px;
+    width: 290px;
     border: 1px solid grey;
     border-radius: 25px;
     padding: 0 15px;

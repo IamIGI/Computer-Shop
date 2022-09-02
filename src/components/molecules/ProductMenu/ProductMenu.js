@@ -2,7 +2,7 @@ import React from 'react';
 import { Wrapper } from './ProductMenu.style';
 import { BsChevronDoubleUp } from 'react-icons/bs';
 
-const ProductMenu = () => {
+const ProductMenu = ({ numberOfOpinions }) => {
     return (
         <>
             <Wrapper>
@@ -11,7 +11,7 @@ const ProductMenu = () => {
                 </a>
                 <a href="#Description">Opis</a>
                 <a href="#Specification">Specyfikacja</a>
-                <a href="#Opinions">Opinie</a>
+                <a href="#Opinions">Opinie ({numberOfOpinions})</a>
             </Wrapper>
         </>
     );

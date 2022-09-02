@@ -55,6 +55,30 @@ export const Bottom = styled.div`
     }
 `;
 
+export const ProductOpinionsShort = styled.div`
+    border-top: 1px solid ${({ theme }) => theme.colors.grey};
+    padding-top: 5px;
+    margin: 0 3%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+`;
+
+export const Rating = styled.div`
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    font-size: ${({ theme }) => theme.fontSize.s};
+`;
+
+export const Opinions = styled.div`
+    padding-top: 5px;
+    font-size: ${({ theme }) => theme.fontSize.l};
+`;
+
 export const StyledList = styled.ul`
     list-style: none;
     margin: 0;
@@ -69,7 +93,7 @@ export const StyledRecord = styled.li`
 
     padding-left: 10px;
     font-size: ${({ theme }) => theme.fontSize.m};
-    color: ${({ theme }) => theme.colors.darkGrey};
+    color: ${({ theme }) => theme.colors.black};
 
     &:not(:last-child)::after {
         //every element without last

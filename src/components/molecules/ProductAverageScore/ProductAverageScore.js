@@ -15,36 +15,6 @@ const ProductAverageScore = ({ averageScore }) => {
                 })}
             </Stars>
             <NumberOfOpinions>({averageScore.numberOfComments} opinii)</NumberOfOpinions>
-            {/* <p>AverageScore Section </p>
-            {waitForFetchAS ? (
-                <>
-                    <LoadingAnimation />
-                </>
-            ) : Object.keys(averageScore).length == 0 ? (
-                <>
-                    <p>Brak Ocen</p>
-                </>
-            ) : (
-                <>
-                    <ul>
-                        <li>
-                            {averageScore.numberOfComments} - {averageScore.averageScore_View} -{' '}
-                            {averageScore.averageScore_Stars}
-                        </li>
-                        <li>
-                            {' '}
-                            <ul>
-                                <li>One: {averageScore.eachScore.one}</li>
-                                <li>Two: {averageScore.eachScore.two}</li>
-                                <li>Three: {averageScore.eachScore.three}</li>
-                                <li>Four: {averageScore.eachScore.four}</li>
-                                <li>Five: {averageScore.eachScore.five}</li>
-                                <li>Six: {averageScore.eachScore.six}</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </>
-            )} */}
         </Wrapper>
     );
 };
