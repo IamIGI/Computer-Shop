@@ -69,13 +69,6 @@ const Root = () => {
 
     useEffect(() => {
         getAllProducts(dataInit);
-
-        // axios
-        //     .post(baseURL, dataInit)
-        //     .then(({ data }) => {
-        //         setProducts(data);
-        //     })
-        //     .catch((err) => console.log(err));
     }, []);
 
     return (
