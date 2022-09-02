@@ -6,11 +6,10 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import useComments from 'hooks/comments/useComments';
 import { BiCommentDetail } from 'react-icons/bi';
 import ProductSummary from '../ProductSummary/ProductSummary';
-import useProduct from 'hooks/useProduct';
+
 import CommentItem from 'components/molecules/CommentItem/CommentItem';
 
 const Comments = () => {
-    const { product } = useProduct();
     const [refreshComments, setRefreshComments] = useState(false);
 
     const handleRefreshComments = () => {
@@ -21,11 +20,7 @@ const Comments = () => {
         <Wrapper id="Opinions">
             <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
             <ProductSummary handleRefreshComments={handleRefreshComments} />
-            <CommentItem
-                productId={product._id}
-                refreshComments={refreshComments}
-                handleRefreshComments={handleRefreshComments}
-            />
+            <CommentItem refreshComments={refreshComments} handleRefreshComments={handleRefreshComments} />
         </Wrapper>
     );
 };

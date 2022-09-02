@@ -11,7 +11,7 @@ const ProductMiddleContent = () => {
         <>
             <MenuSector>
                 <Separator />
-                <ProductMenu />
+                <ProductMenu numberOfOpinions={product.numberOfOpinions} />
             </MenuSector>
             <AboutProductSector>
                 <Description id="Description">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getAllComments } from 'api/comments';
 
-const useComments = (productId) => {
+const useComments = (data) => {
     const [comments, setComment] = useState([]);
     const [waitForFetchComments, setWaitForFetchComments] = useState(false);
 
@@ -9,7 +9,7 @@ const useComments = (productId) => {
 
     const fetchComment = async () => {
         setWaitForFetchComments(true);
-        setComment(await getAllComments(productId));
+        setComment(await getAllComments(data));
         setWaitForFetchComments(false);
     };
     const getComments = () => {

@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Bottom, Link, StyledList, StyledRecord, Top, Wrapper } from './ProductPreview.styles';
+import {
+    Bottom,
+    Link,
+    StyledList,
+    StyledRecord,
+    Top,
+    Wrapper,
+    ProductOpinionsShort,
+    Rating,
+    Opinions,
+} from './ProductPreview.styles';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useProduct from 'hooks/useProduct';
+import Star from 'components/atoms/Star/Star';
 
 let Show = '';
 const ProductPreview = ({ goToProduct, allProducts }) => {
@@ -14,7 +25,22 @@ const ProductPreview = ({ goToProduct, allProducts }) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await ProductsApi.get('/all');
+                const dataInit = {
+                    filters: {
+                        producers: [],
+                        processors: [],
+                        ram: {
+                            min: 4,
+                            max: 128,
+                        },
+                        disk: {
+                            min: 128,
+                            max: 2000,
+                        },
+                    },
+                    sortBy: 'none',
+                };
+                const response = await ProductsApi.post('/all', dataInit);
                 setProducts(response.data);
             } catch (err) {
                 if (err.response) {
@@ -53,14 +79,29 @@ const ProductPreview = ({ goToProduct, allProducts }) => {
                                             <h1>{item.name}</h1>
                                         </Top>
                                         {allProducts === 'yes' ? (
-                                            <StyledList>
-                                                <StyledRecord>{item.specification.processor.description}</StyledRecord>
-                                                <StyledRecord>{item.specification.ram.description}</StyledRecord>
-                                                <StyledRecord>
-                                                    {item.specification.graphics_card.description}
-                                                </StyledRecord>
-                                                <StyledRecord>{item.specification.disk.description}</StyledRecord>
-                                            </StyledList>
+                                            <>
+                                                <ProductOpinionsShort>
+                                                    <Rating>
+                                                        {[...Array(6)].map((star, index) => {
+                                                            index += 1;
+                                                            return (
+                                                                <Star opinionRating={item.averageStars} rate={index} />
+                                                            );
+                                                        })}
+                                                    </Rating>
+                                                    <Opinions>({item.numberOfOpinions})</Opinions>
+                                                </ProductOpinionsShort>
+                                                <StyledList>
+                                                    <StyledRecord>
+                                                        {item.specification.processor.description}
+                                                    </StyledRecord>
+                                                    <StyledRecord>{item.specification.ram.description}</StyledRecord>
+                                                    <StyledRecord>
+                                                        {item.specification.graphics_card.description}
+                                                    </StyledRecord>
+                                                    <StyledRecord>{item.specification.disk.description}</StyledRecord>
+                                                </StyledList>
+                                            </>
                                         ) : (
                                             <span></span>
                                         )}

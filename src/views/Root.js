@@ -23,8 +23,7 @@ import useOrder from 'hooks/useOrder';
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useProduct from 'hooks/useProduct';
-
-const baseURL = 'http://localhost:5000/products';
+import productApi from 'api/products';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -33,18 +32,43 @@ const ROLES = {
 };
 
 const Root = () => {
+    const dataInit = {
+        filters: {
+            producers: [],
+            processors: [],
+            ram: {
+                min: 4,
+                max: 128,
+            },
+            disk: {
+                min: 128,
+                max: 2000,
+            },
+        },
+        sortBy: 'none',
+    };
     //API section---------------------
     const [products, setProducts] = useState(null);
     const { orderItem } = useOrder();
     const { product } = useProduct();
 
+    const getAllProducts = async (data) => {
+        try {
+            const response = await productApi.post('/all', data);
+            setProducts(response.data);
+        } catch (err) {
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+            } else {
+                console.log(`Error: ${err.message}`);
+            }
+        }
+    };
+
     useEffect(() => {
-        axios
-            .get(baseURL)
-            .then(({ data }) => {
-                setProducts(data);
-            })
-            .catch((err) => console.log(err));
+        getAllProducts(dataInit);
     }, []);
 
     return (
