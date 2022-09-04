@@ -48,7 +48,7 @@ const CommentsSection = ({ product }) => {
                 waitForFetchAS={waitForFetchAS}
                 handleWaitForFetchAS={handleWaitForFetchAS}
             />
-            <CommentFilters productId={product._id} handleFilters={handleFilters} />
+            <CommentFilters productId={product._id} handleFilters={handleFilters} comments={comments} />
             <Comments
                 comments={comments}
                 refreshComments={refreshComments}

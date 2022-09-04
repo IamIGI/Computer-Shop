@@ -66,7 +66,6 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
 
                     console.log(`Data send successfully`);
                     handleRefreshComments();
-                    // handleRefreshProductSummary();
                 };
 
                 sendData();

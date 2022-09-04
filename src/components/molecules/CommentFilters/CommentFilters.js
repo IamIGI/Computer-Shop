@@ -11,15 +11,15 @@ import {
 } from './CommentFilters.style';
 import { useState, useEffect } from 'react';
 
-const CommentFilters = ({ productId, commentsSize, handleFilters, handleRefreshComments }) => {
+const CommentFilters = ({ productId, handleFilters, comments }) => {
     const [rating, setRating] = useState(0);
     const [sortBy, setSortBy] = useState('date');
     const [confirmed, setConfirmed] = useState(false);
+    const { length: commentsSize } = comments;
 
     useEffect(() => {
         let filters = { productId, filters: { rating, confirmed }, sortBy };
         handleFilters(filters);
-        // handleRefreshComments();
     }, [rating, sortBy, confirmed]);
 
     const ratingOptions = [
@@ -42,7 +42,9 @@ const CommentFilters = ({ productId, commentsSize, handleFilters, handleRefreshC
 
     return (
         <Wrapper>
-            <NumberOfComments>{/* Wyniki: {commentsSize} z {commentsSize} */}</NumberOfComments>
+            <NumberOfComments>
+                Wyniki: {commentsSize} z {commentsSize}
+            </NumberOfComments>
             <Title>Filtruj: </Title>
             <Filters>
                 <SelectStyle>

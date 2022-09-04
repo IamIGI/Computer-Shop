@@ -32,11 +32,9 @@ import { addLike } from 'api/comments';
 import { Separator } from 'components/atoms/Separator/Separator';
 import { useState } from 'react';
 import useProduct from 'hooks/useProduct';
-
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import CommentFilters from '../CommentFilters/CommentFilters';
 
-const CommentItem = ({ handleFilters, comments, waitForFetchComments, handleRefreshComments }) => {
+const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) => {
     const { product } = useProduct();
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
@@ -102,13 +100,6 @@ const CommentItem = ({ handleFilters, comments, waitForFetchComments, handleRefr
                         <></>
                     ) : (
                         <>
-                            {/* <CommentFilters
-                                productId={product._id}
-                                handleFilters={handleFilters}
-                                commentsSize={commentsSize}
-                                handleRefreshComments={handleRefreshComments}
-                            /> */}
-                            Wyniki: {commentsSize} z {commentsSize}
                             <Separator />
                             {commentsArray.map((comment) => (
                                 <>

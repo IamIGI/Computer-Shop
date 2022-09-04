@@ -16,7 +16,7 @@ const Product = ({ code }) => {
     }, [code]);
 
     //Work when element is rendered
-    // document.getElementById('Top') && document.getElementById('Top').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('Top') && document.getElementById('Top').scrollIntoView({ behavior: 'smooth' });
 
     return (
         <Wrapper>
