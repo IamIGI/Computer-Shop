@@ -37,9 +37,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
     const [countChar, setCountChar] = useState(0);
 
     useEffect(() => {
-        console.log('here');
         if (sendComment) {
-            console.log('here2');
             if (userName.length !== 0 && opinion.length > 10 && rating !== 0) {
                 const sendData = async () => {
                     const data = {
@@ -68,7 +66,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
 
                     console.log(`Data send successfully`);
                     handleRefreshComments();
-                    handleRefreshProductSummary();
+                    // handleRefreshProductSummary();
                 };
 
                 sendData();

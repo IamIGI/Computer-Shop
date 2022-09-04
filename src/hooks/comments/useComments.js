@@ -4,7 +4,7 @@ import { getAllComments } from 'api/comments';
 const useComments = (data) => {
     const [comments, setComment] = useState([]);
     const [waitForFetchComments, setWaitForFetchComments] = useState(false);
-
+    // console.log(data);
     //get all comments
 
     const fetchComment = async () => {

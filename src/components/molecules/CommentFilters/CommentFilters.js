@@ -9,43 +9,61 @@ import {
     Checkbox,
     NumberOfComments,
 } from './CommentFilters.style';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const CommentFilters = ({ commentsSize }) => {
-    const [check, toggleCheck] = useState(false);
+const CommentFilters = ({ productId, commentsSize, handleFilters, handleRefreshComments }) => {
+    const [rating, setRating] = useState(0);
+    const [sortBy, setSortBy] = useState('date');
+    const [confirmed, setConfirmed] = useState(false);
+
+    useEffect(() => {
+        let filters = { productId, filters: { rating, confirmed }, sortBy };
+        handleFilters(filters);
+        // handleRefreshComments();
+    }, [rating, sortBy, confirmed]);
+
+    const ratingOptions = [
+        { label: 'Wszystkie oceny', value: 0 },
+        { label: '1 gwiazdka', value: 1 },
+        { label: '2 gwiazdka', value: 2 },
+        { label: '3 gwiazdka', value: 3 },
+        { label: '4 gwiazdka', value: 4 },
+        { label: '5 gwiazdka', value: 5 },
+        { label: '6 gwiazdka', value: 6 },
+    ];
+
+    const filterOptions = [
+        { label: 'Najnowsze', value: 'date' },
+        { label: 'Najstarsze', value: '-date' },
+        { label: 'Najbardziej pomocne', value: 'likes.up' },
+        { label: 'Najwyższe oceny', value: 'content.rating' },
+        { label: 'Najniższe oceny', value: '-content.rating' },
+    ];
 
     return (
         <Wrapper>
-            <NumberOfComments>
-                Wyniki: {commentsSize} z {commentsSize}
-            </NumberOfComments>
+            <NumberOfComments>{/* Wyniki: {commentsSize} z {commentsSize} */}</NumberOfComments>
             <Title>Filtruj: </Title>
             <Filters>
                 <SelectStyle>
-                    <select>
-                        <option>Wszystkie oceny</option>
-                        <option>1 gwiazdka</option>
-                        <option>2 gwiazdka</option>
-                        <option>3 gwiazdka</option>
-                        <option>4 gwiazdka</option>
-                        <option>5 gwiazdka</option>
-                        <option>6 gwiazdka</option>
+                    <select onChange={(e) => setRating(e.target.value)}>
+                        {ratingOptions.map((option) => (
+                            <option value={option.value}>{option.label}</option>
+                        ))}
                     </select>
                 </SelectStyle>
             </Filters>
             <Confirmed>
-                <Checkbox type="checkbox" onChange={() => toggleCheck(!check)} checked={check} />
-                <ConfirmedDesc onClick={() => toggleCheck(!check)}>Potwierdzone zakupy</ConfirmedDesc>
+                <Checkbox type="checkbox" onChange={() => setConfirmed(!confirmed)} checked={confirmed} />
+                <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>Potwierdzone zakupy</ConfirmedDesc>
             </Confirmed>
             <Title>Sortuj:</Title>
             <Sort>
                 <SelectStyle>
-                    <select>
-                        <option>Najnowsze</option>
-                        <option>Najstarsze</option>
-                        <option>Najbardziej pomocne</option>
-                        <option>Najwyższe oceny</option>
-                        <option>Najniższe oceny</option>
+                    <select onChange={(e) => setSortBy(e.target.value)}>
+                        {filterOptions.map((option) => (
+                            <option value={option.value}>{option.label}</option>
+                        ))}
                     </select>
                 </SelectStyle>
             </Sort>

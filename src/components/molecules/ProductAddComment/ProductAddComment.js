@@ -15,7 +15,7 @@ const ProductAddComment = ({ productName, handleOpen, comments }) => {
                 break;
             }
         }
-    }, [comments.comments]);
+    }, [comments.length]);
 
     return (
         <Wrapper>
