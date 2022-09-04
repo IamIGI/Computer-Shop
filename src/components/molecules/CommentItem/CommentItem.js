@@ -1,6 +1,5 @@
 import {
     Wrapper,
-    NumberOfComments,
     CommentSection,
     UserData,
     ContentSection,
@@ -31,24 +30,16 @@ import Star from 'components/atoms/Star/Star';
 import useAuth from 'hooks/useAuth';
 import { addLike } from 'api/comments';
 import { Separator } from 'components/atoms/Separator/Separator';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useProduct from 'hooks/useProduct';
-import useComments from 'hooks/comments/useComments';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import CommentFilters from '../CommentFilters/CommentFilters';
 
-const CommentItem = ({ refreshComments, handleRefreshComments }) => {
+const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) => {
     const { product } = useProduct();
-    const dataInit = { productId: product._id, filters: { rating: 0, confirmed: 2 }, sortBy: 'date' };
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
     const [readMore, setReadMore] = useState(false);
-    const [comments, getComments, waitForFetchComments] = useComments(dataInit);
     const { comments: commentsArray, length: commentsSize } = comments;
-
-    useEffect(() => {
-        getComments();
-    }, [refreshComments]);
 
     const onLikeComment = async (value) => {
         const data = {
@@ -109,8 +100,6 @@ const CommentItem = ({ refreshComments, handleRefreshComments }) => {
                         <></>
                     ) : (
                         <>
-                            <CommentFilters commentsSize={commentsSize} />
-
                             <Separator />
                             {commentsArray.map((comment) => (
                                 <>

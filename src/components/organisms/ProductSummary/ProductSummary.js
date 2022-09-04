@@ -1,37 +1,40 @@
 import ProductAverageScore from 'components/molecules/ProductAverageScore/ProductAverageScore';
 import ProductEachScore from 'components/molecules/ProductEachScore/ProductEachScore';
-import React from 'react';
-import useAverageScore from 'hooks/comments/useAverageScore';
+import React, { useEffect } from 'react';
+
 import { NoComments, Wrapper } from './ProductSummary.style';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ProductAddComment from 'components/molecules/ProductAddComment/ProductAddComment';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { BsArrowRight } from 'react-icons/bs';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpAddComment from 'components/molecules/PopUpAddComment/PopUpAddComment';
 import useProduct from 'hooks/useProduct';
-import useComments from 'hooks/comments/useComments';
+import { getProductAverageScore } from 'api/comments';
 
-const ProductSummary = ({ handleRefreshComments }) => {
+const ProductSummary = ({
+    refreshComments,
+    waitForFetchAS,
+    comments,
+    averageScore,
+    handleRefreshComments,
+    handleAverageScore,
+    handleWaitForFetchAS,
+}) => {
     const { product } = useProduct();
-    const [averageScore, getAverageScore, waitForFetchAS] = useAverageScore(product._id);
-    const dataInit = { productId: product._id, filters: { rating: 0, confirmed: 2 }, sortBy: 'date' };
-    const [comments, getComments] = useComments(dataInit);
     const [isOpen, setIsOpen] = useState([false]);
-    const [refreshProductSummary, setRefreshProductSummary] = useState();
-
-    useEffect(() => {
-        getComments();
-        getAverageScore();
-    }, [refreshProductSummary]);
-
     const handleOpen = () => {
         setIsOpen([true]);
     };
 
-    const handleRefreshProductSummary = () => {
-        setRefreshProductSummary(!refreshProductSummary);
-    };
+    useEffect(() => {
+        const fetchAverageScore = async (productID) => {
+            handleWaitForFetchAS(true);
+            handleAverageScore(await getProductAverageScore(productID));
+            handleWaitForFetchAS(false);
+        };
+        fetchAverageScore(product._id);
+    }, [refreshComments]);
 
     return (
         <Wrapper>
@@ -66,7 +69,6 @@ const ProductSummary = ({ handleRefreshComments }) => {
                     prevImg={product.prevImg}
                     productId={product._id}
                     handleRefreshComments={handleRefreshComments}
-                    handleRefreshProductSummary={handleRefreshProductSummary}
                 />
             </Modal>
         </Wrapper>

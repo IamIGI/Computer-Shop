@@ -17,7 +17,7 @@ import useProduct from 'hooks/useProduct';
 import Star from 'components/atoms/Star/Star';
 
 let Show = '';
-const ProductPreview = ({ goToProduct, allProducts }) => {
+const ProductPreview = ({ allProducts }) => {
     const [products, setProducts] = useState([]);
     const { setProduct } = useProduct();
 

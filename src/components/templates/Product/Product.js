@@ -4,7 +4,7 @@ import ProductTopContent from 'components/organisms/ProductTopContent/ProductTop
 import ProductMiddleContent from 'components/organisms/ProductMiddleContent/ProductMiddleContent';
 import useProduct from 'hooks/useProduct';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import Comments from 'components/organisms/Comments/Comments';
+import CommentsSection from 'components/templates/CommentsSection/CommentsSection';
 
 let waitForFetch = false;
 
@@ -34,7 +34,7 @@ const Product = ({ code }) => {
                             <ProductMiddleContent />
                         </MidWrapper>
                         <BottomWrapper>
-                            <Comments />
+                            <CommentsSection product={product} />
                         </BottomWrapper>
                     </>
                 )}

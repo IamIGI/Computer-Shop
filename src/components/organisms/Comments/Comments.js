@@ -1,26 +1,29 @@
 import { Wrapper } from './Comments.style';
 import { useEffect, useState } from 'react';
-import { Separator } from 'components/atoms/Separator/Separator';
-import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import useComments from 'hooks/comments/useComments';
-import { BiCommentDetail } from 'react-icons/bi';
-import ProductSummary from '../ProductSummary/ProductSummary';
 
 import CommentItem from 'components/molecules/CommentItem/CommentItem';
+import { getAllComments } from 'api/comments';
 
-const Comments = () => {
-    const [refreshComments, setRefreshComments] = useState(false);
+const Comments = ({ refreshComments, filterComments, handleComments, comments, handleRefreshComments }) => {
+    const [waitForFetchComments, setWaitForFetchComments] = useState(false);
 
-    const handleRefreshComments = () => {
-        setRefreshComments(!refreshComments);
-    };
+    useEffect(() => {
+        const fetchComments = async (data) => {
+            setWaitForFetchComments(true);
+            handleComments(await getAllComments(data));
+            setWaitForFetchComments(false);
+        };
+
+        fetchComments(filterComments);
+    }, [refreshComments, filterComments]);
 
     return (
         <Wrapper id="Opinions">
-            <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
-            <ProductSummary handleRefreshComments={handleRefreshComments} />
-            <CommentItem refreshComments={refreshComments} handleRefreshComments={handleRefreshComments} />
+            <CommentItem
+                comments={comments}
+                waitForFetchComments={waitForFetchComments}
+                handleRefreshComments={handleRefreshComments}
+            />
         </Wrapper>
     );
 };

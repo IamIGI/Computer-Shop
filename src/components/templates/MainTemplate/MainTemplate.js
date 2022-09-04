@@ -11,6 +11,7 @@ import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { OrderProvider } from 'context/OrderItemProvider';
 import { BasketProvider } from 'context/BasketProvider';
 import { ProductProvider } from 'context/ProductProvider';
+import { CommentsProvider } from 'context/CommentsProvider';
 import { BrowserRouter } from 'react-router-dom';
 
 const MainTemplate = ({ children }) => {
@@ -23,12 +24,14 @@ const MainTemplate = ({ children }) => {
                         <BasketProvider>
                             <ProductProvider>
                                 <OrderProvider>
-                                    <AuthProvider>
-                                        <NavBar />
-                                        {children}
-                                        <AccountPreviewSection />
-                                        <Footer />
-                                    </AuthProvider>
+                                    <CommentsProvider>
+                                        <AuthProvider>
+                                            <NavBar />
+                                            {children}
+                                            <AccountPreviewSection />
+                                            <Footer />
+                                        </AuthProvider>
+                                    </CommentsProvider>
                                 </OrderProvider>
                             </ProductProvider>
                         </BasketProvider>
