@@ -19,6 +19,7 @@ export const TitleSection = styled.div`
 `;
 
 export const Quantity = styled.div`
+    position: absolute;
     border-radius: 50%;
     height: 40px;
     width: 40px;
@@ -27,7 +28,7 @@ export const Quantity = styled.div`
     font-weight: 700;
     padding-top: 7px;
     font-size: 20px;
-    position: absolute;
+
     right: -12px;
     top: -12px;
 `;
@@ -77,7 +78,30 @@ export const Image = styled.div`
     }
 `;
 
+export const BottomWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+`;
+
 export const Link = styled(NavLink)`
     color: black;
     text-decoration: none;
+`;
+
+export const RemoveBasket = styled.div`
+    color: ${({ theme }) => theme.colors.darkGrey};
+    font-size: ${({ theme }) => theme.fontSize.xl};
+    margin: 12px 0;
+    padding: 0 8px;
+    padding-top: 7px;
+    border: 2px solid white;
+    border-radius: 50%;
+    :hover {
+        cursor: pointer;
+        color: ${({ theme }) => theme.colors.successDark};
+        border: 2px solid ${({ theme }) => theme.colors.successDark};
+        border-radius: 50%;
+    }
 `;

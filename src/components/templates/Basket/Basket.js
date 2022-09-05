@@ -56,7 +56,6 @@ const Basket = () => {
     } else {
         basketInit = null;
     }
-    const [basket, setBasket] = useState(basketInit);
 
     useEffect(() => {
         let isMounted = true;
@@ -134,7 +133,7 @@ const Basket = () => {
                 localStorage.removeItem('productsInBasket');
                 localStorage.removeItem('basketItems');
                 setBasketItems([]);
-                setBasket(null);
+
                 setProducts([]);
                 setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
                 setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
@@ -171,8 +170,6 @@ const Basket = () => {
                         setProductsInBasket={setProductsInBasket}
                         theProducts={theProducts}
                         setProducts={setProducts}
-                        basket={basket}
-                        setBasket={setBasket}
                     />
                     <DeliveryPreview
                         deliveryCheckboxesPay={deliveryCheckboxesPay}
