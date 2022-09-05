@@ -1,12 +1,22 @@
-import { ProductsSection, Wrapper, Image, TitleSection, Quantity, Link, ProductQuantity } from './CartHint.style';
+import {
+    ProductsSection,
+    Wrapper,
+    Image,
+    TitleSection,
+    Quantity,
+    Link,
+    ProductQuantity,
+    RemoveBasket,
+    BottomWrapper,
+} from './CartHint.style';
 import { Button } from 'components/atoms/Button/Button';
-
+import { IoTrashBinOutline } from 'react-icons/io5';
 import useBasket from 'hooks/useBasket';
 import useProduct from 'hooks/useProduct';
 
 const CartHint = () => {
     const { setProduct } = useProduct();
-    const { basketItems } = useBasket();
+    const { basketItems, setBasketItems } = useBasket();
     console.log(basketItems);
 
     const getQuantityOfItems = () => {
@@ -15,6 +25,11 @@ const CartHint = () => {
             temp += item.quantity;
         });
         return temp;
+    };
+
+    const removeBasket = () => {
+        localStorage.removeItem('basketItems');
+        setBasketItems([]);
     };
 
     return (
@@ -45,9 +60,14 @@ const CartHint = () => {
                                 </>
                             ))}
                         </ProductsSection>
-                        <Link to={`/basket`}>
-                            <Button>Do koszyka</Button>
-                        </Link>
+                        <BottomWrapper>
+                            <Link to={`/basket`}>
+                                <Button>Do koszyka</Button>
+                            </Link>
+                            <RemoveBasket onClick={() => removeBasket()}>
+                                <IoTrashBinOutline />
+                            </RemoveBasket>
+                        </BottomWrapper>
                     </Wrapper>
                 </>
             )}

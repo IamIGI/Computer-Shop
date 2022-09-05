@@ -16,7 +16,7 @@ import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
 
-const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts, basket, setBasket }) => {
+const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setProducts }) => {
     const { basketItems, setBasketItems } = useBasket();
 
     const deleteProduct = (_id) => {
@@ -24,7 +24,6 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, theProducts, setPro
 
         if (oldBasket.length === 1) {
             localStorage.removeItem('basketItems');
-            setBasket(null);
             setPriceToPay(() => {
                 return 0;
             });
