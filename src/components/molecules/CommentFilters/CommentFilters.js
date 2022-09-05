@@ -10,17 +10,19 @@ import {
     NumberOfComments,
 } from './CommentFilters.style';
 import { useState, useEffect } from 'react';
+import useProduct from 'hooks/useProduct';
 
-const CommentFilters = ({ productId, handleFilters, comments }) => {
+const CommentFilters = ({ handleFilters, comments }) => {
     const [rating, setRating] = useState(0);
     const [sortBy, setSortBy] = useState('date');
     const [confirmed, setConfirmed] = useState(false);
-    const { length: commentsSize } = comments;
-
+    const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
+    const { product } = useProduct();
+    console.log(product);
     useEffect(() => {
-        let filters = { productId, filters: { rating, confirmed }, sortBy };
+        let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
         handleFilters(filters);
-    }, [rating, sortBy, confirmed]);
+    }, [rating, sortBy, confirmed, product]);
 
     const ratingOptions = [
         { label: 'Wszystkie oceny', value: 0 },
@@ -43,7 +45,7 @@ const CommentFilters = ({ productId, handleFilters, comments }) => {
     return (
         <Wrapper>
             <NumberOfComments>
-                Wyniki: {commentsSize} z {commentsSize}
+                Wyniki: {commentsSize} z {totalNumberOfComments}
             </NumberOfComments>
             <Title>Filtruj: </Title>
             <Filters>
