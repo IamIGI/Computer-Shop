@@ -28,10 +28,6 @@ const Product = ({ code }) => {
         window.scrollTo(0, 0);
     }, [code]);
 
-    useEffect(() => {
-        console.log(product2);
-    }, [product2]);
-
     //Work when element is rendered
     document.getElementById('Top') && document.getElementById('Top').scrollIntoView({ behavior: 'smooth' });
 

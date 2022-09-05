@@ -7,7 +7,7 @@ import { getAllComments } from 'api/comments';
 const Comments = ({ refreshComments, filterComments, handleComments, comments, handleRefreshComments }) => {
     const [waitForFetchComments, setWaitForFetchComments] = useState(false);
     const { product } = useProduct();
-    console.log(product);
+
     useEffect(() => {
         const fetchComments = async (data) => {
             setWaitForFetchComments(true);

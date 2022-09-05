@@ -9,7 +9,6 @@ export const ProductProvider = ({ children }) => {
             : JSON.parse(localStorage.getItem('currentWebPage'))
     );
 
-    console.log(product);
     localStorage.setItem('currentWebPage', JSON.stringify(product));
 
     return <ProductContext.Provider value={{ product, setProduct }}>{children}</ProductContext.Provider>;

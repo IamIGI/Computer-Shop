@@ -32,7 +32,6 @@ const CartHint = () => {
                         <ProductsSection>
                             {basketItems.map((item) => (
                                 <>
-                                    {console.log(item._id)}
                                     <Image key={item._id}>
                                         <ProductQuantity>{item.quantity}</ProductQuantity>
                                         <Link
