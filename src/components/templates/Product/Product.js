@@ -5,15 +5,32 @@ import ProductMiddleContent from 'components/organisms/ProductMiddleContent/Prod
 import useProduct from 'hooks/useProduct';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import CommentsSection from 'components/templates/CommentsSection/CommentsSection';
-
-let waitForFetch = false;
+import { getProduct } from 'api/products';
 
 const Product = ({ code }) => {
-    const { product } = useProduct();
+    console.log(code);
+    const [waitForFetchProduct, setWaitForFetchProduct] = useState(true);
+    const [product2, setProduct2] = useState({});
+    const { setProduct } = useProduct();
+
+    useEffect(() => {
+        const fetchProduct = async (code) => {
+            const response = await getProduct(code);
+            setProduct2(response);
+            setProduct(response);
+            setWaitForFetchProduct(false);
+        };
+
+        fetchProduct(code);
+    }, [code]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [code]);
+
+    useEffect(() => {
+        console.log(product2);
+    }, [product2]);
 
     //Work when element is rendered
     document.getElementById('Top') && document.getElementById('Top').scrollIntoView({ behavior: 'smooth' });
@@ -21,20 +38,20 @@ const Product = ({ code }) => {
     return (
         <Wrapper>
             <>
-                {waitForFetch || !product ? (
+                {waitForFetchProduct ? (
                     <>
                         <LoadingAnimation />
                     </>
                 ) : (
                     <>
                         <TopWrapper id="Top">
-                            <ProductTopContent />
+                            <ProductTopContent product={product2} />
                         </TopWrapper>
                         <MidWrapper>
-                            <ProductMiddleContent />
+                            <ProductMiddleContent product={product2} />
                         </MidWrapper>
                         <BottomWrapper>
-                            <CommentsSection product={product} />
+                            <CommentsSection product={product2} />
                         </BottomWrapper>
                     </>
                 )}

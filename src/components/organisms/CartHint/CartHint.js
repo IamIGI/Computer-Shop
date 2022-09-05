@@ -2,8 +2,10 @@ import { ProductsSection, Wrapper, Image, TitleSection, Quantity, Link, ProductQ
 import { Button } from 'components/atoms/Button/Button';
 
 import useBasket from 'hooks/useBasket';
+import useProduct from 'hooks/useProduct';
 
 const CartHint = () => {
+    const { setProduct } = useProduct();
     const { basketItems } = useBasket();
     console.log(basketItems);
 
@@ -29,12 +31,19 @@ const CartHint = () => {
 
                         <ProductsSection>
                             {basketItems.map((item) => (
-                                <Image key={item._id}>
-                                    <ProductQuantity>{item.quantity}</ProductQuantity>
-                                    <Link to={`/product/${item._id}`} key={item._id}>
-                                        <img src={item.prevImg} alt="images of product" />
-                                    </Link>
-                                </Image>
+                                <>
+                                    {console.log(item._id)}
+                                    <Image key={item._id}>
+                                        <ProductQuantity>{item.quantity}</ProductQuantity>
+                                        <Link
+                                            onClick={() => setProduct(item)}
+                                            to={`/product/${item._id}`}
+                                            key={item._id}
+                                        >
+                                            <img src={item.prevImg} alt="images of product" />
+                                        </Link>
+                                    </Image>
+                                </>
                             ))}
                         </ProductsSection>
                         <Link to={`/basket`}>

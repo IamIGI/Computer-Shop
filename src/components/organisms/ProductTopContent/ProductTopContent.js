@@ -5,10 +5,8 @@ import TitleContent from 'components/molecules/TitleContent/TitleContent';
 import PrevDataProduct from 'components/molecules/PrevDataProduct/PrevDataProduct';
 import ProductBuyContent from 'components/molecules/ProductBuyContent/ProductBuyContent';
 import { Separator } from 'components/atoms/Separator/Separator';
-import useProduct from 'hooks/useProduct';
 
-const ProductTopContent = () => {
-    const { product } = useProduct();
+const ProductTopContent = ({ product }) => {
     return (
         <>
             <CarouselBox>

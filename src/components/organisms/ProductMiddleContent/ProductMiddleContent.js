@@ -3,10 +3,8 @@ import ProductDescription from 'components/molecules/ProductDescription/ProductD
 import ProductMenu from 'components/molecules/ProductMenu/ProductMenu';
 import SpecificationList from 'components/molecules/SpecificationList/SpecificationList';
 import { AboutProductSector, Description, MenuSector, Specification } from './ProductMIddleContent.style';
-import useProduct from 'hooks/useProduct';
 
-const ProductMiddleContent = () => {
-    const { product } = useProduct();
+const ProductMiddleContent = ({ product }) => {
     return (
         <>
             <MenuSector>

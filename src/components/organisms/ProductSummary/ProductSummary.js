@@ -34,7 +34,7 @@ const ProductSummary = ({
             handleWaitForFetchAS(false);
         };
         fetchAverageScore(product._id);
-    }, [refreshComments]);
+    }, [refreshComments, product]);
 
     return (
         <Wrapper>
