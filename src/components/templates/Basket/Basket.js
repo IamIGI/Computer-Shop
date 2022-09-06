@@ -62,10 +62,6 @@ const Basket = () => {
         setIsOpen([false]);
     };
 
-    useEffect(() => {
-        console.log(isOpen);
-    }, [isOpen]);
-
     const finishHandler = () => {
         setFinishOrder(() => {
             return true;
@@ -139,7 +135,6 @@ const Basket = () => {
                 const sendUserOrder = async () => {
                     try {
                         const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
-                        console.log(response.data.OrderId);
                         setOrderId(response.data.OrderId);
                     } catch (err) {
                         console.log(err);

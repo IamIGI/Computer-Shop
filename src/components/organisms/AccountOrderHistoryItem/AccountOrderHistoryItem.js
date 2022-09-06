@@ -40,12 +40,10 @@ const AccountOrderHistoryItem = ({ orderId }) => {
     const [waitForFetch, setWaitForFetch] = useState(true);
     const [orderItem, setOrderItem] = useState({});
 
-    console.log(`OrderId: ${orderId}`);
     useEffect(() => {
         const fetchOrder = async (orderId) => {
             try {
                 const response = await axiosPrivate.get(`/order/history/${orderId}`);
-                console.log(response.data);
                 setOrderItem(response.data);
                 setWaitForFetch(false);
             } catch (err) {
@@ -56,10 +54,6 @@ const AccountOrderHistoryItem = ({ orderId }) => {
 
         fetchOrder(orderId);
     }, [orderId]);
-
-    useEffect(() => {
-        console.log(orderItem);
-    }, [orderItem]);
 
     //set right month name
     const getDate = (date) => {

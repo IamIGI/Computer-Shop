@@ -68,10 +68,6 @@ export const BottomSection = styled.div`
     justify-content: space-around;
 `;
 
-export const Dot = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.l};
-`;
-
 export const Link = styled(NavLink)`
     text-decoration: none;
 `;
