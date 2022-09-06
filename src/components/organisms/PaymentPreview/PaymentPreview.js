@@ -1,13 +1,7 @@
 import React from 'react';
 import { FinishSection, List, ListSection, LocalButton, Name, Price, Section, Wrapper } from './PaymentPreview.style';
 
-const PaymentPreview = ({ priceToPay, setFinishOrder, priceForDelivery }) => {
-    const finishHandler = () => {
-        setFinishOrder(() => {
-            return true;
-        });
-    };
-
+const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery }) => {
     return (
         <>
             <Wrapper>
@@ -40,7 +34,7 @@ const PaymentPreview = ({ priceToPay, setFinishOrder, priceForDelivery }) => {
                     </List>
                 </Section>
                 <FinishSection>
-                    <LocalButton onClick={finishHandler}>Zakończ</LocalButton>
+                    <LocalButton onClick={() => finishHandler()}>Zakończ</LocalButton>
                 </FinishSection>
             </Wrapper>
         </>

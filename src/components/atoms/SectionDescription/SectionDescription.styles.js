@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 `;
 
 export const IconTitle = styled.div`
-    padding-top: 7px;
+    padding-top: 6px;
     font-size: ${({ theme }) => theme.fontSize.omegaBig};
 `;
 
@@ -18,10 +18,10 @@ export const ContentTitle = styled.div`
     /* width: 50%; */
 `;
 export const ContentDescription = styled.div`
-    padding-top: 17px;
+    padding-top: 22px;
     color: ${({ theme }) => theme.colors.darkGrey};
     margin-left: 30px;
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSize.l};
 `;
 
 export const Line = styled.div`
