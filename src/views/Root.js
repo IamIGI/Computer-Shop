@@ -13,7 +13,6 @@ import AccountSettingsOrders from 'components/organisms/AccountSettingsOrders/Ac
 
 import React, { useState, useEffect } from 'react';
 import { Wrapper } from './Root.styles';
-import axios from 'axios';
 
 import { Routes, Route } from 'react-router-dom';
 import RequireAuth from 'components/molecules/RequireAuth/RequireAuth';
@@ -96,7 +95,7 @@ const Root = () => {
                                 <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
                                 <Route
                                     path={`/accountSettings/orders/history/${orderItem._id}`}
-                                    element={<AccountOrderHistoryItem />}
+                                    element={<AccountOrderHistoryItem orderId={orderItem._id} />}
                                 />
                                 <Route path="basket" element={<Basket />} />
                             </Route>

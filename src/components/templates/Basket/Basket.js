@@ -13,6 +13,8 @@ import useLogout from 'hooks/useLogout';
 import useMultiCheckboxMemory from 'hooks/useMultiCheckboxMemory';
 import { Prices } from 'data/Prices';
 import useBasket from 'hooks/useBasket';
+import Modal from 'components/atoms/Modal/Modal';
+import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 
 const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
 const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
@@ -50,6 +52,21 @@ const Basket = () => {
     const [productsInBasket, setProductsInBasket] = useState(null);
     const [finishOrder, setFinishOrder] = useState(false);
     const [priceForDelivery, setPriceForDelivery] = useState();
+    const [isOpen, setIsOpen] = useState([false]);
+    const [orderId, setOrderId] = useState('');
+
+    const clearLocalStorage = () => {
+        localStorage.removeItem('productsInBasket');
+        localStorage.removeItem('basketItems');
+        setBasketItems([]);
+        setIsOpen([false]);
+    };
+
+    const finishHandler = () => {
+        setFinishOrder(() => {
+            return true;
+        });
+    };
 
     if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
         basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
@@ -93,7 +110,6 @@ const Basket = () => {
                 break;
         }
 
-        console.log(productsInBasket);
         const finalPrice = priceToPay + priceForDelivery;
         orderTemplateDocument = {
             status: 1, //all orders have to start from "In realization" status
@@ -119,7 +135,7 @@ const Basket = () => {
                 const sendUserOrder = async () => {
                     try {
                         const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
-                        console.log(response.data);
+                        setOrderId(response.data.OrderId);
                     } catch (err) {
                         console.log(err);
                         await logout();
@@ -130,15 +146,12 @@ const Basket = () => {
                 isMounted && sendUserOrder();
                 //clearData
 
-                localStorage.removeItem('productsInBasket');
-                localStorage.removeItem('basketItems');
-                setBasketItems([]);
-
                 setProducts([]);
                 setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
                 setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
                 setOrderData(initRecipientDetails);
                 setFinishOrder(false);
+                setIsOpen([true]);
             }
         } else {
             setFinishOrder(false);
@@ -178,11 +191,14 @@ const Basket = () => {
                     />
                     <PaymentPreview
                         priceToPay={priceToPay}
-                        setFinishOrder={setFinishOrder}
+                        finishHandler={finishHandler}
                         priceForDelivery={priceForDelivery}
                     />
                 </PrevWrapper>
             </Prev>
+            <Modal position={[30, -80]} width={600} open={isOpen} onClose={() => clearLocalStorage()}>
+                <BoughtPopUp onClose={() => clearLocalStorage()} orderId={orderId} />
+            </Modal>
         </Wrapper>
     );
 };
