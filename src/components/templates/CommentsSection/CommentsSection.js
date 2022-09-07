@@ -37,7 +37,7 @@ const CommentsSection = ({ product }) => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper id="Opinions">
             <SectionDescription title={'Opinie'} icon={<BiCommentDetail />} />
             <ProductSummary
                 refreshComments={refreshComments}

@@ -19,7 +19,7 @@ const Comments = ({ refreshComments, filterComments, handleComments, comments, h
     }, [refreshComments, filterComments, product]);
 
     return (
-        <Wrapper id="Opinions">
+        <Wrapper>
             <CommentItem
                 comments={comments}
                 waitForFetchComments={waitForFetchComments}

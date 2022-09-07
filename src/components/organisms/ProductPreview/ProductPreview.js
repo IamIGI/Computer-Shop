@@ -15,32 +15,21 @@ import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useProduct from 'hooks/useProduct';
 import Star from 'components/atoms/Star/Star';
+import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
 
 let Show = '';
-const ProductPreview = ({ allProducts }) => {
+const ProductPreview = ({ allProducts, filters }) => {
     const [products, setProducts] = useState([]);
+    const [waitForFetch, setWaitForFetch] = useState(false);
     const { setProduct } = useProduct();
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProducts = async (data) => {
             try {
-                const dataInit = {
-                    filters: {
-                        producers: [],
-                        processors: [],
-                        ram: {
-                            min: 4,
-                            max: 128,
-                        },
-                        disk: {
-                            min: 128,
-                            max: 2000,
-                        },
-                    },
-                    sortBy: 'none',
-                };
-                const response = await ProductsApi.post('/all', dataInit);
+                setWaitForFetch(true);
+                const response = await ProductsApi.post('/all', data);
                 setProducts(response.data);
+                setWaitForFetch(false);
             } catch (err) {
                 if (err.response) {
                     console.log(err.response.data);
@@ -51,20 +40,21 @@ const ProductPreview = ({ allProducts }) => {
                 }
             }
         };
-        //##DEV ---- timeout
-        // setTimeout(() => {
-        //     fetchProducts();
-        // }, 500);
-        fetchProducts();
-    }, []);
+
+        fetchProducts(filters);
+    }, [filters]);
 
     //--------------------------------------------
     allProducts === 'yes' ? (Show = products.length) : (Show = 3);
     return (
         <>
-            {products.length === 0 ? (
+            {waitForFetch ? (
                 <>
                     <LoadingAnimation />
+                </>
+            ) : products.length === 0 ? (
+                <>
+                    <BadFiltersInfo />
                 </>
             ) : (
                 <>
