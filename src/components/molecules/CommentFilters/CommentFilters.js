@@ -4,11 +4,11 @@ import {
     Filters,
     Confirmed,
     Sort,
-    SelectStyle,
     ConfirmedDesc,
     Checkbox,
     NumberOfComments,
 } from './CommentFilters.style';
+import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { useState, useEffect } from 'react';
 import useProduct from 'hooks/useProduct';
 
@@ -49,7 +49,7 @@ const CommentFilters = ({ handleFilters, comments }) => {
             </NumberOfComments>
             <Title>Filtruj: </Title>
             <Filters>
-                <SelectStyle>
+                <SelectStyle width="200px">
                     <select onChange={(e) => setRating(e.target.value)}>
                         {ratingOptions.map((option) => (
                             <option value={option.value}>{option.label}</option>
@@ -63,7 +63,7 @@ const CommentFilters = ({ handleFilters, comments }) => {
             </Confirmed>
             <Title>Sortuj:</Title>
             <Sort>
-                <SelectStyle>
+                <SelectStyle width="200px">
                     <select onChange={(e) => setSortBy(e.target.value)}>
                         {filterOptions.map((option) => (
                             <option value={option.value}>{option.label}</option>

@@ -13,6 +13,22 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { AiOutlineHeart } from 'react-icons/ai';
 
 const HomeTopContent = () => {
+    const dataInt = {
+        filters: {
+            producers: [],
+            processors: [],
+            ram: {
+                min: 8,
+                max: 128,
+            },
+            disk: {
+                min: 128,
+                max: 2000,
+            },
+        },
+        sortBy: 'none',
+    };
+
     return (
         <>
             <HotShootWrapper>
@@ -25,7 +41,7 @@ const HomeTopContent = () => {
                 <Recommended>
                     <SectionDescription title={'Polecane'} icon={<AiOutlineHeart />} />
                     <ProductPrevWrapper>
-                        <ProductPreview products={products} allProducts="no" />
+                        <ProductPreview filters={dataInt} allProducts="no" />
                     </ProductPrevWrapper>
                 </Recommended>
             </RightTopWrapper>

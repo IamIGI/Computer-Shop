@@ -1,21 +1,122 @@
-import React from 'react';
-import { Producers, Places, Processors, RAM, OS } from 'data/ProductsFilters';
-import DropDownCheckbox from 'components/atoms/DropDownList/DropDownList';
-import { Price, Title, Wrapper } from './ProductsFiltersSection.style';
+import { useEffect, useState } from 'react';
+import { Producers, Processors, filterOptions } from 'data/ProductsFilters';
+import FilterProcessors from 'components/atoms/FilterProcessors/FilterProcessors';
+import FilterProducers from 'components/atoms/FilterProducers/FilterProducers';
+import { InputField, Title, Wrapper } from './ProductsFiltersSection.style';
+import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
+import { Button } from 'components/atoms/Button/Button';
 
-const ProductsFiltersSection = () => {
+const ProductsFiltersSection = ({ handleFilters }) => {
+    const [sortBy, setSortBy] = useState('none');
+    const [producers, setProducers] = useState([]);
+    const [processors, setProcessors] = useState([]);
+    const [ram, setRam] = useState({ min: '', max: '' });
+    const [disk, setDisk] = useState({ min: '', max: '' });
+    let processorsArray = [];
+
+    const handleProducers = (data) => {
+        setProducers([data]);
+    };
+    const handleProcessors = (data) => {
+        setProcessors([data]);
+    };
+
+    const clearFilters = () => {
+        setProcessors([]);
+        setProducers([]);
+        setRam({ min: '', max: '' });
+        setDisk({ min: '', max: '' });
+        setSortBy('none');
+    };
+
+    const handleInput = (inputName, key, data) => {
+        const changeMinMaxValue = (inputName, key, data) => {
+            if (inputName === 'ram') {
+                setRam((prevValue) => {
+                    return {
+                        ...prevValue,
+                        [key]: data,
+                    };
+                });
+            } else {
+                setDisk((prevValue) => {
+                    return {
+                        ...prevValue,
+                        [key]: data,
+                    };
+                });
+            }
+        };
+
+        if (!isNaN(data)) changeMinMaxValue(inputName, key, data);
+    };
+
+    useEffect(() => {
+        //check for cpu
+        processors[0] === undefined && (processors[0] = []);
+        for (let i = 0; i < processors[0].length; i++) {
+            let filteredCPU = processors[0][i];
+            for (let j = 0; j < Processors.filters_extended.length; j++) {
+                let checkedCPU = Processors.filters_extended[j];
+                if (filteredCPU == checkedCPU.label) {
+                    processorsArray.push(checkedCPU.value);
+                    break;
+                }
+            }
+        }
+
+        producers[0] === undefined && (producers[0] = []);
+        let productFilters = {
+            filters: {
+                producers: producers[0],
+                processors: processorsArray,
+                ram,
+                disk,
+            },
+            sortBy,
+        };
+        setTimeout(() => {
+            handleFilters(productFilters);
+        }, 500);
+    }, [sortBy, producers, processors, ram, disk]);
+
     return (
-        <>
-            <Wrapper>
-                <DropDownCheckbox filterData={Producers} />
-                <Title>Cena</Title>
-                <Price placeholder="od        zł" /> - <Price placeholder="do        zł" />
-                <DropDownCheckbox filterData={Places} />
-                <DropDownCheckbox filterData={Processors} />
-                <DropDownCheckbox filterData={RAM} />
-                <DropDownCheckbox filterData={OS} />
-            </Wrapper>
-        </>
+        <Wrapper>
+            <SelectStyle width="250px">
+                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                    {filterOptions.map((option) => (
+                        <option value={option.value}>{option.label}</option>
+                    ))}
+                </select>
+            </SelectStyle>
+            <FilterProducers data={producers[0]} filterData={Producers} handleProducers={handleProducers} />
+            <FilterProcessors data={processors[0]} filterData={Processors} handleProcessors={handleProcessors} />
+            <Title>RAM</Title>
+            <InputField
+                onChange={(e) => handleInput('ram', 'min', e.target.value)}
+                value={ram.min}
+                placeholder="od GB"
+            />{' '}
+            -
+            <InputField
+                onChange={(e) => handleInput('ram', 'max', e.target.value)}
+                value={ram.max}
+                placeholder="do GB"
+            />
+            <Title>Dysk</Title>
+            <InputField
+                onChange={(e) => handleInput('disk', 'min', e.target.value)}
+                value={disk.min}
+                placeholder="od GB"
+            />{' '}
+            -
+            <InputField
+                onChange={(e) => handleInput('disk', 'max', e.target.value)}
+                value={disk.max}
+                placeholder="do GB"
+            />
+            <Button onClick={() => clearFilters()}>Wyczyść filtry</Button>
+        </Wrapper>
     );
 };
 

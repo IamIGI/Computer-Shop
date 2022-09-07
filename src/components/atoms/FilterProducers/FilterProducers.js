@@ -1,23 +1,16 @@
-import React from 'react';
-import { DropDownList, Title } from './DropDownList.style';
-import { useState } from 'react';
+import { DropDownList, Title } from './FilterProducers.style';
 
-const DropDownCheckbox = ({ filterData }) => {
-    const [item, setItem] = useState(filterData.filters);
+const FilterProducers = ({ data, filterData, handleProducers }) => {
     return (
         <>
             <Title>{filterData.title}</Title>
             <DropDownList
                 isObject={false}
-                onRemove={(event) => {
-                    console.log(event);
-                }}
-                onSelect={(event) => {
-                    console.log(event);
-                }}
-                options={item}
+                onRemove={(e) => handleProducers(e)}
+                onSelect={(e) => handleProducers(e)}
+                options={filterData.filters}
                 placeholder="Wybierz"
-                // selectedValues={['Option 1', 'Option 2']}
+                selectedValues={data}
                 style={{
                     chips: {
                         // color: 'black',
@@ -43,4 +36,4 @@ const DropDownCheckbox = ({ filterData }) => {
     );
 };
 
-export default DropDownCheckbox;
+export default FilterProducers;

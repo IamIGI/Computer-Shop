@@ -17,19 +17,19 @@ export const Title = styled.p`
     font-size: ${({ theme }) => theme.fontSize.l};
 `;
 
-export const Price = styled.input`
+export const InputField = styled.input`
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
     height: 25px;
     width: 100px;
     border-radius: 10px;
-    border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    border: 1px solid ${({ theme }) => theme.colors.grey};
     color: ${({ theme }) => theme.colors.darkGrey};
-    text-align: right;
+    text-align: center;
     padding-right: 10px;
 
     &:hover {
-        border: 1px solid ${({ theme }) => theme.colors.darkPurple};
+        border: 1px solid grey;
     }
 `;
