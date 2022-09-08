@@ -36,12 +36,12 @@ const Root = () => {
             producers: [],
             processors: [],
             ram: {
-                min: 4,
-                max: 128,
+                min: '',
+                max: '',
             },
             disk: {
-                min: 128,
-                max: 2000,
+                min: '',
+                max: '',
             },
         },
         sortBy: 'none',

@@ -1,4 +1,3 @@
-import React from 'react';
 import useLogout from 'hooks/useLogout';
 import useAuth from 'hooks/useAuth';
 import {
@@ -18,6 +17,7 @@ import { BsPerson } from 'react-icons/bs';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import CartHint from 'components/organisms/CartHint/CartHint';
 import useBasket from 'hooks/useBasket';
+
 const UserLogged = () => {
     const { auth } = useAuth();
     const { setBasketItems } = useBasket();

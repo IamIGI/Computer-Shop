@@ -17,6 +17,7 @@ export const Title = styled.div`
     border-top-right-radius: 25px;
     text-align: left;
     padding-left: 10%;
+    margin-bottom: 10px;
 
     span {
         font-weight: 400;
@@ -25,6 +26,9 @@ export const Title = styled.div`
 
 export const FormSection = styled.div``;
 
-export const InputLocal = styled(Input)``;
+export const InputLocal = styled(Input)`
+    width: 80%;
+    font-size: ${({ theme }) => theme.fontSize.l};
+`;
 
 export const ButtonLocal = styled(Button)``;

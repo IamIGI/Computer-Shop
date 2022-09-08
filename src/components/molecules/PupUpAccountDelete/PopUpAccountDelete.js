@@ -1,48 +1,52 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection } from './PopUpAccountDelete.style';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { accountSettingsDelete } from 'data/FormSchema';
+import useAuth from 'hooks/useAuth';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
 
-const baseURL = `http://localhost:5000/userSettingsDelete`;
-let schema = '';
 let viewedName = '';
 
-const PopUpAccountDelete = ({ name }) => {
-    const [passwordDiff, setPasswordDiff] = useState(false);
+const PopUpAccountDelete = ({ name, signOut }) => {
+    const axiosPrivate = useAxiosPrivate();
+    const { auth } = useAuth();
+    const [pwd, setPwd] = useState('');
+    const [pwdFieldFocus, setPwdFieldFocus] = useState(false);
+    const [isCapsLockOn, setIsCapsLockOn] = useState(false);
+    const [isMatch, setIsMatch] = useState(true);
+    const [matchFiledFocus, setMatchFieldFocus] = useState(false);
+    const [repeatPassword, setRepeatPassword] = useState('');
+
+    const checkCapsLock = (event) => {
+        if (event.getModifierState('CapsLock')) {
+            setIsCapsLockOn(true);
+        } else {
+            setIsCapsLockOn(false);
+        }
+    };
 
     switch (name) {
         case 'DeleteAccount':
             viewedName = 'Usuwanie konta';
-            schema = accountSettingsDelete;
             break;
     }
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schema),
-    });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = {
+            _id: auth.id,
+            password: pwd,
+        };
 
-    const onSubmit = ({ password, confirmPassword }) => {
-        console.log(password, confirmPassword);
-        if (password === confirmPassword) {
-            axios
-                .post(baseURL, {
-                    email: 'igorigi1998@gmail.com',
-                    hashedPassword: password,
-                })
-                .then(({ data }) => {
-                    console.log(data);
-                })
-                .catch((err) => console.log(err));
+        if (pwd !== repeatPassword) {
+            setIsMatch(false);
+            return;
+        }
 
-            setPasswordDiff(false);
-        } else {
-            setPasswordDiff(true);
+        try {
+            const response = await axiosPrivate.post('user/delete', data);
+            console.log(response);
+            signOut();
+        } catch (err) {
+            console.log(err);
         }
     };
 
@@ -53,20 +57,34 @@ const PopUpAccountDelete = ({ name }) => {
                     <h3>{viewedName}</h3>
                 </Title>
                 <FormSection>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit}>
                         <div>
-                            <InputLocal name="name" placeholder="hasło" {...register('password')} />
+                            <InputLocal
+                                name="name"
+                                placeholder="hasło"
+                                type="password"
+                                value={pwd}
+                                onChange={(e) => setPwd(e.target.value)}
+                                onFocus={() => setPwdFieldFocus(true)}
+                                onBlur={() => setPwdFieldFocus(false)}
+                                onKeyUp={checkCapsLock}
+                            />
                         </div>
+                        {pwdFieldFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
                         <div>
                             <InputLocal
                                 name="password"
                                 placeholder="Podaj hasło ponownie"
                                 type="password"
-                                {...register('confirmPassword')}
+                                value={repeatPassword}
+                                onFocus={() => setMatchFieldFocus(true)}
+                                onBlur={() => setMatchFieldFocus(false)}
+                                onChange={(e) => setRepeatPassword(e.target.value)}
+                                onKeyUp={checkCapsLock}
                             />
                         </div>
-                        <p>{errors.password && 'Hasło min:4 max:15 znaków'}</p>
-                        <p>{passwordDiff && 'Hasła nie są takie same'}</p>
+                        {matchFiledFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
+                        {!isMatch ? <p>Hasła muszą być takie same</p> : <></>}
                         <div>
                             <ButtonLocal type="submit">Usuń</ButtonLocal>
                         </div>
