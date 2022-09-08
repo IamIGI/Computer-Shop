@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useLogout from 'hooks/useLogout';
-
 import useBasket from 'hooks/useBasket';
 import { ButtonWrapper, Description, Section, Title, Wrapper, SectionTitle } from './AccountDangerSection.style';
 import { Button } from 'components/atoms/Button/Button';

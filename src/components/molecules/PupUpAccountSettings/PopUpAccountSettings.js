@@ -70,7 +70,6 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(editedField, pwd);
         const data = {
             _id: auth.id,
             fieldName: name,

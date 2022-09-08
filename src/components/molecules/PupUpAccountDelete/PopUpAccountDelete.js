@@ -31,8 +31,6 @@ const PopUpAccountDelete = ({ name, signOut }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log(auth.id);
         const data = {
             _id: auth.id,
             password: pwd,

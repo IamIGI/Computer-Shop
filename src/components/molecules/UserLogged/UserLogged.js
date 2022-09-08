@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import useLogout from 'hooks/useLogout';
 import useAuth from 'hooks/useAuth';
 import {

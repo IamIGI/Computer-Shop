@@ -6,12 +6,9 @@ import { Button } from 'components/atoms/Button/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSettingsEnlistments } from 'data/FormSchema';
-import axios from 'axios';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-
-const baseURL = `http://localhost:5000/userSettingsEnlistments`;
 
 const AccountEntitlements = ({ accountEnlistments }) => {
     const { auth } = useAuth();
@@ -35,10 +32,6 @@ const AccountEntitlements = ({ accountEnlistments }) => {
         });
     };
 
-    useEffect(() => {
-        // console.log(enlistments);
-    }, [enlistments]);
-
     const onSubmit = async (data) => {
         data._id = auth.id;
         console.log(data);
@@ -61,7 +54,6 @@ const AccountEntitlements = ({ accountEnlistments }) => {
                     <LoadingAnimation />
                 ) : (
                     <>
-                        {/* {console.log(accountEnlistments)} */}
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <SectionChange>
                                 <CheckboxLocal

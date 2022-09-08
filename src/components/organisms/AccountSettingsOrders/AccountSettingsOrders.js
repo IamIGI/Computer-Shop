@@ -50,16 +50,12 @@ const AccountSettingsOrders = () => {
                 setOrderHistory(response.data.orderData);
                 setCountOrders(response.data.orderCount);
             } catch (err) {
-                console.log('OrderHistory: Fail');
                 console.log(err);
-                console.log(auth);
                 navigate('/', { state: { from: location }, replace: true });
             }
         };
         setWaitForFetch(true);
-
         getUserOrderHistory();
-
         setWaitForFetch(false);
     }, [pageNr]);
 
