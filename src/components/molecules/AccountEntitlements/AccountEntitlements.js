@@ -1,5 +1,5 @@
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wrapper, SectionTitle, LabelArea, SectionChange, CheckboxLocal } from './AccountEntitlements.style';
 import { GiStamper } from 'react-icons/gi';
 import { Button } from 'components/atoms/Button/Button';
@@ -7,10 +7,17 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSettingsEnlistments } from 'data/FormSchema';
 import axios from 'axios';
+import useAuth from 'hooks/useAuth';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
 const baseURL = `http://localhost:5000/userSettingsEnlistments`;
 
-const AccountEntitlements = () => {
+const AccountEntitlements = ({ accountEnlistments }) => {
+    const { auth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
+    const [enlistments, setEnlistments] = useState(accountEnlistments);
+
     const {
         register,
         handleSubmit,
@@ -19,20 +26,29 @@ const AccountEntitlements = () => {
         resolver: yupResolver(accountSettingsEnlistments),
     });
 
-    const onSubmit = (data) => {
+    const handleCheck = (key, value) => {
+        setEnlistments((prevValue) => {
+            return {
+                ...prevValue,
+                [key]: value,
+            };
+        });
+    };
+
+    useEffect(() => {
+        // console.log(enlistments);
+    }, [enlistments]);
+
+    const onSubmit = async (data) => {
+        data._id = auth.id;
         console.log(data);
-        axios
-            .post(baseURL, {
-                accountEmail: 'igorigi1998@gmail.com',
-                email: data.email,
-                sms: data.sms,
-                phone: data.phone,
-                adjustedOffers: data.adjustedOffers,
-            })
-            .then(({ data }) => {
-                console.log(data);
-            })
-            .catch((err) => console.log(err));
+
+        try {
+            const response = await axiosPrivate.put('user/enlistments', data);
+            console.log(response);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -41,25 +57,54 @@ const AccountEntitlements = () => {
                 <SectionDescription title={'Zgody'} icon={<GiStamper />} />
             </SectionTitle>
             <Wrapper>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <SectionChange>
-                        <CheckboxLocal type="checkbox" {...register('email')} />
-                        <LabelArea>Chcę otrzymywać informacje o aktualnych ofertach oraz promocjach w wiadomości e‑mail</LabelArea>
-                    </SectionChange>
-                    <SectionChange>
-                        <CheckboxLocal type="checkbox" {...register('sms')} />
-                        <LabelArea>Chcę otrzymywać wiadomości SMS.</LabelArea>
-                    </SectionChange>
-                    <SectionChange>
-                        <CheckboxLocal type="checkbox" {...register('phone')} />
-                        <LabelArea>Chcę otrzymywać informacje telefonicznie</LabelArea>
-                    </SectionChange>
-                    <SectionChange>
-                        <CheckboxLocal type="checkbox" {...register('adjustedOffers')} />
-                        <LabelArea>Chcę otrzymywać ofertę dopasowaną do moich potrzeb</LabelArea>
-                    </SectionChange>
-                    <Button type="submit">Zapisz Zgody</Button>
-                </form>
+                {enlistments === undefined ? (
+                    <LoadingAnimation />
+                ) : (
+                    <>
+                        {/* {console.log(accountEnlistments)} */}
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <SectionChange>
+                                <CheckboxLocal
+                                    type="checkbox"
+                                    {...register('email')}
+                                    onChange={(e) => handleCheck('email', e.target.checked)}
+                                    checked={enlistments.email}
+                                />
+                                <LabelArea>
+                                    Chcę otrzymywać informacje o aktualnych ofertach oraz promocjach w wiadomości e‑mail
+                                </LabelArea>
+                            </SectionChange>
+                            <SectionChange>
+                                <CheckboxLocal
+                                    type="checkbox"
+                                    {...register('sms')}
+                                    onChange={(e) => handleCheck('sms', e.target.checked)}
+                                    checked={enlistments.sms}
+                                />
+                                <LabelArea>Chcę otrzymywać wiadomości SMS.</LabelArea>
+                            </SectionChange>
+                            <SectionChange>
+                                <CheckboxLocal
+                                    type="checkbox"
+                                    {...register('phone')}
+                                    onChange={(e) => handleCheck('phone', e.target.checked)}
+                                    checked={enlistments.phone}
+                                />
+                                <LabelArea>Chcę otrzymywać informacje telefonicznie</LabelArea>
+                            </SectionChange>
+                            <SectionChange>
+                                <CheckboxLocal
+                                    type="checkbox"
+                                    {...register('adjustedOffers')}
+                                    onChange={(e) => handleCheck('adjustedOffers', e.target.checked)}
+                                    checked={enlistments.adjustedOffers}
+                                />
+                                <LabelArea>Chcę otrzymywać ofertę dopasowaną do moich potrzeb</LabelArea>
+                            </SectionChange>
+                            <Button type="submit">Zapisz Zgody</Button>
+                        </form>
+                    </>
+                )}
             </Wrapper>
         </>
     );

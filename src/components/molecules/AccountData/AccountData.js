@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ButtonLocal, InputLocal, LabelArea, SectionChange, SectionTitle, Wrapper } from './AccountData.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { FiSettings } from 'react-icons/fi';
@@ -6,20 +6,9 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpAccountSettings from '../PupUpAccountSettings/PopUpAccountSettings';
 
 //You need to pass right email
-const AccountData = () => {
-    const [inputValue, setInput] = useState({
-        name: 'Igor',
-        lastName: 'Kwiatkowski',
-        email: 'igorigi1998@gmail.com',
-        password: '12345',
-    });
+const AccountData = ({ accountInfo, handleRefresh }) => {
     const [isOpen, setIsOpen] = useState([false, { DataName: '', value: '' }]);
-
-    function handleChangesInput(event) {
-        const newInput = event.target.value;
-        return setInput(newInput);
-    }
-
+    const passwordMock = '****';
     return (
         <>
             <SectionTitle>
@@ -32,56 +21,47 @@ const AccountData = () => {
                 </div>
                 <SectionChange>
                     <LabelArea>Imię</LabelArea>
-                    <InputLocal
-                        onChange={handleChangesInput}
-                        value={inputValue.name}
-                        name="firstName"
-                        disabled="true"
-                    />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'firstName', value: inputValue.name }])}>
+                    <InputLocal value={accountInfo.firstName} name="firstName" disabled="true" />
+                    <ButtonLocal
+                        onClick={() => setIsOpen([true, { DataName: 'firstName', value: accountInfo.firstName }])}
+                    >
                         Zmień
                     </ButtonLocal>
                 </SectionChange>
 
                 <SectionChange>
                     <LabelArea>Nazwisko</LabelArea>
-                    <InputLocal
-                        onChange={handleChangesInput}
-                        value={inputValue.lastName}
-                        name="lastName"
-                        disabled="true"
-                    />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'lastName', value: inputValue.forname }])}>
+                    <InputLocal value={accountInfo.lastName} name="lastName" disabled="true" />
+                    <ButtonLocal
+                        onClick={() => setIsOpen([true, { DataName: 'lastName', value: accountInfo.lastName }])}
+                    >
                         Zmień
                     </ButtonLocal>
                 </SectionChange>
 
                 <SectionChange>
                     <LabelArea>Email</LabelArea>
-                    <InputLocal onChange={handleChangesInput} value={inputValue.email} name="email" disabled="true" />
-                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'email', value: inputValue.email }])}>
+                    <InputLocal value={accountInfo.email} name="email" disabled="true" />
+                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'email', value: accountInfo.email }])}>
                         Zmień
                     </ButtonLocal>
                 </SectionChange>
 
                 <SectionChange>
                     <LabelArea>Hasło</LabelArea>
-                    <InputLocal
-                        onChange={handleChangesInput}
-                        value={inputValue.password}
-                        name="hashedPassword"
-                        type="password"
-                        disabled="true"
-                    />
-                    <ButtonLocal
-                        onClick={() => setIsOpen([true, { DataName: 'hashedPassword', value: inputValue.password }])}
-                    >
+                    <InputLocal value={passwordMock} name="hashedPassword" type="password" disabled="true" />
+                    <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'hashedPassword', value: passwordMock }])}>
                         Zmień
                     </ButtonLocal>
                 </SectionChange>
 
-                <Modal position={[40, -80]} width={300} open={isOpen} onClose={() => setIsOpen([false, {}])}>
-                    <PopUpAccountSettings name={isOpen[1].DataName} value={isOpen[1].value} />
+                <Modal position={[40, -80]} width={350} open={isOpen} onClose={() => setIsOpen([false, {}])}>
+                    <PopUpAccountSettings
+                        name={isOpen[1].DataName}
+                        value={isOpen[1].value}
+                        onClose={() => setIsOpen([false, {}])}
+                        handleRefresh={handleRefresh}
+                    />
                 </Modal>
             </Wrapper>
         </>

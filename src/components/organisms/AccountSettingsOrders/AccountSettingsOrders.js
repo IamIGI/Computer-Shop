@@ -36,6 +36,7 @@ const AccountSettingsOrders = () => {
     const [orderHistory, setOrderHistory] = useState([]);
     const [countOrders, setCountOrders] = useState(0);
     const [pageNr, setPageNr] = useState(1);
+    const [waitForFetch, setWaitForFetch] = useState(true);
 
     useEffect(() => {
         let data = {};
@@ -45,11 +46,9 @@ const AccountSettingsOrders = () => {
                 pageNr,
             };
             try {
-                //Start for loadingAnimation
                 const response = await axiosPrivate.post('order/history', data);
                 setOrderHistory(response.data.orderData);
                 setCountOrders(response.data.orderCount);
-                //end for loadingAnimation
             } catch (err) {
                 console.log('OrderHistory: Fail');
                 console.log(err);
@@ -57,7 +56,11 @@ const AccountSettingsOrders = () => {
                 navigate('/', { state: { from: location }, replace: true });
             }
         };
+        setWaitForFetch(true);
+
         getUserOrderHistory();
+
+        setWaitForFetch(false);
     }, [pageNr]);
 
     //set right status name
@@ -149,7 +152,9 @@ const AccountSettingsOrders = () => {
                 </TitleSection>
                 <BodySection>
                     <>
-                        {orderHistory.length === 0 ? (
+                        {waitForFetch ? (
+                            <LoadingAnimation />
+                        ) : orderHistory.length === 0 ? (
                             <p>Koszyk pusty</p>
                         ) : (
                             <>

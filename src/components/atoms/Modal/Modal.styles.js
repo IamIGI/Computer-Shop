@@ -46,6 +46,7 @@ export const Close = styled.div`
     right: 5px;
 
     &:hover {
+        cursor: pointer;
         color: black;
         background-color: ${({ theme }) => theme.colors.grey};
     }

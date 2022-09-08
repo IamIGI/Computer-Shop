@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import useLogout from 'hooks/useLogout';
+
+import useBasket from 'hooks/useBasket';
 import { ButtonWrapper, Description, Section, Title, Wrapper, SectionTitle } from './AccountDangerSection.style';
 import { Button } from 'components/atoms/Button/Button';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
@@ -7,7 +10,14 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpAccountDelete from '../PupUpAccountDelete/PopUpAccountDelete';
 
 const AccountDangerSection = () => {
+    const logout = useLogout();
+    const { setBasketItems } = useBasket();
     const [isOpen, setIsOpen] = useState([false, { DataName: '', value: '' }]);
+
+    const signOut = async () => {
+        setBasketItems([]);
+        await logout();
+    };
 
     return (
         <>
@@ -26,7 +36,9 @@ const AccountDangerSection = () => {
                         </p>
                     </Description>
                     <ButtonWrapper>
-                        <Button>Wyloguj się wszędzie</Button>
+                        <Button onClick={signOut} to="">
+                            Wyloguj się wszędzie
+                        </Button>
                     </ButtonWrapper>
                 </Section>
                 <Section>
@@ -51,7 +63,7 @@ const AccountDangerSection = () => {
                 </Section>
             </Wrapper>
             <Modal position={[40, -80]} width={300} open={isOpen} onClose={() => setIsOpen([false, {}])}>
-                <PopUpAccountDelete name={isOpen[1].DataName} />
+                <PopUpAccountDelete signOut={signOut} name={isOpen[1].DataName} />
             </Modal>
         </>
     );
