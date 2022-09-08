@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import { Producers, Processors, filterOptions } from 'data/ProductsFilters';
 import FilterProcessors from 'components/atoms/FilterProcessors/FilterProcessors';
 import FilterProducers from 'components/atoms/FilterProducers/FilterProducers';
-import { InputField, Title, Wrapper } from './ProductsFiltersSection.style';
+import {
+    InputField,
+    SearchDescription,
+    SearchField,
+    SearchSection,
+    Title,
+    Wrapper,
+} from './ProductsFiltersSection.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { Button } from 'components/atoms/Button/Button';
 
@@ -12,6 +19,8 @@ const ProductsFiltersSection = ({ handleFilters }) => {
     const [processors, setProcessors] = useState([]);
     const [ram, setRam] = useState({ min: '', max: '' });
     const [disk, setDisk] = useState({ min: '', max: '' });
+    const [searchTerm, setSearchTerm] = useState('');
+    const [refreshSearchTerm, setRefreshSearchTerm] = useState(false);
     let processorsArray = [];
 
     const handleProducers = (data) => {
@@ -28,6 +37,12 @@ const ProductsFiltersSection = ({ handleFilters }) => {
         setDisk({ min: '', max: '' });
         setSortBy('none');
     };
+
+    // const handleKeyDown = (e) => {
+    //     if (e.key === 'Enter') {
+    //         setRefreshSearchTerm(!refreshSearchTerm);
+    //     }
+    // };
 
     const handleInput = (inputName, key, data) => {
         const changeMinMaxValue = (inputName, key, data) => {
@@ -67,6 +82,7 @@ const ProductsFiltersSection = ({ handleFilters }) => {
 
         producers[0] === undefined && (producers[0] = []);
         let productFilters = {
+            searchTerm,
             filters: {
                 producers: producers[0],
                 processors: processorsArray,
@@ -75,13 +91,23 @@ const ProductsFiltersSection = ({ handleFilters }) => {
             },
             sortBy,
         };
+        console.log(productFilters);
         setTimeout(() => {
             handleFilters(productFilters);
         }, 500);
-    }, [sortBy, producers, processors, ram, disk]);
+    }, [sortBy, producers, processors, ram, disk, searchTerm]);
 
     return (
         <Wrapper>
+            <SearchSection>
+                <SearchField
+                    placeholder="Czego szukasz?"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    // onKeyDown={handleKeyDown}
+                />
+                <SearchDescription>Wyszukiwanie</SearchDescription>
+            </SearchSection>
             <SelectStyle width="250px">
                 <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                     {filterOptions.map((option) => (
