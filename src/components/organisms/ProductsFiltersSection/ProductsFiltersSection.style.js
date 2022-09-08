@@ -32,4 +32,40 @@ export const InputField = styled.input`
     &:hover {
         border: 1px solid grey;
     }
+
+    &:focus {
+        outline-width: 0;
+        border: 1px solid grey;
+    }
+`;
+export const SearchSection = styled.div`
+    position: relative;
+`;
+export const SearchDescription = styled.div`
+    position: absolute;
+    top: 1px;
+    right: 5px;
+    background-color: white;
+    padding: 0 5px;
+`;
+
+export const SearchField = styled.input`
+    margin: 10px 10px 20px 10px;
+    height: 40px;
+    width: 250px;
+    border-radius: 10px;
+    border: 1px solid ${({ theme }) => theme.colors.grey};
+    color: ${({ theme }) => theme.colors.darkGrey};
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 10px;
+
+    &:hover {
+        border: 1px solid grey;
+    }
+
+    &:focus {
+        outline-width: 0;
+        border: 1px solid grey;
+    }
 `;

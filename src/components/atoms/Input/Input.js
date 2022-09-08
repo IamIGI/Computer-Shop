@@ -13,4 +13,9 @@ export const Input = styled.input`
     &:hover {
         border: 1px solid ${({ theme }) => theme.colors.success};
     }
+
+    &:focus {
+        outline-width: 0;
+        border: 1px solid ${({ theme }) => theme.colors.success};
+    }
 `;
