@@ -2,24 +2,10 @@ import ProductsFiltersSection from 'components/organisms/ProductsFiltersSection/
 import { useState } from 'react';
 import ProductPreview from 'components/organisms/ProductPreview/ProductPreview';
 import { Products, Wrapper } from './AllProducts.styles';
+import { filterInit } from 'data/Products';
 
 const AllProducts = () => {
-    const [filters, setFilters] = useState({
-        searchTerm: '',
-        filters: {
-            producers: [],
-            processors: [],
-            ram: {
-                min: '',
-                max: '',
-            },
-            disk: {
-                min: '',
-                max: '',
-            },
-        },
-        sortBy: 'none',
-    });
+    const [filters, setFilters] = useState(filterInit);
 
     const handleFilters = (data) => {
         setFilters(data);
@@ -30,7 +16,7 @@ const AllProducts = () => {
             <Wrapper>
                 <ProductsFiltersSection handleFilters={handleFilters} />
                 <Products>
-                    <ProductPreview allProducts="yes" filters={filters} />
+                    <ProductPreview filterInit={filterInit} allProducts="yes" filters={filters} />
                 </Products>
             </Wrapper>
         </>

@@ -18,15 +18,16 @@ import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
 
 let Show = '';
-const ProductPreview = ({ allProducts, filters }) => {
+const ProductPreview = ({ filterInit, allProducts, filters }) => {
     const [products, setProducts] = useState([]);
-    const [waitForFetch, setWaitForFetch] = useState(false);
+    const [waitForFetch, setWaitForFetch] = useState(true);
     const { setProduct } = useProduct();
 
     useEffect(() => {
         const fetchProducts = async (data) => {
             try {
-                setWaitForFetch(true);
+                if (JSON.stringify(filterInit) !== JSON.stringify(filters)) setWaitForFetch(true);
+
                 const response = await ProductsApi.post('/all', data);
                 setProducts(response.data);
                 setWaitForFetch(false);
@@ -40,7 +41,6 @@ const ProductPreview = ({ allProducts, filters }) => {
                 }
             }
         };
-
         fetchProducts(filters);
     }, [filters]);
 
