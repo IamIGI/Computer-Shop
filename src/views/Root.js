@@ -31,86 +31,46 @@ const ROLES = {
 };
 
 const Root = () => {
-    const dataInit = {
-        filters: {
-            producers: [],
-            processors: [],
-            ram: {
-                min: '',
-                max: '',
-            },
-            disk: {
-                min: '',
-                max: '',
-            },
-        },
-        sortBy: 'none',
-    };
-    //API section---------------------
-    const [products, setProducts] = useState(null);
     const { orderItem } = useOrder();
     const { product } = useProduct();
 
-    const getAllProducts = async (data) => {
-        try {
-            const response = await productApi.post('/all', data);
-            setProducts(response.data);
-        } catch (err) {
-            if (err.response) {
-                console.log(err.response.data);
-                console.log(err.response.status);
-                console.log(err.response.headers);
-            } else {
-                console.log(`Error: ${err.message}`);
-            }
-        }
-    };
-
-    useEffect(() => {
-        getAllProducts(dataInit);
-    }, []);
-
     return (
         <>
-            {products === null ? (
-                <LoadingAnimation />
-            ) : (
-                <Wrapper>
-                    <Routes>
-                        {/* public routes */}
-                        <Route element={<PersistLogin />}>
-                            <Route path="" element={<Home />} />
-                            <Route path="allProducts" element={<AllProducts />} />
-                            <Route path="about" element={<About />} />
-                            <Route path={`/product/${product._id}`} element={<Product code={product._id} />} />
+            <Wrapper>
+                <Routes>
+                    {/* public routes */}
+                    <Route element={<PersistLogin />}>
+                        <Route path="" element={<Home />} />
+                        <Route path="allProducts" element={<AllProducts />} />
+                        <Route path="about" element={<About />} />
+                        <Route path={`/product/${product._id}`} element={<Product code={product._id} />} />
 
-                            <Route path="*" element={<MissingPage />} />
-                            <Route path="unauthorized" element={<Unauthorized />} />
+                        <Route path="*" element={<MissingPage />} />
+                        <Route path="unauthorized" element={<Unauthorized />} />
 
-                            {/* protected routes */}
+                        {/* protected routes */}
 
-                            <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
-                                <Route path="adminSettings" element={<AdminSettings />} />
-                                <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
-                                <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
-                                <Route
-                                    path={`/accountSettings/orders/history/${orderItem._id}`}
-                                    element={<AccountOrderHistoryItem orderId={orderItem._id} />}
-                                />
-                                <Route path="basket" element={<Basket />} />
-                            </Route>
-
-                            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                                <Route path="adminSettings" element={<AdminSettings />} />
-                            </Route>
-
-                            <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
-                                <Route path="editorSettings" element={<EditorSettings />} />
-                            </Route>
+                        <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
+                            <Route path="adminSettings" element={<AdminSettings />} />
+                            <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
+                            <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
+                            <Route
+                                path={`/accountSettings/orders/history/${orderItem._id}`}
+                                element={<AccountOrderHistoryItem orderId={orderItem._id} />}
+                            />
+                            <Route path="basket" element={<Basket />} />
                         </Route>
-                    </Routes>
-                </Wrapper>
-            )}
+
+                        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                            <Route path="adminSettings" element={<AdminSettings />} />
+                        </Route>
+
+                        <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
+                            <Route path="editorSettings" element={<EditorSettings />} />
+                        </Route>
+                    </Route>
+                </Routes>
+            </Wrapper>
         </>
     );
 };

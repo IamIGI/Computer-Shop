@@ -5,6 +5,7 @@ import { Products, Wrapper } from './AllProducts.styles';
 
 const AllProducts = () => {
     const [filters, setFilters] = useState({
+        searchTerm: '',
         filters: {
             producers: [],
             processors: [],
