@@ -10,25 +10,9 @@ import {
 import ProductPreview from '../ProductPreview/ProductPreview';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { filterInit } from 'data/Products';
 
 const HomeTopContent = () => {
-    const dataInt = {
-        searchTerm: '',
-        filters: {
-            producers: [],
-            processors: [],
-            ram: {
-                min: 8,
-                max: 128,
-            },
-            disk: {
-                min: 128,
-                max: 2000,
-            },
-        },
-        sortBy: 'none',
-    };
-
     return (
         <>
             <HotShootWrapper>
@@ -41,7 +25,7 @@ const HomeTopContent = () => {
                 <Recommended>
                     <SectionDescription title={'Polecane'} icon={<AiOutlineHeart />} />
                     <ProductPrevWrapper>
-                        <ProductPreview filters={dataInt} allProducts="no" />
+                        <ProductPreview filters={filterInit} allProducts="no" />
                     </ProductPrevWrapper>
                 </Recommended>
             </RightTopWrapper>

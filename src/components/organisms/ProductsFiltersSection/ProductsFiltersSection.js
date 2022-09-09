@@ -79,7 +79,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                 }
             }
         }
-
         producers[0] === undefined && (producers[0] = []);
         let productFilters = {
             searchTerm,
@@ -91,7 +90,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
             },
             sortBy,
         };
-        console.log(productFilters);
         setTimeout(() => {
             handleFilters(productFilters);
         }, 500);
