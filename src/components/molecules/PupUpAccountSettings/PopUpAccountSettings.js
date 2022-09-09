@@ -2,13 +2,9 @@ import { useState, useEffect } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection } from './PopUpAccountSettiings.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
 
 const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
-    const EMAIL_REGEX =
-        /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    const NAME_REGEX = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/;
-    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
     const { auth, setAuth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
     const [pwd, setPwd] = useState('');
@@ -33,13 +29,13 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
     useEffect(() => {
         if (name === 'email') {
-            setValidateEditedField(EMAIL_REGEX.test(editedField));
+            setValidateEditedField(testEmailRegex(editedField));
             return;
         } else if (name === 'hashedPassword') {
-            setValidateEditedField(PWD_REGEX.test(editedField));
+            setValidateEditedField(testPasswordRegex(editedField));
             return;
         } else if (name === 'firstName' || name === 'lastName') {
-            setValidateEditedField(NAME_REGEX.test(editedField));
+            setValidateEditedField(testNameRegex(editedField));
             return;
         } else {
             return;
