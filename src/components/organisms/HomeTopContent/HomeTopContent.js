@@ -7,13 +7,13 @@ import {
     Recommended,
     RightTopWrapper,
 } from './HomeTopContent.style';
-import { products } from 'data/Products';
 import ProductPreview from '../ProductPreview/ProductPreview';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { AiOutlineHeart } from 'react-icons/ai';
 
 const HomeTopContent = () => {
     const dataInt = {
+        searchTerm: '',
         filters: {
             producers: [],
             processors: [],
