@@ -15,7 +15,6 @@ function RegisterArea() {
     const { setAuth } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
     const errRef = useRef();
 
     const [expanded, setExpanded] = useState('false');
@@ -102,7 +101,6 @@ function RegisterArea() {
                     withCredentials: true,
                 }
             );
-            console.log(response?.data);
 
             //clear
             setExpanded(!expanded);
