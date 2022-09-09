@@ -9,9 +9,7 @@ import axios from '../../../api/axios';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
 import useInput from 'hooks/useInput';
 import useToggle from 'hooks/useToggle';
-
-const EMAIL_REGEX =
-    /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+import { testEmailRegex } from 'data/Regex';
 
 function LoginArea() {
     const { setAuth } = useAuth();
@@ -40,7 +38,7 @@ function LoginArea() {
     }, [email, pwd]);
 
     useEffect(() => {
-        setValidEmail(EMAIL_REGEX.test(email));
+        setValidEmail(testEmailRegex(email));
     }, [email]);
 
     //send Form

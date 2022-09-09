@@ -17,7 +17,6 @@ import useProduct from 'hooks/useProduct';
 const CartHint = () => {
     const { setProduct } = useProduct();
     const { basketItems, setBasketItems } = useBasket();
-    console.log(basketItems);
 
     const getQuantityOfItems = () => {
         let temp = 0;

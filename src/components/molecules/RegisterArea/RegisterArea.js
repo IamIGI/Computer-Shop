@@ -7,19 +7,17 @@ import { BsFillCaretUpFill } from 'react-icons/bs';
 import axios from '../../../api/axios';
 import useInput from 'hooks/useInput';
 import useToggle from 'hooks/useToggle';
-
-const NAME_REGEX = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX =
-    /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
-const REGISTER_URL = '/register';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
 
 function RegisterArea() {
-    const [expanded, setExpanded] = useState('false');
-
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
     const errRef = useRef();
 
+    const [expanded, setExpanded] = useState('false');
     const [firstName, resetFirstName, firstNameAttribs] = useInput('firstName', '');
     const [validFirstName, setValidFirstName] = useState(false);
     const [firstNameFocus, setFirstNameFocus] = useState(false);
@@ -47,19 +45,19 @@ function RegisterArea() {
     const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
-        setValidFirstName(NAME_REGEX.test(firstName));
+        setValidFirstName(testNameRegex(firstName));
     }, [firstName]);
 
     useEffect(() => {
-        setValidLastName(NAME_REGEX.test(lastName));
+        setValidLastName(testNameRegex(lastName));
     }, [lastName]);
 
     useEffect(() => {
-        setValidEmail(EMAIL_REGEX.test(email));
+        setValidEmail(testEmailRegex(email));
     }, [email]);
 
     useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
+        setValidPwd(testPasswordRegex(pwd));
         setValidMatchPwd(pwd === matchPwd);
     }, [pwd, matchPwd]);
 
@@ -69,10 +67,10 @@ function RegisterArea() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const v1 = NAME_REGEX.test(firstName);
-        const v2 = NAME_REGEX.test(lastName);
-        const v3 = EMAIL_REGEX.test(email);
-        const v4 = PWD_REGEX.test(pwd);
+        const v1 = testNameRegex(firstName);
+        const v2 = testNameRegex(lastName);
+        const v3 = testEmailRegex(email);
+        const v4 = testPasswordRegex(pwd);
         const v5 = shopRules;
 
         if (!v1 || !v2 || !v3 || !v4) {
@@ -86,7 +84,7 @@ function RegisterArea() {
 
         try {
             const response = await axios.post(
-                REGISTER_URL,
+                '/register',
                 JSON.stringify({
                     firstName,
                     lastName,
@@ -103,15 +101,26 @@ function RegisterArea() {
                     withCredentials: true,
                 }
             );
-            console.log(response?.data);
 
             //clear
+            setExpanded(!expanded);
             resetFirstName('');
             resetLastName('');
             resetEmail('');
             setPwd('');
             setMatchPwd('');
             setAgreeToShopRules('false');
+
+            const auth = await axios.post('/auth', JSON.stringify({ email, hashedPassword: pwd }), {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
+            });
+            const accessToken = auth?.data?.accessToken;
+            const roles = auth?.data?.roles;
+            const userName = auth?.data?.userName;
+            const id = auth?.data?.id;
+            setAuth({ id, userName, email, roles, accessToken });
+            navigate('accountSettings/Settings', { replace: true });
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('Brak łączyności z serwerem');
