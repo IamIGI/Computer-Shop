@@ -22,7 +22,14 @@ const HotShootContent = () => {
         const date = new Date();
         const seconds = 60 - date.getSeconds();
         const minutes = 60 - date.getMinutes();
-        const hours = 23 - date.getHours();
+        let hours = 0;
+        if (date.getHours() >= 22 && date.getHours() <= 23) {
+            hours = 33 - date.getHours();
+        } else if (date.getHours() >= 0 && date.getHours() <= 9) {
+            hours = 9 - date.getHours();
+        } else {
+            hours = 21 - date.getHours();
+        }
         let hoursToEnd = hours.toString();
         let secondsToEnd = seconds.toString();
         let minutesToEnd = minutes.toString();

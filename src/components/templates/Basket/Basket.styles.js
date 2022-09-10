@@ -14,7 +14,6 @@ export const Main = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* top | right | bottom | left */
     padding: 0 100px 0 5%;
 
     overflow-y: scroll;
@@ -29,13 +28,8 @@ export const Main = styled.div`
 `;
 
 export const Prev = styled.div`
-    width: 100%;
-    height: 100%;
     grid-column: 2/2;
     border-left: 1px solid grey;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
@@ -53,4 +47,7 @@ export const PrevWrapper = styled.div`
     height: auto;
     border: 1px solid grey;
     border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 `;

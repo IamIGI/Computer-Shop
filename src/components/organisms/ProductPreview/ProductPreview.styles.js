@@ -50,36 +50,13 @@ export const Bottom = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-
     span {
-        font-size: ${({ theme }) => theme.fontSize.l};
+        font-size: ${({ theme }) => theme.fontSize.xl};
         color: black;
     }
-`;
-
-export const PriceSection = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-`;
-export const PriceOldValue = styled.div`
-    text-decoration: line-through;
-
-    color: ${({ theme }) => theme.colors.darkGrey};
-    span {
-        font-size: ${({ theme }) => theme.fontSize.m_plus};
-    }
-`;
-
-export const PriceValue = styled.div`
-    span {
-        color: ${({ theme }) => theme.colors.successDark};
-        font-weight: 700;
-    }
+    margin-bottom: 10px;
 `;
 
 export const ProductOpinionsShort = styled.div`
@@ -136,4 +113,28 @@ export const StyledRecord = styled.li`
 
 export const Link = styled(NavLink)`
     text-decoration: none;
+`;
+
+export const PriceSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
+`;
+export const PriceOldValue = styled.div`
+    text-decoration: line-through;
+    margin-right: 10px;
+
+    color: ${({ theme }) => theme.colors.darkGrey};
+    span {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+`;
+
+export const PriceValue = styled.div`
+    span {
+        color: ${({ theme }) => theme.colors.successDark};
+        font-weight: 700;
+    }
 `;

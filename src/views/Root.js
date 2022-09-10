@@ -11,7 +11,7 @@ import Product from 'components/templates/Product/Product';
 import AccountSettingsSettings from 'components/organisms/AccountSettingsSettings/AccountSettingsSettings';
 import AccountSettingsOrders from 'components/organisms/AccountSettingsOrders/AccountSettingsOrders';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Wrapper } from './Root.styles';
 
 import { Routes, Route } from 'react-router-dom';
@@ -20,9 +20,7 @@ import PersistLogin from 'providers/PersistLogin';
 
 import useOrder from 'hooks/useOrder';
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
-import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useProduct from 'hooks/useProduct';
-import productApi from 'api/products';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),

@@ -4,7 +4,6 @@ import { BsCartPlus } from 'react-icons/bs';
 
 const BuyButton = () => (
     <StyledButton>
-        {/* you give all the props, f.e: onClick given in UsersListItem */}
         <BsCartPlus />
     </StyledButton>
 );

@@ -8,41 +8,24 @@ export const CarouselBox = styled.div`
 `;
 
 export const TopInsideWrapper = styled.div`
-    height: 100%;
-    width: 100%;
-    grid-column: 2/2;
-    display: grid;
-    grid-template-rows: 200px 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 `;
 
 export const Title = styled.div`
     padding-top: 20px;
-    padding-left: 5%;
-
-    height: 100%;
-    width: 100%;
-    grid-row: 1/2;
+    padding-left: 2%;
 `;
 
 export const DataBuyWrapper = styled.div`
-    height: 100%;
-    width: 100%;
-    grid-row: 2/2;
-    display: grid;
-    grid-template-columns: 0.5fr 0.5fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 20px;
 `;
-export const PrevData = styled.div`
-    padding-top: 5%;
-
-    height: 100%;
-    width: 100%;
-    grid-column: 1/2;
-`;
+export const PrevData = styled.div``;
 export const BuySelector = styled.div`
-    height: 100%;
-    width: 100%;
-    grid-column: 2/2;
-    padding: 20px 0;
     display: flex;
     justify-content: center;
 `;
