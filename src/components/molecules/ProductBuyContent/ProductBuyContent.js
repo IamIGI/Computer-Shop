@@ -1,6 +1,25 @@
 import { useEffect, useState } from 'react';
-import { BuyButton, NumberInput, Separator, Wrapper } from './ProductBuyContent.style';
+import {
+    BuyButton,
+    NumberInput,
+    Separator,
+    Wrapper,
+    DiscountSize,
+    OldPrice,
+    PriceSection,
+    CurrentPrice,
+    BuySection,
+    BuyIcon,
+    HintSection,
+    HintIcon,
+    HintDescription,
+    HintTitle,
+    HintAsk,
+} from './ProductBuyContent.style';
 import useBasket from 'hooks/useBasket';
+import { BsCartPlus, BsTruck } from 'react-icons/bs';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { RiCoinLine } from 'react-icons/ri';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -69,30 +88,62 @@ const ProductBuyContent = ({ product }) => {
     return (
         <>
             <Wrapper>
-                {isDiscount ? product.price : <></>}
-                <h1>{price},00 zł</h1>
-                <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} />
-                <BuyButton onClick={addProduct}>Dodaj do koszyka</BuyButton>
-                <p>
-                    Wydłużony czas dostawy <br />
-                    <a>
-                        <span>Zapytaj o termin</span>
-                    </a>
-                </p>
+                {isDiscount ? (
+                    <>
+                        <DiscountSize>Oszczędzasz {product.special_offer.price} zł </DiscountSize>
+                        <PriceSection>
+                            <OldPrice>{product.price},00zł</OldPrice>
+                            <CurrentPrice> {price},00 zł</CurrentPrice>
+                        </PriceSection>
+                    </>
+                ) : (
+                    <>
+                        <PriceSection>
+                            <CurrentPrice> {price},00 zł</CurrentPrice>
+                        </PriceSection>
+                    </>
+                )}
+
+                <BuySection>
+                    <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} />
+                    <BuyButton onClick={addProduct}>
+                        <BuyIcon>
+                            <BsCartPlus />
+                        </BuyIcon>
+                        <div> Dodaj do koszyka</div>
+                    </BuyButton>
+                </BuySection>
+                <HintSection>
+                    <HintIcon>
+                        <AiOutlineClockCircle />
+                    </HintIcon>
+                    <HintDescription>
+                        <HintTitle>Wydłużony czas dostawy</HintTitle>
+                        <HintAsk>Zapytaj o termin</HintAsk>
+                    </HintDescription>
+                </HintSection>
                 <Separator />
-                <p>
-                    Darmowa dostawa <br />
-                    <a>
-                        <span>Sprawdź szczegóły</span>
-                    </a>
-                </p>
+                <HintSection>
+                    <HintIcon>
+                        <BsTruck />
+                    </HintIcon>
+                    <HintDescription>
+                        <HintTitle>Darmowa dostawa</HintTitle>
+                        <HintAsk>Sprawdź szczegóły</HintAsk>
+                    </HintDescription>
+                </HintSection>
                 <Separator />
-                <p>
-                    Rata tylko {(price / 24).toFixed(2)} zł <br />
-                    <a>
-                        <span>Oblicz ratę</span>
-                    </a>
-                </p>
+                <HintSection>
+                    <HintIcon>
+                        <RiCoinLine />
+                    </HintIcon>
+                    <HintDescription>
+                        <HintTitle>
+                            Rata tylko {(price / 24).toFixed(2)} zł <br />
+                        </HintTitle>
+                        <HintAsk>Oblicz ratę</HintAsk>
+                    </HintDescription>
+                </HintSection>
             </Wrapper>
         </>
     );

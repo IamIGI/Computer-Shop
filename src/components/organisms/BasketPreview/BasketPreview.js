@@ -10,13 +10,18 @@ import {
     DescriptionAreaMissing,
     DescriptionBottom,
     StyledButton,
+    OldPrice,
+    CurrentPrice,
+    Title,
 } from './BasketPreview.style';
 import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
+import useProduct from 'hooks/useProduct';
 
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
+    const { setProduct } = useProduct();
     const { basketItems, setBasketItems } = useBasket();
 
     const deleteProduct = (_id) => {
@@ -64,60 +69,63 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
     return (
         <>
             <Wrapper>
-                <List>
-                    {basketItems.length === 0 ? (
-                        <>
-                            <Section>
-                                <Icon>
-                                    <BsBasket3 />
-                                </Icon>
-                                <DescriptionAreaMissing>
-                                    <h4>Brak produktów w koszyku </h4>
-                                </DescriptionAreaMissing>
-                            </Section>
-                        </>
-                    ) : (
-                        <>
-                            {basketItems.map((item, index) => (
-                                <>
-                                    <li key={index} id={index}>
-                                        <Section>
-                                            <ImageArea>
-                                                <img src={item.prevImg} alt="Product img" />
-                                            </ImageArea>
-                                            <DescriptionArea>
-                                                <Link to={`/product/${item._id}`} key={item._id}>
-                                                    <h4>{item.name}</h4>
-                                                </Link>
-                                                <DescriptionBottom>
-                                                    <div>{item.quantity} szt.</div>
-                                                    <div>
-                                                        <StyledButton onClick={() => deleteProduct(item._id)}>
-                                                            {/* you give all the props, f.e: onClick given in UsersListItem */}
-                                                            <AiOutlineDelete />
-                                                        </StyledButton>
-                                                    </div>
-                                                </DescriptionBottom>
-                                            </DescriptionArea>
-                                            <PriceArea>
-                                                {item.isDiscount ? (
-                                                    <>
-                                                        <p>
-                                                            <span>{item.priceBeforeDiscount},00 zł</span>
-                                                        </p>
-                                                        <p>{item.price}</p>
-                                                    </>
-                                                ) : (
+                {basketItems.length === 0 ? (
+                    <>
+                        <Section>
+                            <Icon>
+                                <BsBasket3 />
+                            </Icon>
+                            <DescriptionAreaMissing>
+                                <h4>Brak produktów w koszyku </h4>
+                            </DescriptionAreaMissing>
+                        </Section>
+                    </>
+                ) : (
+                    <List>
+                        {basketItems.map((item, index) => (
+                            <>
+                                <li key={index} id={index}>
+                                    <Section>
+                                        <ImageArea>
+                                            <img src={item.prevImg} alt="Product img" />
+                                        </ImageArea>
+                                        <DescriptionArea>
+                                            <Link
+                                                onClick={() => setProduct(item)}
+                                                to={`/product/${item._id}`}
+                                                key={item._id}
+                                            >
+                                                <Title>{item.name}</Title>
+                                            </Link>
+                                            <DescriptionBottom>
+                                                <div>{item.quantity} szt.</div>
+                                                <div>
+                                                    <StyledButton onClick={() => deleteProduct(item._id)}>
+                                                        <AiOutlineDelete />
+                                                    </StyledButton>
+                                                </div>
+                                            </DescriptionBottom>
+                                        </DescriptionArea>
+                                        <PriceArea>
+                                            {item.isDiscount ? (
+                                                <>
+                                                    <OldPrice>
+                                                        <span>{String(item.priceBeforeDiscount)},00 zł</span>
+                                                    </OldPrice>
+                                                    <CurrentPrice>{item.price},00 zł</CurrentPrice>
+                                                </>
+                                            ) : (
+                                                <CurrentPrice>
                                                     <p>{item.price},00 zł</p>
-                                                )}
-                                            </PriceArea>
-                                        </Section>
-                                    </li>
-                                </>
-                            ))}
-                        </>
-                    )}
-                </List>
+                                                </CurrentPrice>
+                                            )}
+                                        </PriceArea>
+                                    </Section>
+                                </li>
+                            </>
+                        ))}
+                    </List>
+                )}
             </Wrapper>
         </>
     );

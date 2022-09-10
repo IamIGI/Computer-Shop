@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     h1 {
+        font-size: 26px;
         margin-left: 20px;
         line-height: 40px;
     }

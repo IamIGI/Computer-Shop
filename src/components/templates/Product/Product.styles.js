@@ -23,6 +23,7 @@ export const TopWrapper = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 630px 1fr;
+    margin-bottom: 30px;
 `;
 
 export const MidWrapper = styled.div`

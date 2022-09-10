@@ -14,8 +14,6 @@ export const StyledButton = styled.button`
     justify-content: center;
     align-items: center;
 
-    margin-bottom: 4%;
-
     &:hover {
         background-color: ${({ theme }) => theme.colors.lightPurple};
         color: ${({ theme }) => theme.colors.white};
