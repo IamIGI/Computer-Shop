@@ -57,7 +57,6 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
         });
 
         setProductsInBasket(() => {
-            console.log(basketItems);
             return basketItems;
         });
     }, [basketItems]);

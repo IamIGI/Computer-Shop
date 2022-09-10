@@ -19,7 +19,6 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import useProduct from 'hooks/useProduct';
 import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
-import { IoGitMerge } from 'react-icons/io5';
 
 let Show = '';
 const ProductPreview = ({ filterInit, allProducts, filters }) => {

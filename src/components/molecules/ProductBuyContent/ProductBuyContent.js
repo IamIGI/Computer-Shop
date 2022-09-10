@@ -7,7 +7,6 @@ const ProductBuyContent = ({ product }) => {
     const { basketItems, setBasketItems } = useBasket();
     const [price, setPrice] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
-    console.log(product);
 
     const getPrice = (product) => {
         if (product.special_offer.mode) {
@@ -22,8 +21,6 @@ const ProductBuyContent = ({ product }) => {
     useEffect(() => {
         getPrice(product);
     }, [product]);
-
-    console.log(product);
 
     const addProduct = () => {
         let q = Number(quantity);

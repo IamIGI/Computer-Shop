@@ -40,7 +40,6 @@ const HotShootContent = () => {
         const fetchHotShoot = async () => {
             setIsFetchHotShoot(true);
             const response = await getHotShootPromotion();
-            console.log(response);
             setHotShoot(response);
             setIsFetchHotShoot(false);
         };

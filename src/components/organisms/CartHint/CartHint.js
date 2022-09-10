@@ -53,7 +53,6 @@ const CartHint = () => {
                                             to={`/product/${item._id}`}
                                             key={item._id}
                                         >
-                                            {/* {console.log(item)} */}
                                             <img src={item.prevImg} alt="images of product" />
                                         </Link>
                                     </Image>

@@ -111,7 +111,6 @@ const Basket = () => {
         }
 
         const finalPrice = priceToPay + priceForDelivery;
-        // console.log(productsInBasket);
         orderTemplateDocument = {
             status: 1, //all orders have to start from "In realization" status
             products: productsInBasket,
@@ -135,7 +134,6 @@ const Basket = () => {
             if (finishOrder === true) {
                 const sendUserOrder = async () => {
                     try {
-                        console.log(orderTemplateDocument);
                         const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
                         setOrderId(response.data.OrderId);
                     } catch (err) {
