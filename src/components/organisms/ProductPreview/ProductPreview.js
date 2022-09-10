@@ -9,6 +9,9 @@ import {
     ProductOpinionsShort,
     Rating,
     Opinions,
+    PriceSection,
+    PriceValue,
+    PriceOldValue,
 } from './ProductPreview.styles';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ProductsApi from 'api/products';
@@ -96,7 +99,19 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                         )}
 
                                         <Bottom>
-                                            <span>{item.price} zł</span>
+                                            {item.special_offer.mode ? (
+                                                <PriceSection>
+                                                    <PriceOldValue>
+                                                        <span>{item.price} zł</span>
+                                                    </PriceOldValue>
+                                                    <PriceValue>
+                                                        <span>{item.price - item.special_offer.price} zł</span>
+                                                    </PriceValue>
+                                                </PriceSection>
+                                            ) : (
+                                                <span>{item.price} zł</span>
+                                            )}
+
                                             <BuyButton />
                                         </Bottom>
                                     </Wrapper>

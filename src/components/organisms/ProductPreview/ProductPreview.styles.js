@@ -48,10 +48,37 @@ export const Top = styled.div`
 
 export const Bottom = styled.div`
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-around;
+    align-items: center;
+
     span {
         font-size: ${({ theme }) => theme.fontSize.l};
-        color: ${({ theme }) => theme.colors.darkGrey};
+        color: black;
+    }
+`;
+
+export const PriceSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+`;
+export const PriceOldValue = styled.div`
+    text-decoration: line-through;
+
+    color: ${({ theme }) => theme.colors.darkGrey};
+    span {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+`;
+
+export const PriceValue = styled.div`
+    span {
+        color: ${({ theme }) => theme.colors.successDark};
+        font-weight: 700;
     }
 `;
 

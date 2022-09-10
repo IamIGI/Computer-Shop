@@ -38,11 +38,14 @@ export const PriceArea = styled.div`
     justify-content: center;
     text-align: center;
     border-left: 1px solid ${({ theme }) => theme.colors.darkGrey};
-    /* top | right | bottom | left */
     padding: 30px 10px 0 10px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     margin: 10px 0;
+
+    span {
+        text-decoration: line-through;
+    }
 `;
 
 export const List = styled.div`

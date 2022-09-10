@@ -17,7 +17,6 @@ import useOrder from 'hooks/useOrder';
 const BoughtPopUp = ({ onClose, orderId }) => {
     const { basketItems } = useBasket();
     const { setOrderItem } = useOrder();
-    console.log(basketItems);
 
     const goToOrderItem = (order) => {
         setOrderItem(order);

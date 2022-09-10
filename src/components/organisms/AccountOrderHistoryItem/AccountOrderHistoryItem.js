@@ -231,7 +231,10 @@ const AccountOrderHistoryItem = ({ orderId }) => {
                                     </ProductImage>
                                     <ProductDescription>
                                         <p>{product.name}</p>
-                                        <p>{product.price} zł</p>
+                                        <p>
+                                            {product.price} zł &emsp;
+                                            {product.isDiscount ? <span>{product.priceBeforeDiscount} zł</span> : <></>}
+                                        </p>
                                     </ProductDescription>
                                     <ProductQuantity>{product.quantity} szt.</ProductQuantity>
                                 </ProductElement>

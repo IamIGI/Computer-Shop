@@ -1,10 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BuyButton, NumberInput, Separator, Wrapper } from './ProductBuyContent.style';
 import useBasket from 'hooks/useBasket';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const { basketItems, setBasketItems } = useBasket();
+    const [price, setPrice] = useState(0);
+    const [isDiscount, setIsDiscount] = useState(false);
+
+    const getPrice = (product) => {
+        if (product.special_offer.mode) {
+            setPrice(product.price - product.special_offer.price);
+            setIsDiscount(true);
+        } else {
+            setPrice(product.price);
+            setIsDiscount(false);
+        }
+    };
+
+    useEffect(() => {
+        getPrice(product);
+    }, [product]);
+
     const addProduct = () => {
         let q = Number(quantity);
         // 👇️ check if array contains object with given product id
@@ -30,8 +47,10 @@ const ProductBuyContent = ({ product }) => {
                         prevImg: product.prevImg,
                         _id: product._id,
                         quantity: q,
-                        price: product.price,
                         name: product.name,
+                        price: price,
+                        isDiscount,
+                        priceBeforeDiscount: product.price,
                     },
                 ];
             });
@@ -47,15 +66,12 @@ const ProductBuyContent = ({ product }) => {
         }
     };
 
-    const getQuantity = (value) => {
-        setQuantity(value);
-    };
-
     return (
         <>
             <Wrapper>
-                <h1>{product.price},00 zł</h1>
-                <NumberInput placeholder="1" onChange={(e) => getQuantity(e.target.value)} />
+                {isDiscount ? product.price : <></>}
+                <h1>{price},00 zł</h1>
+                <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} />
                 <BuyButton onClick={addProduct}>Dodaj do koszyka</BuyButton>
                 <p>
                     Wydłużony czas dostawy <br />
@@ -72,7 +88,7 @@ const ProductBuyContent = ({ product }) => {
                 </p>
                 <Separator />
                 <p>
-                    Rata tylko {product.price / 24} zł <br />
+                    Rata tylko {(price / 24).toFixed(2)} zł <br />
                     <a>
                         <span>Oblicz ratę</span>
                     </a>
