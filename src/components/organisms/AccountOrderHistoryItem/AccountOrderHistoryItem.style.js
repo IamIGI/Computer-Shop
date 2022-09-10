@@ -134,6 +134,11 @@ export const ProductDescription = styled.div`
     p {
         font-size: ${({ theme }) => theme.fontSize.l_plus};
         /* color: ${({ theme }) => theme.colors.darkGrey}; */
+
+        span {
+            text-decoration: line-through;
+            font-weight: 400;
+        }
     }
 
     p:last-child {

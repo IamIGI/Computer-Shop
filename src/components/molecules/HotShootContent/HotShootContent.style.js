@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+    a,
+    a:hover,
+    a:visited,
+    a:active {
+        color: inherit;
+        text-decoration: none;
+    }
     height: 100%;
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
@@ -68,9 +75,9 @@ export const Timer = styled.div`
     justify-content: center;
 `;
 export const GivenTime = styled.div`
-    border: 1px solid grey;
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     border-radius: 15px;
-    background-color: ${({ theme }) => theme.colors.lightGrey};
+    background-color: ${({ theme }) => theme.colors.lightLightGrey};
     font-size: ${({ theme }) => theme.fontSize.xl};
     margin: 0 10px;
     padding-top: 17px;

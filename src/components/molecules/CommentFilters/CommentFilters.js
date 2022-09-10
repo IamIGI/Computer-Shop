@@ -18,7 +18,6 @@ const CommentFilters = ({ handleFilters, comments }) => {
     const [confirmed, setConfirmed] = useState(false);
     const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
     const { product } = useProduct();
-    console.log(product);
     useEffect(() => {
         let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
         handleFilters(filters);

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Title, Wrapper, Image, Description, Price, Timer, GivenTime, DescTimer, Colon } from './HotShootContent.style';
-import { HotShoot } from 'data/HotShoot';
+import useProduct from 'hooks/useProduct';
+import { getHotShootPromotion } from '../../../api/products';
+import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import { Link } from 'components/atoms/Link/Link';
 
 const HotShootContent = () => {
     const [counters, setCounters] = useState([1, 2, 3]);
+    const [isFetchHotShoot, setIsFetchHotShoot] = useState(true);
+    const [hotShoot, setHotShoot] = useState({});
+    const { setProduct } = useProduct();
 
     const isZeroNeeded = (time, timeToEnd) => {
         if (time < 10) {
@@ -31,6 +37,16 @@ const HotShootContent = () => {
     var TimeToEnd = TimerCount();
 
     useEffect(() => {
+        const fetchHotShoot = async () => {
+            setIsFetchHotShoot(true);
+            const response = await getHotShootPromotion();
+            console.log(response);
+            setHotShoot(response);
+            setIsFetchHotShoot(false);
+        };
+
+        fetchHotShoot();
+
         const interval = setInterval(() => {
             TimeToEnd = TimerCount();
 
@@ -42,33 +58,41 @@ const HotShootContent = () => {
 
     return (
         <Wrapper>
-            <Title>
-                <h2>Gorący strzał</h2>
-            </Title>
-            <Image>
-                <img src={HotShoot.image} />
-            </Image>
-            <Description>
-                <p>{HotShoot.name}</p>
-            </Description>
-            <Price>
-                <p>
-                    <span>{HotShoot.prevPrice},00 zł</span>
-                </p>
-                <h3>{HotShoot.promoPrice},00 zł</h3>
-            </Price>
-            <DescTimer>
-                <h3>
-                    Następny <span>HotShoot</span> za:
-                </h3>
-            </DescTimer>
-            <Timer>
-                <GivenTime>{counters[0]}</GivenTime>
-                <Colon>:</Colon>
-                <GivenTime>{counters[1]}</GivenTime>
-                <Colon>:</Colon>
-                <GivenTime>{counters[2]}</GivenTime>
-            </Timer>
+            {isFetchHotShoot ? (
+                <LoadingAnimation />
+            ) : (
+                <>
+                    <Link onClick={() => setProduct(hotShoot.productData)} to={`/product/${hotShoot.productData._id}`}>
+                        <Title>
+                            <h2>Gorący strzał</h2>
+                        </Title>
+                        <Image>
+                            <img src={hotShoot.productData.prevImg} />
+                        </Image>
+                        <Description>
+                            <p>{hotShoot.productData.name}</p>
+                        </Description>
+                        <Price>
+                            <p>
+                                <span>{hotShoot.productData.price},00 zł</span>
+                            </p>
+                            <h3>{hotShoot.productData.price - hotShoot.productData.special_offer.price},00 zł</h3>
+                        </Price>
+                        <DescTimer>
+                            <h3>
+                                Następny <span>HotShoot</span> za:
+                            </h3>
+                        </DescTimer>
+                        <Timer>
+                            <GivenTime>{counters[0]}</GivenTime>
+                            <Colon>:</Colon>
+                            <GivenTime>{counters[1]}</GivenTime>
+                            <Colon>:</Colon>
+                            <GivenTime>{counters[2]}</GivenTime>
+                        </Timer>
+                    </Link>
+                </>
+            )}
         </Wrapper>
     );
 };

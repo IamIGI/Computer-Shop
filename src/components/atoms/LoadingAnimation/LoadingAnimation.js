@@ -5,7 +5,7 @@ const LoadingAnimation = () => {
     return (
         <>
             <Wrapper>
-                <Spinner>Loading</Spinner>
+                <Spinner>Ładowanie</Spinner>
             </Wrapper>
         </>
     );

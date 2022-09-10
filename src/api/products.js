@@ -24,3 +24,23 @@ export const getProduct = async (code) => {
         }
     }
 };
+
+const hotShootApi = axios.create({
+    baseURL: 'http://localhost:5000/hotShoot/',
+    headers: { 'Content-Type': 'application/json' },
+});
+
+export const getHotShootPromotion = async () => {
+    try {
+        const response = await hotShootApi.get('/get');
+        return response.data;
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+        } else {
+            console.log(`Error: ${err.message}`);
+        }
+    }
+};

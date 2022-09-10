@@ -9,6 +9,9 @@ import {
     ProductOpinionsShort,
     Rating,
     Opinions,
+    PriceSection,
+    PriceValue,
+    PriceOldValue,
 } from './ProductPreview.styles';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ProductsApi from 'api/products';
@@ -16,6 +19,7 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import useProduct from 'hooks/useProduct';
 import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
+import { IoGitMerge } from 'react-icons/io5';
 
 let Show = '';
 const ProductPreview = ({ filterInit, allProducts, filters }) => {
@@ -96,7 +100,19 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                         )}
 
                                         <Bottom>
-                                            <span>{item.price} zł</span>
+                                            {item.special_offer.mode ? (
+                                                <PriceSection>
+                                                    <PriceOldValue>
+                                                        <span>{item.price} zł</span>
+                                                    </PriceOldValue>
+                                                    <PriceValue>
+                                                        <span>{item.price - item.special_offer.price} zł</span>
+                                                    </PriceValue>
+                                                </PriceSection>
+                                            ) : (
+                                                <span>{item.price} zł</span>
+                                            )}
+
                                             <BuyButton />
                                         </Bottom>
                                     </Wrapper>
