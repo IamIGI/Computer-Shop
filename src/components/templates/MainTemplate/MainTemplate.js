@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 import { theme } from 'assets/styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { AuthProvider } from 'context/AuthProvider';
-import { Wrapper } from './MainTemplate.styles';
+import { InsideWrapper, Wrapper } from './MainTemplate.styles';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { OrderProvider } from 'context/OrderItemProvider';
 import { BasketProvider } from 'context/BasketProvider';
@@ -27,8 +27,10 @@ const MainTemplate = ({ children }) => {
                                     <CommentsProvider>
                                         <AuthProvider>
                                             <NavBar />
-                                            {children}
-                                            <AccountPreviewSection />
+                                            <InsideWrapper>
+                                                {children}
+                                                <AccountPreviewSection />
+                                            </InsideWrapper>
                                             <Footer />
                                         </AuthProvider>
                                     </CommentsProvider>

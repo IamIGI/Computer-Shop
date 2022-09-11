@@ -1,12 +1,26 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    /* z-index: 1; */
-    width: 100%;
-    margin: 0;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
     padding: 0;
-    display: grid;
-    grid-template-rows: 125px 1fr 60px;
-    grid-template-columns: 5% 1fr 300px 5%;
-    /* overflow-y: hidden; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+`;
+
+export const InsideWrapper = styled.div`
+    max-width: 2100px;
+    padding: 0 4%;
+    height: 83vh;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @media (min-width: 700px) {
+        min-width: 700px;
+        width: 100%;
+    }
 `;

@@ -1,5 +1,17 @@
 import React from 'react';
-import { Wrapper, Nav, SiteTitle, StyledLink, List } from './NavBar.styles';
+import {
+    Wrapper,
+    Nav,
+    Home,
+    SiteTitle,
+    StyledLink,
+    List,
+    Navigation,
+    Icon,
+    Title,
+    LinkIcon,
+    LinkDescription,
+} from './NavBar.styles';
 import { VscArchive, VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
 import useAuth from 'hooks/useAuth';
 
@@ -7,68 +19,79 @@ import useAuth from 'hooks/useAuth';
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
 
-function CustomLink({ to, children, ...props }) {
-    return (
-        <li>
-            <StyledLink to={to} {...props}>
-                {children}
-            </StyledLink>
-        </li>
-    );
-}
+// function CustomLink({ to, children, ...props }) {
+//     return (
+//         <li>
+//             <StyledLink to={to} {...props}>
+//                 {children}
+//             </StyledLink>
+//         </li>
+//     );
+// }
 
 const NavBar = () => {
     const { auth } = useAuth();
     return (
         <Wrapper>
-            <Nav>
-                <SiteTitle to="/">
+            <SiteTitle to="/">
+                <Home>
                     {' '}
-                    <span>
-                        <VscVm />
-                    </span>
-                    HotShoot
-                </SiteTitle>
-                <List>
-                    {auth?.roles?.find((role) => Admin_entitlements === role) && (
-                        <CustomLink to="/adminSettings">
+                    <Icon>
+                        <span>
+                            <VscVm />
+                        </span>
+                    </Icon>
+                    <Title>
+                        H<span>o</span>tSh<span>o</span>
+                        <span>o</span>t
+                    </Title>
+                </Home>
+            </SiteTitle>
+            <Navigation>
+                {auth?.roles?.find((role) => Admin_entitlements === role) && (
+                    <StyledLink to="/adminSettings">
+                        <LinkIcon>
                             <span>
                                 <VscInspect />
                             </span>
-                            Administrator
-                        </CustomLink>
-                    )}
-                    {auth?.roles?.find((role) => Editor_entitlements === role) && (
-                        <>
-                            <CustomLink to="/editorSettings">
-                                <span>
-                                    <VscInspect />
-                                </span>
-                                Edytor
-                            </CustomLink>
-                        </>
-                    )}
+                        </LinkIcon>
+                        <LinkDescription>Administrator</LinkDescription>
+                    </StyledLink>
+                )}
+                {auth?.roles?.find((role) => Editor_entitlements === role) && (
+                    <StyledLink to="/editorSettings">
+                        <LinkIcon>
+                            <VscInspect />
+                        </LinkIcon>
+                        <LinkDescription>Edytor</LinkDescription>
+                    </StyledLink>
+                )}
 
-                    <CustomLink to="/allProducts">
+                <StyledLink to="/allProducts">
+                    <LinkIcon>
                         <span>
                             <VscInspect />
                         </span>
-                        Produkty
-                    </CustomLink>
-                    <CustomLink to="/basket">
+                    </LinkIcon>
+                    <LinkDescription>Produkty</LinkDescription>
+                </StyledLink>
+                <StyledLink to="/basket">
+                    <LinkIcon>
                         <span>
                             <VscArchive />
                         </span>
-                        Koszyk
-                    </CustomLink>
-                    <CustomLink to="/about">
+                    </LinkIcon>
+                    <LinkDescription>Koszyk</LinkDescription>
+                </StyledLink>
+                <StyledLink to="/about">
+                    <LinkIcon>
                         <span>
                             <VscMilestone />
                         </span>
-                        O Nas
-                    </CustomLink>
-                </List>
-            </Nav>
+                    </LinkIcon>
+                    <LinkDescription>O Nas</LinkDescription>
+                </StyledLink>
+            </Navigation>
         </Wrapper>
     );
 };
