@@ -2,102 +2,100 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-    grid-row: 1/2;
-    grid-column: 1/5;
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
-    margin-top: 40px;
-    padding: 0 4%;
-    box-sizing: border-box;
-`;
-
-export const Nav = styled.nav`
-    background-color: white;
-    height: 55px;
-    border-radius: 15px;
-
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: stretch;
-    padding: 0 1rem;
-
-    ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        display: flex;
-        gap: 3rem;
-    }
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px 4%;
+    min-height: fit-content;
 
     a {
-        color: inherit;
+        color: black;
         text-decoration: none;
-        display: flex;
-        align-items: center;
     }
+`;
+
+export const Home = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    font-size: ${({ theme }) => theme.fontSize.xxl};
+    border-bottom-left-radius: 30px;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
+
+    :hover {
+        border-color: ${({ theme }) => theme.colors.successDark};
+        /* background-color: ${({ theme }) => theme.colors.grey}; */
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+`;
+export const Title = styled.div`
+    margin-left: 20px;
+    color: black;
+`;
+
+export const Icon = styled.div`
+    border: 2px solid gray;
+    border-radius: 50%;
+    padding: 6px 8px 2px 8px;
+    background-color: ${({ theme }) => theme.colors.lightPurple};
 `;
 
 export const SiteTitle = styled(NavLink)`
-    padding: 15px;
-    padding-right: 20px;
-    border-radius: 15px 0 0 15px;
-    font-size: ${({ theme }) => theme.fontSize.omegaBig};
-    background-color: ${({ theme }) => theme.colors.lightPurple};
-
-    span {
-        padding-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    :hover {
-        background-color: ${({ theme }) => theme.colors.grey};
-
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-
     &.active {
-        border-bottom: 2px solid ${({ theme }) => theme.colors.successDark};
-
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
     }
+`;
+
+export const Navigation = styled.div`
+    margin-right: 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
 `;
 
 export const StyledLink = styled(NavLink)`
-    margin-top: 10px;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
-    padding: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
 
-    span {
-        margin-right: 5px;
-    }
+    margin-right: 40px;
+    font-size: ${({ theme }) => theme.fontSize.xl};
+    padding: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid grey;
 
     &:hover {
-        border-bottom: 2px solid ${({ theme }) => theme.colors.success};
-    }
-
-    &.active {
-        border-bottom: 2px solid ${({ theme }) => theme.colors.successDark};
+        border-color: ${({ theme }) => theme.colors.successDark};
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
     }
 
-    :hover {
+    &.active {
+        border-color: ${({ theme }) => theme.colors.successDark};
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
     }
 `;
 
-export const List = styled.ul`
-    li {
-        :not(:first-child) {
-            padding-left: 50px;
-            border-left: 2px solid ${({ theme }) => theme.colors.grey};
-            /* border: 1px solid red; */
-        }
-    }
+export const LinkIcon = styled.div``;
+export const LinkDescription = styled.div`
+    margin-left: 10px;
 `;
