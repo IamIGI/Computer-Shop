@@ -1,11 +1,9 @@
 import React from 'react';
 import {
     Wrapper,
-    Nav,
     Home,
     SiteTitle,
     StyledLink,
-    List,
     Navigation,
     Icon,
     Title,
@@ -15,19 +13,8 @@ import {
 import { VscArchive, VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
 import useAuth from 'hooks/useAuth';
 
-//move to env
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
-
-// function CustomLink({ to, children, ...props }) {
-//     return (
-//         <li>
-//             <StyledLink to={to} {...props}>
-//                 {children}
-//             </StyledLink>
-//         </li>
-//     );
-// }
 
 const NavBar = () => {
     const { auth } = useAuth();
