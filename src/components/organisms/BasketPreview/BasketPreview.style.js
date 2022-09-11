@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 export const Section = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     border-top-left-radius: 40px;
 `;
 
