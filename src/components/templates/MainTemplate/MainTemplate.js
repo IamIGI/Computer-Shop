@@ -4,7 +4,7 @@ import NavBar from 'components/organisms/NavBar/NavBar';
 import React from 'react';
 import Footer from '../Footer/Footer';
 import { theme } from 'assets/styles/theme';
-import { ThemeProvider } from 'styled-components'; //use styles/theme.js everywhere you want
+import { ThemeProvider } from 'styled-components';
 import { AuthProvider } from 'context/AuthProvider';
 import { Wrapper } from './MainTemplate.styles';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';

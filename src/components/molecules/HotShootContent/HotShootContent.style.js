@@ -44,6 +44,7 @@ export const Image = styled.div`
 `;
 
 export const Description = styled.div`
+    margin: 0 15px;
     p {
         font-size: ${({ theme }) => theme.fontSize.l};
     }
