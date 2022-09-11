@@ -42,7 +42,6 @@ const OAutorzeStrony = ({ description }) => {
                             <img src={extra.image} alt="StackImage" />
                         </StackImage>
                         <StackTitle>{extra.name}</StackTitle>
-                        {console.log(extra.libraries)}
                         {extra.libraries.length !== 0 ? (
                             <>
                                 <UsePopUp onMouseOver={() => openPopUp(index)} onMouseOut={() => closePopUp('')}>
