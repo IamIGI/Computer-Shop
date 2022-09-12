@@ -3,6 +3,7 @@ import HomeTopContent from 'components/organisms/HomeTopContent/HomeTopContent';
 import React from 'react';
 import { BottomWrapper, TopWrapper, Wrapper } from './Home.styles';
 const Home = () => {
+    console.log('huj');
     return (
         <>
             <Wrapper>
