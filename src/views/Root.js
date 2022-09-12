@@ -2,7 +2,6 @@ import About from 'components/templates/About/About';
 import AllProducts from 'components/templates/AllProducts/AllProducts';
 import Basket from 'components/templates/Basket/Basket';
 import Home from 'components/templates/Home/Home';
-import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import MissingPage from 'components/templates/MissingPage/MissingPage';
 import Unauthorized from 'components/templates/Unauthorized/Unauthorized';
 import AdminSettings from 'components/templates/AdminSettings/AdminSettings';
