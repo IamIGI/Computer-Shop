@@ -16,7 +16,6 @@ import {
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import useProduct from 'hooks/useProduct';
 import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
 
@@ -24,7 +23,6 @@ let Show = '';
 const ProductPreview = ({ filterInit, allProducts, filters }) => {
     const [products, setProducts] = useState([]);
     const [waitForFetch, setWaitForFetch] = useState(true);
-    const { setProduct } = useProduct();
 
     useEffect(() => {
         const fetchProducts = async (data) => {
@@ -64,7 +62,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                     {products.map((item, index) => (
                         <>
                             {index < Show && (
-                                <Link onClick={() => setProduct(item)} to={`/product/${item._id}`} key={item._id}>
+                                <Link to={`/product/${item._id}`} key={item._id}>
                                     <Wrapper>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />

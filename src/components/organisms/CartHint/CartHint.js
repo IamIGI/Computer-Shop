@@ -12,10 +12,8 @@ import {
 import { Button } from 'components/atoms/Button/Button';
 import { IoTrashBinOutline } from 'react-icons/io5';
 import useBasket from 'hooks/useBasket';
-import useProduct from 'hooks/useProduct';
 
 const CartHint = () => {
-    const { setProduct } = useProduct();
     const { basketItems, setBasketItems } = useBasket();
 
     const getQuantityOfItems = () => {
@@ -48,11 +46,7 @@ const CartHint = () => {
                                 <>
                                     <Image key={item._id}>
                                         <ProductQuantity>{item.quantity}</ProductQuantity>
-                                        <Link
-                                            onClick={() => setProduct(item)}
-                                            to={`/product/${item._id}`}
-                                            key={item._id}
-                                        >
+                                        <Link to={`/product/${item._id}`} key={item._id}>
                                             <img src={item.prevImg} alt="images of product" />
                                         </Link>
                                     </Image>

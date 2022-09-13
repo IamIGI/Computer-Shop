@@ -17,9 +17,7 @@ import { Routes, Route } from 'react-router-dom';
 import RequireAuth from 'components/molecules/RequireAuth/RequireAuth';
 import PersistLogin from 'providers/PersistLogin';
 
-import useOrder from 'hooks/useOrder';
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
-import useProduct from 'hooks/useProduct';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -28,9 +26,6 @@ const ROLES = {
 };
 
 const Root = () => {
-    const { orderItem } = useOrder();
-    const { product } = useProduct();
-
     return (
         <>
             <Wrapper>
@@ -40,7 +35,7 @@ const Root = () => {
                         <Route path="" element={<Home />} />
                         <Route path="allProducts" element={<AllProducts />} />
                         <Route path="about" element={<About />} />
-                        <Route path={`/product/${product._id}`} element={<Product code={product._id} />} />
+                        <Route path={`/product/:id`} element={<Product />} />
 
                         <Route path="*" element={<MissingPage />} />
                         <Route path="unauthorized" element={<Unauthorized />} />
@@ -52,8 +47,8 @@ const Root = () => {
                             <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
                             <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
                             <Route
-                                path={`/accountSettings/orders/history/${orderItem._id}`}
-                                element={<AccountOrderHistoryItem orderId={orderItem._id} />}
+                                path={`/accountSettings/orders/history/:orderId`}
+                                element={<AccountOrderHistoryItem />}
                             />
                             <Route path="basket" element={<Basket />} />
                         </Route>

@@ -2,12 +2,7 @@ import { Button } from 'components/atoms/Button/Button';
 import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.styles';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-`;
+export const Wrapper = styled.div``;
 
 export const BottomRegister = styled(Bottom)`
     justify-content: center;
