@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Title, Wrapper, Image, Description, Price, Timer, GivenTime, DescTimer, Colon } from './HotShootContent.style';
-import useProduct from 'hooks/useProduct';
 import { getHotShootPromotion } from '../../../api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { Link } from 'components/atoms/Link/Link';
@@ -9,7 +8,7 @@ const HotShootContent = () => {
     const [counters, setCounters] = useState([1, 2, 3]);
     const [isFetchHotShoot, setIsFetchHotShoot] = useState(true);
     const [hotShoot, setHotShoot] = useState({});
-    const { setProduct } = useProduct();
+    const [triggerHotShoot, setTriggerHotShoot] = useState(false);
 
     const isZeroNeeded = (time, timeToEnd) => {
         if (time < 10) {
@@ -55,12 +54,24 @@ const HotShootContent = () => {
 
         const interval = setInterval(() => {
             TimeToEnd = TimerCount();
-
+            if (TimeToEnd[0] == '11' && TimeToEnd[1] == '59' && TimeToEnd[2] == '55')
+                setTriggerHotShoot(!triggerHotShoot);
             setCounters(TimeToEnd);
         }, 1000);
 
         return () => clearInterval(interval);
     }, []);
+
+    //setNewPromotion for HotShoot
+    useEffect(() => {
+        const fetchHotShoot = async () => {
+            setIsFetchHotShoot(true);
+            const response = await getHotShootPromotion();
+            setHotShoot(response);
+            setIsFetchHotShoot(false);
+        };
+        fetchHotShoot();
+    }, [triggerHotShoot]);
 
     return (
         <Wrapper>
@@ -68,7 +79,7 @@ const HotShootContent = () => {
                 <LoadingAnimation />
             ) : (
                 <>
-                    <Link onClick={() => setProduct(hotShoot.productData)} to={`/product/${hotShoot.productData._id}`}>
+                    <Link to={`/product/${hotShoot.productData._id}`}>
                         <Title>
                             <h2>Gorący strzał</h2>
                         </Title>
