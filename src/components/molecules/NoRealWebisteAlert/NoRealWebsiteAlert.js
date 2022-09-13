@@ -5,12 +5,6 @@ import { FiAlertTriangle } from 'react-icons/fi';
 const NoRealWebsiteAlert = () => {
     const [alert, setAlert] = useState(false);
 
-    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-    const handleMouseOut = async () => {
-        await delay(2000);
-        setAlert(false);
-    };
     return (
         <Wrapper onMouseOver={() => setAlert(true)}>
             <Icon>
