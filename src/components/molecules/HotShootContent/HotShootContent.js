@@ -8,7 +8,6 @@ const HotShootContent = () => {
     const [counters, setCounters] = useState([1, 2, 3]);
     const [isFetchHotShoot, setIsFetchHotShoot] = useState(true);
     const [hotShoot, setHotShoot] = useState({});
-    const [triggerHotShoot, setTriggerHotShoot] = useState(false);
 
     const isZeroNeeded = (time, timeToEnd) => {
         if (time < 10) {
@@ -52,26 +51,21 @@ const HotShootContent = () => {
 
         fetchHotShoot();
 
-        const interval = setInterval(() => {
+        const interval = setInterval(async () => {
             TimeToEnd = TimerCount();
-            if (TimeToEnd[0] == '11' && TimeToEnd[1] == '59' && TimeToEnd[2] == '55')
-                setTriggerHotShoot(!triggerHotShoot);
+
+            //setNew hot shoot promotion
+            if (TimeToEnd[0] == '11' && TimeToEnd[1] == '59' && TimeToEnd[2] == '55') {
+                setIsFetchHotShoot(true);
+                const response = await getHotShootPromotion();
+                setHotShoot(response);
+                setIsFetchHotShoot(false);
+            }
             setCounters(TimeToEnd);
         }, 1000);
 
         return () => clearInterval(interval);
     }, []);
-
-    //setNewPromotion for HotShoot
-    useEffect(() => {
-        const fetchHotShoot = async () => {
-            setIsFetchHotShoot(true);
-            const response = await getHotShootPromotion();
-            setHotShoot(response);
-            setIsFetchHotShoot(false);
-        };
-        fetchHotShoot();
-    }, [triggerHotShoot]);
 
     return (
         <Wrapper>
