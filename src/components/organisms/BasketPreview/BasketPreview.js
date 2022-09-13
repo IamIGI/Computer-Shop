@@ -18,10 +18,8 @@ import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
-import useProduct from 'hooks/useProduct';
 
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
-    const { setProduct } = useProduct();
     const { basketItems, setBasketItems } = useBasket();
 
     const deleteProduct = (_id) => {
@@ -90,11 +88,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                                             <img src={item.prevImg} alt="Product img" />
                                         </ImageArea>
                                         <DescriptionArea>
-                                            <Link
-                                                onClick={() => setProduct(item)}
-                                                to={`/product/${item._id}`}
-                                                key={item._id}
-                                            >
+                                            <Link to={`/product/${item._id}`} key={item._id}>
                                                 <Title>{item.name}</Title>
                                             </Link>
                                             <DescriptionBottom>

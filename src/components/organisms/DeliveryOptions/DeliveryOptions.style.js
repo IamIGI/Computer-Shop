@@ -21,6 +21,7 @@ export const Section = styled.div`
     justify-content: flex-start;
 
     :hover {
+        cursor: pointer;
         border: 1px solid ${({ theme }) => theme.colors.successDark};
     }
 `;

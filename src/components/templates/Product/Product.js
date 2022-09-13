@@ -6,9 +6,11 @@ import useProduct from 'hooks/useProduct';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import CommentsSection from 'components/templates/CommentsSection/CommentsSection';
 import { getProduct } from 'api/products';
+import { useParams } from 'react-router-dom';
 
-const Product = ({ code }) => {
-    console.log(code);
+const Product = () => {
+    const code = useParams().id;
+    // console.log(code);
     const [waitForFetchProduct, setWaitForFetchProduct] = useState(true);
     const [product2, setProduct2] = useState({});
     const { setProduct } = useProduct();

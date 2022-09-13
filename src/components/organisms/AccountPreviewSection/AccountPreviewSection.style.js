@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    min-width: 350px;
+    min-width: 300px;
     grid-column: 3/4;
     padding-top: 20px;
     border-left: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     text-align: center;
-    justify-content: center;
+    flex-wrap: nowrap;
+`;
+
+export const InsideWrapper = styled.div`
+    max-width: 300px;
 `;
 
 export const Separator = styled.hr`

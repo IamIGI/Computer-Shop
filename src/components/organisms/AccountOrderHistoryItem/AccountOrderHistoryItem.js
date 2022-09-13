@@ -34,8 +34,10 @@ import { BsCashCoin, BsWallet2, BsPiggyBank } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import { useParams } from 'react-router-dom';
 
-const AccountOrderHistoryItem = ({ orderId }) => {
+const AccountOrderHistoryItem = () => {
+    const orderId = useParams().orderId;
     const axiosPrivate = useAxiosPrivate();
     const [waitForFetch, setWaitForFetch] = useState(true);
     const [orderItem, setOrderItem] = useState({});

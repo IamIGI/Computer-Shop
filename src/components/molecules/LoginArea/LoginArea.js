@@ -126,7 +126,7 @@ function LoginArea() {
                         {isCapsLockOn && pwdFocus && pwd && <Instructions>Caps Lock jest wciśnięty</Instructions>}
                         <BottomLogin>
                             <Checkbox type="checkbox" onChange={toggleCheck} checked={check} />
-                            <p>Zaufaj temu urządzeniu</p>
+                            <div>Zaufaj temu urządzeniu</div>
                         </BottomLogin>
                         <Button> Zaloguj sie </Button>
                         <WrapButton onClick={() => setExpanded(!expanded)}>

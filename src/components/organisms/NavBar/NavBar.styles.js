@@ -3,13 +3,21 @@ import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    margin-top: 10px;
+    padding: 10px 0;
+`;
+
+export const InsideWrapper = styled.div`
+    position: relative;
+    margin: auto;
+    max-width: 2100px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-    padding: 10px 4%;
+    padding-left: 5%;
+
     min-height: fit-content;
 
     a {
@@ -59,7 +67,7 @@ export const SiteTitle = styled(NavLink)`
 `;
 
 export const Navigation = styled.div`
-    margin-right: 5%;
+    margin-right: 2%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -73,7 +81,7 @@ export const StyledLink = styled(NavLink)`
     justify-content: center;
     align-items: baseline;
 
-    margin-right: 40px;
+    margin-left: 30px;
     font-size: ${({ theme }) => theme.fontSize.xl};
     padding: 10px;
     border-bottom-left-radius: 15px;
