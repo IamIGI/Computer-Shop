@@ -13,8 +13,11 @@ import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
 
 function RegisterArea() {
     const { setAuth } = useAuth();
+
     const navigate = useNavigate();
     const location = useLocation();
+    const from = location.pathname == '/basket' ? location.pathname : '/accountSettings/Settings';
+
     const errRef = useRef();
 
     const [expanded, setExpanded] = useState('false');
@@ -120,7 +123,7 @@ function RegisterArea() {
             const userName = auth?.data?.userName;
             const id = auth?.data?.id;
             setAuth({ id, userName, email, roles, accessToken });
-            navigate('accountSettings/Settings', { replace: true });
+            navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('Brak łączyności z serwerem');

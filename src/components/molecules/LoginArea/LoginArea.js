@@ -16,7 +16,7 @@ function LoginArea() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+    const from = location.pathname || '/';
 
     const [expanded, setExpanded] = useState('false');
     const errRef = useRef();
