@@ -18,7 +18,7 @@ const RequireAuth = ({ allowedRoles }) => {
         </>
     ) : (
         //Back user to page where he came from
-        <Navigate to="" state={{ from: location }} replace />
+        <Navigate to="/" state={{ from: location }} replace />
     );
 };
 
