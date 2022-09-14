@@ -14,6 +14,9 @@ import {
     TitleSection,
     Wrapper,
     ProductImageSmall,
+    NoOrders,
+    NoOrderIcon,
+    NoOrderDescription,
 } from './AccountSettingsOrders.style';
 
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
@@ -25,7 +28,7 @@ import { BsBox } from 'react-icons/bs';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { SectionTitle } from 'components/molecules/AccountData/AccountData.style';
 import useOrder from 'hooks/useOrder';
-import { GetUserOrderHistory } from 'api/order';
+import { BsLaptop } from 'react-icons/bs';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
@@ -152,7 +155,12 @@ const AccountSettingsOrders = () => {
                         {waitForFetch ? (
                             <LoadingAnimation />
                         ) : orderHistory.length === 0 ? (
-                            <p>Koszyk pusty</p>
+                            <NoOrders>
+                                <NoOrderIcon>
+                                    <BsLaptop />
+                                </NoOrderIcon>
+                                <NoOrderDescription>Zamień ten wirtualny laptop na coś lepszego !!!</NoOrderDescription>
+                            </NoOrders>
                         ) : (
                             <>
                                 {orderHistory.map((item, index) => (
