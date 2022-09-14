@@ -33,6 +33,28 @@ export const Quantity = styled.div`
     top: -12px;
 `;
 
+export const DeleteProduct = styled.div`
+    position: absolute;
+
+    bottom: -15px;
+    right: -15px;
+
+    color: gray;
+
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    background-color: white;
+    border: 1px solid gray;
+    padding-top: 6px;
+    font-size: 20px;
+
+    :hover {
+        color: black;
+        background-color: ${({ theme }) => theme.colors.error};
+    }
+`;
+
 export const ProductQuantity = styled.div`
     border-radius: 50%;
     height: 30px;
@@ -99,8 +121,8 @@ export const RemoveBasket = styled.div`
     border-radius: 50%;
     :hover {
         cursor: pointer;
-        color: ${({ theme }) => theme.colors.successDark};
-        border: 2px solid ${({ theme }) => theme.colors.successDark};
+        color: ${({ theme }) => theme.colors.error};
+        border: 2px solid ${({ theme }) => theme.colors.error};
         border-radius: 50%;
     }
 `;

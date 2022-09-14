@@ -8,10 +8,12 @@ import {
     ProductQuantity,
     RemoveBasket,
     BottomWrapper,
+    DeleteProduct,
 } from './CartHint.style';
 import { Button } from 'components/atoms/Button/Button';
 import { IoTrashBinOutline } from 'react-icons/io5';
 import useBasket from 'hooks/useBasket';
+import { MdOutlineDelete } from 'react-icons/md';
 
 const CartHint = () => {
     const { basketItems, setBasketItems } = useBasket();
@@ -25,8 +27,11 @@ const CartHint = () => {
     };
 
     const removeBasket = () => {
-        localStorage.removeItem('basketItems');
         setBasketItems([]);
+    };
+
+    const removeProduct = (id) => {
+        setBasketItems(basketItems.filter((product) => product._id !== id));
     };
 
     return (
@@ -46,6 +51,9 @@ const CartHint = () => {
                                 <>
                                     <Image key={item._id}>
                                         <ProductQuantity>{item.quantity}</ProductQuantity>
+                                        <DeleteProduct onClick={() => removeProduct(item._id)}>
+                                            <MdOutlineDelete />
+                                        </DeleteProduct>
                                         <Link to={`/product/${item._id}`} key={item._id}>
                                             <img src={item.prevImg} alt="images of product" />
                                         </Link>
