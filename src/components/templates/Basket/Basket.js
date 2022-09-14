@@ -122,9 +122,6 @@ const Basket = () => {
             },
             user: auth.id,
         };
-        //--------------
-        if (Boolean(auth.id)) console.log('add pop up info');
-        //-------------
 
         const { transactionInfo } = orderTemplateDocument;
         const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;

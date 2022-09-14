@@ -48,7 +48,6 @@ const AccountSettingsOrders = () => {
             };
             try {
                 const response = await axiosPrivate.post('user/orderhistory', data);
-                console.log(response);
                 setOrderHistory(response.data.orderData);
                 setCountOrders(response.data.orderCount);
             } catch (err) {

@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     margin-top: 2%;
-    /* margin-left: 10%; */
     font-size: ${({ theme }) => theme.fontSize.xl};
 `;
 
