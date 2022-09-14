@@ -13,7 +13,6 @@ import {
 import { Button } from 'components/atoms/Button/Button';
 import { IoTrashBinOutline } from 'react-icons/io5';
 import useBasket from 'hooks/useBasket';
-import { useEffect } from 'react';
 import { MdOutlineDelete } from 'react-icons/md';
 
 const CartHint = () => {
@@ -32,7 +31,6 @@ const CartHint = () => {
     };
 
     const removeProduct = (id) => {
-        console.log(id);
         setBasketItems(basketItems.filter((product) => product._id !== id));
     };
 
