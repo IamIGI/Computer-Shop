@@ -1,7 +1,20 @@
 import React from 'react';
-import { FinishSection, List, ListSection, LocalButton, Name, Price, Section, Wrapper } from './PaymentPreview.style';
+import {
+    FinishSection,
+    List,
+    ListSection,
+    LocalButton,
+    Name,
+    Price,
+    Section,
+    Wrapper,
+    NoUserAlert,
+    AlertIcon,
+    AlertDescription,
+} from './PaymentPreview.style';
+import { FiAlertCircle } from 'react-icons/fi';
 
-const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery }) => {
+const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery, isUserLogIn }) => {
     return (
         <>
             <Wrapper>
@@ -34,6 +47,18 @@ const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery }) => {
                     </List>
                 </Section>
                 <FinishSection>
+                    {!isUserLogIn ? (
+                        <NoUserAlert>
+                            <AlertIcon>
+                                <FiAlertCircle />
+                            </AlertIcon>
+                            <AlertDescription>
+                                Będąc nie zalogowanym twoje zamówienie nie zostanie przypisane do twojego konta
+                            </AlertDescription>
+                        </NoUserAlert>
+                    ) : (
+                        <></>
+                    )}
                     <LocalButton onClick={() => finishHandler()}>Zakończ</LocalButton>
                 </FinishSection>
             </Wrapper>

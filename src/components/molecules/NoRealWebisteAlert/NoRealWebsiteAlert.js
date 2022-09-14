@@ -19,12 +19,14 @@ const NoRealWebsiteAlert = () => {
                         <ul>
                             <li>Trigger function for HotShootPromotion</li>
                             <li>Alert about "this is not real website"</li>
+                            <li>upgrade css</li>
                         </ul>
                     </ListSection>
                     <Subtitle>InProgress:</Subtitle>
                     <ListSection>
                         <ul>
                             <li>RWD</li>
+                            <li>Delete given product from cart</li>
                             <li>Buy without being logged</li>
                         </ul>
                     </ListSection>

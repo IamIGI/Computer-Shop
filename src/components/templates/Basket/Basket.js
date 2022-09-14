@@ -83,13 +83,13 @@ const Basket = () => {
         let orderTemplateDocument = {};
         //logic---------------------------
         Object.values(deliveryCheckboxesOpt).map((x, index) => {
-            if (x === true) {
+            if (x) {
                 tempOpt = Object.keys(deliveryCheckboxesOpt)[index];
             }
         });
 
         Object.values(deliveryCheckboxesPay).map((x, index) => {
-            if (x === true) {
+            if (x) {
                 tempPay = Object.keys(deliveryCheckboxesPay)[index];
             }
         });
@@ -122,8 +122,6 @@ const Basket = () => {
             },
             user: auth.id,
         };
-
-        //check is it document ready to send
 
         const { transactionInfo } = orderTemplateDocument;
         const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;
@@ -190,6 +188,7 @@ const Basket = () => {
                         orderStreet={street}
                     />
                     <PaymentPreview
+                        isUserLogIn={Boolean(auth.id)}
                         priceToPay={priceToPay}
                         finishHandler={finishHandler}
                         priceForDelivery={priceForDelivery}
@@ -197,7 +196,7 @@ const Basket = () => {
                 </PrevWrapper>
             </Prev>
             <Modal position={[30, -80]} width={600} open={isOpen} onClose={() => clearLocalStorage()}>
-                <BoughtPopUp onClose={() => clearLocalStorage()} orderId={orderId} />
+                <BoughtPopUp onClose={() => clearLocalStorage()} orderId={orderId} isUserLogIn={Boolean(auth.id)} />
             </Modal>
         </Wrapper>
     );

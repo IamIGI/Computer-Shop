@@ -11,7 +11,7 @@ import {
     LinkDescription,
     InsideWrapper,
 } from './NavBar.styles';
-import { VscArchive, VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
+import { VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
 import useAuth from 'hooks/useAuth';
 import NoRealWebsiteAlert from 'components/molecules/NoRealWebisteAlert/NoRealWebsiteAlert';
 
@@ -65,14 +65,6 @@ const NavBar = () => {
                             </span>
                         </LinkIcon>
                         <LinkDescription>Produkty</LinkDescription>
-                    </StyledLink>
-                    <StyledLink to="/basket">
-                        <LinkIcon>
-                            <span>
-                                <VscArchive />
-                            </span>
-                        </LinkIcon>
-                        <LinkDescription>Koszyk</LinkDescription>
                     </StyledLink>
                     <StyledLink to="/about">
                         <LinkIcon>

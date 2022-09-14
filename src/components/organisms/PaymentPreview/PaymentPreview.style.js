@@ -9,7 +9,8 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     background-color: ${({ theme }) => theme.colors.lightPurple};
     border-radius: 40px;
-    border: 1px solid grey;
+    /* border: 1px solid grey */
+    border-top: 1px solid gray;
 `;
 
 export const Section = styled.div`
@@ -62,4 +63,20 @@ export const LocalButton = styled(Button)`
         background-color: ${({ theme }) => theme.colors.successDark};
         color: black;
     }
+`;
+
+export const AlertDescription = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.s};
+    width: 60%;
+`;
+
+export const NoUserAlert = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+export const AlertIcon = styled.div`
+    margin-right: 14px;
+    color: red;
 `;
