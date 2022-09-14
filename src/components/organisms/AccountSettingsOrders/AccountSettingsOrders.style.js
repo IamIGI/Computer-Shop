@@ -149,3 +149,22 @@ export const PageButton = styled.div`
 export const Link = styled(NavLink)`
     text-decoration: none;
 `;
+
+export const NoOrders = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 100%;
+`;
+
+export const NoOrderIcon = styled.div`
+    font-size: 4vw;
+`;
+
+export const NoOrderDescription = styled.div`
+    font-size: 30px;
+`;
