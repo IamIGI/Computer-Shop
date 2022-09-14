@@ -49,8 +49,7 @@ export const ProductQuantity = styled.div`
 
 export const ProductsSection = styled.div`
     width: 100%;
-    height: 100%;
-    padding: 3% 9%;
+    padding: 8px 9%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

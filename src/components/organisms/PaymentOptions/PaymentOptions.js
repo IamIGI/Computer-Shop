@@ -7,9 +7,8 @@ import { BsCashCoin, BsWallet2, BsPiggyBank } from 'react-icons/bs';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 
 const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setDeliveryCheckboxesPay }) => {
-    const setState = ({ target }) => {
+    const setState = (name) => {
         let setValue = '';
-        const { name } = target;
         if (deliveryCheckboxesPay[name]) {
             setValue = false;
         } else {
@@ -27,13 +26,8 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                 <SectionDescription title={'Sposób płatności'} icon={<MdOutlinePayment />} />
             </SectionTitle>
             <Wrapper>
-                <Section>
-                    <CheckboxLocal
-                        type="checkbox"
-                        name="online"
-                        checked={deliveryCheckboxesPay.online}
-                        onClick={setState}
-                    />
+                <Section onClick={() => setState('online')}>
+                    <CheckboxLocal type="checkbox" name="online" checked={deliveryCheckboxesPay.online} />
                     <Description>
                         <h4>
                             Płatność online <span>(bezpłatnie)</span>{' '}
@@ -43,13 +37,8 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                         <HiStatusOnline />
                     </Icon>
                 </Section>
-                <Section>
-                    <CheckboxLocal
-                        type="checkbox"
-                        name="card"
-                        checked={deliveryCheckboxesPay.card}
-                        onClick={setState}
-                    />
+                <Section onClick={() => setState('card')}>
+                    <CheckboxLocal type="checkbox" name="card" checked={deliveryCheckboxesPay.card} />
                     <Description>
                         <h4>
                             Karta płatnicza online <span>(bezpłatnie)</span>
@@ -59,13 +48,8 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                         <RiVisaLine />
                     </Icon>
                 </Section>
-                <Section>
-                    <CheckboxLocal
-                        type="checkbox"
-                        name="cash"
-                        checked={deliveryCheckboxesPay.cash}
-                        onClick={setState}
-                    />
+                <Section onClick={() => setState('cash')}>
+                    <CheckboxLocal type="checkbox" name="cash" checked={deliveryCheckboxesPay.cash} />
                     <Description>
                         <h4>Przelew gotówkowy</h4>
                     </Description>
@@ -73,13 +57,8 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                         <BsCashCoin />
                     </Icon>
                 </Section>
-                <Section>
-                    <CheckboxLocal
-                        type="checkbox"
-                        name="uponReceipt"
-                        checked={deliveryCheckboxesPay.uponReceipt}
-                        onClick={setState}
-                    />
+                <Section onClick={() => setState('uponReceipt')}>
+                    <CheckboxLocal type="checkbox" name="uponReceipt" checked={deliveryCheckboxesPay.uponReceipt} />
                     <Description>
                         <h4>Przy odbiorze</h4>
                     </Description>
@@ -87,13 +66,8 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                         <BsWallet2 />
                     </Icon>
                 </Section>
-                <Section>
-                    <CheckboxLocal
-                        type="checkbox"
-                        name="installment"
-                        checked={deliveryCheckboxesPay.installment}
-                        onClick={setState}
-                    />
+                <Section onClick={() => setState('installment')}>
+                    <CheckboxLocal type="checkbox" name="installment" checked={deliveryCheckboxesPay.installment} />
                     <Description>
                         <h4>Raty</h4>
                     </Description>

@@ -14,7 +14,7 @@ import { RiCake3Line } from 'react-icons/ri';
 import useBasket from 'hooks/useBasket';
 import useOrder from 'hooks/useOrder';
 
-const BoughtPopUp = ({ onClose, orderId }) => {
+const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
     const { basketItems } = useBasket();
     const { setOrderItem } = useOrder();
 
@@ -43,9 +43,18 @@ const BoughtPopUp = ({ onClose, orderId }) => {
                 ))}
             </ListOfProducts>
             <BottomSection>
-                <Link onClick={() => goToOrderItem({ _id: orderId })} to={`/accountSettings/orders/history/${orderId}`}>
-                    <Button onClick={() => onClose()}>Status zamówienia</Button>
-                </Link>
+                {isUserLogIn ? (
+                    <>
+                        <Link
+                            onClick={() => goToOrderItem({ _id: orderId })}
+                            to={`/accountSettings/orders/history/${orderId}`}
+                        >
+                            <Button onClick={() => onClose()}>Status zamówienia</Button>
+                        </Link>
+                    </>
+                ) : (
+                    <></>
+                )}
                 <Button onClick={() => onClose()}>Wyjdź</Button>
             </BottomSection>
         </Wrapper>

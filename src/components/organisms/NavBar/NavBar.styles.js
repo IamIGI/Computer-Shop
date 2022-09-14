@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
     margin-top: 10px;
     padding: 10px 0;
+    padding-right: 3%;
 `;
 
 export const InsideWrapper = styled.div`

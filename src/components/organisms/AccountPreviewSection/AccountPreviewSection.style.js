@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     text-align: center;
     flex-wrap: nowrap;
+    padding-left: 20px;
 `;
 
 export const InsideWrapper = styled.div`

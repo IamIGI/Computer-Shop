@@ -36,6 +36,7 @@ const Root = () => {
                         <Route path="allProducts" element={<AllProducts />} />
                         <Route path="about" element={<About />} />
                         <Route path={`/product/:id`} element={<Product />} />
+                        <Route path="basket" element={<Basket />} />
 
                         <Route path="*" element={<MissingPage />} />
                         <Route path="unauthorized" element={<Unauthorized />} />
@@ -50,7 +51,6 @@ const Root = () => {
                                 path={`/accountSettings/orders/history/:orderId`}
                                 element={<AccountOrderHistoryItem />}
                             />
-                            <Route path="basket" element={<Basket />} />
                         </Route>
 
                         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

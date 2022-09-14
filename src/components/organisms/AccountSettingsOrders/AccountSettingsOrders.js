@@ -25,6 +25,7 @@ import { BsBox } from 'react-icons/bs';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { SectionTitle } from 'components/molecules/AccountData/AccountData.style';
 import useOrder from 'hooks/useOrder';
+import { GetUserOrderHistory } from 'api/order';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
@@ -46,7 +47,8 @@ const AccountSettingsOrders = () => {
                 pageNr,
             };
             try {
-                const response = await axiosPrivate.post('order/history', data);
+                const response = await axiosPrivate.post('user/orderhistory', data);
+                console.log(response);
                 setOrderHistory(response.data.orderData);
                 setCountOrders(response.data.orderCount);
             } catch (err) {

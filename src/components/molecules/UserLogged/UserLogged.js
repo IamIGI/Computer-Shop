@@ -9,22 +9,19 @@ import {
     Title,
     UserDescription,
     NavDescription,
-    Line,
     LogoutLink,
 } from './UserLogged.style';
+import { Line } from 'components/atoms/Line/Line';
 import { VscAccount } from 'react-icons/vsc';
 import { BsPerson } from 'react-icons/bs';
 import { RiLogoutCircleLine } from 'react-icons/ri';
-import CartHint from 'components/organisms/CartHint/CartHint';
-import useBasket from 'hooks/useBasket';
 
 const UserLogged = () => {
     const { auth } = useAuth();
-    const { setBasketItems } = useBasket();
+
     const logout = useLogout();
 
     const signOut = async () => {
-        setBasketItems([]);
         await logout();
     };
 
@@ -65,8 +62,6 @@ const UserLogged = () => {
                     </LogoutLink>
                 </li>
             </List>
-            <Line />
-            <CartHint />
         </Wrapper>
     );
 };

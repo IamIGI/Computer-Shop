@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     margin-top: 2%;
-    margin-left: 10%;
+    /* margin-left: 10%; */
     font-size: ${({ theme }) => theme.fontSize.xl};
 `;
 
@@ -88,11 +88,4 @@ export const LogoutLink = styled(NavLink)`
 
 export const NavDescription = styled.div`
     padding-bottom: 4px;
-`;
-
-export const Line = styled.div`
-    /* margin-left: 15%;
-    width: 70%; */
-    margin-bottom: 20px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;

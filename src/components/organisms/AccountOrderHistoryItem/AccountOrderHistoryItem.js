@@ -45,7 +45,8 @@ const AccountOrderHistoryItem = () => {
     useEffect(() => {
         const fetchOrder = async (orderId) => {
             try {
-                const response = await axiosPrivate.get(`/order/history/${orderId}`);
+                // const response = await axiosPrivate.get(`/orderhistory/${orderId}`);
+                const response = await axiosPrivate.get(`user/orderhistory/${orderId}`);
                 setOrderItem(response.data);
                 setWaitForFetch(false);
             } catch (err) {
