@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
 export const MenuSector = styled.div`
-    height: 100px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    height: 70px;
     width: 100%;
+    box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
 `;
 
 export const AboutProductSector = styled.div`
@@ -11,6 +16,7 @@ export const AboutProductSector = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-top: 20px;
 `;
 
 export const Description = styled.div`

@@ -48,7 +48,6 @@ export const Top = styled.div`
 `;
 
 export const Bottom = styled.div`
-    /* border: 1px solid red; */
     padding-left: 10%;
     display: flex;
     flex-direction: row;
