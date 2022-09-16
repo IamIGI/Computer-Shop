@@ -15,6 +15,7 @@ import {
 } from './ProductPreview.styles';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ProductsApi from 'api/products';
+
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
@@ -62,8 +63,8 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                     {products.map((item, index) => (
                         <>
                             {index < Show && (
-                                <Link to={`/product/${item._id}`} key={item._id}>
-                                    <Wrapper>
+                                <Wrapper>
+                                    <Link to={`/product/${item._id}`} key={item._id}>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />
                                             <h1>{item.name}</h1>
@@ -109,11 +110,10 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                             ) : (
                                                 <span>{item.price} zł</span>
                                             )}
-
-                                            <BuyButton />
                                         </Bottom>
-                                    </Wrapper>
-                                </Link>
+                                    </Link>
+                                    <BuyButton item={item} index={index} />
+                                </Wrapper>
                             )}
                         </>
                     ))}

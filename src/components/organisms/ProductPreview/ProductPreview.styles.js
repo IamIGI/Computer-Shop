@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
+    position: relative;
     a,
     a:hover,
     a:visited,
@@ -47,16 +48,18 @@ export const Top = styled.div`
 `;
 
 export const Bottom = styled.div`
+    /* border: 1px solid red; */
+    padding-left: 10%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     span {
         font-size: ${({ theme }) => theme.fontSize.xl};
         color: black;
     }
-    margin-bottom: 10px;
+    padding-bottom: 10px;
 `;
 
 export const ProductOpinionsShort = styled.div`

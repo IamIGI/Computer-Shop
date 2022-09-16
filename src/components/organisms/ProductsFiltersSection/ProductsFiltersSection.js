@@ -36,6 +36,7 @@ const ProductsFiltersSection = ({ handleFilters }) => {
         setRam({ min: '', max: '' });
         setDisk({ min: '', max: '' });
         setSortBy('none');
+        setSearchTerm('');
     };
 
     // const handleKeyDown = (e) => {

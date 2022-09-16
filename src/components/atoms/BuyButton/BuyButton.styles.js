@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    z-index: 1;
     width: 40px;
     height: 40px;
     background-color: white;
