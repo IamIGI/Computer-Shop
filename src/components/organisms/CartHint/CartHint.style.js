@@ -36,8 +36,8 @@ export const Quantity = styled.div`
 export const DeleteProduct = styled.div`
     position: absolute;
 
-    bottom: -15px;
-    right: -15px;
+    bottom: -12px;
+    right: -12px;
 
     color: gray;
 
@@ -65,8 +65,8 @@ export const ProductQuantity = styled.div`
     font-weight: 700;
     padding-top: 5px;
     position: absolute;
-    right: -12px;
-    top: -12px;
+    right: -10px;
+    top: -10px;
 `;
 
 export const ProductsSection = styled.div`
@@ -80,7 +80,8 @@ export const ProductsSection = styled.div`
 
 export const Image = styled.div`
     position: relative;
-    margin: 3%;
+    margin: 13px 3%;
+    /* margin: 3%; */
     height: 80px;
     width: auto;
     img {

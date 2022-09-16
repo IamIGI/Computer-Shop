@@ -10,28 +10,18 @@ import { useParams } from 'react-router-dom';
 
 const Product = () => {
     const code = useParams().id;
-    // console.log(code);
     const [waitForFetchProduct, setWaitForFetchProduct] = useState(true);
-    const [product2, setProduct2] = useState({});
-    const { setProduct } = useProduct();
+    const { product, setProduct } = useProduct();
 
     useEffect(() => {
         const fetchProduct = async (code) => {
             const response = await getProduct(code);
-            setProduct2(response);
             setProduct(response);
             setWaitForFetchProduct(false);
         };
 
         fetchProduct(code);
     }, [code]);
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [code]);
-
-    //Work when element is rendered
-    document.getElementById('Top') && document.getElementById('Top').scrollIntoView({ behavior: 'smooth' });
 
     return (
         <Wrapper>
@@ -43,13 +33,13 @@ const Product = () => {
                 ) : (
                     <>
                         <TopWrapper id="Top">
-                            <ProductTopContent product={product2} />
+                            <ProductTopContent product={product} />
                         </TopWrapper>
                         <MidWrapper>
-                            <ProductMiddleContent product={product2} />
+                            <ProductMiddleContent product={product} />
                         </MidWrapper>
                         <BottomWrapper>
-                            <CommentsSection product={product2} />
+                            <CommentsSection product={product} />
                         </BottomWrapper>
                     </>
                 )}

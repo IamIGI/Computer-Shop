@@ -19,15 +19,18 @@ const NoRealWebsiteAlert = () => {
                         <ul>
                             <li>Trigger function for HotShootPromotion</li>
                             <li>Alert about "this is not real website"</li>
+                            <li>Info "be log in to save order"</li>
                             <li>upgrade css</li>
+                            <li>Delete given product from cart</li>
+                            <li>Buy without being logged</li>
+                            <li>Navigate after authentication</li>
                         </ul>
                     </ListSection>
                     <Subtitle>InProgress:</Subtitle>
                     <ListSection>
                         <ul>
-                            <li>RWD</li>
-                            <li>Delete given product from cart</li>
-                            <li>Buy without being logged</li>
+                            <li>RWD - hide accountPreview on minWidth</li>
+                            <li>Cleaner code - make external function for component</li>
                         </ul>
                     </ListSection>
                     <GitLink>
