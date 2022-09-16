@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
 
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+    scroll-behavior: smooth;
 `;
 export const TopWrapper = styled.div`
     height: 100%;
