@@ -97,6 +97,7 @@ export const OrderProducts = styled.div`
     flex-direction: row;
 `;
 export const ProductImage = styled.div`
+    position: relative;
     height: 120px;
     width: auto;
     img {
@@ -105,6 +106,7 @@ export const ProductImage = styled.div`
     }
 `;
 export const ProductImageSmall = styled.div`
+    position: relative;
     margin-top: 5%;
     margin-left: 3%;
     height: 70px;
@@ -167,4 +169,18 @@ export const NoOrderIcon = styled.div`
 
 export const NoOrderDescription = styled.div`
     font-size: 30px;
+`;
+
+export const Quantity = styled.div`
+    border-radius: 50%;
+    height: ${({ height }) => `${height}px`};
+    width: ${({ width }) => `${width}px`};
+    background-color: ${({ theme }) => theme.colors.success};
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 5px;
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
 `;

@@ -17,6 +17,7 @@ import {
     NoOrders,
     NoOrderIcon,
     NoOrderDescription,
+    Quantity,
 } from './AccountSettingsOrders.style';
 
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
@@ -29,6 +30,7 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { SectionTitle } from 'components/molecules/AccountData/AccountData.style';
 import useOrder from 'hooks/useOrder';
 import { BsLaptop } from 'react-icons/bs';
+import { getStatus, getDate } from './AccountSettingsOrders.logic';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
@@ -63,76 +65,12 @@ const AccountSettingsOrders = () => {
         setWaitForFetch(false);
     }, [pageNr]);
 
-    //set right status name
-    const getStatus = (number) => {
-        switch (number) {
-            case 1:
-                return 'W realizacji';
-            case 2:
-                return 'Wysłane';
-            case 3:
-                return 'Zakończone';
-            default:
-                console.log('Bad number status given');
-                break;
-        }
-    };
-    //set right month name
-    const getDate = (date) => {
-        let day = date.split('.')[2];
-        let month = date.split('.')[1];
-        let year = date.split('.')[0];
-        let monthName = '';
-        switch (month) {
-            case '01':
-                monthName = 'Styczeń';
-                break;
-            case '02':
-                monthName = 'Luty';
-                break;
-            case '03':
-                monthName = 'Marzec';
-                break;
-            case '04':
-                monthName = 'Kwiecień';
-                break;
-            case '05':
-                monthName = 'Maj';
-                break;
-            case '06':
-                monthName = 'Czerwiec';
-                break;
-            case '07':
-                monthName = 'Lipiec';
-                break;
-            case '08':
-                monthName = 'Sierpień';
-                break;
-            case '09':
-                monthName = 'Wrzesień';
-                break;
-            case '10':
-                monthName = 'Październik';
-                break;
-            case '11':
-                monthName = 'Listopad';
-                break;
-            case '12':
-                monthName = 'Grudzień';
-                break;
-
-            default:
-                console.log('Bad date given');
-                break;
-        }
-        return `${day} ${monthName} ${year}`;
-    };
-
     //set right number of page buttons
     const buttonClicked = (number) => {
         setPageNr(number);
     };
 
+    //setNumberOfButtons
     const countPageButtons = [];
     for (let i = 1; i <= Math.ceil(countOrders / 5.01); i++) {
         countPageButtons.push(i);
@@ -185,6 +123,9 @@ const AccountSettingsOrders = () => {
                                                         <>
                                                             {item.products.length > 1 ? (
                                                                 <ProductImageSmall>
+                                                                    <Quantity height={30} width={30}>
+                                                                        {product.quantity}
+                                                                    </Quantity>
                                                                     <img
                                                                         src={product.prevImg}
                                                                         alt="images of product"
@@ -193,6 +134,9 @@ const AccountSettingsOrders = () => {
                                                             ) : (
                                                                 <>
                                                                     <ProductImage>
+                                                                        <Quantity height={30} width={30}>
+                                                                            {product.quantity}
+                                                                        </Quantity>
                                                                         <img
                                                                             src={product.prevImg}
                                                                             alt="images of product"
