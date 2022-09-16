@@ -4,7 +4,9 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 24px;
+    width: 80%;
+    margin: 12px auto;
+    min-width: 400px;
 
     a {
         padding: 10px 2.5%;
