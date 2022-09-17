@@ -24,15 +24,15 @@ import { RiCoinLine } from 'react-icons/ri';
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const { basketItems, setBasketItems } = useBasket();
-    const [price, setPrice] = useState(0);
+    const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
 
     const getPrice = (product) => {
         if (product.special_offer.mode) {
-            setPrice(product.price - product.special_offer.price);
+            setPriceBeforeDiscount(product.price + product.special_offer.price);
             setIsDiscount(true);
         } else {
-            setPrice(product.price);
+            setPriceBeforeDiscount(0); // don't matter
             setIsDiscount(false);
         }
     };
@@ -67,9 +67,9 @@ const ProductBuyContent = ({ product }) => {
                         _id: product._id,
                         quantity: q,
                         name: product.name,
-                        price: price,
+                        price: product.price,
                         isDiscount,
-                        priceBeforeDiscount: product.price,
+                        priceBeforeDiscount: priceBeforeDiscount,
                     },
                 ];
             });
@@ -92,14 +92,14 @@ const ProductBuyContent = ({ product }) => {
                     <>
                         <DiscountSize>Oszczędzasz {product.special_offer.price} zł </DiscountSize>
                         <PriceSection>
-                            <OldPrice>{product.price},00zł</OldPrice>
-                            <CurrentPrice> {price},00 zł</CurrentPrice>
+                            <OldPrice>{priceBeforeDiscount},00zł</OldPrice>
+                            <CurrentPrice> {product.price},00 zł</CurrentPrice>
                         </PriceSection>
                     </>
                 ) : (
                     <>
                         <PriceSection>
-                            <CurrentPrice> {price},00 zł</CurrentPrice>
+                            <CurrentPrice> {product.price},00 zł</CurrentPrice>
                         </PriceSection>
                     </>
                 )}
@@ -139,7 +139,7 @@ const ProductBuyContent = ({ product }) => {
                     </HintIcon>
                     <HintDescription>
                         <HintTitle>
-                            Rata tylko {(price / 24).toFixed(2)} zł <br />
+                            Rata tylko {(product.price / 24).toFixed(2)} zł <br />
                         </HintTitle>
                         <HintAsk>Oblicz ratę</HintAsk>
                     </HintDescription>
