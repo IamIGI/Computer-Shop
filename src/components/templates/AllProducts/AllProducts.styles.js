@@ -5,8 +5,6 @@ export const Wrapper = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 300px 1fr;
-    text-align: center;
-    justify-content: center;
 `;
 
 export const Products = styled.div`
@@ -15,10 +13,10 @@ export const Products = styled.div`
     grid-column: 2/3;
 
     display: flex;
-    justify-content: space-evenly;
     flex-direction: row;
     flex-wrap: wrap;
     overflow-y: scroll;
+    justify-content: space-evenly;
 
     &::-webkit-scrollbar {
         display: none;
