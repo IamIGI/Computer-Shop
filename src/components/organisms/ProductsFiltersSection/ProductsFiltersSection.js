@@ -9,6 +9,9 @@ import {
     SearchSection,
     Title,
     Wrapper,
+    DiscountFilter,
+    DiscountDesc,
+    DiscountCheckbox,
 } from './ProductsFiltersSection.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { Button } from 'components/atoms/Button/Button';
@@ -20,6 +23,7 @@ const ProductsFiltersSection = ({ handleFilters }) => {
     const [ram, setRam] = useState({ min: '', max: '' });
     const [disk, setDisk] = useState({ min: '', max: '' });
     const [searchTerm, setSearchTerm] = useState('');
+    const [discounts, setDiscounts] = useState(false);
     const [refreshSearchTerm, setRefreshSearchTerm] = useState(false);
     let processorsArray = [];
 
@@ -28,6 +32,10 @@ const ProductsFiltersSection = ({ handleFilters }) => {
     };
     const handleProcessors = (data) => {
         setProcessors([data]);
+    };
+
+    const handleDiscount = () => {
+        setDiscounts(!discounts);
     };
 
     const clearFilters = () => {
@@ -80,10 +88,12 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                 }
             }
         }
+        console.log();
         producers[0] === undefined && (producers[0] = []);
         let productFilters = {
             searchTerm,
             filters: {
+                discounts,
                 producers: producers[0],
                 processors: processorsArray,
                 ram,
@@ -94,7 +104,7 @@ const ProductsFiltersSection = ({ handleFilters }) => {
         setTimeout(() => {
             handleFilters(productFilters);
         }, 500);
-    }, [sortBy, producers, processors, ram, disk, searchTerm]);
+    }, [sortBy, producers, processors, ram, disk, searchTerm, discounts]);
 
     return (
         <Wrapper>
@@ -114,6 +124,11 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                     ))}
                 </select>
             </SelectStyle>
+            <Title>Status</Title>
+            <DiscountFilter>
+                <DiscountCheckbox type="checkbox" onChange={() => handleDiscount()} checked={discounts} />
+                <DiscountDesc onClick={() => handleDiscount()}>Promocje</DiscountDesc>
+            </DiscountFilter>
             <FilterProducers data={producers[0]} filterData={Producers} handleProducers={handleProducers} />
             <FilterProcessors data={processors[0]} filterData={Processors} handleProcessors={handleProcessors} />
             <Title>RAM</Title>

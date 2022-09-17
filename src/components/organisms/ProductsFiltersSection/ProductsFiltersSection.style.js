@@ -18,9 +18,7 @@ export const Title = styled.p`
 `;
 
 export const InputField = styled.input`
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px 10px 0px 10px;
     height: 25px;
     width: 100px;
     border-radius: 10px;
@@ -67,5 +65,38 @@ export const SearchField = styled.input`
     &:focus {
         outline-width: 0;
         border: 1px solid grey;
+    }
+`;
+
+export const DiscountFilter = styled.div`
+    margin: 10px 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+`;
+export const DiscountDesc = styled.div`
+    margin-top: 9px;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    color: ${({ theme }) => theme.colors.darkGrey};
+
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+export const DiscountCheckbox = styled.input`
+    transform: scale(1.5);
+    margin: 8px 13px 0 13px;
+    height: 20px;
+    width: auto;
+    /* border-radius: 16px; */
+    border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    color: ${({ theme }) => theme.colors.darkGrey};
+    text-align: center;
+    padding-right: 10px;
+
+    &:hover {
+        border: 1px solid ${({ theme }) => theme.colors.darkPurple};
     }
 `;

@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
     text-align: left;
     margin: 15px 15px;
     width: 290px;
+    height: fit-content;
     border: 1px solid white;
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 
