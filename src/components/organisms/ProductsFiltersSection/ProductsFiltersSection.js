@@ -88,7 +88,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                 }
             }
         }
-        console.log();
         producers[0] === undefined && (producers[0] = []);
         let productFilters = {
             searchTerm,

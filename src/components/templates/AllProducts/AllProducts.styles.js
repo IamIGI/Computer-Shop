@@ -5,8 +5,6 @@ export const Wrapper = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 300px 1fr;
-    /* text-align: center; */
-    /* justify-content: center; */
 `;
 
 export const Products = styled.div`
