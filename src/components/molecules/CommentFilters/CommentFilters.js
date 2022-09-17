@@ -11,6 +11,7 @@ import {
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { useState, useEffect } from 'react';
 import useProduct from 'hooks/useProduct';
+import { ratingOptions, filterOptions } from './CommentFilters.logic';
 
 const CommentFilters = ({ handleFilters, comments }) => {
     const [rating, setRating] = useState(0);
@@ -18,28 +19,11 @@ const CommentFilters = ({ handleFilters, comments }) => {
     const [confirmed, setConfirmed] = useState(false);
     const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
     const { product } = useProduct();
+
     useEffect(() => {
         let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
         handleFilters(filters);
     }, [rating, sortBy, confirmed, product]);
-
-    const ratingOptions = [
-        { label: 'Wszystkie oceny', value: 0 },
-        { label: '1 gwiazdka', value: 1 },
-        { label: '2 gwiazdka', value: 2 },
-        { label: '3 gwiazdka', value: 3 },
-        { label: '4 gwiazdka', value: 4 },
-        { label: '5 gwiazdka', value: 5 },
-        { label: '6 gwiazdka', value: 6 },
-    ];
-
-    const filterOptions = [
-        { label: 'Najnowsze', value: 'date' },
-        { label: 'Najstarsze', value: '-date' },
-        { label: 'Najbardziej pomocne', value: 'likes.up' },
-        { label: 'Najwyższe oceny', value: 'content.rating' },
-        { label: 'Najniższe oceny', value: '-content.rating' },
-    ];
 
     return (
         <Wrapper>
