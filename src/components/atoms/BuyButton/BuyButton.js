@@ -40,9 +40,9 @@ const BuyButton = ({ item, index }) => {
                         _id: product._id,
                         quantity: q,
                         name: product.name,
-                        price: isDiscount ? price - discountValue : price,
+                        price: product.price,
                         isDiscount,
-                        priceBeforeDiscount: product.price,
+                        priceBeforeDiscount: isDiscount ? price + discountValue : price,
                     },
                 ];
             });

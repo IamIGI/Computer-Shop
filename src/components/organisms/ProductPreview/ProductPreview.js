@@ -101,10 +101,10 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                             {item.special_offer.mode ? (
                                                 <PriceSection>
                                                     <PriceOldValue>
-                                                        <span>{item.price} zł</span>
+                                                        <span>{item.price + item.special_offer.price} zł</span>
                                                     </PriceOldValue>
                                                     <PriceValue>
-                                                        <span>{item.price - item.special_offer.price} zł</span>
+                                                        <span>{item.price} zł</span>
                                                     </PriceValue>
                                                 </PriceSection>
                                             ) : (
