@@ -60,11 +60,20 @@ export const accountSettingsDelete = yup
 
 export const recipientDetails = yup
     .object({
-        name: yup.string().required(),
+        name: yup
+            .string()
+            .matches(/^[a-zA-Z\s]*$/)
+            .required(),
         street: yup.string().required(),
-        zipCode: yup.string().required(),
+        zipCode: yup
+            .string()
+            .matches(/^\d{2}(?:[-]\d{3})?$/)
+            .required(),
         place: yup.string().required(),
         email: yup.string().email().required(),
-        phone: yup.number().required(),
+        phone: yup
+            .string()
+            .matches(/^\d{9}$/)
+            .required(),
     })
     .required();

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { SectionTitle, Wrapper, InputLocal, ButtonWrapper } from './OrderForm.style';
-import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import { CgUserList } from 'react-icons/cg';
+import { Wrapper, InputLocal, ButtonWrapper, Error } from './OrderForm.style';
+
 import { Button } from 'components/atoms/Button/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { recipientDetails } from 'data/FormSchema';
 
-const OrderForm = ({ setOrderData }) => {
+const OrderForm = ({ handleOrderData, comment, handleOrderComment }) => {
     //form logic
     const {
         register,
@@ -18,38 +16,30 @@ const OrderForm = ({ setOrderData }) => {
         resolver: yupResolver(recipientDetails),
     });
 
+    //there could be issue with that (data)
     const onSubmit = (data) => {
-        setOrderData({
-            name: data.name,
-            street: data.street,
-            zipCode: data.zipCode,
-            place: data.place,
-            email: data.email,
-            phone: data.phone,
-        });
+        handleOrderData(data.name, data.street, data.zipCode, data.place, data.email, data.phone, comment);
+        //clear data
         reset({ name: '', street: '', zipCode: '', place: '', email: '', phone: '' });
+        handleOrderComment('');
     };
 
     return (
         <>
-            ``
-            <SectionTitle>
-                <SectionDescription title={'Dane Odbiorcy'} icon={<CgUserList />} />
-            </SectionTitle>
             <Wrapper>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputLocal name="name" placeholder="Imie i nazwisko lub nazwa firmy" {...register('name')} />
-                    <p>{errors.name && 'Uzupełnij pole'}</p>
+                    <Error>{errors.name && 'Tylko litery'}</Error>
                     <InputLocal name="street" placeholder="Ulica i numer" {...register('street')} />
-                    <p>{errors.street && 'Uzupełnij pole'}</p>
-                    <InputLocal name="zipCode" placeholder="Kod pocztowy" {...register('zipCode')} />
-                    <p>{errors.zipCode && 'Uzupełnij pole'}</p>
+                    <Error>{errors.street && 'Uzupełnij pole'}</Error>
+                    <InputLocal name="zipCode" placeholder="Kod pocztowy (xx-xxx)" {...register('zipCode')} />
+                    <Error>{errors.zipCode && 'Wpisz poprawny numer pocztowy'}</Error>
                     <InputLocal name="place" placeholder="Miejscowosc" {...register('place')} />
-                    <p>{errors.place && 'Uzupełnij pole'}</p>
+                    <Error>{errors.place && 'Uzupełnij pole'}</Error>
                     <InputLocal name="email" placeholder="E-mail" {...register('email')} />
-                    <p>{errors.email && 'Wpisz poprawny adres email'}</p>
+                    <Error>{errors.email && 'Wpisz poprawny adres email'}</Error>
                     <InputLocal name="phone" placeholder="Telefon" {...register('phone')} />
-                    <p>{errors.phone && 'Numer niepoprawny'}</p>
+                    <Error>{errors.phone && 'Wpisz poprawny numer'}</Error>
                     <ButtonWrapper>
                         <Button type="submit"> Zapisz </Button>
                     </ButtonWrapper>

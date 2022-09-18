@@ -1,6 +1,5 @@
 import BasketPreview from 'components/organisms/BasketPreview/BasketPreview';
 import DeliveryOptions from 'components/organisms/DeliveryOptions/DeliveryOptions';
-import OrderForm from 'components/organisms/OderForm/OderForm';
 import DeliveryPreview from 'components/organisms/DeliveryPreview/DeliveryPreview';
 import PaymentOptions from 'components/organisms/PaymentOptions/PaymentOptions';
 import React, { useEffect, useState } from 'react';
@@ -15,6 +14,7 @@ import { Prices } from 'data/Prices';
 import useBasket from 'hooks/useBasket';
 import Modal from 'components/atoms/Modal/Modal';
 import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
+import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
 
 const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
 const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
@@ -25,6 +25,7 @@ const initRecipientDetails = {
     place: '',
     email: '',
     phone: '',
+    comment: '',
 };
 let basketInit = null;
 
@@ -60,6 +61,18 @@ const Basket = () => {
         localStorage.removeItem('basketItems');
         setBasketItems([]);
         setIsOpen([false]);
+    };
+
+    const handleOrderData = (name, street, zipCode, place, email, phone, comment) => {
+        setOrderData({
+            name,
+            street,
+            zipCode,
+            place,
+            email,
+            phone,
+            comment,
+        });
     };
 
     const finishHandler = () => {
@@ -172,7 +185,7 @@ const Basket = () => {
                     deliveryCheckboxesPay={deliveryCheckboxesPay}
                     setDeliveryCheckboxesPay={setDeliveryCheckboxesPay}
                 />
-                <OrderForm setOrderData={setOrderData} />
+                <RecipientDetails handleOrderData={handleOrderData} />
             </Main>
             <Prev>
                 <PrevWrapper>
