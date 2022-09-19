@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     width: 100%;
     grid-column: 1/2;
     padding-right: 30px;
+    justify-content: center;
     border-right: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
@@ -48,7 +49,8 @@ export const SearchDescription = styled.div`
 `;
 
 export const SearchField = styled.input`
-    margin: 10px 10px 20px 10px;
+    /* margin: 10px 10px 20px 10px; */
+    margin: 10px 0;
     height: 40px;
     width: 250px;
     border-radius: 10px;
@@ -87,7 +89,7 @@ export const DiscountDesc = styled.div`
 
 export const DiscountCheckbox = styled.input`
     transform: scale(1.5);
-    margin: 8px 13px 0 13px;
+    margin: 8px 10px 0 10px;
     height: 20px;
     width: auto;
     /* border-radius: 16px; */

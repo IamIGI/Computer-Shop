@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     margin-top: 25%;
+    justify-content: center;
+    text-align: center;
 
     p {
         font-size: ${({ theme }) => theme.fontSize.xl};

@@ -5,7 +5,10 @@ import styled from 'styled-components';
 export const Wrapper = styled.div``;
 
 export const BottomRegister = styled(Bottom)`
-    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 10px;
 
     p {
         font-size: ${({ theme }) => theme.fontSize.m};
