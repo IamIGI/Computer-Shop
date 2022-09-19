@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 //change type='checkbox'
 export const Checkbox = styled.input`
-    margin: 10px 10px 0 10px;
+    /* margin: 10px 10px 0 10px; */
+    margin: 0 10px;
     height: 20px;
     width: auto;
     border-radius: 16px;
