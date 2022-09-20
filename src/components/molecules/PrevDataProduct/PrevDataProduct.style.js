@@ -8,7 +8,10 @@ export const Wrapper = styled.div`
         text-decoration: none;
         color: ${({ theme }) => theme.colors.darkGrey};
         font-size: ${({ theme }) => theme.fontSize.m_plus};
-
+        span {
+            border-radius: 50%;
+            border: 1px solid white;
+        }
         :hover {
             color: ${({ theme }) => theme.colors.black};
 
