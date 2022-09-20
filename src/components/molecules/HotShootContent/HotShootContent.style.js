@@ -8,7 +8,9 @@ export const Wrapper = styled.div`
         color: inherit;
         text-decoration: none;
     }
-    height: 100%;
+    height: fit-content;
+    padding: 20px;
+    padding: 20px 20px 30px 20px;
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     border-radius: 30px;
@@ -31,7 +33,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.div`
-    margin-top: -50px;
+    margin-top: -10px;
     margin-left: 20px;
     text-align: left;
 `;
