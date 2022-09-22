@@ -13,8 +13,10 @@ import { BasketProvider } from 'context/BasketProvider';
 import { ProductProvider } from 'context/ProductProvider';
 import { CommentsProvider } from 'context/CommentsProvider';
 import { BrowserRouter } from 'react-router-dom';
+import { changeHotShootTimer } from 'data/ChangeHotShootTimer';
 
 const MainTemplate = ({ children }) => {
+    changeHotShootTimer();
     return (
         <>
             <GlobalStyle />
