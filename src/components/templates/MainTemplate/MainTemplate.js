@@ -1,7 +1,7 @@
 import AccountPreviewSection from 'components/organisms/AccountPreviewSection/AccountPreviewSection';
 import NavBar from 'components/organisms/NavBar/NavBar';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../Footer/Footer';
 import { theme } from 'assets/styles/theme';
 import { ThemeProvider } from 'styled-components';
@@ -12,30 +12,34 @@ import { OrderProvider } from 'context/OrderItemProvider';
 import { BasketProvider } from 'context/BasketProvider';
 import { ProductProvider } from 'context/ProductProvider';
 import { CommentsProvider } from 'context/CommentsProvider';
+import { RefreshProvider } from 'context/refreshProvider';
 import { BrowserRouter } from 'react-router-dom';
-import { changeHotShootTimer } from 'data/ChangeHotShootTimer';
+import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
 
 const MainTemplate = ({ children }) => {
-    changeHotShootTimer();
     return (
         <>
             <GlobalStyle />
+
             <Wrapper>
                 <BrowserRouter>
                     <ThemeProvider theme={theme}>
                         <BasketProvider>
                             <ProductProvider>
                                 <OrderProvider>
-                                    <CommentsProvider>
-                                        <AuthProvider>
-                                            <NavBar />
-                                            <InsideWrapper>
-                                                {children}
-                                                <AccountPreviewSection />
-                                            </InsideWrapper>
-                                            <Footer />
-                                        </AuthProvider>
-                                    </CommentsProvider>
+                                    <RefreshProvider>
+                                        <CommentsProvider>
+                                            <ChangeHotShootTimer />
+                                            <AuthProvider>
+                                                <NavBar />
+                                                <InsideWrapper>
+                                                    {children}
+                                                    <AccountPreviewSection />
+                                                </InsideWrapper>
+                                                <Footer />
+                                            </AuthProvider>
+                                        </CommentsProvider>
+                                    </RefreshProvider>
                                 </OrderProvider>
                             </ProductProvider>
                         </BasketProvider>

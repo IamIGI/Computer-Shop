@@ -4,11 +4,13 @@ import { getHotShootPromotion } from 'api/hotShoot';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { Link } from 'components/atoms/Link/Link';
 import { TimerCount } from './HotShootContent.logic';
+import useRefresh from 'hooks/useRefresh';
 
 const HotShootContent = () => {
     const [counters, setCounters] = useState([1, 2, 3]);
     const [isFetchHotShoot, setIsFetchHotShoot] = useState(true);
     const [hotShoot, setHotShoot] = useState({});
+    const { refresh } = useRefresh();
 
     useEffect(() => {
         const fetchHotShoot = async () => {
@@ -25,7 +27,7 @@ const HotShootContent = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [refresh]);
 
     return (
         <Wrapper>
