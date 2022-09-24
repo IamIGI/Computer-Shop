@@ -27,7 +27,6 @@ const initRecipientDetails = {
     phone: '',
     comment: '',
 };
-let basketInit = null;
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -57,7 +56,6 @@ const Basket = () => {
     const [orderId, setOrderId] = useState('');
 
     const clearLocalStorage = () => {
-        localStorage.removeItem('productsInBasket');
         localStorage.removeItem('basketItems');
         setBasketItems([]);
         setIsOpen([false]);
@@ -80,12 +78,6 @@ const Basket = () => {
             return true;
         });
     };
-
-    if (JSON.parse(localStorage.getItem('productsInBasket')) !== null) {
-        basketInit = JSON.parse(localStorage.getItem('productsInBasket')).products;
-    } else {
-        basketInit = null;
-    }
 
     useEffect(() => {
         let isMounted = true;

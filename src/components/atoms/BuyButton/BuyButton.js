@@ -47,14 +47,6 @@ const BuyButton = ({ item, index }) => {
                 ];
             });
         }
-        let basket = JSON.parse(localStorage.getItem('productsInBasket'));
-        if (basket == null) {
-            let addedProduct = { products: [product._id] };
-            localStorage.setItem('productsInBasket', JSON.stringify(addedProduct));
-        } else {
-            basket.push(product._id);
-            localStorage.setItem('productsInBasket', JSON.stringify(basket));
-        }
     }
 
     return (
