@@ -64,7 +64,7 @@ const AccountEntitlements = ({ accountEnlistments }) => {
             </SectionTitle>
             <Wrapper>
                 {enlistments === undefined ? (
-                    <LoadingAnimation />
+                    <LoadingAnimation loadingSize={10} />
                 ) : (
                     <>
                         <form onSubmit={handleSubmit(onSubmit)}>

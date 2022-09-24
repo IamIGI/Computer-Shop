@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     text-align: center;
+    /* align-items: center; */
     flex-direction: column;
     /* grid-template-rows: 100px 220px 100px 100px 150px; */
 

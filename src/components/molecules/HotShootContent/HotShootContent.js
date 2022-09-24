@@ -32,7 +32,7 @@ const HotShootContent = () => {
     return (
         <Wrapper>
             {isFetchHotShoot ? (
-                <LoadingAnimation />
+                <LoadingAnimation loadingSize={15} />
             ) : (
                 <>
                     <Link to={`/product/${hotShoot.productData._id}`}>
@@ -40,7 +40,7 @@ const HotShootContent = () => {
                             <h2>Gorący strzał</h2>
                         </Title>
                         <Image>
-                            <img src={hotShoot.productData.prevImg} />
+                            <img src={hotShoot.productData.prevImg} alt="product" />
                         </Image>
                         <Description>
                             <p>{hotShoot.productData.name}</p>

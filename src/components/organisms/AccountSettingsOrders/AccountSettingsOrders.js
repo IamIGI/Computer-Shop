@@ -64,6 +64,7 @@ const AccountSettingsOrders = () => {
         setWaitForFetch(true);
         getUserOrderHistory();
         setWaitForFetch(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageNr]);
 
     //set right number of page buttons
@@ -92,7 +93,7 @@ const AccountSettingsOrders = () => {
                 <BodySection>
                     <>
                         {waitForFetch ? (
-                            <LoadingAnimation />
+                            <LoadingAnimation loadingSize={10} />
                         ) : orderHistory.length === 0 ? (
                             <NoOrders>
                                 <NoOrderIcon>
