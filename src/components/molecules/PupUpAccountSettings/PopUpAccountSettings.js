@@ -117,7 +117,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                                 onChange={(e) => setEditedField(e.target.value)}
                                 onFocus={() => setFieldFocus(true)}
                                 onBlur={() => setFieldFocus(false)}
-                                onKeyUp={name === 'hashedPassword' && checkCapsLock}
+                                onKeyUp={name === 'hashedPassword' ? checkCapsLock : undefined}
                             />
                         </div>
                         {fieldFocus && isCapsLockOn && name === 'hashedPassword' ? (

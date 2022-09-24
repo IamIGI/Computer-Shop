@@ -118,8 +118,10 @@ const ProductsFiltersSection = ({ handleFilters }) => {
             </SearchSection>
             <SelectStyle width="250px">
                 <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                    {filterOptions.map((option) => (
-                        <option value={option.value}>{option.label}</option>
+                    {filterOptions.map((option, index) => (
+                        <option value={option.value} key={index}>
+                            {option.label}
+                        </option>
                     ))}
                 </select>
             </SelectStyle>

@@ -13,6 +13,7 @@ import {
     Link,
     TitleSection,
     Wrapper,
+    InsideWrapper,
     ProductImageSmall,
     NoOrders,
     NoOrderIcon,
@@ -102,11 +103,10 @@ const AccountSettingsOrders = () => {
                         ) : (
                             <>
                                 {orderHistory.map((item, index) => (
-                                    <>
+                                    <InsideWrapper key={index}>
                                         <Link
                                             onClick={() => goToOrderItem(item)}
                                             to={`/accountSettings/orders/history/${item._id}`}
-                                            key={index}
                                         >
                                             <OrderContent>
                                                 <OrderDescription>
@@ -152,7 +152,7 @@ const AccountSettingsOrders = () => {
                                                 </OrderProducts>
                                             </OrderContent>
                                         </Link>
-                                    </>
+                                    </InsideWrapper>
                                 ))}
                             </>
                         )}

@@ -52,9 +52,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
 
     useEffect(() => {
         let temp = 0;
-        basketItems.map((item) => {
-            temp += item.price * item.quantity;
-        });
+        basketItems.map((item) => (temp += item.price * item.quantity));
         setPriceToPay(() => {
             return temp;
         });
@@ -62,6 +60,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
         setProductsInBasket(() => {
             return basketItems;
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [basketItems]);
 
     return (
@@ -82,13 +81,13 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                     <List>
                         {basketItems.map((item, index) => (
                             <>
-                                <li key={index} id={index}>
-                                    <Section>
+                                <li id={index}>
+                                    <Section key={index}>
                                         <ImageArea>
-                                            <img src={item.prevImg} alt="Product img" />
+                                            <img src={item.prevImg} alt="Product prev" />
                                         </ImageArea>
                                         <DescriptionArea>
-                                            <Link to={`/product/${item._id}`} key={item._id}>
+                                            <Link to={`/product/${item._id}`}>
                                                 <Title>{item.name}</Title>
                                             </Link>
                                             <DescriptionBottom>

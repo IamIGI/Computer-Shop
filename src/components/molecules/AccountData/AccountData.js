@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ButtonLocal, InputLocal, LabelArea, SectionChange, SectionTitle, Wrapper } from './AccountData.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { FiSettings } from 'react-icons/fi';
@@ -21,7 +21,7 @@ const AccountData = ({ accountInfo, handleRefresh }) => {
                 </div>
                 <SectionChange>
                     <LabelArea>Imię</LabelArea>
-                    <InputLocal value={accountInfo.firstName} name="firstName" disabled="true" />
+                    <InputLocal value={accountInfo.firstName} name="firstName" disabled={true} />
                     <ButtonLocal
                         onClick={() => setIsOpen([true, { DataName: 'firstName', value: accountInfo.firstName }])}
                     >
@@ -31,7 +31,7 @@ const AccountData = ({ accountInfo, handleRefresh }) => {
 
                 <SectionChange>
                     <LabelArea>Nazwisko</LabelArea>
-                    <InputLocal value={accountInfo.lastName} name="lastName" disabled="true" />
+                    <InputLocal value={accountInfo.lastName} name="lastName" disabled={true} />
                     <ButtonLocal
                         onClick={() => setIsOpen([true, { DataName: 'lastName', value: accountInfo.lastName }])}
                     >
@@ -41,7 +41,7 @@ const AccountData = ({ accountInfo, handleRefresh }) => {
 
                 <SectionChange>
                     <LabelArea>Email</LabelArea>
-                    <InputLocal value={accountInfo.email} name="email" disabled="true" />
+                    <InputLocal value={accountInfo.email} name="email" disabled={true} />
                     <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'email', value: accountInfo.email }])}>
                         Zmień
                     </ButtonLocal>
@@ -49,7 +49,7 @@ const AccountData = ({ accountInfo, handleRefresh }) => {
 
                 <SectionChange>
                     <LabelArea>Hasło</LabelArea>
-                    <InputLocal value={passwordMock} name="hashedPassword" type="password" disabled="true" />
+                    <InputLocal value={passwordMock} name="hashedPassword" type="password" disabled={true} />
                     <ButtonLocal onClick={() => setIsOpen([true, { DataName: 'hashedPassword', value: passwordMock }])}>
                         Zmień
                     </ButtonLocal>

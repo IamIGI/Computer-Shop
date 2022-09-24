@@ -5,3 +5,5 @@ export const Wrapper = styled.div`
         border-radius: 35px;
     }
 `;
+
+export const InsideWrapper = styled.div``;

@@ -12,10 +12,8 @@ export const BasketProvider = ({ children }) => {
         let reset = [];
         localStorage.setItem('basketItems', JSON.stringify(reset));
         basket = JSON.parse(localStorage.getItem('basketItems'));
-        basketItems.map((item) => {
-            basket.push(item);
-            localStorage.setItem('basketItems', JSON.stringify(basket));
-        });
+        basketItems.map((item) => basket.push(item));
+        localStorage.setItem('basketItems', JSON.stringify(basket));
     }, [basketItems]);
 
     return <BasketContext.Provider value={{ basketItems, setBasketItems }}>{children}</BasketContext.Provider>;
