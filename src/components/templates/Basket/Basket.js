@@ -123,10 +123,8 @@ const Basket = () => {
         const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;
         const { email } = recipientDetails;
 
-        console.log(price, deliveryMethod, paymentMethod, email, finishOrder);
         //main statement
         if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
-            console.log(price, deliveryMethod, paymentMethod, email, finishOrder);
             if (finishOrder === true) {
                 const sendUserOrder = async () => {
                     try {

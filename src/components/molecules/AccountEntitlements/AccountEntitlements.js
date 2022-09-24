@@ -1,6 +1,16 @@
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import { useState } from 'react';
-import { Wrapper, SectionTitle, LabelArea, SectionChange, CheckboxLocal } from './AccountEntitlements.style';
+import { useEffect, useState } from 'react';
+import {
+    Wrapper,
+    SectionTitle,
+    LabelArea,
+    SectionChange,
+    CheckboxLocal,
+    BottomWrapper,
+    SavedInfo,
+    SavedIcon,
+    SavedDescription,
+} from './AccountEntitlements.style';
 import { GiStamper } from 'react-icons/gi';
 import { Button } from 'components/atoms/Button/Button';
 import { useForm } from 'react-hook-form';
@@ -9,15 +19,23 @@ import { accountSettingsEnlistments } from 'data/FormSchema';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import { AiOutlineSave } from 'react-icons/ai';
 
 const AccountEntitlements = ({ accountEnlistments }) => {
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
     const [enlistments, setEnlistments] = useState(accountEnlistments);
+    const [isSaved, setIsSaved] = useState(false);
 
     const { register, handleSubmit } = useForm({
         resolver: yupResolver(accountSettingsEnlistments),
     });
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsSaved(false);
+        }, 3000);
+    }, [isSaved]);
 
     const handleCheck = (key, value) => {
         setEnlistments((prevValue) => {
@@ -32,6 +50,8 @@ const AccountEntitlements = ({ accountEnlistments }) => {
         data._id = auth.id;
         try {
             await axiosPrivate.put('user/enlistments', data);
+
+            setIsSaved(true);
         } catch (err) {
             console.log(err);
         }
@@ -86,7 +106,20 @@ const AccountEntitlements = ({ accountEnlistments }) => {
                                 />
                                 <LabelArea>Chcę otrzymywać ofertę dopasowaną do moich potrzeb</LabelArea>
                             </SectionChange>
-                            <Button type="submit">Zapisz Zgody</Button>
+                            <BottomWrapper>
+                                <Button type="submit">Zapisz Zgody</Button>
+
+                                {isSaved ? (
+                                    <SavedInfo>
+                                        <SavedIcon>
+                                            <AiOutlineSave />
+                                        </SavedIcon>
+                                        <SavedDescription>Zapisano</SavedDescription>
+                                    </SavedInfo>
+                                ) : (
+                                    <></>
+                                )}
+                            </BottomWrapper>
                         </form>
                     </>
                 )}
