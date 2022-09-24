@@ -38,13 +38,14 @@ const AccountSettingsSettings = () => {
         };
 
         getAccountInfo(data);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh]);
 
     return (
         <AccountSettings>
             <Wrapper>
                 {waitForFetch ? (
-                    <LoadingAnimation />
+                    <LoadingAnimation loadingSize={10} />
                 ) : (
                     <>
                         <AccountData accountInfo={accountInfo} handleRefresh={handleRefresh} />

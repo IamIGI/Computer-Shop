@@ -10,6 +10,7 @@ import useToggle from 'hooks/useToggle';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
+import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
 function RegisterArea() {
     const { setAuth } = useAuth();
@@ -44,6 +45,8 @@ function RegisterArea() {
     const [isCapsLockOn, setIsCapsLockOn] = useState(false);
 
     const [shopRules, setAgreeToShopRules] = useToggle('ShopRulesRegister', false);
+
+    const [waitForRegister, setWaitForRegister] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
 
@@ -86,6 +89,7 @@ function RegisterArea() {
         }
 
         try {
+            setWaitForRegister(true);
             await axios.post(
                 '/register',
                 JSON.stringify({
@@ -104,7 +108,7 @@ function RegisterArea() {
                     withCredentials: true,
                 }
             );
-
+            setWaitForRegister(false);
             //clear
             setExpanded(!expanded);
             resetFirstName('');
@@ -147,123 +151,137 @@ function RegisterArea() {
     };
 
     return (
-        <Wrapper>
-            <form onSubmit={handleSubmit}>
-                {expanded && <Button onClick={() => setExpanded(!expanded)}> Rejestracja </Button>}
-                {!expanded && (
-                    <section>
-                        <div ref={errRef}>
-                            {' '}
-                            {errMsg && (
-                                <>
-                                    <ErrMsg aria-live="assertive">{errMsg}</ErrMsg>
-                                </>
-                            )}
-                        </div>
-                        <Input
-                            style={validFirstName || !firstName ? {} : { border: '1px solid red' }}
-                            type="text"
-                            id="firstName"
-                            placeholder="Imie (wymagane)"
-                            autoComplete="off"
-                            {...firstNameAttribs}
-                            required
-                            aria-invalid={validFirstName ? 'false' : 'true'}
-                            aria-describedby="firstNameField"
-                            onFocus={() => setFirstNameFocus(true)}
-                            onBlur={() => setFirstNameFocus(false)}
-                        />
-                        {firstNameFocus && firstName && !validFirstName && <Instructions>Tylko litery</Instructions>}
-                        <Input
-                            style={validLastName || !lastName ? {} : { border: '1px solid red' }}
-                            type="text"
-                            id="lastName"
-                            placeholder="Nazwisko (wymagane)"
-                            autoComplete="off"
-                            {...lastNameAttribs}
-                            required
-                            aria-invalid={validLastName ? 'false' : 'true'}
-                            aria-describedby="lastNameField"
-                            onFocus={() => setLastNameFocus(true)}
-                            onBlur={() => setLastNameFocus(false)}
-                        />
-                        {lastNameFocus && lastName && !validLastName && <Instructions>Tylko litery</Instructions>}
-                        <Input
-                            style={validEmail || !email ? {} : { border: '1px solid red' }}
-                            type="text"
-                            id="email"
-                            placeholder="Email (wymagane)"
-                            autoComplete="off"
-                            {...emailAttribs}
-                            required
-                            aria-invalid={validEmail ? 'false' : 'true'}
-                            aria-describedby="EmailField"
-                            onFocus={() => setEmailFocus(true)}
-                            onBlur={() => setEmailFocus(false)}
-                        />
-                        {emailFocus && email && !validEmail && <Instructions>Email jest nie poprawny.</Instructions>}
-                        <Input
-                            style={validPwd || !pwd ? {} : { border: '1px solid red' }}
-                            type="password"
-                            id="password"
-                            placeholder="Haslo (wymagane)"
-                            autoComplete="off"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            aria-invalid={validPwd ? 'false' : 'true'}
-                            aria-describedby="PwdField"
-                            onFocus={() => setPwdFocus(true)}
-                            onBlur={() => setPwdFocus(false)}
-                            onKeyUp={checkCapsLock}
-                        />
-                        {pwdFocus && pwd && !validPwd && (
-                            <Instructions>
-                                8-24 znaków. <br />
-                                Muszą zawierać małe i duże litery, <br />
-                                liczby oraz znaki specjalne.
-                            </Instructions>
+        <>
+            {waitForRegister ? (
+                <LoadingAnimation loadingSize={10} />
+            ) : (
+                <Wrapper>
+                    <form onSubmit={handleSubmit}>
+                        {expanded && <Button onClick={() => setExpanded(!expanded)}> Rejestracja </Button>}
+                        {!expanded && (
+                            <section>
+                                <div ref={errRef}>
+                                    {' '}
+                                    {errMsg && (
+                                        <>
+                                            <ErrMsg aria-live="assertive">{errMsg}</ErrMsg>
+                                        </>
+                                    )}
+                                </div>
+                                <Input
+                                    style={validFirstName || !firstName ? {} : { border: '1px solid red' }}
+                                    type="text"
+                                    id="firstName"
+                                    placeholder="Imie (wymagane)"
+                                    autoComplete="off"
+                                    {...firstNameAttribs}
+                                    required
+                                    aria-invalid={validFirstName ? 'false' : 'true'}
+                                    aria-describedby="firstNameField"
+                                    onFocus={() => setFirstNameFocus(true)}
+                                    onBlur={() => setFirstNameFocus(false)}
+                                />
+                                {firstNameFocus && firstName && !validFirstName && (
+                                    <Instructions>Tylko litery</Instructions>
+                                )}
+                                <Input
+                                    style={validLastName || !lastName ? {} : { border: '1px solid red' }}
+                                    type="text"
+                                    id="lastName"
+                                    placeholder="Nazwisko (wymagane)"
+                                    autoComplete="off"
+                                    {...lastNameAttribs}
+                                    required
+                                    aria-invalid={validLastName ? 'false' : 'true'}
+                                    aria-describedby="lastNameField"
+                                    onFocus={() => setLastNameFocus(true)}
+                                    onBlur={() => setLastNameFocus(false)}
+                                />
+                                {lastNameFocus && lastName && !validLastName && (
+                                    <Instructions>Tylko litery</Instructions>
+                                )}
+                                <Input
+                                    style={validEmail || !email ? {} : { border: '1px solid red' }}
+                                    type="text"
+                                    id="email"
+                                    placeholder="Email (wymagane)"
+                                    autoComplete="off"
+                                    {...emailAttribs}
+                                    required
+                                    aria-invalid={validEmail ? 'false' : 'true'}
+                                    aria-describedby="EmailField"
+                                    onFocus={() => setEmailFocus(true)}
+                                    onBlur={() => setEmailFocus(false)}
+                                />
+                                {emailFocus && email && !validEmail && (
+                                    <Instructions>Email jest nie poprawny.</Instructions>
+                                )}
+                                <Input
+                                    style={validPwd || !pwd ? {} : { border: '1px solid red' }}
+                                    type="password"
+                                    id="password"
+                                    placeholder="Haslo (wymagane)"
+                                    autoComplete="off"
+                                    onChange={(e) => setPwd(e.target.value)}
+                                    value={pwd}
+                                    required
+                                    aria-invalid={validPwd ? 'false' : 'true'}
+                                    aria-describedby="PwdField"
+                                    onFocus={() => setPwdFocus(true)}
+                                    onBlur={() => setPwdFocus(false)}
+                                    onKeyUp={checkCapsLock}
+                                />
+                                {pwdFocus && pwd && !validPwd && (
+                                    <Instructions>
+                                        8-24 znaków. <br />
+                                        Muszą zawierać małe i duże litery, <br />
+                                        liczby oraz znaki specjalne.
+                                    </Instructions>
+                                )}
+                                <Input
+                                    style={validMatchPwd || !matchPwd ? {} : { border: '1px solid red' }}
+                                    type="password"
+                                    id="passwordMatch"
+                                    placeholder="Powtórz hasło (wymagane)"
+                                    autoComplete="off"
+                                    onChange={(e) => setMatchPwd(e.target.value)}
+                                    value={matchPwd}
+                                    required
+                                    aria-invalid={validMatchPwd ? 'false' : 'true'}
+                                    aria-describedby="MatchPwdField"
+                                    onFocus={() => setMatchPwdFocus(true)}
+                                    onBlur={() => setMatchPwdFocus(false)}
+                                    onKeyUp={checkCapsLock}
+                                />
+                                {matchPwdFocus && !validMatchPwd && (
+                                    <Instructions>Hasła muszą być takie same</Instructions>
+                                )}
+                                {(matchPwdFocus || pwdFocus) && isCapsLockOn && (
+                                    <Instructions>Caps Lock jest wciśnięty</Instructions>
+                                )}
+                                <BottomRegister onClick={() => setAgreeToShopRules()}>
+                                    <Checkbox type="checkbox" checked={shopRules} readOnly={true} />
+                                    Akceptuj regulamin sklepu
+                                </BottomRegister>
+                                <Button
+                                    disabled={
+                                        !validFirstName || !validLastName || !validEmail || !validPwd || !validMatchPwd
+                                            ? true
+                                            : false
+                                    }
+                                >
+                                    {' '}
+                                    Załóż konto!{' '}
+                                </Button>
+                                <WrapButton onClick={() => setExpanded(!expanded)}>
+                                    <BsFillCaretUpFill />
+                                </WrapButton>
+                            </section>
                         )}
-                        <Input
-                            style={validMatchPwd || !matchPwd ? {} : { border: '1px solid red' }}
-                            type="password"
-                            id="passwordMatch"
-                            placeholder="Powtórz hasło (wymagane)"
-                            autoComplete="off"
-                            onChange={(e) => setMatchPwd(e.target.value)}
-                            value={matchPwd}
-                            required
-                            aria-invalid={validMatchPwd ? 'false' : 'true'}
-                            aria-describedby="MatchPwdField"
-                            onFocus={() => setMatchPwdFocus(true)}
-                            onBlur={() => setMatchPwdFocus(false)}
-                            onKeyUp={checkCapsLock}
-                        />
-                        {matchPwdFocus && !validMatchPwd && <Instructions>Hasła muszą być takie same</Instructions>}
-                        {(matchPwdFocus || pwdFocus) && isCapsLockOn && (
-                            <Instructions>Caps Lock jest wciśnięty</Instructions>
-                        )}
-                        <BottomRegister onClick={() => setAgreeToShopRules()}>
-                            <Checkbox type="checkbox" checked={shopRules} readOnly={true} />
-                            Akceptuj regulamin sklepu
-                        </BottomRegister>
-                        <Button
-                            disabled={
-                                !validFirstName || !validLastName || !validEmail || !validPwd || !validMatchPwd
-                                    ? true
-                                    : false
-                            }
-                        >
-                            {' '}
-                            Załóż konto!{' '}
-                        </Button>
-                        <WrapButton onClick={() => setExpanded(!expanded)}>
-                            <BsFillCaretUpFill />
-                        </WrapButton>
-                    </section>
-                )}
-            </form>
-        </Wrapper>
+                    </form>
+                </Wrapper>
+            )}
+        </>
     );
 }
 

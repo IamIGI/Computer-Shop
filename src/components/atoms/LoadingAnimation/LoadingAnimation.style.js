@@ -5,6 +5,9 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin: auto;
+    font-size: ${(props) => props.size};
+    /* width: 100%;
+    height: 100%; */
 `;
 
 export const Spinner = styled.div`
@@ -35,12 +38,12 @@ export const Spinner = styled.div`
     & {
         transform: translate3d(0, 0, 0);
         margin: auto;
-        width: 300px;
-        height: 300px;
+        width: 10em;
+        height: 10em;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 2rem;
+        font-size: 1.5em;
         overflow: hidden;
         position: relative;
         animation: text-color 2s ease-in-out infinite alternate;
@@ -50,10 +53,10 @@ export const Spinner = styled.div`
     &:after {
         content: '';
         position: absolute;
-        width: 100%;
-        height: 100%;
+        width: 10em;
+        height: 10em;
         border-radius: 50%;
-        border: 15px solid transparent;
+        border: 0.68em solid transparent;
         mix-blend-mode: overlay;
         animation: rotate var(--duration) var(--timing) infinite;
         pointer-events: none;

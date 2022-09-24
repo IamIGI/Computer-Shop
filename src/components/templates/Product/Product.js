@@ -28,7 +28,7 @@ const Product = () => {
             <>
                 {waitForFetchProduct ? (
                     <>
-                        <LoadingAnimation />
+                        <LoadingAnimation loadingSize={15} />
                     </>
                 ) : (
                     <>

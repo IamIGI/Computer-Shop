@@ -53,7 +53,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
         <>
             {waitForFetch ? (
                 <>
-                    <LoadingAnimation />
+                    <LoadingAnimation loadingSize={15} />
                 </>
             ) : products.length === 0 ? (
                 <>

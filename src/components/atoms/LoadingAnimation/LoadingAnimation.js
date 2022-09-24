@@ -1,13 +1,11 @@
 import React from 'react';
 import { Spinner, Wrapper } from './LoadingAnimation.style';
 
-const LoadingAnimation = () => {
+const LoadingAnimation = ({ loadingSize }) => {
     return (
-        <>
-            <Wrapper>
-                <Spinner>Ładowanie</Spinner>
-            </Wrapper>
-        </>
+        <Wrapper size={`${loadingSize}px`}>
+            <Spinner>Ładowanie</Spinner>
+        </Wrapper>
     );
 };
 

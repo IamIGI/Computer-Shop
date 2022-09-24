@@ -40,7 +40,7 @@ const ProductSummary = ({
         <Wrapper>
             {waitForFetchAS ? (
                 <>
-                    <LoadingAnimation />
+                    <LoadingAnimation loadingSize={10} />
                 </>
             ) : (
                 <>

@@ -39,7 +39,7 @@ const About = () => {
     return (
         <>
             {waitForFetch ? (
-                <LoadingAnimation />
+                <LoadingAnimation loadingSize={15} />
             ) : description === {} ? (
                 <p>Błąd serwera</p>
             ) : (
