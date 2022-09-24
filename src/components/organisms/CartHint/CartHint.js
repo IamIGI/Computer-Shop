@@ -20,9 +20,7 @@ const CartHint = () => {
 
     const getQuantityOfItems = () => {
         let temp = 0;
-        basketItems.map((item) => {
-            temp += item.quantity;
-        });
+        basketItems.map((item) => (temp += item.quantity));
         return temp;
     };
 
@@ -47,18 +45,16 @@ const CartHint = () => {
                         </TitleSection>
 
                         <ProductsSection>
-                            {basketItems.map((item) => (
-                                <>
-                                    <Image key={item._id}>
-                                        <ProductQuantity>{item.quantity}</ProductQuantity>
-                                        <DeleteProduct onClick={() => removeProduct(item._id)}>
-                                            <MdOutlineDelete />
-                                        </DeleteProduct>
-                                        <Link to={`/product/${item._id}`} key={item._id}>
-                                            <img src={item.prevImg} alt="images of product" />
-                                        </Link>
-                                    </Image>
-                                </>
+                            {basketItems.map((item, index) => (
+                                <Image key={index}>
+                                    <ProductQuantity>{item.quantity}</ProductQuantity>
+                                    <DeleteProduct onClick={() => removeProduct(item._id)}>
+                                        <MdOutlineDelete />
+                                    </DeleteProduct>
+                                    <Link to={`/product/${item._id}`} key={item._id}>
+                                        <img src={item.prevImg} alt="images of product" />
+                                    </Link>
+                                </Image>
                             ))}
                         </ProductsSection>
                         <BottomWrapper>

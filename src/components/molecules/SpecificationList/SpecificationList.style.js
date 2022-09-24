@@ -2,11 +2,16 @@ import styled from 'styled-components';
 
 export const List = styled.ul`
     li {
+        border-top: 1px solid ${({ theme }) => theme.colors.lightGrey};
         list-style: none;
     }
 
     li:nth-child(2n) {
         background-color: ${({ theme }) => theme.colors.lightPurple};
+    }
+
+    li:last-child {
+        border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
     }
 `;
 
@@ -26,7 +31,7 @@ export const LiDesc = styled.div`
     width: 40%;
     /* border: 1px solid blue; */
     p {
-        line-height: 12px;
+        line-height: 15px;
     }
 `;
 

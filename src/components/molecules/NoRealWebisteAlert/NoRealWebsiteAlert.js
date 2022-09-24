@@ -39,16 +39,16 @@ const NoRealWebsiteAlert = () => {
                             <Subtitle>Added:</Subtitle>
                             <ListSection>
                                 <ul>
-                                    {lastUpdate.changes.added.map((item) => (
-                                        <li>{item}</li>
+                                    {lastUpdate.changes.added.map((item, index) => (
+                                        <li key={index}>{item}</li>
                                     ))}
                                 </ul>
                             </ListSection>
                             <Subtitle>Fixed:</Subtitle>
                             <ListSection>
                                 <ul>
-                                    {lastUpdate.changes.fixes.map((item) => (
-                                        <li>{item}</li>
+                                    {lastUpdate.changes.fixes.map((item, index) => (
+                                        <li key={index}>{item}</li>
                                     ))}
                                 </ul>
                             </ListSection>

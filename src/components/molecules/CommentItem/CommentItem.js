@@ -25,20 +25,18 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) 
                     ) : (
                         <>
                             <Separator />
-                            {commentsArray.map((comment) => (
-                                <>
-                                    <CommentSection key={comment._id}>
-                                        <UserData comment={comment} />
-                                        <ContentSection>
-                                            <ContentData comment={comment} />
-                                            <Opinion comment={comment} />
-                                            <CommentsScore
-                                                comment={comment}
-                                                handleRefreshComments={handleRefreshComments}
-                                            />
-                                        </ContentSection>
-                                    </CommentSection>
-                                </>
+                            {commentsArray.map((comment, index) => (
+                                <CommentSection key={index}>
+                                    <UserData comment={comment} />
+                                    <ContentSection>
+                                        <ContentData comment={comment} />
+                                        <Opinion comment={comment} />
+                                        <CommentsScore
+                                            comment={comment}
+                                            handleRefreshComments={handleRefreshComments}
+                                        />
+                                    </ContentSection>
+                                </CommentSection>
                             ))}
                         </>
                     )}

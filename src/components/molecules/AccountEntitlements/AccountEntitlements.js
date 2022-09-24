@@ -1,5 +1,5 @@
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Wrapper, SectionTitle, LabelArea, SectionChange, CheckboxLocal } from './AccountEntitlements.style';
 import { GiStamper } from 'react-icons/gi';
 import { Button } from 'components/atoms/Button/Button';
@@ -15,11 +15,7 @@ const AccountEntitlements = ({ accountEnlistments }) => {
     const axiosPrivate = useAxiosPrivate();
     const [enlistments, setEnlistments] = useState(accountEnlistments);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
+    const { register, handleSubmit } = useForm({
         resolver: yupResolver(accountSettingsEnlistments),
     });
 
@@ -34,11 +30,8 @@ const AccountEntitlements = ({ accountEnlistments }) => {
 
     const onSubmit = async (data) => {
         data._id = auth.id;
-        console.log(data);
-
         try {
-            const response = await axiosPrivate.put('user/enlistments', data);
-            console.log(response);
+            await axiosPrivate.put('user/enlistments', data);
         } catch (err) {
             console.log(err);
         }

@@ -6,7 +6,7 @@ const ContentData = ({ comment }) => {
             <StarsWrapper>
                 {[...Array(6)].map((star, index) => {
                     index += 1;
-                    return <Star opinionRating={comment.content.rating} rate={index} />;
+                    return <Star opinionRating={comment.content.rating} rate={index} key={index} />;
                 })}
             </StarsWrapper>
             <Dot>&#x2022;</Dot>

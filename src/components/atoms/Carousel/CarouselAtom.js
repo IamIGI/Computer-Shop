@@ -1,16 +1,14 @@
-// https://www.npmjs.com/package/react-responsive-carousel
 import React from 'react';
-import { Carousel_ } from './CarouselAtom.style';
+import { CarouselComponent } from './CarouselAtom.style';
 
 const CarouselAtom = ({ images }) => {
-    // console.log(images);
     return (
         <>
-            <Carousel_>
-                {images.map((image) => (
-                    <img src={image} />
+            <CarouselComponent>
+                {images.map((image, index) => (
+                    <img src={image} alt="carousel" key={index} />
                 ))}
-            </Carousel_>
+            </CarouselComponent>
         </>
     );
 };

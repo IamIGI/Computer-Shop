@@ -14,13 +14,13 @@ const DlaczegoMy = ({ description }) => {
                 <SectionDescription title={description[1].title} icon={<GrHelp />} />
             </Title>
             <Description>
-                {description[1].content.map((paragraph) => (
-                    <p>{paragraph}</p>
+                {description[1].content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
                 ))}
             </Description>
             <InfoSection>
                 {description[1].extras.map((extra, index) => (
-                    <Info>
+                    <Info key={index}>
                         <IconInfo>{InfoIcons[index]}</IconInfo>
                         <ContentInfo>
                             <TitleInfo>{extra.title}</TitleInfo>

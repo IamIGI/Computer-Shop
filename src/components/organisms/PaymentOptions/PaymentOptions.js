@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { MdOutlinePayment } from 'react-icons/md';
 import { CheckboxLocal, Description, Icon, Section, SectionTitle, Wrapper } from './PaymentOptions.style';
 import { HiStatusOnline } from 'react-icons/hi';
@@ -27,7 +26,12 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
             </SectionTitle>
             <Wrapper>
                 <Section onClick={() => setState('online')}>
-                    <CheckboxLocal type="checkbox" name="online" checked={deliveryCheckboxesPay.online} />
+                    <CheckboxLocal
+                        type="checkbox"
+                        name="online"
+                        checked={deliveryCheckboxesPay.online}
+                        readOnly={true}
+                    />
                     <Description>
                         <h4>
                             Płatność online <span>(bezpłatnie)</span>{' '}
@@ -38,7 +42,7 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                     </Icon>
                 </Section>
                 <Section onClick={() => setState('card')}>
-                    <CheckboxLocal type="checkbox" name="card" checked={deliveryCheckboxesPay.card} />
+                    <CheckboxLocal type="checkbox" name="card" checked={deliveryCheckboxesPay.card} readOnly={true} />
                     <Description>
                         <h4>
                             Karta płatnicza online <span>(bezpłatnie)</span>
@@ -49,7 +53,7 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                     </Icon>
                 </Section>
                 <Section onClick={() => setState('cash')}>
-                    <CheckboxLocal type="checkbox" name="cash" checked={deliveryCheckboxesPay.cash} />
+                    <CheckboxLocal type="checkbox" name="cash" checked={deliveryCheckboxesPay.cash} readOnly={true} />
                     <Description>
                         <h4>Przelew gotówkowy</h4>
                     </Description>
@@ -58,7 +62,12 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                     </Icon>
                 </Section>
                 <Section onClick={() => setState('uponReceipt')}>
-                    <CheckboxLocal type="checkbox" name="uponReceipt" checked={deliveryCheckboxesPay.uponReceipt} />
+                    <CheckboxLocal
+                        type="checkbox"
+                        name="uponReceipt"
+                        checked={deliveryCheckboxesPay.uponReceipt}
+                        readOnly={true}
+                    />
                     <Description>
                         <h4>Przy odbiorze</h4>
                     </Description>
@@ -67,7 +76,12 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
                     </Icon>
                 </Section>
                 <Section onClick={() => setState('installment')}>
-                    <CheckboxLocal type="checkbox" name="installment" checked={deliveryCheckboxesPay.installment} />
+                    <CheckboxLocal
+                        type="checkbox"
+                        name="installment"
+                        checked={deliveryCheckboxesPay.installment}
+                        readOnly={true}
+                    />
                     <Description>
                         <h4>Raty</h4>
                     </Description>

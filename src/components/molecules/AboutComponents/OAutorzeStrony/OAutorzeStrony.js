@@ -31,15 +31,15 @@ const OAutorzeStrony = ({ description }) => {
                 <SectionDescription title={description[2].title} icon={<BsPersonBoundingBox />} />
             </Title>
             <Description>
-                {description[2].content.map((paragraph) => (
-                    <p>{paragraph}</p>
+                {description[2].content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
                 ))}
             </Description>
             <StackSection>
                 {description[2].extras.map((extra, index) => (
-                    <Stack>
+                    <Stack key={index}>
                         <StackImage>
-                            <img src={extra.image} alt="StackImage" />
+                            <img src={extra.image} alt="Stack" />
                         </StackImage>
                         <StackTitle>{extra.name}</StackTitle>
                         {extra.libraries.length !== 0 ? (
@@ -51,8 +51,8 @@ const OAutorzeStrony = ({ description }) => {
                                     <PopUp>
                                         <StackLibrarySection>
                                             <ul>
-                                                {extra.libraries.map((library) => (
-                                                    <li>
+                                                {extra.libraries.map((library, index) => (
+                                                    <li key={index}>
                                                         <StackLibrary>{library}</StackLibrary>
                                                     </li>
                                                 ))}
@@ -70,7 +70,7 @@ const OAutorzeStrony = ({ description }) => {
                         <StackStars>
                             {[...Array(6)].map((star, index) => {
                                 index += 1;
-                                return <Star opinionRating={extra.score} rate={index} />;
+                                return <Star opinionRating={extra.score} rate={index} key={index} />;
                             })}
                         </StackStars>
                     </Stack>

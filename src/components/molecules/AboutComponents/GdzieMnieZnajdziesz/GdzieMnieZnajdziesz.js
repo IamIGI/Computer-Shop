@@ -10,8 +10,8 @@ const GdzieMnieZnajdziesz = ({ description }) => {
                 <SectionDescription title={description[3].title} icon={<RiContactsLine />} />
             </Title>
             <AboutMe>
-                {description[3].content.map((paragraph) => (
-                    <PageSection>
+                {description[3].content.map((paragraph, index) => (
+                    <PageSection key={index}>
                         <a href={paragraph.href}>
                             <PageImage>
                                 <img src={paragraph.image} alt="StackImage" />

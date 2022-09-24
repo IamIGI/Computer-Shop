@@ -16,7 +16,7 @@ const Onas = ({ description }) => {
             </Title>
             <DataShortSection>
                 {description[0].extras.map((extra, index) => (
-                    <Data>
+                    <Data key={index}>
                         <Icon>{dataShortIcons[index]}</Icon>
                         <Numbers>{extra.numbers}</Numbers>
                         <Desc>{extra.description}</Desc>
@@ -24,8 +24,8 @@ const Onas = ({ description }) => {
                 ))}
             </DataShortSection>
             <Description>
-                {description[0].content.map((paragraph) => (
-                    <p>{paragraph}</p>
+                {description[0].content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
                 ))}
             </Description>
         </>
