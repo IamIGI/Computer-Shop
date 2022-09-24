@@ -58,7 +58,6 @@ const ProductBuyContent = ({ product }) => {
         });
 
         if (!isFound) {
-            console.log(`Adding new item to basket`);
             setBasketItems((prevItems) => {
                 return [
                     ...prevItems,
@@ -73,15 +72,6 @@ const ProductBuyContent = ({ product }) => {
                     },
                 ];
             });
-        }
-
-        let basket = JSON.parse(localStorage.getItem('productsInBasket'));
-        if (basket == null) {
-            let addedProduct = { products: [product._id] };
-            localStorage.setItem('productsInBasket', JSON.stringify(addedProduct));
-        } else {
-            basket.push(product._id);
-            localStorage.setItem('productsInBasket', JSON.stringify(basket));
         }
     };
 
