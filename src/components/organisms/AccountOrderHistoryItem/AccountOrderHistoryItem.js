@@ -55,6 +55,7 @@ const AccountOrderHistoryItem = () => {
         };
 
         fetchOrder(orderId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderId]);
 
     return (

@@ -42,6 +42,10 @@ const CommentsScore = ({ comment, handleRefreshComments }) => {
                 console.log(`Error: ${err.message}`);
             }
         }
+
+        setTimeout(() => {
+            setNotLoggedIn([false, '']);
+        }, 2000);
     };
     return (
         <Wrapper>

@@ -45,3 +45,25 @@ export const CheckboxLocal = styled(Checkbox)`
         border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     }
 `;
+
+export const BottomWrapper = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+`;
+
+export const SavedInfo = styled.div`
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: baseline;
+    color: ${({ theme }) => theme.colors.successDark};
+    font-weight: 700;
+`;
+
+export const SavedIcon = styled.div`
+    margin: 0 10px;
+`;
+export const SavedDescription = styled.div``;

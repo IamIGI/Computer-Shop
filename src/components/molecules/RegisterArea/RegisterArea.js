@@ -243,9 +243,9 @@ function RegisterArea() {
                         {(matchPwdFocus || pwdFocus) && isCapsLockOn && (
                             <Instructions>Caps Lock jest wciśnięty</Instructions>
                         )}
-                        <BottomRegister>
-                            <Checkbox type="checkbox" onChange={setAgreeToShopRules} checked={shopRules} />
-                            <p>Akceptuj regulamin sklepu</p>
+                        <BottomRegister onClick={() => setAgreeToShopRules()}>
+                            <Checkbox type="checkbox" checked={shopRules} readOnly={true} />
+                            Akceptuj regulamin sklepu
                         </BottomRegister>
                         <Button
                             disabled={

@@ -24,7 +24,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
     const [disk, setDisk] = useState({ min: '', max: '' });
     const [searchTerm, setSearchTerm] = useState('');
     const [discounts, setDiscounts] = useState(false);
-    const [refreshSearchTerm, setRefreshSearchTerm] = useState(false);
     let processorsArray = [];
 
     const handleProducers = (data) => {
@@ -82,7 +81,7 @@ const ProductsFiltersSection = ({ handleFilters }) => {
             let filteredCPU = processors[0][i];
             for (let j = 0; j < Processors.filters_extended.length; j++) {
                 let checkedCPU = Processors.filters_extended[j];
-                if (filteredCPU == checkedCPU.label) {
+                if (filteredCPU === checkedCPU.label) {
                     processorsArray.push(checkedCPU.value);
                     break;
                 }
@@ -103,6 +102,8 @@ const ProductsFiltersSection = ({ handleFilters }) => {
         setTimeout(() => {
             handleFilters(productFilters);
         }, 500);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortBy, producers, processors, ram, disk, searchTerm, discounts]);
 
     return (

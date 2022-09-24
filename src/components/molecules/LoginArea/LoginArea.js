@@ -124,8 +124,8 @@ function LoginArea() {
                             required
                         />
                         {isCapsLockOn && pwdFocus && pwd && <Instructions>Caps Lock jest wciśnięty</Instructions>}
-                        <BottomLogin>
-                            <Checkbox type="checkbox" onChange={toggleCheck} checked={check} />
+                        <BottomLogin onClick={() => toggleCheck()}>
+                            <Checkbox type="checkbox" checked={check} readOnly={true} />
                             <div>Zaufaj temu urządzeniu</div>
                         </BottomLogin>
                         <Button> Zaloguj sie </Button>

@@ -5,14 +5,20 @@ import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.style
 export const Wrapper = styled.div``;
 
 export const BottomLogin = styled(Bottom)`
-    margin: 10px 0 0 10px;
+    margin: 10px 0 0 14%;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    width: fit-content;
+    padding: 0;
 
     font-size: ${({ theme }) => theme.fontSize.m};
     color: ${({ theme }) => theme.colors.darkGrey};
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const WrapButton = styled(Button)`

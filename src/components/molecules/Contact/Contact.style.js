@@ -75,6 +75,7 @@ export const MediaIcon = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.lightPurple};
 
     :hover {
+        cursor: pointer;
         color: ${({ theme }) => theme.colors.success};
         border-bottom: 1px solid ${({ theme }) => theme.colors.success};
     }

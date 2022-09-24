@@ -13,6 +13,7 @@ export const Checkbox = styled.input`
     padding-right: 10px;
 
     &:hover {
+        cursor: pointer;
         border: 1px solid ${({ theme }) => theme.colors.darkPurple};
     }
 `;

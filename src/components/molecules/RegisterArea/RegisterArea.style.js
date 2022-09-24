@@ -8,11 +8,15 @@ export const BottomRegister = styled(Bottom)`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin-left: 10px;
+    margin: 10px 0 0 12%;
+    padding: 0;
+    width: fit-content;
 
-    p {
-        font-size: ${({ theme }) => theme.fontSize.m};
-        color: ${({ theme }) => theme.colors.darkGrey};
+    font-size: ${({ theme }) => theme.fontSize.m};
+    color: ${({ theme }) => theme.colors.darkGrey};
+
+    :hover {
+        cursor: pointer;
     }
 `;
 
