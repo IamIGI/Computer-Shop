@@ -1,6 +1,4 @@
 import AccountSettings from 'components/templates/AccountSettings/AccountSettings';
-import useOrder from 'hooks/useOrder';
-import { Prices } from 'data/Prices';
 import {
     DeliveryData,
     OrderSectionDescription,
@@ -25,16 +23,17 @@ import {
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BsBox } from 'react-icons/bs';
 import CheckController from 'components/atoms/CheckController/CheckController';
-import { BsTruck, BsInboxes } from 'react-icons/bs';
-import { FaRegBuilding } from 'react-icons/fa';
 import { SectionTitle } from '../DeliveryOptions/DeliveryOptions.style';
-import { HiStatusOnline } from 'react-icons/hi';
-import { RiVisaLine } from 'react-icons/ri';
-import { BsCashCoin, BsWallet2, BsPiggyBank } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import { useParams } from 'react-router-dom';
+import { getDate } from '../AccountSettingsOrders/AccountSettingsOrders.logic';
+import {
+    getDeliveryMethodDescription,
+    getPaymentMethodDescription,
+    getDeliveryPrice,
+} from './AccountOrderHistoryItem.logic';
 
 const AccountOrderHistoryItem = () => {
     const orderId = useParams().orderId;
@@ -57,108 +56,6 @@ const AccountOrderHistoryItem = () => {
 
         fetchOrder(orderId);
     }, [orderId]);
-
-    //set right month name
-    const getDate = (date) => {
-        let day = date.split('.')[2];
-        let month = date.split('.')[1];
-        let year = date.split('.')[0];
-        let monthName = '';
-        switch (month) {
-            case '01':
-                monthName = 'Styczeń';
-                break;
-            case '02':
-                monthName = 'Luty';
-                break;
-            case '03':
-                monthName = 'Marzec';
-                break;
-            case '04':
-                monthName = 'Kwiecień';
-                break;
-            case '05':
-                monthName = 'Maj';
-                break;
-            case '06':
-                monthName = 'Czerwiec';
-                break;
-            case '07':
-                monthName = 'Lipiec';
-                break;
-            case '08':
-                monthName = 'Sierpień';
-                break;
-            case '09':
-                monthName = 'Wrzesień';
-                break;
-            case '10':
-                monthName = 'Październik';
-                break;
-            case '11':
-                monthName = 'Listopad';
-                break;
-            case '12':
-                monthName = 'Grudzień';
-                break;
-
-            default:
-                console.log('Bad date given');
-                break;
-        }
-        return `${day} ${monthName} ${year}`;
-    };
-
-    const getDeliveryMethodDescription = (method) => {
-        switch (method) {
-            case 'deliveryMan':
-                return { desc: 'Kurier – InPost, UPS, FedEx, DTS bezpłatnie', icon: <BsTruck /> };
-            case 'atTheSalon':
-                return { desc: 'Odbiór w salonie HotShoot', icon: <FaRegBuilding /> };
-            case 'locker':
-                return { desc: 'Paczkomat 24/7', icon: <BsInboxes /> };
-
-            default:
-                console.log({ Err: 'Missing Order Method' });
-                break;
-        }
-    };
-
-    const getPaymentMethodDescription = (method) => {
-        switch (method) {
-            case 'online':
-                return { desc: 'Płatność online', icon: <HiStatusOnline /> };
-            case 'card':
-                return { desc: 'Karta płatnicza online', icon: <RiVisaLine /> };
-            case 'cash':
-                return { desc: 'Przelew gotówkowy', icon: <BsCashCoin /> };
-            case 'uponReceipt':
-                return { desc: 'Przy odbiorze', icon: <BsWallet2 /> };
-            case 'installment':
-                return { desc: 'Raty', icon: <BsPiggyBank /> };
-
-            default:
-                console.log({ Err: 'Missing Payment Method' });
-                break;
-        }
-    };
-
-    const getDeliveryPrice = (method) => {
-        switch (method) {
-            case 'deliveryMan':
-                return Prices.deliveryMan;
-
-            case 'atTheSalon':
-                return Prices.atTheSalon;
-
-            case 'locker':
-                return Prices.locker;
-
-            default:
-                console.log(`Bad payment method ${method} `);
-                break;
-        }
-    };
 
     return (
         <AccountSettings>
@@ -228,7 +125,7 @@ const AccountOrderHistoryItem = () => {
                         <ProductSection>
                             <OrderSectionTitle>Zamówienie</OrderSectionTitle>
                             {orderItem.products.map((product, index) => (
-                                <ProductElement>
+                                <ProductElement key={index}>
                                     <ProductImage>
                                         <img src={product.prevImg} alt="images of product" />
                                     </ProductImage>

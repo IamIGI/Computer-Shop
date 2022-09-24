@@ -2,7 +2,7 @@ import BasketPreview from 'components/organisms/BasketPreview/BasketPreview';
 import DeliveryOptions from 'components/organisms/DeliveryOptions/DeliveryOptions';
 import DeliveryPreview from 'components/organisms/DeliveryPreview/DeliveryPreview';
 import PaymentOptions from 'components/organisms/PaymentOptions/PaymentOptions';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Wrapper, Main, Prev, PrevWrapper } from './Basket.styles';
 import PaymentPreview from 'components/organisms/PaymentPreview/PaymentPreview';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
@@ -15,18 +15,7 @@ import useBasket from 'hooks/useBasket';
 import Modal from 'components/atoms/Modal/Modal';
 import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
-
-const initDeliveryCheckboxesOpt = { deliveryMan: false, atTheSalon: false, locker: false };
-const initDeliveryCheckboxesPay = { online: false, card: false, cash: false, uponReceipt: false, installment: false };
-const initRecipientDetails = {
-    name: ``,
-    street: '',
-    zipCode: '',
-    place: '',
-    email: '',
-    phone: '',
-    comment: '',
-};
+import { initDeliveryCheckboxesOpt, initDeliveryCheckboxesPay, initRecipientDetails } from './Basket.logic';
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -89,14 +78,16 @@ const Basket = () => {
         //logic---------------------------
         Object.values(deliveryCheckboxesOpt).map((x, index) => {
             if (x) {
-                tempOpt = Object.keys(deliveryCheckboxesOpt)[index];
+                return (tempOpt = Object.keys(deliveryCheckboxesOpt)[index]);
             }
+            return undefined;
         });
 
         Object.values(deliveryCheckboxesPay).map((x, index) => {
             if (x) {
-                tempPay = Object.keys(deliveryCheckboxesPay)[index];
+                return (tempPay = Object.keys(deliveryCheckboxesPay)[index]);
             }
+            return undefined;
         });
 
         switch (tempOpt) {
@@ -132,8 +123,10 @@ const Basket = () => {
         const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;
         const { email } = recipientDetails;
 
+        console.log(price, deliveryMethod, paymentMethod, email, finishOrder);
         //main statement
         if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
+            console.log(price, deliveryMethod, paymentMethod, email, finishOrder);
             if (finishOrder === true) {
                 const sendUserOrder = async () => {
                     try {
@@ -162,6 +155,8 @@ const Basket = () => {
         return () => {
             isMounted = false;
         };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, productsInBasket, finishOrder]);
 
     return (

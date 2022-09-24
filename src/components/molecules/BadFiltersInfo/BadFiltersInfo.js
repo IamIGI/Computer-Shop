@@ -7,7 +7,7 @@ const BadFiltersInfo = () => {
             <Icon>
                 <TbDeviceLaptopOff />
             </Icon>
-            <p>Brak produktów spełniająctch dane kryteria</p>
+            <p>Brak produktów spełniających dane kryteria</p>
         </Wrapper>
     );
 };

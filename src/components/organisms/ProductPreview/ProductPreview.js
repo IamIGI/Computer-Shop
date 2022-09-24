@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
+    OutsideWrapper,
     Bottom,
     Link,
     StyledList,
@@ -61,10 +62,10 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
             ) : (
                 <>
                     {products.map((item, index) => (
-                        <>
+                        <OutsideWrapper key={index}>
                             {index < Show && (
                                 <Wrapper>
-                                    <Link to={`/product/${item._id}`} key={item._id}>
+                                    <Link to={`/product/${item._id}`}>
                                         <Top>
                                             <img src={item.prevImg} alt="article" />
                                             <h1>{item.name}</h1>
@@ -76,7 +77,11 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                                         {[...Array(6)].map((star, index) => {
                                                             index += 1;
                                                             return (
-                                                                <Star opinionRating={item.averageStars} rate={index} />
+                                                                <Star
+                                                                    opinionRating={item.averageStars}
+                                                                    rate={index}
+                                                                    key={index}
+                                                                />
                                                             );
                                                         })}
                                                     </Rating>
@@ -115,7 +120,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                     <BuyButton item={item} index={index} />
                                 </Wrapper>
                             )}
-                        </>
+                        </OutsideWrapper>
                     ))}
                 </>
             )}

@@ -17,6 +17,8 @@ export const Wrapper = styled.div`
     grid-template-rows: 70px 1fr 1px 100px;
 `;
 
+export const InsideWrapper = styled.div``;
+
 export const TitleSection = styled.div`
     height: 100%;
     width: 100%;

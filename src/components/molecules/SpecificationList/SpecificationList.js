@@ -63,10 +63,8 @@ const SpecificationList = ({ product }) => {
                             <span>Komunikacja</span>
                         </LiName>
                         <LiDesc>
-                            {PS.communication.map(({ com }) => (
-                                <>
-                                    <p>{com}</p>
-                                </>
+                            {PS.communication.map(({ com }, index) => (
+                                <p key={index}>{com}</p>
                             ))}
                         </LiDesc>
                     </LiWrapper>
@@ -77,10 +75,8 @@ const SpecificationList = ({ product }) => {
                             <span>Porty</span>
                         </LiName>
                         <LiDesc>
-                            {PS.ports.map(({ port }) => (
-                                <>
-                                    <p>{port}</p>
-                                </>
+                            {PS.ports.map(({ port }, index) => (
+                                <p key={index}>{port}</p>
                             ))}
                         </LiDesc>
                     </LiWrapper>
@@ -115,10 +111,8 @@ const SpecificationList = ({ product }) => {
                             <span>Dodatkowe informacje</span>
                         </LiName>
                         <LiDesc>
-                            {PS.additional_information.map(({ info }) => (
-                                <>
-                                    <p>{info}</p>
-                                </>
+                            {PS.additional_information.map(({ info }, index) => (
+                                <p key={index}>{info}</p>
                             ))}
                         </LiDesc>
                     </LiWrapper>

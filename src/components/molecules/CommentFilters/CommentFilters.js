@@ -34,8 +34,10 @@ const CommentFilters = ({ handleFilters, comments }) => {
             <Filters>
                 <SelectStyle width="200px">
                     <select onChange={(e) => setRating(e.target.value)}>
-                        {ratingOptions.map((option) => (
-                            <option value={option.value}>{option.label}</option>
+                        {ratingOptions.map((option, index) => (
+                            <option value={option.value} key={index}>
+                                {option.label}
+                            </option>
                         ))}
                     </select>
                 </SelectStyle>
@@ -48,8 +50,10 @@ const CommentFilters = ({ handleFilters, comments }) => {
             <Sort>
                 <SelectStyle width="200px">
                     <select onChange={(e) => setSortBy(e.target.value)}>
-                        {filterOptions.map((option) => (
-                            <option value={option.value}>{option.label}</option>
+                        {filterOptions.map((option, index) => (
+                            <option value={option.value} key={index}>
+                                {option.label}
+                            </option>
                         ))}
                     </select>
                 </SelectStyle>
