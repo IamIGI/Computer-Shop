@@ -16,7 +16,7 @@ function RegisterArea() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.pathname == '/basket' ? location.pathname : '/accountSettings/Settings';
+    const from = location.pathname === '/basket' ? location.pathname : '/accountSettings/Settings';
 
     const errRef = useRef();
 
@@ -86,7 +86,7 @@ function RegisterArea() {
         }
 
         try {
-            const response = await axios.post(
+            await axios.post(
                 '/register',
                 JSON.stringify({
                     firstName,
