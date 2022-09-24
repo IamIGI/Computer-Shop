@@ -93,7 +93,7 @@ const AccountSettingsOrders = () => {
                 <BodySection>
                     <>
                         {waitForFetch ? (
-                            <LoadingAnimation loadingSize={10} />
+                            <LoadingAnimation loadingSize={15} />
                         ) : orderHistory.length === 0 ? (
                             <NoOrders>
                                 <NoOrderIcon>

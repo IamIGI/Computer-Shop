@@ -26,6 +26,7 @@ const PersistLogin = () => {
         !auth.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
 
         return () => (isMounted = false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return <>{!persist ? <Outlet /> : isLoading ? <LoadingAnimation loadingSize={15} /> : <Outlet />}</>;

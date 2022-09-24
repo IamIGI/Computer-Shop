@@ -45,6 +45,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
             }
         };
         fetchProducts(filters);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
     //--------------------------------------------

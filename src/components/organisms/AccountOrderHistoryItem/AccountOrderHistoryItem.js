@@ -62,7 +62,7 @@ const AccountOrderHistoryItem = () => {
         <AccountSettings>
             <Wrapper>
                 {waitForFetch ? (
-                    <LoadingAnimation loadingSize={10} />
+                    <LoadingAnimation loadingSize={15} />
                 ) : (
                     <>
                         <OrderTitleSection>
