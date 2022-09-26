@@ -55,11 +55,30 @@ export const ListSection = styled.div`
     }
 `;
 
+export const BottomWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+`;
+
 export const GitLink = styled.div`
     text-align: center;
-    margin-bottom: 10px;
 
     a {
         color: blue;
+    }
+`;
+
+export const GetPDF = styled.div`
+    width: fit-content;
+
+    a {
+        color: blue;
+    }
+
+    :hover {
+        cursor: pointer;
     }
 `;

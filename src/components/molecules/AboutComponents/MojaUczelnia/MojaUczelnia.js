@@ -22,7 +22,9 @@ const MojaUczelnia = ({ description }) => {
                         <ul>
                             <li>{description[4].content[1]}</li>
                             <li>
-                                <a href="https://www.agh.edu.pl">{description[4].content[2]}</a>
+                                <a href="https://www.agh.edu.pl" target="_blank" rel="noopener noreferrer">
+                                    {description[4].content[2]}
+                                </a>
                             </li>
                             <li>{description[4].content[3]}</li>
                             <li>{description[4].content[4]}</li>
