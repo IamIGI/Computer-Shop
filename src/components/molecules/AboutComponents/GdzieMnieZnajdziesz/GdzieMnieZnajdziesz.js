@@ -12,7 +12,7 @@ const GdzieMnieZnajdziesz = ({ description }) => {
             <AboutMe>
                 {description[3].content.map((paragraph, index) => (
                     <PageSection key={index}>
-                        <a href={paragraph.href}>
+                        <a href={paragraph.href} target="_blank" rel="noopener noreferrer">
                             <PageImage>
                                 <img src={paragraph.image} alt="StackImage" />
                             </PageImage>
