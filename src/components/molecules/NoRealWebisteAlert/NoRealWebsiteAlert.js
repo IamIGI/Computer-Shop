@@ -12,9 +12,9 @@ import {
 } from './NoRealWebsiteAlert.style';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { getWebUpdates } from 'api/webUpdates';
+import { BASE_URL } from 'data/GlobalVariables';
 
 const NoRealWebsiteAlert = () => {
-    const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : '/api';
     const [alert, setAlert] = useState(false);
     const [waitForFetch, setWaitForFetch] = useState(false);
     const [updates, setUpdates] = useState({});
