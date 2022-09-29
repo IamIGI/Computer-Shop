@@ -20,11 +20,13 @@ import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
+import useRefresh from 'hooks/useRefresh';
 
 let Show = '';
 const ProductPreview = ({ filterInit, allProducts, filters }) => {
     const [products, setProducts] = useState([]);
     const [waitForFetch, setWaitForFetch] = useState(true);
+    const { refresh } = useRefresh();
 
     useEffect(() => {
         const fetchProducts = async (data) => {
@@ -46,7 +48,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
         };
         fetchProducts(filters);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters]);
+    }, [filters, refresh]);
 
     //--------------------------------------------
     allProducts === 'yes' ? (Show = products.length) : (Show = 3);
