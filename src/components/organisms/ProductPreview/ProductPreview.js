@@ -118,7 +118,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                                             )}
                                         </Bottom>
                                     </Link>
-                                    <BuyButton item={item} index={index} />
+                                    <BuyButton item={item} />
                                 </Wrapper>
                             )}
                         </OutsideWrapper>

@@ -10,15 +10,18 @@ import {
     ProductDescription,
     ProductImage,
     Line,
-    Link,
     TitleSection,
     Wrapper,
-    InsideWrapper,
     ProductImageSmall,
     NoOrders,
     NoOrderIcon,
     NoOrderDescription,
     Quantity,
+    GetPDF,
+    HandyMenu,
+    DescriptionPDF,
+    IconPDF,
+    InsideWrapper,
 } from './AccountSettingsOrders.style';
 
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
@@ -32,6 +35,9 @@ import { SectionTitle } from 'components/molecules/AccountData/AccountData.style
 import useOrder from 'hooks/useOrder';
 import { BsLaptop } from 'react-icons/bs';
 import { getStatus, getDate } from './AccountSettingsOrders.logic';
+import { HiDotsVertical } from 'react-icons/hi';
+import { GrDocumentPdf } from 'react-icons/gr';
+import { BASE_URL } from 'data/GlobalVariables';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
@@ -44,6 +50,8 @@ const AccountSettingsOrders = () => {
     const [countOrders, setCountOrders] = useState(0);
     const [pageNr, setPageNr] = useState(1);
     const [waitForFetch, setWaitForFetch] = useState(true);
+    const [showHandyOptions, setShowHandyOptions] = useState('');
+    const [isActiveLink, setIsActiveLink] = useState(true);
 
     useEffect(() => {
         let data = {};
@@ -80,11 +88,12 @@ const AccountSettingsOrders = () => {
 
     const goToOrderItem = (order) => {
         setOrderItem(order);
+        setIsActiveLink(true);
     };
 
     return (
         <AccountSettings>
-            <Wrapper>
+            <Wrapper onClick={() => setShowHandyOptions('')}>
                 <TitleSection>
                     <SectionTitle>
                         <SectionDescription title={'Zamówienia'} icon={<BsBox />} />
@@ -104,26 +113,34 @@ const AccountSettingsOrders = () => {
                         ) : (
                             <>
                                 {orderHistory.map((item, index) => (
-                                    <InsideWrapper key={index}>
-                                        <Link
+                                    <InsideWrapper>
+                                        <OrderContent
+                                            key={index}
                                             onClick={() => goToOrderItem(item)}
-                                            to={`/accountSettings/orders/history/${item._id}`}
+                                            to={isActiveLink ? `/accountSettings/orders/history/${item._id}` : ''}
                                         >
-                                            <OrderContent>
-                                                <OrderDescription>
-                                                    <h4>{getStatus(item.status)}</h4>
-                                                    {/* <br /> */}
-                                                    <DateDecorator>{getDate(item.transactionInfo.date)}</DateDecorator>
-                                                    nr {item._id}
-                                                    <br />
-                                                    <h4>{item.transactionInfo.price} zł</h4>
-                                                    {/* <br /> */}
-                                                </OrderDescription>
-                                                <OrderProducts>
-                                                    {item.products.map((product, index) => (
-                                                        <>
-                                                            {item.products.length > 1 ? (
-                                                                <ProductImageSmall>
+                                            <OrderDescription>
+                                                <h4>{getStatus(item.status)}</h4>
+                                                {/* <br /> */}
+                                                <DateDecorator>{getDate(item.transactionInfo.date)}</DateDecorator>
+                                                nr {item._id}
+                                                <br />
+                                                <h4>{item.transactionInfo.price} zł</h4>
+                                                {/* <br /> */}
+                                            </OrderDescription>
+                                            <OrderProducts>
+                                                {item.products.map((product, index) => (
+                                                    <>
+                                                        {item.products.length > 1 ? (
+                                                            <ProductImageSmall>
+                                                                <Quantity height={30} width={30}>
+                                                                    {product.quantity}
+                                                                </Quantity>
+                                                                <img src={product.prevImg} alt="images of product" />
+                                                            </ProductImageSmall>
+                                                        ) : (
+                                                            <>
+                                                                <ProductImage>
                                                                     <Quantity height={30} width={30}>
                                                                         {product.quantity}
                                                                     </Quantity>
@@ -131,28 +148,38 @@ const AccountSettingsOrders = () => {
                                                                         src={product.prevImg}
                                                                         alt="images of product"
                                                                     />
-                                                                </ProductImageSmall>
-                                                            ) : (
-                                                                <>
-                                                                    <ProductImage>
-                                                                        <Quantity height={30} width={30}>
-                                                                            {product.quantity}
-                                                                        </Quantity>
-                                                                        <img
-                                                                            src={product.prevImg}
-                                                                            alt="images of product"
-                                                                        />
-                                                                    </ProductImage>
-                                                                    <ProductDescription>
-                                                                        <p>{product.name}</p>
-                                                                    </ProductDescription>
-                                                                </>
-                                                            )}
-                                                        </>
-                                                    ))}
-                                                </OrderProducts>
-                                            </OrderContent>
-                                        </Link>
+                                                                </ProductImage>
+                                                                <ProductDescription>
+                                                                    <p>{product.name}</p>
+                                                                </ProductDescription>
+                                                            </>
+                                                        )}
+                                                    </>
+                                                ))}
+                                            </OrderProducts>
+                                            <GetPDF
+                                                onMouseOver={() => {
+                                                    setShowHandyOptions(item._id);
+                                                    setIsActiveLink(false);
+                                                }}
+                                            >
+                                                <HiDotsVertical />
+                                            </GetPDF>
+                                        </OrderContent>
+                                        {showHandyOptions === item._id ? (
+                                            <>
+                                                <a href={`${BASE_URL}/order/pdf/${item._id}`}>
+                                                    <HandyMenu>
+                                                        <IconPDF>
+                                                            <GrDocumentPdf />
+                                                        </IconPDF>
+                                                        <DescriptionPDF>Dokument faktury</DescriptionPDF>
+                                                    </HandyMenu>
+                                                </a>
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </InsideWrapper>
                                 ))}
                             </>

@@ -29,7 +29,7 @@ export const OrderSection = styled.div`
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    margin-bottom: 10px; ;
+    margin-bottom: 30px;
 `;
 export const OrderSectionTitle = styled.div`
     height: 40px;
@@ -55,10 +55,10 @@ export const OrderSectionDescription = styled.div`
 `;
 
 export const UserDataDescription = styled.div`
+    padding-left: 10px;
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     border-radius: 20px;
-    padding-bottom: 10px;
 
     ul {
         margin-top: 10px;
@@ -68,6 +68,10 @@ export const UserDataDescription = styled.div`
     li {
         list-style: none;
         padding: 3px 0;
+
+        a {
+            text-decoration: none;
+        }
     }
 `;
 

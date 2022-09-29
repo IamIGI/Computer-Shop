@@ -34,6 +34,7 @@ import {
     getPaymentMethodDescription,
     getDeliveryPrice,
 } from './AccountOrderHistoryItem.logic';
+import { BASE_URL } from 'data/GlobalVariables';
 
 const AccountOrderHistoryItem = () => {
     const orderId = useParams().orderId;
@@ -108,7 +109,9 @@ const AccountOrderHistoryItem = () => {
 
                                 <UserDataDescription>
                                     <ul>
-                                        <li>{orderItem.transactionInfo.recipientDetails.name}</li>
+                                        <li>
+                                            <b>{orderItem.transactionInfo.recipientDetails.name}</b>
+                                        </li>
                                         <li>tel. {orderItem.transactionInfo.recipientDetails.phone}</li>
                                         <li>e-mail: {orderItem.transactionInfo.recipientDetails.email}</li>
                                     </ul>
@@ -122,6 +125,22 @@ const AccountOrderHistoryItem = () => {
                                 <Icon>{getPaymentMethodDescription(orderItem.transactionInfo.paymentMethod).icon}</Icon>
                                 <Desc>{getPaymentMethodDescription(orderItem.transactionInfo.paymentMethod).desc}</Desc>
                             </OrderSectionDescription>
+                        </OrderSection>
+                        <OrderSection>
+                            <OrderSectionTitle>Dane do faktury</OrderSectionTitle>
+                            <UserDataDescription>
+                                <ul>
+                                    <li>
+                                        <b>{orderItem.transactionInfo.recipientDetails.name}</b>
+                                    </li>
+                                    <li>tel. {orderItem.transactionInfo.recipientDetails.phone}</li>
+                                    <li>e-mail: {orderItem.transactionInfo.recipientDetails.email}</li>
+                                    <li>
+                                        {' '}
+                                        <a href={`${BASE_URL}/order/pdf/${orderItem._id}`}>Pobierz dokument faktury </a>
+                                    </li>
+                                </ul>
+                            </UserDataDescription>
                         </OrderSection>
                         <ProductSection>
                             <OrderSectionTitle>Zamówienie</OrderSectionTitle>

@@ -17,7 +17,28 @@ export const Wrapper = styled.div`
     grid-template-rows: 70px 1fr 1px 100px;
 `;
 
-export const InsideWrapper = styled.div``;
+export const InsideWrapper = styled.div`
+    position: relative;
+`;
+
+export const OrderContent = styled(NavLink)`
+    text-decoration: none;
+    position: relative;
+    height: 175px;
+    width: 90%;
+    margin: 3% 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-radius: 40px;
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+
+    &:hover {
+        border: 1px solid ${({ theme }) => theme.colors.grey};
+        box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
+        cursor: pointer;
+    }
+`;
 
 export const TitleSection = styled.div`
     height: 100%;
@@ -56,46 +77,38 @@ export const FooterSection = styled.div`
     flex-direction: row;
 `;
 
-export const OrderContent = styled.div`
-    height: 175px;
-    width: 90%;
-    margin: 3% 5%;
-    display: grid;
-    grid-template-columns: 0.35fr 0.65fr;
-    border-radius: 40px;
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-    &:hover {
-        border: 1px solid ${({ theme }) => theme.colors.grey};
-        box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
-        cursor: pointer;
-    }
-`;
-
-export const OrderDescription = styled.div`
-    height: 100%;
-    width: 100%;
-    grid-column: 1/2;
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
-    background-color: ${({ theme }) => theme.colors.lightLightGrey};
-    text-align: left;
-    padding-left: 15%;
-`;
-
 export const DateDecorator = styled.div`
     color: ${({ theme }) => theme.colors.darkGrey};
     font-weight: 600;
     margin-bottom: 5px;
 `;
 
+export const OrderDescription = styled.div`
+    height: 100%;
+    min-width: 350px;
+    width: fit-content;
+    /* grid-column: 1/2; */
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    background-color: ${({ theme }) => theme.colors.lightLightGrey};
+    text-align: left;
+    padding-left: 5%;
+    padding-top: 30px;
+    h4 {
+        padding: 7px 0;
+        margin: 0;
+    }
+`;
+
 export const OrderProducts = styled.div`
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
     height: 100%;
     width: 100%;
     justify-content: left;
-    grid-column: 2/2;
-    padding-top: 3%;
     padding-left: 5%;
     display: flex;
+    align-items: center;
     flex-direction: row;
 `;
 export const ProductImage = styled.div`
@@ -109,7 +122,6 @@ export const ProductImage = styled.div`
 `;
 export const ProductImageSmall = styled.div`
     position: relative;
-    margin-top: 5%;
     margin-left: 3%;
     height: 70px;
     width: auto;
@@ -120,13 +132,11 @@ export const ProductImageSmall = styled.div`
 `;
 
 export const ProductDescription = styled.div`
-    padding-top: 4%;
     justify-content: center;
     text-align: left;
     padding-left: 5%;
     p {
-        font-size: ${({ theme }) => theme.fontSize.l_plus};
-        /* color: ${({ theme }) => theme.colors.darkGrey}; */
+        font-size: ${({ theme }) => theme.fontSize.l};
     }
 `;
 
@@ -148,10 +158,6 @@ export const PageButton = styled.div`
         box-shadow: 1px 1px 12px 1px ${({ theme }) => theme.colors.grey};
         cursor: pointer;
     }
-`;
-
-export const Link = styled(NavLink)`
-    text-decoration: none;
 `;
 
 export const NoOrders = styled.div`
@@ -185,4 +191,41 @@ export const Quantity = styled.div`
     position: absolute;
     right: -10px;
     bottom: -10px;
+`;
+
+export const GetPDF = styled.div`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 6px 1px 6px;
+    border: 1px solid white;
+    border-radius: 50%;
+
+    :hover {
+        background-color: ${({ theme }) => theme.colors.lightLightGrey};
+    }
+`;
+
+export const HandyMenu = styled.div`
+    z-index: 100;
+    position: absolute;
+    top: 85px;
+    right: 5%;
+    padding: 15px 10px;
+    width: fit-content;
+    background-color: white;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px 1px ${({ theme }) => theme.colors.grey};
+`;
+
+export const IconPDF = styled.div``;
+
+export const DescriptionPDF = styled.div`
+    margin-left: 5px;
 `;

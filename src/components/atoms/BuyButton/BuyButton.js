@@ -3,7 +3,7 @@ import { StyledButton } from './BuyButton.styles';
 import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
 
-const BuyButton = ({ item, index }) => {
+const BuyButton = ({ item }) => {
     const { basketItems, setBasketItems } = useBasket();
     const product = item;
     const {
