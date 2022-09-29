@@ -13,6 +13,7 @@ import {
 import { RiCake3Line } from 'react-icons/ri';
 import useBasket from 'hooks/useBasket';
 import useOrder from 'hooks/useOrder';
+import { BASE_URL } from 'data/GlobalVariables';
 
 const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
     const { basketItems } = useBasket();
@@ -53,7 +54,11 @@ const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
                         </Link>
                     </>
                 ) : (
-                    <></>
+                    <>
+                        <a href={`${BASE_URL}/order/pdf/${orderId}`}>
+                            <Button>Pobierz fakturę</Button>{' '}
+                        </a>
+                    </>
                 )}
                 <Button onClick={() => onClose()}>Wyjdź</Button>
             </BottomSection>

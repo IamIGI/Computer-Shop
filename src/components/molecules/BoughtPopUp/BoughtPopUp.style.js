@@ -65,7 +65,7 @@ export const BottomSection = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 `;
 
 export const Link = styled(NavLink)`
