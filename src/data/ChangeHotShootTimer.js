@@ -1,4 +1,4 @@
-import { changeHotShootPromotion } from 'api/hotShoot';
+// import { changeHotShootPromotion } from 'api/hotShoot';
 import useRefresh from 'hooks/useRefresh';
 
 const ChangeHotShootTimer = () => {
@@ -11,16 +11,17 @@ const ChangeHotShootTimer = () => {
         let minutes = time.split(':')[1];
         let seconds = time.split(':')[2];
         if ((hours === '10' || hours === '22') && minutes === '00' && seconds === '03') {
-            const changeHotShoot = async () => {
-                try {
-                    await changeHotShootPromotion();
-                    setRefresh(!refresh);
-                } catch (err) {
-                    console.log(err);
-                }
-            };
+            setRefresh(!refresh);
+            // const changeHotShoot = async () => {
+            //     try {
+            //         await changeHotShootPromotion();
+            //         setRefresh(!refresh);
+            //     } catch (err) {
+            //         console.log(err);
+            //     }
+            // };
 
-            changeHotShoot();
+            // changeHotShoot();
         }
     }, 1000);
 
