@@ -7,6 +7,7 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import CommentsSection from 'components/templates/CommentsSection/CommentsSection';
 import { getProduct } from 'api/products';
 import { useParams } from 'react-router-dom';
+import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandyMenu';
 
 const Product = () => {
     const code = useParams().id;
@@ -33,6 +34,7 @@ const Product = () => {
                     </>
                 ) : (
                     <>
+                        <ProductHandyMenu productId={product._id} />
                         <TopWrapper id="Top">
                             <ProductTopContent product={product} />
                         </TopWrapper>
