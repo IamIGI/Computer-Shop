@@ -93,7 +93,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
     const handleRating = (value) => {
         setRating(value);
     };
-
+    console.log('asd');
     return (
         <WrapperOutside>
             <Title>Dodaj opinię</Title>
