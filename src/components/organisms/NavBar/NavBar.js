@@ -12,6 +12,7 @@ import {
     InsideWrapper,
 } from './NavBar.styles';
 import { VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
+import { BsEnvelope } from 'react-icons/bs';
 import useAuth from 'hooks/useAuth';
 import NoRealWebsiteAlert from 'components/molecules/NoRealWebisteAlert/NoRealWebsiteAlert';
 
@@ -73,6 +74,14 @@ const NavBar = () => {
                             </span>
                         </LinkIcon>
                         <LinkDescription>O Nas</LinkDescription>
+                    </StyledLink>
+                    <StyledLink to="/contact">
+                        <LinkIcon>
+                            <span>
+                                <BsEnvelope />
+                            </span>
+                        </LinkIcon>
+                        <LinkDescription>Kontakt</LinkDescription>
                     </StyledLink>
                 </Navigation>
             </InsideWrapper>
