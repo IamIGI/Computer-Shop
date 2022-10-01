@@ -99,12 +99,12 @@ export const TextArea = styled.textarea`
     resize: none;
 
     :hover {
-        border: 1px solid grey;
+        border: 2px solid grey;
     }
 
     :focus {
         outline: none !important;
-        border: 1px solid grey;
+        border: 2px solid grey;
         /* box-shadow: 0 0 10px #719ece; */
     }
 `;
@@ -129,15 +129,6 @@ export const Input = styled.input`
     padding: 9px 20px;
     color: grey;
     font-size: ${({ theme }) => theme.fontSize.l_plus};
-
-    :hover {
-        border: 1px solid grey;
-    }
-    :focus {
-        outline: none !important;
-        border: 1px solid grey;
-        /* box-shadow: 0 0 10px #719ece; */
-    }
 `;
 
 export const AddComment = styled.div`

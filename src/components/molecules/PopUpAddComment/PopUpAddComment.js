@@ -87,7 +87,6 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                 setSendComment(false);
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sendComment]);
 
     const handleRating = (value) => {
@@ -100,7 +99,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
             <WrapperInside>
                 <ProductDescription>
                     <Image>
-                        <img src={prevImg} alt="Prev product" />
+                        <img src={prevImg} alt="Photo of a product" />
                     </Image>
                     <ProductName>
                         <p>{name}</p>

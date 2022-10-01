@@ -5,16 +5,17 @@ export const Input = styled.input`
     height: 32px;
     width: 200px;
     border-radius: 16px;
-    border: 1px solid lightgrey;
+    border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     color: ${({ theme }) => theme.colors.darkGrey};
     text-align: center;
     padding-right: 10px;
 
-    :hover {
-        border: 1px solid grey;
+    &:hover {
+        border: 1px solid ${({ theme }) => theme.colors.success};
     }
-    :focus {
-        outline: none !important;
-        border: 1px solid grey;
+
+    &:focus {
+        outline-width: 0;
+        border: 1px solid ${({ theme }) => theme.colors.success};
     }
 `;

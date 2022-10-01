@@ -18,7 +18,6 @@ import RequireAuth from 'components/molecules/RequireAuth/RequireAuth';
 import PersistLogin from 'providers/PersistLogin';
 
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
-import ContactAuthor from 'components/templates/ContactAuthor/ContactAuthor';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -38,7 +37,6 @@ const Root = () => {
                         <Route path="about" element={<About />} />
                         <Route path={`/product/:id`} element={<Product />} />
                         <Route path="basket" element={<Basket />} />
-                        <Route path="contact" element={<ContactAuthor />} />
 
                         <Route path="*" element={<MissingPage />} />
                         <Route path="unauthorized" element={<Unauthorized />} />
