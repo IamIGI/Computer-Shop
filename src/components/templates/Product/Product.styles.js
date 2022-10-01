@@ -19,7 +19,6 @@ export const Wrapper = styled.div`
     scrollbar-width: none; /* Firefox */
     scroll-behavior: smooth;
 `;
-
 export const TopWrapper = styled.div`
     height: 100%;
     width: 100%;
