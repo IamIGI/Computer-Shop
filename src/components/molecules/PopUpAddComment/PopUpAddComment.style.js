@@ -99,12 +99,12 @@ export const TextArea = styled.textarea`
     resize: none;
 
     :hover {
-        border: 2px solid grey;
+        border: 1px solid grey;
     }
 
     :focus {
         outline: none !important;
-        border: 2px solid grey;
+        border: 1px solid grey;
         /* box-shadow: 0 0 10px #719ece; */
     }
 `;
@@ -129,6 +129,15 @@ export const Input = styled.input`
     padding: 9px 20px;
     color: grey;
     font-size: ${({ theme }) => theme.fontSize.l_plus};
+
+    :hover {
+        border: 1px solid grey;
+    }
+    :focus {
+        outline: none !important;
+        border: 1px solid grey;
+        /* box-shadow: 0 0 10px #719ece; */
+    }
 `;
 
 export const AddComment = styled.div`
@@ -147,6 +156,7 @@ export const Alert = styled.div`
     border-radius: 10px;
     margin-top: 15px;
     margin-left: 2%;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
 
 export const OpinionSection = styled.div`
@@ -158,4 +168,23 @@ export const NumOfChars = styled.div`
     right: 15px;
     bottom: 10px;
     color: ${({ theme }) => theme.colors.darkGrey};
+`;
+
+export const FailureIcon = styled.div`
+    padding-top: 8px;
+    font-size: ${({ theme }) => theme.fontSize.xl};
+`;
+export const FailureDescription = styled.div`
+    margin-left: 5px;
+`;
+export const FailureSection = styled.div`
+    max-width: 150px;
+    margin-left: 10px;
+    font-weight: 700;
+    color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;

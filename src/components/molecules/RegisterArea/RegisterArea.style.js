@@ -44,7 +44,7 @@ export const Instructions = styled.div`
     justify-content: center;
     text-align: center;
     width: 50%;
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
     border-radius: 0.5rem;
     background: ${({ theme }) => theme.colors.grey};
     color: ${({ theme }) => theme.colors.white};
