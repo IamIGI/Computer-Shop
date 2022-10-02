@@ -18,12 +18,16 @@ import {
     Alert,
     OpinionSection,
     NumOfChars,
+    FailureDescription,
+    FailureIcon,
+    FailureSection,
 } from './PopUpAddComment.style';
 import { useEffect, useState } from 'react';
 import StarRating from 'components/atoms/StarRating/StarRating';
 import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 import { sendCommentAPI } from 'api/comments';
+import { BiCommentError } from 'react-icons/bi';
 
 const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments, handleRefreshProductSummary }) => {
     const alertInit = [false, { userName: '', opinion: '', rating: '' }];
@@ -35,6 +39,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
     const [sendComment, setSendComment] = useState(false);
     const [alert, setAlert] = useState(alertInit);
     const [countChar, setCountChar] = useState(0);
+    const [languageValidation, setLanguageValidation] = useState([false, '']);
 
     useEffect(() => {
         if (sendComment) {
@@ -50,10 +55,23 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                         },
                     };
 
-                    console.log(data);
                     try {
                         const response = await sendCommentAPI(data);
-                        console.log(response);
+                        if (response.code === 5) {
+                            setLanguageValidation([true, 'Imie zawiera słowa wulgarne']);
+                            setAlert(alertInit);
+                        } else if (response.code === 1) {
+                            setLanguageValidation([true, 'Wiadomość zawiera słowa wulgarne']);
+                            setAlert(alertInit);
+                        } else if (response.code === 4) {
+                            console.log(`Data send successfully`);
+                            setLanguageValidation([false, '']);
+
+                            setAlert(alertInit);
+                            setSendComment(false);
+                            onClose();
+                            handleRefreshComments();
+                        }
                     } catch (err) {
                         if (err.response) {
                             console.log(err.response.data);
@@ -63,16 +81,11 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                             console.log(`Error: ${err.message}`);
                         }
                     }
-
-                    console.log(`Data send successfully`);
-                    handleRefreshComments();
                 };
 
                 sendData();
-                setAlert(alertInit);
-                setSendComment(false);
-                onClose();
             } else {
+                setLanguageValidation([false, '']);
                 console.log('Data is bad');
                 setAlert([...alert, (alert[0] = true)]);
                 userName.length === 0
@@ -84,8 +97,8 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                 rating === 0
                     ? setAlert([...alert, (alert[1].rating = 'Minimalna ocena to 1')])
                     : setAlert([...alert, (alert[1].rating = '')]);
-                setSendComment(false);
             }
+            setSendComment(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sendComment]);
@@ -93,7 +106,6 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
     const handleRating = (value) => {
         setRating(value);
     };
-    console.log('asd');
     return (
         <WrapperOutside>
             <Title>Dodaj opinię</Title>
@@ -149,6 +161,16 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                             <p>Dodaj opinię</p>
                         </BuyButton>
                     </div>
+                    {languageValidation[0] ? (
+                        <FailureSection>
+                            <FailureIcon>
+                                <BiCommentError />
+                            </FailureIcon>
+                            <FailureDescription>{languageValidation[1]}</FailureDescription>
+                        </FailureSection>
+                    ) : (
+                        <></>
+                    )}
                     {alert[0] ? (
                         <Alert>
                             {alert[1].userName !== '' && (

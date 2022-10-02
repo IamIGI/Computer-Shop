@@ -156,6 +156,7 @@ export const Alert = styled.div`
     border-radius: 10px;
     margin-top: 15px;
     margin-left: 2%;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
 
 export const OpinionSection = styled.div`
@@ -167,4 +168,23 @@ export const NumOfChars = styled.div`
     right: 15px;
     bottom: 10px;
     color: ${({ theme }) => theme.colors.darkGrey};
+`;
+
+export const FailureIcon = styled.div`
+    padding-top: 8px;
+    font-size: ${({ theme }) => theme.fontSize.xl};
+`;
+export const FailureDescription = styled.div`
+    margin-left: 5px;
+`;
+export const FailureSection = styled.div`
+    max-width: 150px;
+    margin-left: 10px;
+    font-weight: 700;
+    color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
