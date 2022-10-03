@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -113,11 +114,13 @@ export const ProductSection = styled.div`
     justify-content: flex-start;
 `;
 
-export const ProductElement = styled.div`
+export const ProductElement = styled(NavLink)`
     border-top: 1px solid ${({ theme }) => theme.colors.darkGrey};
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    color: black;
+    text-decoration: none;
 `;
 
 export const ProductImage = styled.div`

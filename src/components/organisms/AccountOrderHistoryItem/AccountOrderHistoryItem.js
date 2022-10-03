@@ -19,6 +19,7 @@ import {
     ProductImage,
     ProductDescription,
     ProductQuantity,
+    Link,
 } from './AccountOrderHistoryItem.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BsBox } from 'react-icons/bs';
@@ -145,7 +146,7 @@ const AccountOrderHistoryItem = () => {
                         <ProductSection>
                             <OrderSectionTitle>Zamówienie</OrderSectionTitle>
                             {orderItem.products.map((product, index) => (
-                                <ProductElement key={index}>
+                                <ProductElement to={`/product/${product._id}`} key={product._id}>
                                     <ProductImage>
                                         <img src={product.prevImg} alt="images of product" />
                                     </ProductImage>

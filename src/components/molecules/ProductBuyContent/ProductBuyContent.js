@@ -82,14 +82,14 @@ const ProductBuyContent = ({ product }) => {
                     <>
                         <DiscountSize>Oszczędzasz {product.special_offer.price} zł </DiscountSize>
                         <PriceSection>
-                            <OldPrice>{priceBeforeDiscount},00zł</OldPrice>
-                            <CurrentPrice> {product.price},00 zł</CurrentPrice>
+                            <OldPrice>{priceBeforeDiscount} zł</OldPrice>
+                            <CurrentPrice> {product.price} zł</CurrentPrice>
                         </PriceSection>
                     </>
                 ) : (
                     <>
                         <PriceSection>
-                            <CurrentPrice> {product.price},00 zł</CurrentPrice>
+                            <CurrentPrice> {product.price} zł</CurrentPrice>
                         </PriceSection>
                     </>
                 )}
