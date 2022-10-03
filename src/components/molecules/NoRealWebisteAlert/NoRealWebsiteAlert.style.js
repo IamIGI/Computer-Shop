@@ -10,17 +10,18 @@ export const Icon = styled.div`
     font-size: 30px;
     color: red;
     padding: 2px 4px 0 4px;
-    border: 2px solid white;
+    border: 2px solid transparent;
     border-radius: 100%;
 
     :hover {
+        cursor: pointer;
         border: 2px solid red;
         border-radius: 50%;
     }
 `;
 
 export const Alert = styled.div`
-    z-index: 1;
+    z-index: 5;
     position: absolute;
     top: 0px;
     left: 5px;
