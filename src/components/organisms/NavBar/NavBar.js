@@ -132,7 +132,7 @@ const NavBar = () => {
                                 </StyledLinkSmallScreen>
                             )}
 
-                            <StyledLinkSmallScreen to="/allProducts">
+                            <StyledLinkSmallScreen to="/allProducts" onClick={() => setToggleMenu(false)}>
                                 <LinkIcon>
                                     <span>
                                         <VscInspect />
@@ -140,7 +140,7 @@ const NavBar = () => {
                                 </LinkIcon>
                                 <LinkDescription>Produkty</LinkDescription>
                             </StyledLinkSmallScreen>
-                            <StyledLinkSmallScreen to="/about">
+                            <StyledLinkSmallScreen to="/about" onClick={() => setToggleMenu(false)}>
                                 <LinkIcon>
                                     <span>
                                         <VscMilestone />
@@ -148,7 +148,7 @@ const NavBar = () => {
                                 </LinkIcon>
                                 <LinkDescription>O Nas</LinkDescription>
                             </StyledLinkSmallScreen>
-                            <StyledLinkSmallScreen to="/contact">
+                            <StyledLinkSmallScreen to="/contact" onClick={() => setToggleMenu(false)}>
                                 <LinkIcon>
                                     <span>
                                         <BsEnvelope />
@@ -156,7 +156,7 @@ const NavBar = () => {
                                 </LinkIcon>
                                 <LinkDescription>Kontakt</LinkDescription>
                             </StyledLinkSmallScreen>
-                            <StyledLinkSmallScreen to="/authorization">
+                            <StyledLinkSmallScreen to="/authorization" onClick={() => setToggleMenu(false)}>
                                 <LinkIcon>
                                     <span>
                                         <RiUserReceived2Line />

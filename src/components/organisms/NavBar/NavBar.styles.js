@@ -159,26 +159,26 @@ export const StyledLinksSmallScreenSection = styled.div`
     width: 200px;
     height: fit-content;
     background: var(--color-black);
-    border: 1px solid blue;
+    border: 1px solid gray;
 
     background-color: white;
     z-index: 5;
-`;
 
-export const CloseMarkSmallScreen = styled.div`
-    font-size: 27px;
-    cursor: pointer;
-    position: absolute;
-    top: 0px;
-    right: 20px;
+    @media screen and (max-width: 650px) {
+        align-items: center;
+        top: 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: 0.5s ease;
+    }
 `;
 
 export const StyledLinkSmallScreen = styled(NavLink)`
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-
+    /* border: 1px solid gray; */
     font-size: ${({ theme }) => theme.fontSize.l};
     padding: 10px;
     transition: 0.5s ease;
