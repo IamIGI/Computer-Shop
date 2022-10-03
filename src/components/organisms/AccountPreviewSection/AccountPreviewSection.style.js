@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    min-width: 300px;
-    grid-column: 3/4;
+    width: 300px;
+    max-width: 300px;
     padding-top: 20px;
     border-left: 1px solid ${({ theme }) => theme.colors.darkGrey};
     display: flex;
@@ -11,11 +11,13 @@ export const Wrapper = styled.div`
     text-align: center;
     flex-wrap: nowrap;
     padding-left: 20px;
+
+    @media (max-width: 1370px) {
+        display: none;
+    }
 `;
 
-export const InsideWrapper = styled.div`
-    max-width: 300px;
-`;
+export const InsideWrapper = styled.div``;
 
 export const Separator = styled.hr`
     width: 70%;

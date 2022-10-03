@@ -36,12 +36,12 @@ const NoRealWebsiteAlert = () => {
             {waitForFetch ? (
                 <></>
             ) : (
-                <Wrapper onMouseOver={() => setAlert(true)}>
+                <Wrapper onClick={() => setAlert(true)}>
                     <Icon>
                         <FiAlertTriangle />
                     </Icon>
                     {alert ? (
-                        <Alert onMouseOut={() => setAlert(false)}>
+                        <Alert onMouseLeave={() => setAlert(false)}>
                             <Title>This is website is not real e-commerce website !!</Title>
 
                             <Subtitle>Date: {lastUpdate.date}</Subtitle>

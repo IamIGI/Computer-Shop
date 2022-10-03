@@ -34,7 +34,7 @@ export const Home = styled.div`
     justify-content: space-around;
     align-items: center;
     padding: 15px;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
+    font-size: ${({ theme }) => theme.fontSize.xl};
     border-bottom-left-radius: 30px;
     border-bottom: 2px solid grey;
     border-left: 2px solid grey;
@@ -73,8 +73,12 @@ export const Navigation = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
-`;
+    align-items: center;
 
+    @media screen and (max-width: 830px) {
+        display: none;
+    }
+`;
 export const StyledLink = styled(NavLink)`
     display: flex;
     flex-direction: row;
@@ -82,22 +86,24 @@ export const StyledLink = styled(NavLink)`
     justify-content: center;
     align-items: baseline;
 
-    margin-left: 30px;
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    padding: 10px;
-    border-bottom-left-radius: 15px;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
+    margin-left: 5px;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    padding: 6px 10px 6px 15px;
+    /* border-bottom-left-radius: 15px;
+    border-bottom: 2px solid grey; */
+    /* border: 1.3px solid grey; */
+    border-left: 1.3px solid grey;
+    transition: 0.5s ease;
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.successDark};
+        /* border-color: ${({ theme }) => theme.colors.successDark}; */
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
     }
 
     &.active {
-        border-color: ${({ theme }) => theme.colors.successDark};
+        /* border-color: ${({ theme }) => theme.colors.successDark}; */
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
@@ -107,4 +113,85 @@ export const StyledLink = styled(NavLink)`
 export const LinkIcon = styled.div``;
 export const LinkDescription = styled.div`
     margin-left: 10px;
+`;
+
+//-------------MEDIUM SCREEN--------------
+export const StyledLinkMediumScreen = styled.div`
+    display: none;
+    @media screen and (max-width: 1370px) {
+        display: flex;
+        flex-direction: column;
+        transition: 0.5s ease;
+    }
+`;
+
+export const NavigationSmallScreen = styled.div`
+    display: none;
+    margin-right: 2%;
+
+    @media screen and (max-width: 830px) {
+        display: flex;
+        flex-direction: column;
+        transition: 0.5s ease;
+    }
+`;
+
+export const HamburgerMenu = styled.div`
+    margin-top: 5px;
+    padding: 0;
+    font-size: 27px;
+    transition: 0.5s ease;
+    :hover {
+        cursor: pointer;
+        color: ${({ theme }) => theme.colors.successDark};
+    }
+`;
+
+export const StyledLinksSmallScreenSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: left;
+    position: fixed;
+    top: 40px;
+    right: 0;
+    width: 200px;
+    height: fit-content;
+    background: var(--color-black);
+    border: 1px solid blue;
+
+    background-color: white;
+    z-index: 5;
+`;
+
+export const CloseMarkSmallScreen = styled.div`
+    font-size: 27px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 20px;
+`;
+
+export const StyledLinkSmallScreen = styled(NavLink)`
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    font-size: ${({ theme }) => theme.fontSize.l};
+    padding: 10px;
+    transition: 0.5s ease;
+
+    &:hover {
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+
+    &.active {
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
 `;
