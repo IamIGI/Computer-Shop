@@ -1,7 +1,17 @@
-import { Wrapper } from './Authorization.style';
-
+import { LoginWrapper, Wrapper, RegisterWrapper } from './Authorization.style';
+import LoginArea from 'components/molecules/LoginArea/LoginArea';
+import RegisterArea from 'components/molecules/RegisterArea/RegisterArea';
 const Authorization = () => {
-    return <Wrapper>Authorization</Wrapper>;
+    return (
+        <Wrapper>
+            <LoginWrapper>
+                <LoginArea />
+            </LoginWrapper>
+            <RegisterWrapper>
+                <RegisterArea />
+            </RegisterWrapper>
+        </Wrapper>
+    );
 };
 
 export default Authorization;

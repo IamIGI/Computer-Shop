@@ -2,15 +2,19 @@ import { Button } from 'components/atoms/Button/Button';
 import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.styles';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+    margin: auto;
+`;
 
 export const BottomRegister = styled(Bottom)`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 10px 0 0 12%;
-    padding: 0;
-    width: fit-content;
+    /* margin: 10px 0 0 12%; */
+    margin-top: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    /* width: fit-content; */
 
     font-size: ${({ theme }) => theme.fontSize.m};
     color: ${({ theme }) => theme.colors.darkGrey};

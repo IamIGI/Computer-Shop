@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* align-items: flex-start; */
 `;
 
 export const TopWrapper = styled.div`
@@ -17,7 +16,6 @@ export const TopWrapper = styled.div`
 `;
 
 export const Instructions = styled.div`
-    /* display: block; */
     margin: 0;
     padding: 0;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
@@ -48,7 +46,6 @@ export const EmailSection = styled.div`
 
 export const InputSection = styled.div`
     position: relative;
-    /* border: 1px solid green; */
     width: fit-content;
 
     margin-bottom: 10px;
@@ -62,8 +59,7 @@ export const SelectSection = styled.div`
 
 export const TextAreaSection = styled.div`
     position: relative;
-    /* border: 1px solid green; */
-    /* width: fit-content; */
+
     padding: 0 8px;
 `;
 
@@ -73,7 +69,6 @@ export const InputDescription = styled.div`
     right: 25px;
     background-color: white;
     padding: 0 5px;
-    /* border: 1px solid red; */
 `;
 
 export const ButtonSection = styled.div`
