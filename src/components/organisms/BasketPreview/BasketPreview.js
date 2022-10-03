@@ -103,13 +103,13 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                                             {item.isDiscount ? (
                                                 <>
                                                     <OldPrice>
-                                                        <span>{String(item.priceBeforeDiscount)},00 zł</span>
+                                                        <span>{String(item.priceBeforeDiscount)} zł</span>
                                                     </OldPrice>
-                                                    <CurrentPrice>{item.price},00 zł</CurrentPrice>
+                                                    <CurrentPrice>{item.price} zł</CurrentPrice>
                                                 </>
                                             ) : (
                                                 <CurrentPrice>
-                                                    <p>{item.price},00 zł</p>
+                                                    <p>{item.price} zł</p>
                                                 </CurrentPrice>
                                             )}
                                         </PriceArea>

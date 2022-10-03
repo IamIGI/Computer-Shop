@@ -47,9 +47,9 @@ const HotShootContent = () => {
                         </Description>
                         <Price>
                             <p>
-                                <span>{hotShoot.productData.price},00 zł</span>
+                                <span>{hotShoot.productData.price} zł</span>
                             </p>
-                            <h3>{hotShoot.productData.price - hotShoot.productData.special_offer.price},00 zł</h3>
+                            <h3>{hotShoot.productData.price - hotShoot.productData.special_offer.price} zł</h3>
                         </Price>
                         <DescTimer>
                             <h3>

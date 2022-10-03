@@ -23,7 +23,7 @@ const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery, isUserLog
                         <li>
                             <ListSection>
                                 <Name>Wartość koszyka</Name>
-                                <Price>{priceToPay},00 zł</Price>
+                                <Price>{priceToPay} zł</Price>
                             </ListSection>
                         </li>
                         <li>

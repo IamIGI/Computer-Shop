@@ -58,7 +58,8 @@ export const Bottom = styled.div`
     justify-content: flex-start;
     align-items: center;
     span {
-        font-size: ${({ theme }) => theme.fontSize.xl};
+        font-weight: 700;
+        font-size: ${({ theme }) => theme.fontSize.l};
         color: black;
     }
     padding-bottom: 10px;
