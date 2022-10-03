@@ -2,16 +2,20 @@ import styled from 'styled-components';
 import { Button } from 'components/atoms/Button/Button';
 import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.styles';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+    margin: auto;
+`;
 
 export const BottomLogin = styled(Bottom)`
-    margin: 10px 0 0 14%;
+    /* margin: 10px 0 0 14%; */
+    margin-top: 10px;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: fit-content;
-    padding: 0;
+    /* width: fit-content; */
+    padding-top: 0px;
+    padding-bottom: 0px;
 
     font-size: ${({ theme }) => theme.fontSize.m};
     color: ${({ theme }) => theme.colors.darkGrey};
