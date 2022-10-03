@@ -2,15 +2,22 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-    margin-top: 2%;
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    margin-top: 12px;
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
+    width: 100%;
+    min-width: 260px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; */
 `;
 
 export const TitleSection = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
+    align-items: center;
+    font-size: ${({ theme }) => theme.fontSize.xl};
     font-weight: 700;
 `;
 
@@ -32,9 +39,10 @@ export const List = styled.ul`
 
 export const StyledLink = styled(NavLink)`
     text-decoration: none;
-    width: 83%;
+    width: 85%;
     color: black;
     display: flex;
+    align-items: center;
     flex-direction: row;
     justify-content: flex-start;
     margin-bottom: 15px;
@@ -51,33 +59,6 @@ export const StyledLink = styled(NavLink)`
     }
 
     &.active {
-        border-bottom: 1px solid ${({ theme }) => theme.colors.success};
-        span {
-            color: ${({ theme }) => theme.colors.success};
-        }
-    }
-`;
-
-export const LogoutLink = styled(NavLink)`
-    text-decoration: none;
-    width: 83%;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin-bottom: 15px;
-    div {
-        margin-right: 10px;
-    }
-    border-bottom: 1px solid white;
-
-    span {
-        font-size: 24px;
-        margin: 0px;
-        padding: 0px;
-    }
-
-    :hover {
         border-bottom: 1px solid ${({ theme }) => theme.colors.success};
         span {
             color: ${({ theme }) => theme.colors.success};

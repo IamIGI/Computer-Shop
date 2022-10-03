@@ -9,7 +9,6 @@ import {
     Title,
     UserDescription,
     NavDescription,
-    LogoutLink,
 } from './UserLogged.style';
 import { Line } from 'components/atoms/Line/Line';
 import { VscAccount } from 'react-icons/vsc';
@@ -51,7 +50,7 @@ const UserLogged = () => {
                     </StyledLink>
                 </li>
                 <li>
-                    <LogoutLink onClick={signOut} to="">
+                    <StyledLink onClick={signOut} to="">
                         <div>
                             <span>
                                 {' '}
@@ -59,7 +58,7 @@ const UserLogged = () => {
                             </span>
                         </div>
                         <NavDescription>Wyloguj sie</NavDescription>
-                    </LogoutLink>
+                    </StyledLink>
                 </li>
             </List>
         </Wrapper>

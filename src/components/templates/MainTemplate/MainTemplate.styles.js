@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const InsideWrapper = styled.div`
     max-width: 2100px;
-    padding: 0 4%;
+    padding: 0 3%;
     height: 83vh;
     margin: auto;
     display: flex;
