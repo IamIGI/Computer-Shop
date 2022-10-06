@@ -12,7 +12,7 @@ import useToggle from 'hooks/useToggle';
 import { testEmailRegex } from 'data/Regex';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
-function LoginArea() {
+function LoginArea({ mobileView }) {
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
@@ -62,7 +62,11 @@ function LoginArea() {
             const id = response?.data?.id;
             setAuth({ id, userName, email, roles, accessToken });
             setPwd('');
-            navigate(from, { replace: true });
+            if (!mobileView) {
+                navigate(from, { replace: true });
+            } else {
+                navigate('/', { replace: true });
+            }
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('Brak łącznośći z serwerem');
