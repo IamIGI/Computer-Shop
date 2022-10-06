@@ -3,7 +3,7 @@ import { BASE_URL } from 'data/GlobalVariables';
 
 const contactApi = axios.create({
     baseURL: `${BASE_URL}/contact/`,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'multipart/form-data' },
 });
 
 export const sendContactAPI = async (data) => {
