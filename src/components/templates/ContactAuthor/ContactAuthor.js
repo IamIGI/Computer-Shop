@@ -14,6 +14,7 @@ import {
     SuccessDescription,
     SuccessSection,
     FailureSection,
+    FileSection,
 } from './ContactAuthor.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BsEnvelope } from 'react-icons/bs';
@@ -33,6 +34,7 @@ const ContactAuthor = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState([false, '']);
     const [success, setSuccess] = useState(false);
+    const [files, setFiles] = useState([]);
 
     const [messageCategory, setMessageCategory] = useState(0);
     const [message, setMessage] = useState('');
@@ -49,18 +51,28 @@ const ContactAuthor = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-            name,
-            email,
-            category: messageCategory,
-            message,
-        };
+
+        const formData = new FormData();
+        Object.keys(files).forEach((key) => {
+            //arg1 = add files to file object, arg2 = object itself
+            formData.append(files.item(key).name, files.item(key));
+        });
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('category', messageCategory);
+        formData.append('message', message);
+
         try {
-            const response = await sendContactAPI(data);
+            const response = await sendContactAPI(formData);
+
             if (response.code === 1) {
                 setError([true, 'Wiadomość zawiera słowa wulgarne']);
             } else if (response.code === 2) {
                 setError([true, 'Imie zawiera słowa wulgarne']);
+            } else if (response.code === 3) {
+                setError([true, "Dopuszczalne rozszerznia: '.png', '.jpg', 'jpeg'"]);
+            } else if (response.code === 4) {
+                setError([true, 'Maksymalan waga pliku: 1MB']);
             } else if (response.code === 0) {
                 console.log([false, '']);
                 setError([false, '']);
@@ -138,13 +150,16 @@ const ContactAuthor = () => {
                                 </select>
                             </SelectStyle>
                         </SelectSection>
+                        <FileSection>
+                            <input type="file" accept="image/*" multiple onChange={(e) => setFiles(e.target.files)} />
+                        </FileSection>
                         <TextAreaSection>
                             <TextArea maxLength={2000} value={message} onChange={(e) => setMessage(e.target.value)} />
                             <InputDescription>Wiadomość</InputDescription>
                         </TextAreaSection>
                         <ButtonSection>
-                            <BuyButton>
-                                <p>Dodaj opinię</p>
+                            <BuyButton name="Submit">
+                                <p>Wyślij</p>
                             </BuyButton>
                             {error[0] ? (
                                 <FailureSection>

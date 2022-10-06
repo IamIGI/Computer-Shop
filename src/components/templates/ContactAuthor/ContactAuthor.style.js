@@ -7,12 +7,18 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow-y: scroll;
 `;
 
 export const TopWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+
+    @media screen and (max-width: 830px) {
+        flex-direction: column;
+        margin-left: 10%;
+    }
 `;
 
 export const Instructions = styled.div`
@@ -27,6 +33,9 @@ export const DescriptionSection = styled.div`
     width: 40%;
     min-width: 300px;
     line-height: 20px;
+    @media screen and (max-width: 830px) {
+        width: 90%;
+    }
 `;
 
 export const FormSection = styled.div`
@@ -35,6 +44,9 @@ export const FormSection = styled.div`
     justify-content: flex-start;
     width: 50%;
     min-width: 350px;
+    @media screen and (max-width: 830px) {
+        width: 90%;
+    }
 `;
 
 export const EmailSection = styled.div`
@@ -113,4 +125,8 @@ export const FailureSection = styled.div`
     justify-content: flex-start;
     align-items: center;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
+`;
+
+export const FileSection = styled.div`
+    margin: 0px 0px 5px 10px;
 `;
