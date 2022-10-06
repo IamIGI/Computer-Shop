@@ -5,7 +5,7 @@ const Authorization = () => {
     return (
         <Wrapper>
             <LoginWrapper>
-                <LoginArea />
+                <LoginArea mobileView={true} />
             </LoginWrapper>
             <RegisterWrapper>
                 <RegisterArea />

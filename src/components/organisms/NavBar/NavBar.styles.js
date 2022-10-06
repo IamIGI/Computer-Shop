@@ -75,7 +75,7 @@ export const Navigation = styled.div`
     justify-content: flex-end;
     align-items: center;
 
-    @media screen and (max-width: 830px) {
+    @media screen and (max-width: 950px) {
         display: none;
     }
 `;
@@ -120,7 +120,7 @@ export const StyledLinkMediumScreen = styled.div`
     display: none;
     @media screen and (max-width: 1370px) {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         transition: 0.5s ease;
     }
 `;
@@ -129,7 +129,7 @@ export const NavigationSmallScreen = styled.div`
     display: none;
     margin-right: 2%;
 
-    @media screen and (max-width: 830px) {
+    @media screen and (max-width: 950px) {
         display: flex;
         flex-direction: column;
         transition: 0.5s ease;

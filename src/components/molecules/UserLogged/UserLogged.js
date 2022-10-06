@@ -57,7 +57,7 @@ const UserLogged = () => {
                                 <RiLogoutCircleLine />
                             </span>
                         </div>
-                        <NavDescription>Wyloguj sie</NavDescription>
+                        <NavDescription>Wyloguj się</NavDescription>
                     </StyledLink>
                 </li>
             </List>

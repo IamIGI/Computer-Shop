@@ -15,7 +15,7 @@ const AccountPreviewSection = () => {
                     <UserLogged />
                 ) : (
                     <InsideWrapper>
-                        <LoginArea />
+                        <LoginArea mobileView={false} />
                         <Separator />
                         <RegisterArea />
                     </InsideWrapper>
