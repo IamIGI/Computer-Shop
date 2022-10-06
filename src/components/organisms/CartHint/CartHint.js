@@ -52,7 +52,7 @@ const CartHint = () => {
                                         <MdOutlineDelete />
                                     </DeleteProduct>
                                     <Link to={`/product/${item._id}`} key={item._id}>
-                                        <img src={item.prevImg} alt="images of product" />
+                                        <img src={item.prevImg} alt="product preview" />
                                     </Link>
                                 </Image>
                             ))}

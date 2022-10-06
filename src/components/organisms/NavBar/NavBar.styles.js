@@ -75,10 +75,36 @@ export const Navigation = styled.div`
     justify-content: flex-end;
     align-items: center;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: 1100px) {
         display: none;
     }
 `;
+
+export const StyledLinkLogOut = styled(NavLink)`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
+
+    margin-left: 5px;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    padding: 6px 10px 6px 10px;
+    transition: 0.5s ease;
+
+    &:hover {
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+
+    &.active {
+        span {
+            color: ${({ theme }) => theme.colors.successDark};
+        }
+    }
+`;
+
 export const StyledLink = styled(NavLink)`
     display: flex;
     flex-direction: row;
@@ -88,22 +114,17 @@ export const StyledLink = styled(NavLink)`
 
     margin-left: 5px;
     font-size: ${({ theme }) => theme.fontSize.l};
-    padding: 6px 10px 6px 15px;
-    /* border-bottom-left-radius: 15px;
-    border-bottom: 2px solid grey; */
-    /* border: 1.3px solid grey; */
-    border-left: 1.3px solid grey;
+    padding: 6px 10px 6px 10px;
+    border-right: 1.3px solid grey;
     transition: 0.5s ease;
 
     &:hover {
-        /* border-color: ${({ theme }) => theme.colors.successDark}; */
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
     }
 
     &.active {
-        /* border-color: ${({ theme }) => theme.colors.successDark}; */
         span {
             color: ${({ theme }) => theme.colors.successDark};
         }
@@ -111,12 +132,14 @@ export const StyledLink = styled(NavLink)`
 `;
 
 export const LinkIcon = styled.div``;
+
 export const LinkDescription = styled.div`
     margin-left: 10px;
 `;
 
 //-------------MEDIUM SCREEN--------------
 export const StyledLinkMediumScreen = styled.div`
+    position: relative;
     display: none;
     @media screen and (max-width: 1370px) {
         display: flex;
@@ -125,11 +148,53 @@ export const StyledLinkMediumScreen = styled.div`
     }
 `;
 
+export const SmallScreenMenuPreview = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+`;
+
+export const LinkIconBasketSmallScreen = styled.div`
+    font-size: 25px;
+    margin-right: 15px;
+    padding: 3px 5px;
+    position: relative;
+`;
+
+export const QuantityOfProductSmallScreen = styled.div`
+    position: absolute;
+    top: -13px;
+    right: -14px;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    background-color: ${({ theme }) => theme.colors.successDark};
+    color: white;
+    font-weight: 700;
+    padding-top: 3px;
+    font-size: 15px;
+`;
+
+export const QuantityOfProductMediumScreen = styled.div`
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: ${({ theme }) => theme.colors.successDark};
+    color: white;
+    font-weight: 700;
+    padding-top: 2px;
+    font-size: 13px;
+`;
+
 export const NavigationSmallScreen = styled.div`
     display: none;
     margin-right: 2%;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: 1100px) {
         display: flex;
         flex-direction: column;
         transition: 0.5s ease;
@@ -137,7 +202,7 @@ export const NavigationSmallScreen = styled.div`
 `;
 
 export const HamburgerMenu = styled.div`
-    margin-top: 5px;
+    margin: 5px 0 0 20px;
     padding: 0;
     font-size: 27px;
     transition: 0.5s ease;
