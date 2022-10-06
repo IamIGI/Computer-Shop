@@ -42,17 +42,18 @@ export const Alert = styled.div`
 export const Title = styled.div`
     text-align: center;
     color: red;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
+    font-size: ${({ theme }) => theme.fontSize.xl};
     margin-bottom: 10px;
 `;
 
 export const Subtitle = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
 
 export const ListSection = styled.div`
     li {
         line-height: 20px;
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
     }
 `;
 

@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
     align-items: center;
     text-align: center;
     flex-wrap: nowrap;
-    /* padding-left: 20px; */
 
     @media (max-width: 1370px) {
         display: none;

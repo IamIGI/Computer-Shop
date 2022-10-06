@@ -15,6 +15,11 @@ import {
     StyledLinkSmallScreen,
     StyledLinksSmallScreenSection,
     StyledLinkMediumScreen,
+    SmallScreenMenuPreview,
+    StyledLinkLogOut,
+    LinkIconBasketSmallScreen,
+    QuantityOfProductSmallScreen,
+    QuantityOfProductMediumScreen,
 } from './NavBar.styles';
 import { VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
 import { BsEnvelope } from 'react-icons/bs';
@@ -25,6 +30,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUserReceived2Line } from 'react-icons/ri';
 import { VscAccount } from 'react-icons/vsc';
 import { RiLogoutCircleLine } from 'react-icons/ri';
+import { BsBasket3 } from 'react-icons/bs';
+import useBasket from 'hooks/useBasket';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
@@ -32,6 +39,13 @@ const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
 const NavBar = () => {
     const { auth } = useAuth();
     const logout = useLogout();
+    const { basketItems } = useBasket();
+
+    const getQuantityOfItems = () => {
+        let temp = 0;
+        basketItems.map((item) => (temp += item.quantity));
+        return temp;
+    };
 
     const signOut = async () => {
         setToggleMenu(false);
@@ -104,6 +118,21 @@ const NavBar = () => {
                     {Object.keys(auth).length !== 0 ? (
                         <>
                             <StyledLinkMediumScreen>
+                                <StyledLink to="basket">
+                                    <LinkIcon>
+                                        <span>
+                                            <BsBasket3 />
+                                        </span>
+                                    </LinkIcon>
+                                    <LinkDescription>Koszyk</LinkDescription>
+                                </StyledLink>
+                                {getQuantityOfItems() !== 0 && (
+                                    <QuantityOfProductMediumScreen>
+                                        {getQuantityOfItems()}
+                                    </QuantityOfProductMediumScreen>
+                                )}
+                            </StyledLinkMediumScreen>
+                            <StyledLinkMediumScreen>
                                 <StyledLink to="accountSettings/Settings">
                                     <LinkIcon>
                                         <span>
@@ -113,15 +142,16 @@ const NavBar = () => {
                                     <LinkDescription>Konto</LinkDescription>
                                 </StyledLink>
                             </StyledLinkMediumScreen>
+
                             <StyledLinkMediumScreen>
-                                <StyledLink to="" onClick={signOut}>
+                                <StyledLinkLogOut to="" onClick={signOut}>
                                     <LinkIcon>
                                         <span>
                                             <RiLogoutCircleLine />
                                         </span>
                                     </LinkIcon>
                                     <LinkDescription>Wyloguj się</LinkDescription>
-                                </StyledLink>
+                                </StyledLinkLogOut>
                             </StyledLinkMediumScreen>
                         </>
                     ) : (
@@ -138,9 +168,26 @@ const NavBar = () => {
                     )}
                 </Navigation>
                 <NavigationSmallScreen>
-                    <HamburgerMenu>
-                        <GiHamburgerMenu onClick={() => setToggleMenu(true)} />
-                    </HamburgerMenu>
+                    <SmallScreenMenuPreview>
+                        {getQuantityOfItems() !== 0 && (
+                            <StyledLinkMediumScreen>
+                                <StyledLink to="basket">
+                                    <LinkIconBasketSmallScreen>
+                                        <span>
+                                            <BsBasket3 />
+                                        </span>
+                                        <QuantityOfProductSmallScreen>
+                                            {getQuantityOfItems()}
+                                        </QuantityOfProductSmallScreen>
+                                    </LinkIconBasketSmallScreen>
+                                </StyledLink>
+                            </StyledLinkMediumScreen>
+                        )}
+
+                        <HamburgerMenu>
+                            <GiHamburgerMenu onClick={() => setToggleMenu(true)} />
+                        </HamburgerMenu>
+                    </SmallScreenMenuPreview>
                     {toggleMenu && (
                         <StyledLinksSmallScreenSection onMouseLeave={() => setToggleMenu(false)}>
                             {/* <CloseMarkSmallScreen>

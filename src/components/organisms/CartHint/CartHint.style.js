@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l};
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     border-radius: 20px;
+    width: 233px;
 `;
 
 export const TitleSection = styled.div`
@@ -13,24 +14,24 @@ export const TitleSection = styled.div`
     border-top-right-radius: 20px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
     font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    padding: 10px 0;
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
+    padding: 6px 0;
     background-color: ${({ theme }) => theme.colors.lightLightGrey};
 `;
 
 export const Quantity = styled.div`
     position: absolute;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
+    height: 33px;
+    width: 33px;
     background-color: ${({ theme }) => theme.colors.successDark};
     color: white;
     font-weight: 700;
-    padding-top: 7px;
-    font-size: 20px;
+    padding-top: 6px;
+    font-size: 17px;
 
-    right: -12px;
-    top: -12px;
+    right: -10px;
+    top: -10px;
 `;
 
 export const DeleteProduct = styled.div`
@@ -42,12 +43,12 @@ export const DeleteProduct = styled.div`
     color: gray;
 
     border-radius: 50%;
-    height: 36px;
-    width: 36px;
+    height: 34px;
+    width: 34px;
     background-color: white;
     border: 1px solid gray;
     padding-top: 6px;
-    font-size: 20px;
+    font-size: 19px;
 
     :hover {
         color: black;
@@ -57,8 +58,8 @@ export const DeleteProduct = styled.div`
 
 export const ProductQuantity = styled.div`
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
     background-color: ${({ theme }) => theme.colors.success};
     color: white;
     font-size: 15px;
@@ -71,7 +72,7 @@ export const ProductQuantity = styled.div`
 
 export const ProductsSection = styled.div`
     width: 100%;
-    padding: 8px 9%;
+    padding: 8px 6%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -80,9 +81,9 @@ export const ProductsSection = styled.div`
 
 export const Image = styled.div`
     position: relative;
-    margin: 13px 3%;
+    margin: 13px 0;
     /* margin: 3%; */
-    height: 80px;
+    height: 75px;
     width: auto;
     img {
         max-height: 100%;
@@ -118,7 +119,7 @@ export const RemoveBasket = styled.div`
     margin: 12px 0;
     padding: 0 8px;
     padding-top: 7px;
-    border: 2px solid white;
+    border: 2px solid transparent;
     border-radius: 50%;
     :hover {
         cursor: pointer;
