@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
@@ -27,47 +26,7 @@ export const InsideWrapper = styled.div`
     }
 `;
 
-export const Home = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    padding: 15px;
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    border-bottom-left-radius: 30px;
-    border-bottom: 2px solid grey;
-    border-left: 2px solid grey;
-
-    :hover {
-        border-color: ${({ theme }) => theme.colors.successDark};
-        /* background-color: ${({ theme }) => theme.colors.grey}; */
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-`;
-export const Title = styled.div`
-    margin-left: 20px;
-    color: black;
-`;
-
-export const Icon = styled.div`
-    border: 2px solid gray;
-    border-radius: 50%;
-    padding: 6px 8px 2px 8px;
-    background-color: ${({ theme }) => theme.colors.lightPurple};
-`;
-
-export const SiteTitle = styled(NavLink)`
-    &.active {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-`;
-
-export const Navigation = styled.div`
+export const NormalScreenSection = styled.div`
     margin-right: 2%;
     display: flex;
     flex-direction: row;
@@ -80,65 +39,8 @@ export const Navigation = styled.div`
     }
 `;
 
-export const StyledLinkLogOut = styled(NavLink)`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: baseline;
-
-    margin-left: 5px;
-    font-size: ${({ theme }) => theme.fontSize.l};
-    padding: 6px 10px 6px 10px;
-    transition: 0.5s ease;
-
-    &:hover {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-
-    &.active {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-`;
-
-export const StyledLink = styled(NavLink)`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: baseline;
-
-    margin-left: 5px;
-    font-size: ${({ theme }) => theme.fontSize.l};
-    padding: 6px 10px 6px 10px;
-    border-right: 1.3px solid grey;
-    transition: 0.5s ease;
-
-    &:hover {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-
-    &.active {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-`;
-
-export const LinkIcon = styled.div``;
-
-export const LinkDescription = styled.div`
-    margin-left: 10px;
-`;
-
 //-------------MEDIUM SCREEN--------------
-export const StyledLinkMediumScreen = styled.div`
+export const MediumScreenSection = styled.div`
     position: relative;
     display: none;
     @media screen and (max-width: 1370px) {
@@ -155,17 +57,10 @@ export const SmallScreenMenuPreview = styled.div`
     align-items: center;
 `;
 
-export const LinkIconBasketSmallScreen = styled.div`
-    font-size: 25px;
-    margin-right: 15px;
-    padding: 3px 5px;
-    position: relative;
-`;
-
 export const QuantityOfProductSmallScreen = styled.div`
     position: absolute;
-    top: -13px;
-    right: -14px;
+    top: -6px;
+    right: 20px;
     border-radius: 50%;
     height: 25px;
     width: 25px;
@@ -190,7 +85,7 @@ export const QuantityOfProductMediumScreen = styled.div`
     font-size: 13px;
 `;
 
-export const NavigationSmallScreen = styled.div`
+export const SmallScreenSection = styled.div`
     display: none;
     margin-right: 2%;
 
@@ -203,8 +98,8 @@ export const NavigationSmallScreen = styled.div`
 
 export const HamburgerMenu = styled.div`
     margin: 5px 0 0 20px;
-    padding: 0;
-    font-size: 27px;
+    padding: 5px;
+    font-size: 35px;
     transition: 0.5s ease;
     :hover {
         cursor: pointer;
@@ -223,40 +118,22 @@ export const StyledLinksSmallScreenSection = styled.div`
     right: 0;
     width: 200px;
     height: fit-content;
-    background: var(--color-black);
     border: 1px solid gray;
 
     background-color: white;
     z-index: 5;
 
     @media screen and (max-width: 650px) {
+        /* justify-content: space-around; */
+        font-size: ${({ theme }) => theme.fontSize.xl};
+        gap: 5%;
         align-items: center;
         top: 0px;
+        padding: 10% 0;
+        height: 100%;
         width: 100%;
         display: flex;
         flex-direction: column;
         transition: 0.5s ease;
-    }
-`;
-
-export const StyledLinkSmallScreen = styled(NavLink)`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    /* border: 1px solid gray; */
-    font-size: ${({ theme }) => theme.fontSize.l};
-    padding: 10px;
-    transition: 0.5s ease;
-
-    &:hover {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
-    }
-
-    &.active {
-        span {
-            color: ${({ theme }) => theme.colors.successDark};
-        }
     }
 `;
