@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
 import {
     Wrapper,
-    Home,
-    SiteTitle,
-    StyledLink,
-    Navigation,
-    Icon,
-    Title,
-    LinkIcon,
-    LinkDescription,
+    NormalScreenSection,
     InsideWrapper,
-    NavigationSmallScreen,
+    SmallScreenSection,
     HamburgerMenu,
-    StyledLinkSmallScreen,
     StyledLinksSmallScreenSection,
-    StyledLinkMediumScreen,
     SmallScreenMenuPreview,
-    StyledLinkLogOut,
-    LinkIconBasketSmallScreen,
     QuantityOfProductSmallScreen,
     QuantityOfProductMediumScreen,
+    MediumScreenSection,
 } from './NavBar.styles';
-import { VscMilestone, VscVm, VscInspect } from 'react-icons/vsc';
+import { VscMilestone, VscInspect } from 'react-icons/vsc';
 import { BsEnvelope } from 'react-icons/bs';
 import useAuth from 'hooks/useAuth';
 import useLogout from 'hooks/useLogout';
@@ -32,6 +22,8 @@ import { VscAccount } from 'react-icons/vsc';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsBasket3 } from 'react-icons/bs';
 import useBasket from 'hooks/useBasket';
+import StyledLink from 'components/atoms/StyledLink/StyledLink';
+import WebsiteLogo from 'components/atoms/WebsiteLogo/WebsiteLogo';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
@@ -57,221 +49,121 @@ const NavBar = () => {
         <Wrapper>
             <InsideWrapper>
                 <NoRealWebsiteAlert />
-                <SiteTitle to="/">
-                    <Home>
-                        {' '}
-                        <Icon>
-                            <span>
-                                <VscVm />
-                            </span>
-                        </Icon>
-                        <Title>
-                            H<span>o</span>tSh<span>o</span>
-                            <span>o</span>t
-                        </Title>
-                    </Home>
-                </SiteTitle>
-                <Navigation>
+                <WebsiteLogo />
+                <NormalScreenSection>
                     {auth?.roles?.find((role) => Admin_entitlements === role) && (
-                        <StyledLink to="/adminSettings">
-                            <LinkIcon>
-                                <span>
-                                    <VscInspect />
-                                </span>
-                            </LinkIcon>
-                            <LinkDescription>Administrator</LinkDescription>
-                        </StyledLink>
+                        <StyledLink target={'/adminSettings'} icon={<VscInspect />} description={'Administrator'} />
                     )}
                     {auth?.roles?.find((role) => Editor_entitlements === role) && (
-                        <StyledLink to="/editorSettings">
-                            <LinkIcon>
-                                <VscInspect />
-                            </LinkIcon>
-                            <LinkDescription>Edytor</LinkDescription>
-                        </StyledLink>
+                        <StyledLink target={'/editorSettings'} icon={<VscInspect />} description={'Edytor'} />
                     )}
 
-                    <StyledLink to="/allProducts">
-                        <LinkIcon>
-                            <span>
-                                <VscInspect />
-                            </span>
-                        </LinkIcon>
-                        <LinkDescription>Produkty</LinkDescription>
-                    </StyledLink>
-                    <StyledLink to="/about">
-                        <LinkIcon>
-                            <span>
-                                <VscMilestone />
-                            </span>
-                        </LinkIcon>
-                        <LinkDescription>O Nas</LinkDescription>
-                    </StyledLink>
-                    <StyledLink to="/contact">
-                        <LinkIcon>
-                            <span>
-                                <BsEnvelope />
-                            </span>
-                        </LinkIcon>
-                        <LinkDescription>Kontakt</LinkDescription>
-                    </StyledLink>
-                    {Object.keys(auth).length !== 0 ? (
-                        <>
-                            <StyledLinkMediumScreen>
-                                <StyledLink to="basket">
-                                    <LinkIcon>
-                                        <span>
-                                            <BsBasket3 />
-                                        </span>
-                                    </LinkIcon>
-                                    <LinkDescription>Koszyk</LinkDescription>
-                                </StyledLink>
-                                {getQuantityOfItems() !== 0 && (
-                                    <QuantityOfProductMediumScreen>
-                                        {getQuantityOfItems()}
-                                    </QuantityOfProductMediumScreen>
-                                )}
-                            </StyledLinkMediumScreen>
-                            <StyledLinkMediumScreen>
-                                <StyledLink to="accountSettings/Settings">
-                                    <LinkIcon>
-                                        <span>
-                                            <VscAccount />
-                                        </span>
-                                    </LinkIcon>
-                                    <LinkDescription>Konto</LinkDescription>
-                                </StyledLink>
-                            </StyledLinkMediumScreen>
-
-                            <StyledLinkMediumScreen>
-                                <StyledLinkLogOut to="" onClick={signOut}>
-                                    <LinkIcon>
-                                        <span>
-                                            <RiLogoutCircleLine />
-                                        </span>
-                                    </LinkIcon>
-                                    <LinkDescription>Wyloguj się</LinkDescription>
-                                </StyledLinkLogOut>
-                            </StyledLinkMediumScreen>
-                        </>
-                    ) : (
-                        <StyledLinkMediumScreen to="/authorization">
-                            <StyledLink to="/authorization">
-                                <LinkIcon>
-                                    <span>
-                                        <RiUserReceived2Line />
-                                    </span>
-                                </LinkIcon>
-                                <LinkDescription>Logowanie</LinkDescription>
-                            </StyledLink>
-                        </StyledLinkMediumScreen>
-                    )}
-                </Navigation>
-                <NavigationSmallScreen>
+                    <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
+                    <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
+                    <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
+                    <MediumScreenSection>
+                        <div style={{ position: 'relative' }}>
+                            <StyledLink target={'basket'} icon={<BsBasket3 />} description={'Koszyk'} />
+                            {getQuantityOfItems() !== 0 && (
+                                <QuantityOfProductMediumScreen>{getQuantityOfItems()}</QuantityOfProductMediumScreen>
+                            )}
+                        </div>
+                        {Object.keys(auth).length !== 0 ? (
+                            <>
+                                <StyledLink
+                                    target={'accountSettings/Settings'}
+                                    icon={<VscAccount />}
+                                    description={'Konto'}
+                                />
+                                <div onClick={signOut}>
+                                    <StyledLink target={''} icon={<RiLogoutCircleLine />} description={'Wyloguj się'} />
+                                </div>
+                            </>
+                        ) : (
+                            <StyledLink
+                                target={'/authorization'}
+                                icon={<RiUserReceived2Line />}
+                                description={'Logowanie'}
+                            />
+                        )}
+                    </MediumScreenSection>
+                </NormalScreenSection>
+                <SmallScreenSection>
                     <SmallScreenMenuPreview>
                         {getQuantityOfItems() !== 0 && (
-                            <StyledLinkMediumScreen>
-                                <StyledLink to="basket">
-                                    <LinkIconBasketSmallScreen>
-                                        <span>
-                                            <BsBasket3 />
-                                        </span>
-                                        <QuantityOfProductSmallScreen>
-                                            {getQuantityOfItems()}
-                                        </QuantityOfProductSmallScreen>
-                                    </LinkIconBasketSmallScreen>
-                                </StyledLink>
-                            </StyledLinkMediumScreen>
+                            <div style={{ position: 'relative' }}>
+                                <StyledLink
+                                    target={'/basket'}
+                                    icon={<BsBasket3 />}
+                                    description={''}
+                                    smallScreen={true}
+                                />
+                                <QuantityOfProductSmallScreen>{getQuantityOfItems()}</QuantityOfProductSmallScreen>
+                            </div>
                         )}
-
                         <HamburgerMenu>
                             <GiHamburgerMenu onClick={() => setToggleMenu(true)} />
                         </HamburgerMenu>
                     </SmallScreenMenuPreview>
                     {toggleMenu && (
                         <StyledLinksSmallScreenSection onMouseLeave={() => setToggleMenu(false)}>
-                            {/* <CloseMarkSmallScreen>
-                                <AiOutlineClose onClick={() => setToggleMenu(false)} />
-                            </CloseMarkSmallScreen> */}
-
                             {auth?.roles?.find((role) => Admin_entitlements === role) && (
-                                <StyledLinkSmallScreen to="/adminSettings">
-                                    <LinkIcon>
-                                        <span>
-                                            <VscInspect />
-                                        </span>
-                                    </LinkIcon>
-                                    <LinkDescription>Administrator</LinkDescription>
-                                </StyledLinkSmallScreen>
+                                <div onClick={() => setToggleMenu(false)}>
+                                    <StyledLink
+                                        target={'/adminSettings'}
+                                        icon={<VscInspect />}
+                                        description={'Administrator'}
+                                    />
+                                </div>
                             )}
                             {auth?.roles?.find((role) => Editor_entitlements === role) && (
-                                <StyledLinkSmallScreen to="/editorSettings">
-                                    <LinkIcon>
-                                        <VscInspect />
-                                    </LinkIcon>
-                                    <LinkDescription>Edytor</LinkDescription>
-                                </StyledLinkSmallScreen>
+                                <div onClick={() => setToggleMenu(false)}>
+                                    <StyledLink
+                                        target={'/editorSettings'}
+                                        icon={<VscInspect />}
+                                        description={'Edytor'}
+                                    />
+                                </div>
                             )}
+                            <div onClick={() => setToggleMenu(false)}>
+                                <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
+                            </div>
+                            <div onClick={() => setToggleMenu(false)}>
+                                <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
+                            </div>
+                            <div onClick={() => setToggleMenu(false)}>
+                                <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
+                            </div>
 
-                            <StyledLinkSmallScreen to="/allProducts" onClick={() => setToggleMenu(false)}>
-                                <LinkIcon>
-                                    <span>
-                                        <VscInspect />
-                                    </span>
-                                </LinkIcon>
-                                <LinkDescription>Produkty</LinkDescription>
-                            </StyledLinkSmallScreen>
-                            <StyledLinkSmallScreen to="/about" onClick={() => setToggleMenu(false)}>
-                                <LinkIcon>
-                                    <span>
-                                        <VscMilestone />
-                                    </span>
-                                </LinkIcon>
-                                <LinkDescription>O Nas</LinkDescription>
-                            </StyledLinkSmallScreen>
-                            <StyledLinkSmallScreen to="/contact" onClick={() => setToggleMenu(false)}>
-                                <LinkIcon>
-                                    <span>
-                                        <BsEnvelope />
-                                    </span>
-                                </LinkIcon>
-                                <LinkDescription>Kontakt</LinkDescription>
-                            </StyledLinkSmallScreen>
                             {Object.keys(auth).length !== 0 ? (
                                 <>
-                                    <StyledLinkSmallScreen
-                                        to="accountSettings/Settings"
-                                        onClick={() => setToggleMenu(false)}
-                                    >
-                                        <LinkIcon>
-                                            <span>
-                                                <VscAccount />
-                                            </span>
-                                        </LinkIcon>
-                                        <LinkDescription>Konto</LinkDescription>
-                                    </StyledLinkSmallScreen>
-                                    <StyledLinkSmallScreen to="" onClick={signOut}>
-                                        <LinkIcon>
-                                            <span>
-                                                <RiLogoutCircleLine />
-                                            </span>
-                                        </LinkIcon>
-                                        <LinkDescription>Wyloguj się</LinkDescription>
-                                    </StyledLinkSmallScreen>
+                                    <div onClick={() => setToggleMenu(false)}>
+                                        <StyledLink
+                                            target={'/accountSettings/Settings'}
+                                            icon={<VscAccount />}
+                                            description={'Konto'}
+                                        />
+                                    </div>
+                                    <div onClick={signOut}>
+                                        <StyledLink
+                                            target={''}
+                                            icon={<RiLogoutCircleLine />}
+                                            description={'Wyloguj się'}
+                                        />
+                                    </div>
                                 </>
                             ) : (
-                                <StyledLinkSmallScreen to="/authorization" onClick={() => setToggleMenu(false)}>
-                                    <LinkIcon>
-                                        <span>
-                                            <RiUserReceived2Line />
-                                        </span>
-                                    </LinkIcon>
-                                    <LinkDescription>Logowanie</LinkDescription>
-                                </StyledLinkSmallScreen>
+                                <div onClick={() => setToggleMenu(false)}>
+                                    <StyledLink
+                                        target={'/authorization'}
+                                        icon={<RiUserReceived2Line />}
+                                        description={'Logowanie'}
+                                    />
+                                </div>
                             )}
                         </StyledLinksSmallScreenSection>
                     )}
-                </NavigationSmallScreen>
+                </SmallScreenSection>
             </InsideWrapper>
         </Wrapper>
     );
