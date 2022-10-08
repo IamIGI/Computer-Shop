@@ -29,7 +29,6 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
     const { refresh } = useRefresh();
     const [numberOfProducts, setNumberOfProducts] = useState();
     const windowSize = useWindowSize();
-    // console.log(windowSize);
     let showProducts = [];
 
     useEffect(() => {
@@ -57,7 +56,6 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
 
     //--------------------------------------------
     const handleNumberOfProducts = () => {
-        console.log(allProducts);
         if (allProducts !== 'yes') {
             if (windowSize.width <= 1620 && windowSize.width > 1100) {
                 setNumberOfProducts(2);
@@ -97,7 +95,6 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                     {showProducts.map((item, index) => (
                         <OutsideWrapper key={index}>
                             <Wrapper>
-                                {console.log(item._id)}
                                 <Link to={`/product/${item._id}`}>
                                     <Top>
                                         <img src={item.prevImg} alt="article" />

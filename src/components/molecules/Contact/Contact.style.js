@@ -59,7 +59,6 @@ export const Section = styled.div`
 export const Icon = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l};
     margin-right: 20px;
-    /* margin-left: 30px; */
     border-bottom: 1px solid ${({ theme }) => theme.colors.lightPurple};
 
     :hover {
