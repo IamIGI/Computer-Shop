@@ -22,6 +22,7 @@ const CommentsSection = ({ product }) => {
 
     const handleComments = (data) => {
         setComment(data);
+        console.log(data);
     };
 
     const handleRefreshComments = () => {
@@ -30,6 +31,7 @@ const CommentsSection = ({ product }) => {
 
     const handleAverageScore = (data) => {
         setAverageScore(data);
+        console.log(data);
     };
 
     const handleWaitForFetchAS = (data) => {

@@ -21,12 +21,16 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import Star from 'components/atoms/Star/Star';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
 import useRefresh from 'hooks/useRefresh';
+import useWindowSize from 'hooks/useWindowSize';
 
-let Show = '';
 const ProductPreview = ({ filterInit, allProducts, filters }) => {
     const [products, setProducts] = useState([]);
     const [waitForFetch, setWaitForFetch] = useState(true);
     const { refresh } = useRefresh();
+    const [numberOfProducts, setNumberOfProducts] = useState();
+    const windowSize = useWindowSize();
+    // console.log(windowSize);
+    let showProducts = [];
 
     useEffect(() => {
         const fetchProducts = async (data) => {
@@ -35,6 +39,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
 
                 const response = await ProductsApi.post('/all', data);
                 setProducts(response.data);
+                setNumberOfProducts(response.data.length);
                 setWaitForFetch(false);
             } catch (err) {
                 if (err.response) {
@@ -51,7 +56,32 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
     }, [filters, refresh]);
 
     //--------------------------------------------
-    allProducts === 'yes' ? (Show = products.length) : (Show = 3);
+    const handleNumberOfProducts = () => {
+        console.log(allProducts);
+        if (allProducts !== 'yes') {
+            if (windowSize.width <= 1620 && windowSize.width > 1100) {
+                setNumberOfProducts(2);
+            } else if (windowSize.width <= 947 && windowSize.width > 650) {
+                setNumberOfProducts(4);
+            } else {
+                setNumberOfProducts(3);
+            }
+        }
+    };
+
+    useEffect(() => {
+        handleNumberOfProducts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [windowSize, products]);
+
+    //---------------
+
+    if (products.length > 0) {
+        for (let i = 0; i < numberOfProducts; i++) {
+            showProducts.push(products[i]);
+        }
+    }
+
     return (
         <>
             {waitForFetch ? (
@@ -64,65 +94,62 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
                 </>
             ) : (
                 <>
-                    {products.map((item, index) => (
+                    {showProducts.map((item, index) => (
                         <OutsideWrapper key={index}>
-                            {index < Show && (
-                                <Wrapper>
-                                    <Link to={`/product/${item._id}`}>
-                                        <Top>
-                                            <img src={item.prevImg} alt="article" />
-                                            <h1>{item.name}</h1>
-                                        </Top>
-                                        {allProducts === 'yes' ? (
-                                            <>
-                                                <ProductOpinionsShort>
-                                                    <Rating>
-                                                        {[...Array(6)].map((star, index) => {
-                                                            index += 1;
-                                                            return (
-                                                                <Star
-                                                                    opinionRating={item.averageStars}
-                                                                    rate={index}
-                                                                    key={index}
-                                                                />
-                                                            );
-                                                        })}
-                                                    </Rating>
-                                                    <Opinions>({item.numberOfOpinions})</Opinions>
-                                                </ProductOpinionsShort>
-                                                <StyledList>
-                                                    <StyledRecord>
-                                                        {item.specification.processor.description}
-                                                    </StyledRecord>
-                                                    <StyledRecord>{item.specification.ram.description}</StyledRecord>
-                                                    <StyledRecord>
-                                                        {item.specification.graphics_card.description}
-                                                    </StyledRecord>
-                                                    <StyledRecord>{item.specification.disk.description}</StyledRecord>
-                                                </StyledList>
-                                            </>
-                                        ) : (
-                                            <span></span>
-                                        )}
+                            <Wrapper>
+                                {console.log(item._id)}
+                                <Link to={`/product/${item._id}`}>
+                                    <Top>
+                                        <img src={item.prevImg} alt="article" />
+                                        <h1>{item.name}</h1>
+                                    </Top>
+                                    {allProducts === 'yes' ? (
+                                        <>
+                                            <ProductOpinionsShort>
+                                                <Rating>
+                                                    {[...Array(6)].map((star, index) => {
+                                                        index += 1;
+                                                        return (
+                                                            <Star
+                                                                opinionRating={item.averageStars}
+                                                                rate={index}
+                                                                key={index}
+                                                            />
+                                                        );
+                                                    })}
+                                                </Rating>
+                                                <Opinions>({item.numberOfOpinions})</Opinions>
+                                            </ProductOpinionsShort>
+                                            <StyledList>
+                                                <StyledRecord>{item.specification.processor.description}</StyledRecord>
+                                                <StyledRecord>{item.specification.ram.description}</StyledRecord>
+                                                <StyledRecord>
+                                                    {item.specification.graphics_card.description}
+                                                </StyledRecord>
+                                                <StyledRecord>{item.specification.disk.description}</StyledRecord>
+                                            </StyledList>
+                                        </>
+                                    ) : (
+                                        <span></span>
+                                    )}
 
-                                        <Bottom>
-                                            {item.special_offer.mode ? (
-                                                <PriceSection>
-                                                    <PriceOldValue>
-                                                        <span>{item.price + item.special_offer.price} zł</span>
-                                                    </PriceOldValue>
-                                                    <PriceValue>
-                                                        <span>{item.price} zł</span>
-                                                    </PriceValue>
-                                                </PriceSection>
-                                            ) : (
-                                                <span>{item.price} zł</span>
-                                            )}
-                                        </Bottom>
-                                    </Link>
-                                    <BuyButton item={item} />
-                                </Wrapper>
-                            )}
+                                    <Bottom>
+                                        {item.special_offer.mode ? (
+                                            <PriceSection>
+                                                <PriceOldValue>
+                                                    <span>{item.price + item.special_offer.price} zł</span>
+                                                </PriceOldValue>
+                                                <PriceValue>
+                                                    <span>{item.price} zł</span>
+                                                </PriceValue>
+                                            </PriceSection>
+                                        ) : (
+                                            <span>{item.price} zł</span>
+                                        )}
+                                    </Bottom>
+                                </Link>
+                                <BuyButton item={item} />
+                            </Wrapper>
                         </OutsideWrapper>
                     ))}
                 </>

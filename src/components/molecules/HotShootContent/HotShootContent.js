@@ -1,8 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Title, Wrapper, Image, Description, Price, Timer, GivenTime, DescTimer, Colon } from './HotShootContent.style';
+import {
+    Title,
+    Wrapper,
+    Image,
+    Description,
+    Price,
+    Timer,
+    GivenTime,
+    DescTimer,
+    Colon,
+    ProductDescription,
+    PromoDescription,
+    InsideWrapper,
+} from './HotShootContent.style';
 import { getHotShootPromotion } from 'api/hotShoot';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import { Link } from 'components/atoms/Link/Link';
 import { TimerCount } from './HotShootContent.logic';
 import useRefresh from 'hooks/useRefresh';
 
@@ -34,8 +46,8 @@ const HotShootContent = () => {
             {isFetchHotShoot ? (
                 <LoadingAnimation loadingSize={15} />
             ) : (
-                <>
-                    <Link to={`/product/${hotShoot.productData._id}`}>
+                <InsideWrapper to={`/product/${hotShoot.productData._id}`}>
+                    <ProductDescription>
                         <Title>
                             <h2>Gorący strzał</h2>
                         </Title>
@@ -45,6 +57,8 @@ const HotShootContent = () => {
                         <Description>
                             <p>{hotShoot.productData.name}</p>
                         </Description>
+                    </ProductDescription>
+                    <PromoDescription>
                         <Price>
                             <p>
                                 <span>{hotShoot.productData.price} zł</span>
@@ -63,8 +77,8 @@ const HotShootContent = () => {
                             <Colon>:</Colon>
                             <GivenTime>{counters[2]}</GivenTime>
                         </Timer>
-                    </Link>
-                </>
+                    </PromoDescription>
+                </InsideWrapper>
             )}
         </Wrapper>
     );
