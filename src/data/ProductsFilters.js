@@ -1,4 +1,4 @@
-export const Producers = { title: 'Producent', filters: ['Apple', 'Asus', 'HP', 'Dell', 'MSI'] };
+export const Producers = { title: 'Producent', filters: ['Apple', 'Asus', 'HP', 'Dell', 'MSI', 'Microsoft'] };
 export const Processors = {
     title: 'Procesor',
     filters: ['Intel Core i3', 'Intel Core i5', 'Intel Core i7', 'AMD Ryzen 5', 'Apple M1 Pro', 'Apple M1'],

@@ -44,7 +44,6 @@ const NavBar = () => {
         await logout();
     };
     const [toggleMenu, setToggleMenu] = useState(false);
-    console.log(Object.keys(auth).length);
     return (
         <Wrapper>
             <InsideWrapper>

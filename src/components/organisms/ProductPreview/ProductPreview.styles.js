@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
     }
     justify-content: left;
     text-align: left;
-    margin: 15px 15px;
+    margin: 15px 0;
     width: 290px;
     height: fit-content;
     border: 1px solid white;

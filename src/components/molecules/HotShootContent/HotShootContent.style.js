@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     a,
@@ -8,17 +9,13 @@ export const Wrapper = styled.div`
         color: inherit;
         text-decoration: none;
     }
+    max-width: 380px;
+    margin: 20px;
     height: fit-content;
     padding: 20px 20px 30px 20px;
-    width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     border-radius: 30px;
-    display: flex;
-    justify-content: center;
     text-align: center;
-    /* align-items: center; */
-    flex-direction: column;
-    /* grid-template-rows: 100px 220px 100px 100px 150px; */
 
     &:hover {
         border: 1px solid ${({ theme }) => theme.colors.grey};
@@ -29,6 +26,45 @@ export const Wrapper = styled.div`
         h2 {
             color: red;
         }
+    }
+
+    @media screen and (max-width: 1100px) {
+        max-width: 1000px;
+    }
+`;
+
+export const InsideWrapper = styled(NavLink)`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+
+    @media screen and (max-width: 1100px) {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    @media screen and (max-width: 650px) {
+        flex-direction: column;
+        justify-content: center;
+    }
+`;
+
+export const ProductDescription = styled.div`
+    width: 100%;
+`;
+
+export const PromoDescription = styled.div`
+    width: 100%;
+    @media screen and (max-width: 1100px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 20px;
+        padding-bottom: 20px;
     }
 `;
 

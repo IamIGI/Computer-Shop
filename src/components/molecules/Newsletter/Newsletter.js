@@ -1,12 +1,12 @@
 import React from 'react';
-import { DescriptionContent, Icon, TopWrapper, Wrapper, BottomWrapper } from './Newsletter.style';
+import { DescriptionContent, Icon, LeftWrapper, Wrapper, RightWrapper } from './Newsletter.style';
 import { BsMailbox } from 'react-icons/bs';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 const Newsletter = () => {
     return (
         <Wrapper>
-            <TopWrapper>
+            <LeftWrapper>
                 <DescriptionContent>
                     <h2>Newsletter</h2>
                     <p>
@@ -14,16 +14,15 @@ const Newsletter = () => {
                         <br /> zdobywaj dodatkowe rabaty.
                     </p>
                 </DescriptionContent>
+
+                <Input name="email" placeholder="E-mail" />
+            </LeftWrapper>
+            <RightWrapper>
                 <Icon>
                     <BsMailbox />
                 </Icon>
-            </TopWrapper>
-            <BottomWrapper>
-                <form>
-                    <Input name="email" placeholder="E-mail" />
-                    <Button type="submit"> Zapisz się! </Button>
-                </form>
-            </BottomWrapper>
+                <Button type="submit">Zapisz się!</Button>
+            </RightWrapper>
         </Wrapper>
     );
 };
