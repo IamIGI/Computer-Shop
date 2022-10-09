@@ -14,6 +14,7 @@ export const NormalScreenSize = styled.div`
 export const SmallScreenSize = styled.div`
     display: none;
     @media screen and (max-width: 1100px) {
+        padding-top: 15px;
         width: 100%;
         height: fit-content;
         display: flex;
