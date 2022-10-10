@@ -38,11 +38,11 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) 
                                     </ContentSection>
                                 </CommentSection>
                             ))}
+                            <NoOpinionsLeft>
+                                <p>Koniec opinii</p>
+                            </NoOpinionsLeft>
                         </>
                     )}
-                    <NoOpinionsLeft>
-                        <p>Koniec opinii</p>
-                    </NoOpinionsLeft>
                 </>
             )}
         </Wrapper>

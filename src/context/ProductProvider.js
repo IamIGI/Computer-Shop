@@ -3,8 +3,11 @@ import { createContext, useState } from 'react';
 const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
+    // console.log(localStorage.getItem('currentWebPage'));
     const [product, setProduct] = useState(
-        JSON.parse(localStorage.getItem('currentWebPage')) == null
+        localStorage.getItem('currentWebPage') !== undefined
+            ? {}
+            : JSON.parse(localStorage.getItem('currentWebPage')) == null
             ? {}
             : JSON.parse(localStorage.getItem('currentWebPage'))
     );

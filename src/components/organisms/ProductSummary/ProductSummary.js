@@ -23,6 +23,7 @@ const ProductSummary = ({
 }) => {
     const { product } = useProduct();
     const [isOpen, setIsOpen] = useState([false]);
+    console.log(comments.length);
     const handleOpen = () => {
         setIsOpen([true]);
     };
@@ -34,6 +35,7 @@ const ProductSummary = ({
             handleWaitForFetchAS(false);
         };
         fetchAverageScore(product._id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refreshComments, product]);
 
     return (
@@ -44,7 +46,7 @@ const ProductSummary = ({
                 </>
             ) : (
                 <>
-                    {Object.keys(averageScore).length === 0 ? (
+                    {comments.length === 0 ? (
                         <NoComments>
                             <p>
                                 Masz ten produkt? <br /> Bądź pierwszą osobą która skomentuje
