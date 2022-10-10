@@ -23,42 +23,49 @@ const CommentFilters = ({ handleFilters, comments }) => {
     useEffect(() => {
         let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
         handleFilters(filters);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rating, sortBy, confirmed, product]);
 
     return (
-        <Wrapper>
-            <NumberOfComments>
-                Wyniki: {commentsSize} z {totalNumberOfComments}
-            </NumberOfComments>
-            <Title>Filtruj: </Title>
-            <Filters>
-                <SelectStyle width="200px">
-                    <select onChange={(e) => setRating(e.target.value)}>
-                        {ratingOptions.map((option, index) => (
-                            <option value={option.value} key={index}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                </SelectStyle>
-            </Filters>
-            <Confirmed>
-                <Checkbox type="checkbox" onChange={() => setConfirmed(!confirmed)} checked={confirmed} />
-                <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>Potwierdzone zakupy</ConfirmedDesc>
-            </Confirmed>
-            <Title>Sortuj:</Title>
-            <Sort>
-                <SelectStyle width="200px">
-                    <select onChange={(e) => setSortBy(e.target.value)}>
-                        {filterOptions.map((option, index) => (
-                            <option value={option.value} key={index}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                </SelectStyle>
-            </Sort>
-        </Wrapper>
+        <>
+            {commentsSize === 0 ? (
+                <></>
+            ) : (
+                <Wrapper>
+                    <NumberOfComments>
+                        Wyniki: {commentsSize} z {totalNumberOfComments}
+                    </NumberOfComments>
+                    <Title>Filtruj: </Title>
+                    <Filters>
+                        <SelectStyle width="200px">
+                            <select onChange={(e) => setRating(e.target.value)}>
+                                {ratingOptions.map((option, index) => (
+                                    <option value={option.value} key={index}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </SelectStyle>
+                    </Filters>
+                    <Confirmed>
+                        <Checkbox type="checkbox" onChange={() => setConfirmed(!confirmed)} checked={confirmed} />
+                        <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>Potwierdzone zakupy</ConfirmedDesc>
+                    </Confirmed>
+                    <Title>Sortuj:</Title>
+                    <Sort>
+                        <SelectStyle width="200px">
+                            <select onChange={(e) => setSortBy(e.target.value)}>
+                                {filterOptions.map((option, index) => (
+                                    <option value={option.value} key={index}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </SelectStyle>
+                    </Sort>
+                </Wrapper>
+            )}
+        </>
     );
 };
 
