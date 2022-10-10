@@ -23,7 +23,7 @@ const ProductSummary = ({
 }) => {
     const { product } = useProduct();
     const [isOpen, setIsOpen] = useState([false]);
-    console.log(comments.length);
+
     const handleOpen = () => {
         setIsOpen([true]);
     };
