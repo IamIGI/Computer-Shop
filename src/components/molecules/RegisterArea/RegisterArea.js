@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
-import { WrapButton, Wrapper, BottomRegister, ErrMsg, Instructions } from './RegisterArea.style';
+import { WrapButton, Wrapper, BottomRegister, ErrMsg, Instructions, ButtonSection } from './RegisterArea.style';
 import { BsFillCaretUpFill } from 'react-icons/bs';
 import axios from '../../../api/axios';
 import useInput from 'hooks/useInput';
 import useToggle from 'hooks/useToggle';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
-import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
+import { formReducer, ACTIONS, INITIAL_STATE } from './formReducer';
 
 function RegisterArea() {
     const { setAuth } = useAuth();
@@ -18,78 +18,48 @@ function RegisterArea() {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.pathname === '/basket' ? location.pathname : '/accountSettings/Settings';
-
     const errRef = useRef();
 
     const [expanded, setExpanded] = useState('false');
+    //form values
     const [firstName, resetFirstName, firstNameAttribs] = useInput('firstName', '');
-    const [validFirstName, setValidFirstName] = useState(false);
-    const [firstNameFocus, setFirstNameFocus] = useState(false);
-
     const [lastName, resetLastName, lastNameAttribs] = useInput('lastName', '');
-    const [validLastName, setValidLastName] = useState(false);
-    const [lastNameFocus, setLastNameFocus] = useState(false);
-
     const [email, resetEmail, emailAttribs] = useInput('email', '');
-    const [validEmail, setValidEmail] = useState(false);
-    const [emailFocus, setEmailFocus] = useState(false);
-
     const [pwd, setPwd] = useState('');
-    const [validPwd, setValidPwd] = useState(false);
-    const [pwdFocus, setPwdFocus] = useState(false);
-
     const [matchPwd, setMatchPwd] = useState('');
-    const [validMatchPwd, setValidMatchPwd] = useState(false);
-    const [matchPwdFocus, setMatchPwdFocus] = useState(false);
-
-    const [isCapsLockOn, setIsCapsLockOn] = useState(false);
-
     const [shopRules, setAgreeToShopRules] = useToggle('ShopRulesRegister', false);
-
-    const [waitForRegister, setWaitForRegister] = useState(false);
-
-    const [errMsg, setErrMsg] = useState('');
+    const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
 
     useEffect(() => {
-        setValidFirstName(testNameRegex(firstName));
+        dispatch({ type: ACTIONS.VALID.NAME, payload: { name: 'firstName', value: firstName } });
     }, [firstName]);
 
     useEffect(() => {
-        setValidLastName(testNameRegex(lastName));
+        dispatch({ type: ACTIONS.VALID.NAME, payload: { name: 'lastName', value: lastName } });
     }, [lastName]);
 
     useEffect(() => {
-        setValidEmail(testEmailRegex(email));
+        dispatch({ type: ACTIONS.VALID.EMAIL, payload: email });
     }, [email]);
 
     useEffect(() => {
-        setValidPwd(testPasswordRegex(pwd));
-        setValidMatchPwd(pwd === matchPwd);
+        dispatch({ type: ACTIONS.VALID.PWD, payload: pwd });
+        dispatch({ type: ACTIONS.VALID.MATCH_PWD, payload: { pwd, matchPwd } });
     }, [pwd, matchPwd]);
 
     useEffect(() => {
-        setErrMsg('');
+        dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: '' });
     }, [firstName, lastName, email, pwd, matchPwd]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const v1 = testNameRegex(firstName);
-        const v2 = testNameRegex(lastName);
-        const v3 = testEmailRegex(email);
-        const v4 = testPasswordRegex(pwd);
-        const v5 = shopRules;
-
-        if (!v1 || !v2 || !v3 || !v4) {
-            setErrMsg('Niepoprawne dane');
-            console.log(v1, v2, v3, v4);
-            return;
-        } else if (!v5) {
-            setErrMsg('Zaakceptuj regulamin sklepu');
+        if (!shopRules) {
+            dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Zaakceptuj regulamin sklepu' });
             return;
         }
 
         try {
-            setWaitForRegister(true);
+            dispatch({ type: ACTIONS.WAIT_FOR_REGISTER, payload: true });
             await axios.post(
                 '/register',
                 JSON.stringify({
@@ -108,7 +78,7 @@ function RegisterArea() {
                     withCredentials: true,
                 }
             );
-            setWaitForRegister(false);
+            dispatch({ type: ACTIONS.WAIT_FOR_REGISTER, payload: false });
             //clear
             setExpanded(!expanded);
             resetFirstName('');
@@ -130,29 +100,21 @@ function RegisterArea() {
             navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('Brak łączyności z serwerem');
+                dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Brak łączyności z serwerem' });
             } else if (err.response?.status === 409) {
-                setErrMsg('Email jest już używany');
+                dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Email jest już używany' });
             } else {
                 console.log(err);
-                setErrMsg('Nieznany błąd');
+                dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Nieznany błąd' });
             }
+            dispatch({ type: ACTIONS.WAIT_FOR_REGISTER, payload: false });
             errRef.current.focus();
-        }
-    };
-
-    //Check if capsLock is up
-    const checkCapsLock = (event) => {
-        if (event.getModifierState('CapsLock')) {
-            setIsCapsLockOn(true);
-        } else {
-            setIsCapsLockOn(false);
         }
     };
 
     return (
         <>
-            {waitForRegister ? (
+            {state.waitForRegister ? (
                 <LoadingAnimation loadingSize={10} />
             ) : (
                 <Wrapper>
@@ -162,76 +124,108 @@ function RegisterArea() {
                             <section>
                                 <div ref={errRef}>
                                     {' '}
-                                    {errMsg && (
+                                    {state.errMsg && (
                                         <>
-                                            <ErrMsg aria-live="assertive">{errMsg}</ErrMsg>
+                                            <ErrMsg aria-live="assertive">{state.errMsg}</ErrMsg>
                                         </>
                                     )}
                                 </div>
                                 <Input
-                                    style={validFirstName || !firstName ? {} : { border: '1px solid red' }}
+                                    style={state.valid.firstName || !firstName ? {} : { border: '1px solid red' }}
                                     type="text"
+                                    name="firstName"
                                     id="firstName"
                                     placeholder="Imie (wymagane)"
                                     autoComplete="off"
                                     {...firstNameAttribs}
                                     required
-                                    aria-invalid={validFirstName ? 'false' : 'true'}
+                                    aria-invalid={state.valid.firstName ? 'false' : 'true'}
                                     aria-describedby="firstNameField"
-                                    onFocus={() => setFirstNameFocus(true)}
-                                    onBlur={() => setFirstNameFocus(false)}
+                                    onFocus={(e) =>
+                                        dispatch({ type: ACTIONS.FOCUS, payload: { name: e.target.name, value: true } })
+                                    }
+                                    onBlur={(e) =>
+                                        dispatch({
+                                            type: ACTIONS.FOCUS,
+                                            payload: { name: e.target.name, value: false },
+                                        })
+                                    }
                                 />
-                                {firstNameFocus && firstName && !validFirstName && (
+                                {state.focus.firstName && firstName && !state.valid.firstName && (
                                     <Instructions>Tylko litery</Instructions>
                                 )}
                                 <Input
-                                    style={validLastName || !lastName ? {} : { border: '1px solid red' }}
+                                    style={state.valid.lastName || !lastName ? {} : { border: '1px solid red' }}
+                                    name="lastName"
                                     type="text"
                                     id="lastName"
                                     placeholder="Nazwisko (wymagane)"
                                     autoComplete="off"
                                     {...lastNameAttribs}
                                     required
-                                    aria-invalid={validLastName ? 'false' : 'true'}
+                                    aria-invalid={state.valid.lastName ? 'false' : 'true'}
                                     aria-describedby="lastNameField"
-                                    onFocus={() => setLastNameFocus(true)}
-                                    onBlur={() => setLastNameFocus(false)}
+                                    onFocus={(e) =>
+                                        dispatch({ type: ACTIONS.FOCUS, payload: { name: e.target.name, value: true } })
+                                    }
+                                    onBlur={(e) =>
+                                        dispatch({
+                                            type: ACTIONS.FOCUS,
+                                            payload: { name: e.target.name, value: false },
+                                        })
+                                    }
                                 />
-                                {lastNameFocus && lastName && !validLastName && (
+                                {state.focus.lastName && lastName && !state.valid.lastName && (
                                     <Instructions>Tylko litery</Instructions>
                                 )}
                                 <Input
-                                    style={validEmail || !email ? {} : { border: '1px solid red' }}
+                                    style={state.valid.email || !email ? {} : { border: '1px solid red' }}
                                     type="text"
                                     id="email"
+                                    name="email"
                                     placeholder="Email (wymagane)"
                                     autoComplete="off"
                                     {...emailAttribs}
                                     required
-                                    aria-invalid={validEmail ? 'false' : 'true'}
+                                    aria-invalid={state.valid.email ? 'false' : 'true'}
                                     aria-describedby="EmailField"
-                                    onFocus={() => setEmailFocus(true)}
-                                    onBlur={() => setEmailFocus(false)}
+                                    onFocus={(e) =>
+                                        dispatch({ type: ACTIONS.FOCUS, payload: { name: e.target.name, value: true } })
+                                    }
+                                    onBlur={(e) =>
+                                        dispatch({
+                                            type: ACTIONS.FOCUS,
+                                            payload: { name: e.target.name, value: false },
+                                        })
+                                    }
                                 />
-                                {emailFocus && email && !validEmail && (
+                                {state.focus.email && email && !state.valid.email && (
                                     <Instructions>Email jest nie poprawny.</Instructions>
                                 )}
                                 <Input
-                                    style={validPwd || !pwd ? {} : { border: '1px solid red' }}
+                                    style={state.valid.pwd || !pwd ? {} : { border: '1px solid red' }}
                                     type="password"
                                     id="password"
+                                    name="pwd"
                                     placeholder="Haslo (wymagane)"
                                     autoComplete="off"
                                     onChange={(e) => setPwd(e.target.value)}
                                     value={pwd}
                                     required
-                                    aria-invalid={validPwd ? 'false' : 'true'}
+                                    aria-invalid={state.valid.pwd ? 'false' : 'true'}
                                     aria-describedby="PwdField"
-                                    onFocus={() => setPwdFocus(true)}
-                                    onBlur={() => setPwdFocus(false)}
-                                    onKeyUp={checkCapsLock}
+                                    onFocus={(e) =>
+                                        dispatch({ type: ACTIONS.FOCUS, payload: { name: e.target.name, value: true } })
+                                    }
+                                    onBlur={(e) =>
+                                        dispatch({
+                                            type: ACTIONS.FOCUS,
+                                            payload: { name: e.target.name, value: false },
+                                        })
+                                    }
+                                    onKeyUp={(e) => dispatch({ type: ACTIONS.CHECK_CAPS_LOCK, payload: e })}
                                 />
-                                {pwdFocus && pwd && !validPwd && (
+                                {state.focus.pwd && pwd && !state.valid.pwd && (
                                     <Instructions>
                                         8-24 znaków. <br />
                                         Muszą zawierać małe i duże litery, <br />
@@ -239,43 +233,57 @@ function RegisterArea() {
                                     </Instructions>
                                 )}
                                 <Input
-                                    style={validMatchPwd || !matchPwd ? {} : { border: '1px solid red' }}
+                                    style={state.valid.matchPwd || !matchPwd ? {} : { border: '1px solid red' }}
                                     type="password"
                                     id="passwordMatch"
+                                    name="matchPwd"
                                     placeholder="Powtórz hasło (wymagane)"
                                     autoComplete="off"
                                     onChange={(e) => setMatchPwd(e.target.value)}
                                     value={matchPwd}
                                     required
-                                    aria-invalid={validMatchPwd ? 'false' : 'true'}
+                                    aria-invalid={state.valid.matchPwd ? 'false' : 'true'}
                                     aria-describedby="MatchPwdField"
-                                    onFocus={() => setMatchPwdFocus(true)}
-                                    onBlur={() => setMatchPwdFocus(false)}
-                                    onKeyUp={checkCapsLock}
+                                    onFocus={(e) =>
+                                        dispatch({ type: ACTIONS.FOCUS, payload: { name: e.target.name, value: true } })
+                                    }
+                                    onBlur={(e) =>
+                                        dispatch({
+                                            type: ACTIONS.FOCUS,
+                                            payload: { name: e.target.name, value: false },
+                                        })
+                                    }
+                                    onKeyUp={(e) => dispatch({ type: ACTIONS.CHECK_CAPS_LOCK, payload: e })}
                                 />
-                                {matchPwdFocus && !validMatchPwd && (
+                                {state.focus.matchPwd && !state.valid.matchPwd && (
                                     <Instructions>Hasła muszą być takie same</Instructions>
                                 )}
-                                {(matchPwdFocus || pwdFocus) && isCapsLockOn && (
+                                {(state.focus.matchPwd || state.focus.pwd) && state.capsLock && (
                                     <Instructions>Caps Lock jest wciśnięty</Instructions>
                                 )}
                                 <BottomRegister onClick={() => setAgreeToShopRules()}>
                                     <Checkbox type="checkbox" checked={shopRules} readOnly={true} />
                                     Akceptuj regulamin sklepu
                                 </BottomRegister>
-                                <Button
-                                    disabled={
-                                        !validFirstName || !validLastName || !validEmail || !validPwd || !validMatchPwd
-                                            ? true
-                                            : false
-                                    }
-                                >
-                                    {' '}
-                                    Załóż konto!{' '}
-                                </Button>
-                                <WrapButton onClick={() => setExpanded(!expanded)}>
-                                    <BsFillCaretUpFill />
-                                </WrapButton>
+                                <ButtonSection>
+                                    <Button
+                                        disabled={
+                                            !state.valid.firstName ||
+                                            !state.valid.lastName ||
+                                            !state.valid.email ||
+                                            !state.valid.pwd ||
+                                            !state.valid.matchPwd
+                                                ? true
+                                                : false
+                                        }
+                                    >
+                                        {' '}
+                                        Załóż konto!{' '}
+                                    </Button>
+                                    <WrapButton onClick={() => setExpanded(!expanded)}>
+                                        <BsFillCaretUpFill />
+                                    </WrapButton>
+                                </ButtonSection>
                             </section>
                         )}
                     </form>
