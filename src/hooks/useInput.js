@@ -1,9 +1,7 @@
 import useLocalStorage from './useLocalStorage';
-import useBasket from 'hooks/useBasket';
 
 const useInput = (key, initValue) => {
     const [value, setValue] = useLocalStorage(key, initValue);
-    const { basketItems, setBasketItems } = useBasket();
 
     const reset = () => {
         setValue(initValue);

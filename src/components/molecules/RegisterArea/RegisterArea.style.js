@@ -10,12 +10,9 @@ export const BottomRegister = styled(Bottom)`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    /* margin: 10px 0 0 12%; */
     margin-top: 10px;
     padding-top: 0;
     padding-bottom: 0;
-    /* width: fit-content; */
-
     font-size: ${({ theme }) => theme.fontSize.m};
     color: ${({ theme }) => theme.colors.darkGrey};
 
@@ -24,16 +21,22 @@ export const BottomRegister = styled(Bottom)`
     }
 `;
 
+export const ButtonSection = styled.div`
+    text-align: center;
+`;
+
 export const WrapButton = styled(Button)`
     margin-left: 15px;
     padding: 10px;
 `;
 
 export const ErrMsg = styled.div`
-    width: 50%;
-    margin-left: 25%;
+    width: 70%;
+    text-align: center;
+    margin-left: 14%;
     background: ${({ theme }) => theme.colors.grey};
     color: ${({ theme }) => theme.colors.white};
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
     font-weight: bold;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
@@ -45,7 +48,6 @@ export const UnValid = styled.span`
 `;
 
 export const Instructions = styled.div`
-    justify-content: center;
     text-align: center;
     width: 50%;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
@@ -55,5 +57,5 @@ export const Instructions = styled.div`
     padding: 0.25rem;
     position: relative;
     bottom: -7px;
-    margin-left: 25%;
+    margin-left: 24%;
 `;
