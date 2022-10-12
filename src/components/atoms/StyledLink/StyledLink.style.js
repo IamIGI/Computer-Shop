@@ -14,9 +14,6 @@ export const Wrapper = styled(NavLink)`
     border-right: 1.3px solid grey;
     transition: 0.5s ease;
 
-    @media screen and (max-width: 1370px) {
-    }
-
     @media screen and (max-width: 1100px) {
         border: none;
         padding: 10px;

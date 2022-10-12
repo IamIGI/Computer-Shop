@@ -5,6 +5,7 @@ export const UniversitySection = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    gap: 10px;
     flex-wrap: wrap;
     align-items: flex-start;
 `;
@@ -17,7 +18,7 @@ export const UniversityInfo = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
-    margin-right: 10%;
+    /* margin-right: 10%; */
 `;
 
 export const UniversityDescription = styled.div``;
@@ -34,7 +35,7 @@ export const UniversityData = styled.div`
 
 export const UniversityImage = styled.div`
     width: 45%;
-    min-width: 600px;
+    min-width: 350px;
     margin-right: 5%;
     img {
         border-radius: 30px;
