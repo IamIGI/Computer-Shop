@@ -18,7 +18,6 @@ export const UniversityInfo = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
-    /* margin-right: 10%; */
 `;
 
 export const UniversityDescription = styled.div``;
