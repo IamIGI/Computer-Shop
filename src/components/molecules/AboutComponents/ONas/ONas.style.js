@@ -5,30 +5,44 @@ export const DataShortSection = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 5px;
     flex-wrap: wrap;
-    /* align-items: flex-end; */
 `;
 
 export const Data = styled.div`
-    width: 200px;
+    width: 170px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
+
+    @media screen and (max-width: 650px) {
+        width: 130px;
+    }
 `;
 
 export const Icon = styled.div`
-    font-size: 80px;
+    font-size: 70px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 650px) {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
 `;
 
 export const Numbers = styled.div`
-    font-size: 30px;
+    font-size: 27px;
     color: ${({ theme }) => theme.colors.successDark};
     margin-bottom: 10px;
+
+    @media screen and (max-width: 650px) {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
 `;
 
 export const Desc = styled.div`

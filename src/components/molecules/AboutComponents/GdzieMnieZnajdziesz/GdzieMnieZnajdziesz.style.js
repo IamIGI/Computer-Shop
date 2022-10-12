@@ -9,7 +9,7 @@ export const AboutMe = styled.div`
 `;
 
 export const PageSection = styled.div`
-    width: 500px;
+    max-width: 400px;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
@@ -17,6 +17,7 @@ export const PageSection = styled.div`
     flex-wrap: wrap;
     align-items: center;
     text-align: center;
+    border: 1px solid transparent;
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
     border-radius: 40px;
@@ -37,11 +38,11 @@ export const PageSection = styled.div`
 export const PageImage = styled.div`
     margin-bottom: 20px;
     img {
-        max-height: 250px;
+        max-height: 200px;
         max-width: auto;
     }
 `;
 
 export const PageDescription = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSize.l};
 `;

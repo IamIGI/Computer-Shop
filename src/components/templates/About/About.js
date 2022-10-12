@@ -11,7 +11,7 @@ import GdzieMnieZnajdziesz from 'components/molecules/AboutComponents/GdzieMnieZ
 import MojaUczelnia from 'components/molecules/AboutComponents/MojaUczelnia/MojaUczelnia';
 
 const About = () => {
-    const [{ description, lastUpdate }, setContent] = useState({});
+    const [{ description }, setContent] = useState({});
     const [waitForFetch, setWaitForFetch] = useState(true);
 
     useEffect(() => {

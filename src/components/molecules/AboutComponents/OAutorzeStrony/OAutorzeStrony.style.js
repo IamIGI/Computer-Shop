@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const StackSection = styled.div`
     margin: 0 10%;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
+    gap: 10px;
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
@@ -13,6 +15,7 @@ export const UsePopUp = styled.div`
     position: absolute;
     top: 20px;
     right: 20px;
+    font-size: ${({ theme }) => theme.fontSize.l};
 
     :hover {
         color: green;
@@ -34,7 +37,6 @@ export const PopUp = styled.div`
 export const Stack = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     border-radius: 30px;
-    margin-top: 20px;
     padding-top: 10px;
     width: 250px;
     display: flex;
@@ -43,6 +45,14 @@ export const Stack = styled.div`
     flex-wrap: wrap;
     align-items: center;
     position: relative;
+
+    @media screen and (max-width: 730px) {
+        width: 200px;
+    }
+
+    @media screen and (max-width: 580px) {
+        width: 150px;
+    }
 
     :hover {
         border: 1px solid ${({ theme }) => theme.colors.grey};
@@ -55,6 +65,20 @@ export const StackImage = styled.div`
     img {
         max-height: 100px;
         max-width: auto;
+    }
+
+    @media screen and (max-width: 730px) {
+        img {
+            max-height: 70px;
+            max-width: auto;
+        }
+    }
+
+    @media screen and (max-width: 580px) {
+        img {
+            max-height: 50px;
+            max-width: auto;
+        }
     }
 `;
 
@@ -75,4 +99,12 @@ export const StackStars = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+
+    @media screen and (max-width: 730px) {
+        font-size: 11.5px;
+    }
+
+    @media screen and (max-width: 580px) {
+        font-size: 10px;
+    }
 `;

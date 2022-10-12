@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
     align-items: flex-start;
     overflow-y: scroll;
     padding: 0px 3% 50px 3%;
-    font-size: ${({ theme }) => theme.fontSize.l_plus};
+    font-size: ${({ theme }) => theme.fontSize.l};
     line-height: 27px;
 
     &::-webkit-scrollbar {
@@ -21,6 +21,10 @@ export const Wrapper = styled.div`
 
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+
+    @media screen and (max-width: 650px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
 `;
 
 export const Title = styled.div`
