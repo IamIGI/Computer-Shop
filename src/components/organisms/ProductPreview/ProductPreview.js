@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-    OutsideWrapper,
     Bottom,
     Link,
     StyledList,
@@ -93,61 +92,57 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
             ) : (
                 <>
                     {showProducts.map((item, index) => (
-                        <OutsideWrapper key={index}>
-                            <Wrapper>
-                                <Link to={`/product/${item._id}`}>
-                                    <Top>
-                                        <img src={item.prevImg} alt="article" />
-                                        <h1>{item.name}</h1>
-                                    </Top>
-                                    {allProducts === 'yes' ? (
-                                        <>
-                                            <ProductOpinionsShort>
-                                                <Rating>
-                                                    {[...Array(6)].map((star, index) => {
-                                                        index += 1;
-                                                        return (
-                                                            <Star
-                                                                opinionRating={item.averageStars}
-                                                                rate={index}
-                                                                key={index}
-                                                            />
-                                                        );
-                                                    })}
-                                                </Rating>
-                                                <Opinions>({item.numberOfOpinions})</Opinions>
-                                            </ProductOpinionsShort>
-                                            <StyledList>
-                                                <StyledRecord>{item.specification.processor.description}</StyledRecord>
-                                                <StyledRecord>{item.specification.ram.description}</StyledRecord>
-                                                <StyledRecord>
-                                                    {item.specification.graphics_card.description}
-                                                </StyledRecord>
-                                                <StyledRecord>{item.specification.disk.description}</StyledRecord>
-                                            </StyledList>
-                                        </>
-                                    ) : (
-                                        <span></span>
-                                    )}
+                        <Wrapper key={index}>
+                            <Link to={`/product/${item._id}`}>
+                                <Top>
+                                    <img src={item.prevImg} alt="article" />
+                                    <h1>{item.name}</h1>
+                                </Top>
+                                {allProducts === 'yes' ? (
+                                    <>
+                                        <ProductOpinionsShort>
+                                            <Rating>
+                                                {[...Array(6)].map((star, index) => {
+                                                    index += 1;
+                                                    return (
+                                                        <Star
+                                                            opinionRating={item.averageStars}
+                                                            rate={index}
+                                                            key={index}
+                                                        />
+                                                    );
+                                                })}
+                                            </Rating>
+                                            <Opinions>({item.numberOfOpinions})</Opinions>
+                                        </ProductOpinionsShort>
+                                        <StyledList>
+                                            <StyledRecord>{item.specification.processor.description}</StyledRecord>
+                                            <StyledRecord>{item.specification.ram.description}</StyledRecord>
+                                            <StyledRecord>{item.specification.graphics_card.description}</StyledRecord>
+                                            <StyledRecord>{item.specification.disk.description}</StyledRecord>
+                                        </StyledList>
+                                    </>
+                                ) : (
+                                    <span></span>
+                                )}
 
-                                    <Bottom>
-                                        {item.special_offer.mode ? (
-                                            <PriceSection>
-                                                <PriceOldValue>
-                                                    <span>{item.price + item.special_offer.price} zł</span>
-                                                </PriceOldValue>
-                                                <PriceValue>
-                                                    <span>{item.price} zł</span>
-                                                </PriceValue>
-                                            </PriceSection>
-                                        ) : (
-                                            <span>{item.price} zł</span>
-                                        )}
-                                    </Bottom>
-                                </Link>
-                                <BuyButton item={item} />
-                            </Wrapper>
-                        </OutsideWrapper>
+                                <Bottom>
+                                    {item.special_offer.mode ? (
+                                        <PriceSection>
+                                            <PriceOldValue>
+                                                <span>{item.price + item.special_offer.price} zł</span>
+                                            </PriceOldValue>
+                                            <PriceValue>
+                                                <span>{item.price} zł</span>
+                                            </PriceValue>
+                                        </PriceSection>
+                                    ) : (
+                                        <span>{item.price} zł</span>
+                                    )}
+                                </Bottom>
+                            </Link>
+                            <BuyButton item={item} />
+                        </Wrapper>
                     ))}
                 </>
             )}

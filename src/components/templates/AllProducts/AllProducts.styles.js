@@ -8,16 +8,15 @@ export const Wrapper = styled.div`
 `;
 
 export const Products = styled.div`
-    height: 100%;
-    width: 100%;
     grid-column: 2/3;
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    justify-content: space-evenly;
 
+    justify-content: space-evenly;
+    align-content: flex-start;
+
+    overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
     }

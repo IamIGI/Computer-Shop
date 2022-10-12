@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const OutsideWrapper = styled.div``;
-
 export const Wrapper = styled.div`
     position: relative;
     a,
