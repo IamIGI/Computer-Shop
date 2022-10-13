@@ -10,6 +10,8 @@ import {
     QuantityOfProductSmallScreen,
     QuantityOfProductMediumScreen,
     MediumScreenSection,
+    XmarkLink,
+    XmarkIcon,
 } from './NavBar.styles';
 import { VscMilestone, VscInspect } from 'react-icons/vsc';
 import { BsEnvelope } from 'react-icons/bs';
@@ -24,6 +26,8 @@ import { BsBasket3 } from 'react-icons/bs';
 import useBasket from 'hooks/useBasket';
 import StyledLink from 'components/atoms/StyledLink/StyledLink';
 import WebsiteLogo from 'components/atoms/WebsiteLogo/WebsiteLogo';
+import { RiCloseFill } from 'react-icons/ri';
+import { VscVm } from 'react-icons/vsc';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
@@ -106,6 +110,14 @@ const NavBar = () => {
                     </SmallScreenMenuPreview>
                     {toggleMenu && (
                         <StyledLinksSmallScreenSection onMouseLeave={() => setToggleMenu(false)}>
+                            <XmarkLink>
+                                <XmarkIcon onClick={() => setToggleMenu(false)}>
+                                    <RiCloseFill />
+                                </XmarkIcon>
+                            </XmarkLink>
+                            <div onClick={() => setToggleMenu(false)}>
+                                <StyledLink target={''} icon={<VscVm />} description={'Strona Główna'} />
+                            </div>
                             {auth?.roles?.find((role) => Admin_entitlements === role) && (
                                 <div onClick={() => setToggleMenu(false)}>
                                     <StyledLink

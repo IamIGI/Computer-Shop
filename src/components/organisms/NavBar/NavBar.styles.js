@@ -108,6 +108,7 @@ export const HamburgerMenu = styled.div`
 `;
 
 export const StyledLinksSmallScreenSection = styled.div`
+    border: 1px solid red;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -126,14 +127,42 @@ export const StyledLinksSmallScreenSection = styled.div`
     @media screen and (max-width: 650px) {
         /* justify-content: space-around; */
         font-size: ${({ theme }) => theme.fontSize.xl};
-        gap: 5%;
+        gap: 20px;
         align-items: center;
         top: 0px;
-        padding: 10% 0;
+        padding: 20px 0;
         height: 100%;
         width: 100%;
         display: flex;
         flex-direction: column;
         transition: 0.5s ease;
+    }
+`;
+
+export const XmarkLink = styled.div`
+    display: none;
+    padding: 0;
+    margin: 0;
+
+    @media screen and (max-width: 650px) {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+        text-align: right;
+        align-items: center;
+    }
+`;
+
+export const XmarkIcon = styled.div`
+    line-height: 20px;
+    font-size: 42px;
+    margin-right: 10px;
+    padding: 3px 3px;
+    transition: 0.5s ease;
+
+    :hover {
+        cursor: pointer;
+        color: ${({ theme }) => theme.colors.successDark};
     }
 `;
