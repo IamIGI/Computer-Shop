@@ -15,11 +15,16 @@ export const Home = styled.div`
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
-    padding: 15px;
+    padding: 12px;
     font-size: ${({ theme }) => theme.fontSize.xl};
     border-bottom-left-radius: 30px;
     border-bottom: 2px solid grey;
     border-left: 2px solid grey;
+
+    @media screen and (max-width: 650px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+        padding: 10px;
+    }
 
     :hover {
         border-color: ${({ theme }) => theme.colors.successDark};
@@ -30,8 +35,11 @@ export const Home = styled.div`
     }
 `;
 export const Title = styled.div`
-    margin-left: 20px;
+    margin-left: 17px;
     color: black;
+    @media screen and (max-width: 650px) {
+        margin-left: 10px;
+    }
 `;
 
 export const Icon = styled.div`
