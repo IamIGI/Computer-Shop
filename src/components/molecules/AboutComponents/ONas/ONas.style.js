@@ -18,9 +18,11 @@ export const Data = styled.div`
     align-items: center;
     text-align: center;
     margin-top: 25px;
+    border: 1px solid red;
 
     @media screen and (max-width: 650px) {
-        width: 130px;
+        width: 117px;
+        margin-top: 20px;
     }
 `;
 
@@ -46,5 +48,6 @@ export const Numbers = styled.div`
 `;
 
 export const Desc = styled.div`
+    line-height: 20px;
     font-weight: 700;
 `;

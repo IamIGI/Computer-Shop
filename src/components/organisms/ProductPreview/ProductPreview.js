@@ -56,7 +56,7 @@ const ProductPreview = ({ filterInit, allProducts, filters }) => {
     //--------------------------------------------
     const handleNumberOfProducts = () => {
         if (allProducts !== 'yes') {
-            if (windowSize.width <= 1620 && windowSize.width > 1100) {
+            if (windowSize.width <= 1640 && windowSize.width > 1100) {
                 setNumberOfProducts(2);
             } else if (windowSize.width <= 947 && windowSize.width > 650) {
                 setNumberOfProducts(4);

@@ -9,10 +9,7 @@ const Newsletter = () => {
             <LeftWrapper>
                 <DescriptionContent>
                     <h2>Newsletter</h2>
-                    <p>
-                        Nie przegap żadnej promocji,
-                        <br /> zdobywaj dodatkowe rabaty.
-                    </p>
+                    <p>Nie przegap żadnej promocji, zdobywaj dodatkowe rabaty.</p>
                 </DescriptionContent>
 
                 <Input name="email" placeholder="E-mail" />
