@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: scroll;
-    border: 1px solid red;
 `;
 
 export const TopWrapper = styled.div`
