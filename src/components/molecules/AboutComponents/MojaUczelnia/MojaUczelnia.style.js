@@ -18,6 +18,10 @@ export const UniversityInfo = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
+
+    @media (max-width: 650px) {
+        max-width: 90%;
+    }
 `;
 
 export const UniversityDescription = styled.div``;
@@ -35,7 +39,8 @@ export const UniversityData = styled.div`
 export const UniversityImage = styled.div`
     width: 45%;
     min-width: 350px;
-    margin-right: 5%;
+    justify-content: center;
+    align-self: center;
     img {
         border-radius: 30px;
         width: 100%;

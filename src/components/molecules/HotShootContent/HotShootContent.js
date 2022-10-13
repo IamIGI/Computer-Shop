@@ -54,9 +54,7 @@ const HotShootContent = () => {
                         <Image>
                             <img src={hotShoot.productData.prevImg} alt="product" />
                         </Image>
-                        <Description>
-                            <p>{hotShoot.productData.name}</p>
-                        </Description>
+                        <Description>{hotShoot.productData.name}</Description>
                     </ProductDescription>
                     <PromoDescription>
                         <Price>

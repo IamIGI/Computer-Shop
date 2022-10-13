@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     /* justify-content: center; */
     text-align: center;
-    margin: auto;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -20,14 +20,15 @@ export const InsideWrapper = styled.div`
     justify-content: center;
     text-align: left;
 
-    @media (max-width: 500px) {
+    @media (max-width: 650px) {
         height: fit-content;
+        padding: 0 10px;
     }
-
+    /* 
     @media (min-width: 700px) {
         min-width: 700px;
         width: 100%;
-    }
+    } */
 
     @media (min-height: 1200px) {
         height: 87vh;

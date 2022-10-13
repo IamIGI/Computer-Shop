@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     margin: 15px 0;
     width: 290px;
     height: fit-content;
-    border: 1px solid white;
+    border: 1px solid transparent;
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 
     &:hover {

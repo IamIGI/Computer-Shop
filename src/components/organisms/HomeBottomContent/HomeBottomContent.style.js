@@ -10,6 +10,7 @@ export const InsideWrapper = styled.div`
     padding-top: 12px;
     display: flex;
     flex-direction: row;
+    gap: 10px;
     justify-content: space-evenly;
 
     @media screen and (max-width: 1100px) {

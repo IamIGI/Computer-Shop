@@ -24,10 +24,12 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 650px) {
         font-size: ${({ theme }) => theme.fontSize.m_plus};
+        padding: 0 0 30px 0;
     }
 `;
 
 export const Title = styled.div`
+    /* border: 1px solid red; */
     width: 100%;
     margin: 40px 0 20px 0;
 `;

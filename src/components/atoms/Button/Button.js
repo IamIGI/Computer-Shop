@@ -14,4 +14,11 @@ export const Button = styled.button`
         cursor: pointer;
         background-color: ${({ theme }) => theme.colors.darkPurple};
     }
+
+    @media screen and (max-width: 500px) {
+        min-width: 100px;
+        font-size: ${({ theme }) => theme.fontSize.s};
+        margin: 9px 0;
+        padding: 5px 15px;
+    }
 `;

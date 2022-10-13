@@ -33,6 +33,11 @@ export const PageSection = styled.div`
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         border-radius: 30px;
     }
+
+    @media screen and (max-width: 650px) {
+        max-width: 300px;
+        margin-top: 20px;
+    }
 `;
 
 export const PageImage = styled.div`
@@ -40,6 +45,12 @@ export const PageImage = styled.div`
     img {
         max-height: 200px;
         max-width: auto;
+    }
+
+    @media screen and (max-width: 650px) {
+        img {
+            max-height: 150px;
+        }
     }
 `;
 
