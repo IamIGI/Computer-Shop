@@ -48,7 +48,6 @@ export const Numbers = styled.div`
 `;
 
 export const Desc = styled.div`
-    /* font-size: ${({ theme }) => theme.fontSize.m_plus}; */
     line-height: 20px;
     font-weight: 700;
 `;

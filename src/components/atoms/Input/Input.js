@@ -8,7 +8,6 @@ export const Input = styled.input`
     border: 1px solid lightgrey;
     color: ${({ theme }) => theme.colors.darkGrey};
     text-align: center;
-    /* padding-right: 10px; */
 
     :hover {
         border: 1px solid grey;

@@ -33,14 +33,11 @@ export const Wrapper = styled.div`
     }
 
     @media screen and (max-width: 500px) {
-        /* max-width: 350px; */
         margin: 10px auto;
     }
 `;
 
 export const InsideWrapper = styled(NavLink)`
-    /* width: 100%;
-    height: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,12 +138,6 @@ export const DescTimer = styled.div`
             color: red;
         }
     }
-
-    /* @media screen and (max-width: 730px) {
-        h3 {
-            font-size: ${({ theme }) => theme.fontSize.l_plus};
-        }
-    } */
 
     @media screen and (max-width: 650px) {
         h3 {

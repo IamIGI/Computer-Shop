@@ -106,7 +106,6 @@ export const Media = styled.div`
     font-size: ${({ theme }) => theme.fontSize.xl};
 
     @media screen and (max-width: 590px) {
-        /* max-width: 50px; */
         font-size: ${({ theme }) => theme.fontSize.m};
     }
 `;
