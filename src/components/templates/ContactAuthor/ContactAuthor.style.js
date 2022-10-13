@@ -8,16 +8,18 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: scroll;
+    border: 1px solid red;
 `;
 
 export const TopWrapper = styled.div`
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    gap: 10px;
 
     @media screen and (max-width: 830px) {
         flex-direction: column;
-        margin-left: 10%;
     }
 `;
 
@@ -33,7 +35,10 @@ export const DescriptionSection = styled.div`
     width: 40%;
     min-width: 300px;
     line-height: 20px;
+    margin-bottom: 20px;
     @media screen and (max-width: 830px) {
+        border-top: 1px solid lightgray;
+        border-left: 0;
         width: 90%;
     }
 `;
