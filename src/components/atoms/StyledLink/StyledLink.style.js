@@ -10,7 +10,7 @@ export const Wrapper = styled(NavLink)`
 
     margin-left: 5px;
     font-size: ${({ theme }) => theme.fontSize.l};
-    padding: 6px 10px 6px 10px;
+    padding: 6px 10px;
     border-right: 1.3px solid grey;
     transition: 0.5s ease;
 
