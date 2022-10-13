@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const SelectStyle = styled.div`
     select {
-        width: ${(props) => props.width};
+        min-width: 175px;
+        max-width: ${(props) => props.width};
         padding: 5px 35px 5px 5px;
         font-size: 16px;
         border: 1px solid ${({ theme }) => theme.colors.darkPurple};
