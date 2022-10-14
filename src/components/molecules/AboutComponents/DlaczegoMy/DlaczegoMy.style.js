@@ -27,6 +27,11 @@ export const IconInfo = styled.div`
         font-size: 50px;
         margin-right: 30px;
     }
+
+    @media screen and (max-width: 500px) {
+        font-size: 45px;
+        margin-right: 10px;
+    }
 `;
 
 export const ContentInfo = styled.div`

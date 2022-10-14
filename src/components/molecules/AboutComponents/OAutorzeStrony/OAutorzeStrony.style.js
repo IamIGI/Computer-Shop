@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const StackSection = styled.div`
-    margin: 0 10%;
-    margin-top: 10px;
+    margin: 10px 10% 0 10%;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -20,6 +19,11 @@ export const UsePopUp = styled.div`
     :hover {
         color: green;
     }
+
+    @media screen and (max-width: 580px) {
+        top: 5px;
+        right: 5px;
+    }
 `;
 export const PopUp = styled.div`
     position: absolute;
@@ -32,6 +36,15 @@ export const PopUp = styled.div`
     right: -60px;
     z-index: 1;
     background-color: white;
+
+    @media screen and (max-width: 580px) {
+        width: fit-content;
+        top: 5px;
+        left: 0px;
+        border-radius: 10px;
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        padding-right: 10px;
+    }
 `;
 
 export const Stack = styled.div`
@@ -51,7 +64,8 @@ export const Stack = styled.div`
     }
 
     @media screen and (max-width: 580px) {
-        width: 150px;
+        width: 120px;
+        border-radius: 15px;
     }
 
     :hover {
@@ -86,12 +100,24 @@ export const StackTitle = styled.div``;
 export const StackLibrarySection = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-start;
+    width: fit-content;
+    ul {
+        padding: 0%;
+        padding-left: 25px;
+        margin: 0;
+    }
 `;
 
-export const StackLibrary = styled.div``;
+export const StackLibrary = styled.div`
+    @media screen and (max-width: 580px) {
+        max-width: 100px;
+        margin: 0;
+        padding: 0;
+    }
+`;
 export const StackStars = styled.div`
     font-size: 13px;
     display: flex;
@@ -105,6 +131,6 @@ export const StackStars = styled.div`
     }
 
     @media screen and (max-width: 580px) {
-        font-size: 10px;
+        font-size: 8px;
     }
 `;

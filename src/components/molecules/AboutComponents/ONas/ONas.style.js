@@ -7,6 +7,10 @@ export const DataShortSection = styled.div`
     justify-content: space-around;
     gap: 5px;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 650px) {
+        gap: 0px;
+    }
 `;
 
 export const Data = styled.div`
@@ -18,11 +22,10 @@ export const Data = styled.div`
     align-items: center;
     text-align: center;
     margin-top: 25px;
-    border: 1px solid red;
 
     @media screen and (max-width: 650px) {
-        width: 117px;
-        margin-top: 20px;
+        width: 110px;
+        margin-top: 10px;
     }
 `;
 
@@ -32,7 +35,7 @@ export const Icon = styled.div`
 
     @media screen and (max-width: 650px) {
         font-size: 50px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 `;
 
@@ -42,8 +45,8 @@ export const Numbers = styled.div`
     margin-bottom: 10px;
 
     @media screen and (max-width: 650px) {
-        font-size: 20px;
-        margin-bottom: 8px;
+        font-size: 17px;
+        margin-bottom: 4px;
     }
 `;
 
