@@ -20,68 +20,81 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { BsEnvelope } from 'react-icons/bs';
 import { TextArea } from 'components/molecules/PopUpAddComment/PopUpAddComment.style';
 import { Input } from 'components/atoms/Input/Input';
-import { useState, useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import { BuyButton } from 'components/molecules/ProductBuyContent/ProductBuyContent.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
-import { testEmailRegex } from 'data/Regex';
 import { sendContactAPI } from 'api/contact';
 import { BiMessageAltCheck, BiCommentError } from 'react-icons/bi';
+import { formReducer, ACTIONS, INITIAL_STATE, MESSAGE_OPTIONS } from './formReducer';
 
 const ContactAuthor = () => {
-    const [email, setEmail] = useState('');
-    const [emailFocus, setEmailFocus] = useState(false);
-    const [validEmail, setValidEmail] = useState(false);
-    const [name, setName] = useState('');
-    const [error, setError] = useState([false, '']);
-    const [success, setSuccess] = useState(false);
-    const [files, setFiles] = useState([]);
+    const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
+    const handleInput = (e) => {
+        dispatch({
+            type: ACTIONS.INPUT,
+            payload: { name: e.target.name, value: e.target.value },
+        });
+    };
 
-    const [messageCategory, setMessageCategory] = useState(0);
-    const [message, setMessage] = useState('');
+    const handleFocus = (e, value) => {
+        dispatch({
+            type: ACTIONS.FOCUS,
+            payload: { name: e.target.name, value },
+        });
+    };
 
-    const messageOptions = [
-        { label: 'Błąd', value: 0 },
-        { label: 'Współpraca', value: 1 },
-    ];
+    const handleError = (err) => {
+        dispatch({
+            type: ACTIONS.ERROR,
+            payload: err,
+        });
+    };
+
+    const handleSuccess = (data) => {
+        dispatch({
+            type: ACTIONS.SUCCESS,
+            payload: data,
+        });
+    };
 
     useEffect(() => {
-        setValidEmail(testEmailRegex(email));
+        dispatch({ type: ACTIONS.VALID_EMAIL, payload: state.input.email });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [email]);
+    }, [state.input.email]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
-        Object.keys(files).forEach((key) => {
-            //arg1 = add files to file object, arg2 = object itself
-            formData.append(files.item(key).name, files.item(key));
+        Object.keys(state.files).forEach((key) => {
+            //arg1 = add state.files to file object, arg2 = object itself
+            formData.append(state.files.item(key).name, state.files.item(key));
         });
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('category', messageCategory);
-        formData.append('message', message);
+        formData.append('name', state.input.name);
+        formData.append('email', state.input.email);
+        formData.append('category', state.messageCategory);
+        formData.append('message', state.input.message);
 
         try {
             const response = await sendContactAPI(formData);
 
             if (response.code === 1) {
-                setError([true, 'Wiadomość zawiera słowa wulgarne']);
+                handleError([true, 'Wiadomość zawiera słowa wulgarne']);
             } else if (response.code === 2) {
-                setError([true, 'Imie zawiera słowa wulgarne']);
+                handleError([true, 'Imie zawiera słowa wulgarne']);
             } else if (response.code === 3) {
-                setError([true, "Dopuszczalne rozszerznia: '.png', '.jpg', 'jpeg'"]);
+                handleError([true, "Dopuszczalne rozszerznia: '.png', '.jpg', 'jpeg'"]);
             } else if (response.code === 4) {
-                setError([true, 'Maksymalan waga pliku: 1MB']);
+                handleError([true, 'Maksymalan waga pliku: 1MB']);
             } else if (response.code === 0) {
-                console.log([false, '']);
-                setError([false, '']);
-                setSuccess(true);
+                handleError([false, '']);
+                handleSuccess(true);
                 //clear
-                setName('');
-                setEmail('');
-                setMessageCategory(0);
-                setMessage('');
+                handleInput((e = { target: { name: 'name', value: '' } }));
+                handleInput((e = { target: { name: 'email', value: '' } }));
+                dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: 0 });
+                handleInput((e = { target: { name: 'message', value: '' } }));
+                dispatch({ type: ACTIONS.FILES, payload: [] });
             }
         } catch (err) {
             if (err.response) {
@@ -96,10 +109,10 @@ const ContactAuthor = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            setSuccess(false);
+            handleSuccess(false);
         }, 2000);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [success]);
+    }, [state.success]);
     return (
         <Wrapper>
             <SectionDescription title={'Skontaktuj się z autorem'} icon={<BsEnvelope />} />
@@ -110,9 +123,10 @@ const ContactAuthor = () => {
                             <Input
                                 type="text"
                                 id="name"
+                                name="name"
                                 autoComplete="off"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={state.input.name}
+                                onChange={(e) => handleInput(e)}
                                 required
                             />
                             <InputDescription>Imie</InputDescription>
@@ -122,18 +136,19 @@ const ContactAuthor = () => {
                                 <Input
                                     type="text"
                                     id="email"
-                                    style={validEmail || !email ? {} : { border: '1px solid red' }}
+                                    name="email"
+                                    style={state.validEmail || !state.input.email ? {} : { border: '1px solid red' }}
                                     autoComplete="off"
-                                    onFocus={() => setEmailFocus(true)}
-                                    onBlur={() => setEmailFocus(false)}
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required={messageCategory === 0 ? false : true}
+                                    onFocus={(e) => handleFocus(e, true)}
+                                    onBlur={(e) => handleFocus(e, false)}
+                                    value={state.input.email}
+                                    onChange={(e) => handleInput(e)}
+                                    required={state.messageCategory === 0 ? false : true}
                                 />
 
                                 <InputDescription>Email</InputDescription>
                             </InputSection>
-                            {emailFocus && email && !validEmail && (
+                            {state.focus.email && state.input.email && !state.validEmail && (
                                 <Instructions>
                                     Email jest <br /> nie poprawny.
                                 </Instructions>
@@ -141,8 +156,13 @@ const ContactAuthor = () => {
                         </EmailSection>
                         <SelectSection>
                             <SelectStyle width="200px">
-                                <select value={messageCategory} onChange={(e) => setMessageCategory(e.target.value)}>
-                                    {messageOptions.map((option, index) => (
+                                <select
+                                    value={state.messageCategory}
+                                    onChange={(e) =>
+                                        dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: e.target.value })
+                                    }
+                                >
+                                    {MESSAGE_OPTIONS.map((option, index) => (
                                         <option value={option.value} key={index}>
                                             {option.label}
                                         </option>
@@ -151,27 +171,37 @@ const ContactAuthor = () => {
                             </SelectStyle>
                         </SelectSection>
                         <FileSection>
-                            <input type="file" accept="image/*" multiple onChange={(e) => setFiles(e.target.files)} />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                multiple
+                                onChange={(e) => dispatch({ type: ACTIONS.FILES, payload: e.target.files })}
+                            />
                         </FileSection>
                         <TextAreaSection>
-                            <TextArea maxLength={2000} value={message} onChange={(e) => setMessage(e.target.value)} />
+                            <TextArea
+                                maxLength={2000}
+                                name="message"
+                                value={state.input.message}
+                                onChange={(e) => handleInput(e)}
+                            />
                             <InputDescription>Wiadomość</InputDescription>
                         </TextAreaSection>
                         <ButtonSection>
                             <BuyButton name="Submit">
                                 <p>Wyślij</p>
                             </BuyButton>
-                            {error[0] ? (
+                            {state.errMsg[0] ? (
                                 <FailureSection>
                                     <SuccessIcon>
                                         <BiCommentError />
                                     </SuccessIcon>
-                                    <SuccessDescription>{error[1]}</SuccessDescription>
+                                    <SuccessDescription>{state.errMsg[1]}</SuccessDescription>
                                 </FailureSection>
                             ) : (
                                 <></>
                             )}
-                            {success ? (
+                            {state.success ? (
                                 <SuccessSection>
                                     <SuccessIcon>
                                         <BiMessageAltCheck />
