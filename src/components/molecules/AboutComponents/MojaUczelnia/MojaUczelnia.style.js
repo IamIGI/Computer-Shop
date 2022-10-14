@@ -20,7 +20,8 @@ export const UniversityInfo = styled.div`
     align-items: center;
 
     @media (max-width: 650px) {
-        max-width: 90%;
+        min-width: 0;
+        width: fit-content;
     }
 `;
 
@@ -45,5 +46,11 @@ export const UniversityImage = styled.div`
         border-radius: 30px;
         width: 100%;
         max-height: auto;
+    }
+
+    @media (max-width: 650px) {
+        img {
+            border-radius: 20px;
+        }
     }
 `;

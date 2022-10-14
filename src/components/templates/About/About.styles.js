@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 650px) {
         font-size: ${({ theme }) => theme.fontSize.m_plus};
-        padding: 0 0 30px 0;
+        padding: 0 2% 30px 3%;
     }
 `;
 
