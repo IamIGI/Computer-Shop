@@ -9,7 +9,6 @@ const NoRealWebsiteContent = () => {
     const [waitForFetch, setWaitForFetch] = useState(true);
     const [updates, setUpdates] = useState({});
     const lastUpdate = updates[updates.length - 1];
-    console.log('here');
 
     useEffect(() => {
         const fetchWebUpdates = async () => {
@@ -22,9 +21,6 @@ const NoRealWebsiteContent = () => {
         fetchWebUpdates();
     }, []);
 
-    useEffect(() => {
-        console.log(updates);
-    }, [updates]);
     return (
         <>
             {!waitForFetch ? (
