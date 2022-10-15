@@ -20,6 +20,7 @@ import PersistLogin from 'providers/PersistLogin';
 import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem';
 import ContactAuthor from 'components/templates/ContactAuthor/ContactAuthor';
 import Authorization from 'components/templates/Mobile/Authorization/Authorization';
+import NoRealWebsitePage from 'components/templates/NoRealWebsite/NoRealWebsitePage';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -41,6 +42,7 @@ const Root = () => {
                         <Route path="basket" element={<Basket />} />
                         <Route path="contact" element={<ContactAuthor />} />
                         <Route path="authorization" element={<Authorization />} />
+                        <Route path="noRealWebsite" element={<NoRealWebsitePage />} />
 
                         <Route path="*" element={<MissingPage />} />
                         <Route path="unauthorized" element={<Unauthorized />} />

@@ -1,9 +1,29 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
     position: absolute;
     top: 10px;
     left: 15px;
+
+    /* @media screen and (max-width: 650px) {
+        left: 200px;
+    } */
+`;
+
+export const Link = styled(NavLink)`
+    text-decoration: none;
+    font-size: 30px;
+    color: red;
+    padding: 2px 4px 0 4px;
+    border: 2px solid transparent;
+    border-radius: 100%;
+
+    :hover {
+        cursor: pointer;
+        border: 2px solid red;
+        border-radius: 50%;
+    }
 `;
 
 export const Icon = styled.div`
@@ -37,50 +57,4 @@ export const Alert = styled.div`
     justify-content: flex-start;
     /* align-items: left; */
     text-align: left;
-`;
-
-export const Title = styled.div`
-    text-align: center;
-    color: red;
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    margin-bottom: 10px;
-`;
-
-export const Subtitle = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.m_plus};
-`;
-
-export const ListSection = styled.div`
-    li {
-        line-height: 20px;
-        font-size: ${({ theme }) => theme.fontSize.m_plus};
-    }
-`;
-
-export const BottomWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-evenly;
-    margin-bottom: 10px;
-`;
-
-export const GitLink = styled.div`
-    text-align: center;
-
-    a {
-        color: blue;
-    }
-`;
-
-export const GetPDF = styled.div`
-    width: fit-content;
-
-    a {
-        color: blue;
-    }
-
-    :hover {
-        cursor: pointer;
-    }
 `;

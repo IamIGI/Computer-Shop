@@ -24,6 +24,10 @@ export const InsideWrapper = styled.div`
         color: black;
         text-decoration: none;
     }
+
+    @media screen and (max-width: 1100px) {
+        padding-left: 60px;
+    }
 `;
 
 export const NormalScreenSection = styled.div`
