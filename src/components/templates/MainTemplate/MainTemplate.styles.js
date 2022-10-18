@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 
 export const InsideWrapper = styled.div`
     max-width: 2100px;
+    width: 100%;
     padding: 0 3%;
     height: 83vh;
     margin: auto;
@@ -18,6 +19,7 @@ export const InsideWrapper = styled.div`
     flex-direction: row;
     justify-content: center;
     text-align: left;
+    /* align-items: center; */
 
     @media (max-width: 650px) {
         height: fit-content;

@@ -1,16 +1,20 @@
-export const Producers = { title: 'Producent', filters: ['Apple', 'Asus', 'HP', 'Dell', 'MSI', 'Microsoft'] };
-export const Processors = {
-    title: 'Procesor',
-    filters: ['Intel Core i3', 'Intel Core i5', 'Intel Core i7', 'AMD Ryzen 5', 'Apple M1 Pro', 'Apple M1'],
-    filters_extended: [
-        { label: 'Intel Core i3', value: 'INTEL-3' },
-        { label: 'Intel Core i5', value: 'INTEL-5' },
-        { label: 'Intel Core i7', value: 'INTEL-7' },
-        { label: 'AMD Ryzen 5', value: 'AMD-5' },
-        { label: 'Apple M1 Pro', value: 'APPLE-10' },
-        { label: 'Apple M1', value: 'APPLE-8' },
-    ],
-};
+export const Producers = [
+    { label: 'Apple', value: 'Apple', checked: false },
+    { label: 'Asus', value: 'Asus', checked: false },
+    { label: 'HP', value: 'HP', checked: false },
+    { label: 'Dell', value: 'Dell', checked: false },
+    { label: 'MSI', value: 'MSI', checked: false },
+    { label: 'Microsoft', value: 'Microsoft', checked: false },
+];
+
+export const Processors = [
+    { label: 'Intel Core i3', value: 'INTEL-3', checked: false },
+    { label: 'Intel Core i5', value: 'INTEL-5', checked: false },
+    { label: 'Intel Core i7', value: 'INTEL-7', checked: false },
+    { label: 'AMD Ryzen 5', value: 'AMD-5', checked: false },
+    { label: 'Apple M1 Pro', value: 'APPLE-10', checked: false },
+    { label: 'Apple M1', value: 'APPLE-8', checked: false },
+];
 
 export const filterOptions = [
     { label: 'Brak sortowania', value: 'none' },

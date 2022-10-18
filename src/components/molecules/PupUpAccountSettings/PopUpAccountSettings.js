@@ -40,6 +40,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
         } else {
             return;
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editedField]);
 
     let viewedName = '';

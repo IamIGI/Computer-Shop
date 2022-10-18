@@ -16,6 +16,7 @@ const Comments = ({ refreshComments, filterComments, handleComments, comments, h
         };
 
         fetchComments(filterComments);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refreshComments, filterComments, product]);
 
     return (

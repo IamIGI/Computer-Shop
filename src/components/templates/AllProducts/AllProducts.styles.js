@@ -3,12 +3,17 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-columns: 300px 1fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    @media screen and (max-width: 1100px) {
+        flex-direction: column;
+    }
 `;
 
 export const Products = styled.div`
-    grid-column: 2/3;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

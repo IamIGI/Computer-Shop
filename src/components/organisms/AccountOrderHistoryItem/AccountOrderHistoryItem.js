@@ -19,7 +19,6 @@ import {
     ProductImage,
     ProductDescription,
     ProductQuantity,
-    Link,
 } from './AccountOrderHistoryItem.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BsBox } from 'react-icons/bs';
