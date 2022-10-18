@@ -11,12 +11,13 @@ import {
     DiscountDesc,
     DiscountCheckbox,
     FilterVerticalSection,
+    SmallScreenSize,
 } from './ProductsFiltersSection.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { Button } from 'components/atoms/Button/Button';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 
-const ProductsFiltersSection = ({ handleFilters }) => {
+const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, FilterInitPosition }) => {
     const [sortBy, setSortBy] = useState('none');
     const [producers, setProducers] = useState([]);
     const [clearProducers, setClearProducers] = useState(false);
@@ -107,7 +108,7 @@ const ProductsFiltersSection = ({ handleFilters }) => {
     }, [sortBy, producers, processors, ram, disk, searchTerm, discounts]);
 
     return (
-        <Wrapper>
+        <Wrapper position={position} onMouseLeave={() => handleShowFilters(FilterInitPosition)}>
             <SearchSection>
                 <SearchField
                     placeholder="Czego szukasz?"
@@ -178,6 +179,9 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                 />
             </FilterVerticalSection>
             <Button onClick={() => clearFilters()}>Wyczyść filtry</Button>
+            <SmallScreenSize>
+                <Button onClick={() => handleShowFilters(FilterInitPosition)}>Zapisz / Schowaj</Button>
+            </SmallScreenSize>
         </Wrapper>
     );
 };

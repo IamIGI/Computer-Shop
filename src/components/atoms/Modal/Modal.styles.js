@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const OutsideWrapper = styled.div`
     position: 'fixed';
-    width: ${({ width }) => `${width}px`};
+    width: fit-content;
     transform: ${({ position }) => `translate(${position[0]}vw, ${position[1]}vh)`};
     background-color: white;
     /* z-index: 1000; */

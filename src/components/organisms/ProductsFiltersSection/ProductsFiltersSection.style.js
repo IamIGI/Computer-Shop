@@ -12,7 +12,12 @@ export const Wrapper = styled.div`
     border-right: 1px solid ${({ theme }) => theme.colors.darkGrey};
 
     @media screen and (max-width: 1100px) {
-        display: none;
+        transition: 0.6s ease;
+        position: absolute;
+        top: 0px;
+        left: ${(props) => props.position};
+        background-color: white;
+        z-index: 4;
     }
 `;
 
@@ -113,4 +118,15 @@ export const FilterVerticalSection = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+`;
+
+export const SmallScreenSize = styled.div`
+    display: none;
+
+    @media screen and (max-width: 1100px) {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 `;

@@ -21,7 +21,7 @@ export const InsideWrapper = styled.div`
     text-align: left;
 
     @media (max-width: 650px) {
-        height: fit-content;
+        /* height: fit-content; */
         padding: 0 10px;
     }
 
