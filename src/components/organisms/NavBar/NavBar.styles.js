@@ -111,6 +111,7 @@ export const HamburgerMenu = styled.div`
     }
 `;
 
+//-------------SMALL SCREEN--------------
 export const StyledLinksSmallScreenSection = styled.div`
     padding: 10px 20px 10px 10px;
     border: 1px solid red;
@@ -131,17 +132,17 @@ export const StyledLinksSmallScreenSection = styled.div`
     z-index: 5;
 
     @media screen and (max-width: 650px) {
-        /* justify-content: space-around; */
         font-size: ${({ theme }) => theme.fontSize.xl};
         gap: 20px;
         align-items: center;
         top: 0px;
         padding: 20px 0;
         height: 100%;
+        right: 0px;
+        display: ${(props) => (props.position === '-230px' ? 'none' : 'flex')};
+
         width: 100%;
-        display: flex;
         flex-direction: column;
-        transition: 0.5s ease;
     }
 `;
 

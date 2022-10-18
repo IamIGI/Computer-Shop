@@ -49,6 +49,7 @@ const NavBar = () => {
         await logout();
     };
     const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
+
     return (
         <Wrapper>
             <InsideWrapper>
@@ -109,7 +110,6 @@ const NavBar = () => {
                             <GiHamburgerMenu onClick={() => setToggleMenu('0px')} />
                         </HamburgerMenu>
                     </SmallScreenMenuPreview>
-                    {/* {toggleMenu && ( */}
                     <StyledLinksSmallScreenSection
                         position={toggleMenu}
                         onMouseLeave={() => setToggleMenu(MenuInitPosition)}
@@ -169,7 +169,6 @@ const NavBar = () => {
                             </div>
                         )}
                     </StyledLinksSmallScreenSection>
-                    {/* )} */}
                 </SmallScreenSection>
             </InsideWrapper>
         </Wrapper>
