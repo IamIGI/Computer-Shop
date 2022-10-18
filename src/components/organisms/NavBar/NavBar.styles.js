@@ -112,6 +112,7 @@ export const HamburgerMenu = styled.div`
 `;
 
 export const StyledLinksSmallScreenSection = styled.div`
+    padding: 10px 20px 10px 10px;
     border: 1px solid red;
     display: flex;
     flex-direction: column;
@@ -120,8 +121,9 @@ export const StyledLinksSmallScreenSection = styled.div`
     align-items: left;
     position: fixed;
     top: 40px;
-    right: 0;
-    width: 200px;
+    transition: 0.5s ease;
+    right: ${(props) => props.position};
+    width: 230px;
     height: fit-content;
     border: 1px solid gray;
 

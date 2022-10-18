@@ -31,6 +31,7 @@ import { VscVm } from 'react-icons/vsc';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
+const MenuInitPosition = '-230px';
 
 const NavBar = () => {
     const { auth } = useAuth();
@@ -47,7 +48,7 @@ const NavBar = () => {
         setToggleMenu(false);
         await logout();
     };
-    const [toggleMenu, setToggleMenu] = useState(false);
+    const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
     return (
         <Wrapper>
             <InsideWrapper>
@@ -105,75 +106,70 @@ const NavBar = () => {
                             </div>
                         )}
                         <HamburgerMenu>
-                            <GiHamburgerMenu onClick={() => setToggleMenu(true)} />
+                            <GiHamburgerMenu onClick={() => setToggleMenu('0px')} />
                         </HamburgerMenu>
                     </SmallScreenMenuPreview>
-                    {toggleMenu && (
-                        <StyledLinksSmallScreenSection onMouseLeave={() => setToggleMenu(false)}>
-                            <XmarkLink>
-                                <XmarkIcon onClick={() => setToggleMenu(false)}>
-                                    <RiCloseFill />
-                                </XmarkIcon>
-                            </XmarkLink>
-                            <div onClick={() => setToggleMenu(false)}>
-                                <StyledLink target={''} icon={<VscVm />} description={'Strona Główna'} />
+                    {/* {toggleMenu && ( */}
+                    <StyledLinksSmallScreenSection
+                        position={toggleMenu}
+                        onMouseLeave={() => setToggleMenu(MenuInitPosition)}
+                    >
+                        <XmarkLink>
+                            <XmarkIcon onClick={() => setToggleMenu(MenuInitPosition)}>
+                                <RiCloseFill />
+                            </XmarkIcon>
+                        </XmarkLink>
+                        <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                            <StyledLink target={''} icon={<VscVm />} description={'Strona Główna'} />
+                        </div>
+                        {auth?.roles?.find((role) => Admin_entitlements === role) && (
+                            <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                                <StyledLink
+                                    target={'/adminSettings'}
+                                    icon={<VscInspect />}
+                                    description={'Administrator'}
+                                />
                             </div>
-                            {auth?.roles?.find((role) => Admin_entitlements === role) && (
-                                <div onClick={() => setToggleMenu(false)}>
-                                    <StyledLink
-                                        target={'/adminSettings'}
-                                        icon={<VscInspect />}
-                                        description={'Administrator'}
-                                    />
-                                </div>
-                            )}
-                            {auth?.roles?.find((role) => Editor_entitlements === role) && (
-                                <div onClick={() => setToggleMenu(false)}>
-                                    <StyledLink
-                                        target={'/editorSettings'}
-                                        icon={<VscInspect />}
-                                        description={'Edytor'}
-                                    />
-                                </div>
-                            )}
-                            <div onClick={() => setToggleMenu(false)}>
-                                <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
+                        )}
+                        {auth?.roles?.find((role) => Editor_entitlements === role) && (
+                            <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                                <StyledLink target={'/editorSettings'} icon={<VscInspect />} description={'Edytor'} />
                             </div>
-                            <div onClick={() => setToggleMenu(false)}>
-                                <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
-                            </div>
-                            <div onClick={() => setToggleMenu(false)}>
-                                <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
-                            </div>
+                        )}
+                        <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                            <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
+                        </div>
+                        <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                            <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
+                        </div>
+                        <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                            <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
+                        </div>
 
-                            {Object.keys(auth).length !== 0 ? (
-                                <>
-                                    <div onClick={() => setToggleMenu(false)}>
-                                        <StyledLink
-                                            target={'/accountSettings/Settings'}
-                                            icon={<VscAccount />}
-                                            description={'Konto'}
-                                        />
-                                    </div>
-                                    <div onClick={signOut}>
-                                        <StyledLink
-                                            target={''}
-                                            icon={<RiLogoutCircleLine />}
-                                            description={'Wyloguj się'}
-                                        />
-                                    </div>
-                                </>
-                            ) : (
-                                <div onClick={() => setToggleMenu(false)}>
+                        {Object.keys(auth).length !== 0 ? (
+                            <>
+                                <div onClick={() => setToggleMenu(MenuInitPosition)}>
                                     <StyledLink
-                                        target={'/authorization'}
-                                        icon={<RiUserReceived2Line />}
-                                        description={'Logowanie'}
+                                        target={'/accountSettings/Settings'}
+                                        icon={<VscAccount />}
+                                        description={'Konto'}
                                     />
                                 </div>
-                            )}
-                        </StyledLinksSmallScreenSection>
-                    )}
+                                <div onClick={signOut}>
+                                    <StyledLink target={''} icon={<RiLogoutCircleLine />} description={'Wyloguj się'} />
+                                </div>
+                            </>
+                        ) : (
+                            <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                                <StyledLink
+                                    target={'/authorization'}
+                                    icon={<RiUserReceived2Line />}
+                                    description={'Logowanie'}
+                                />
+                            </div>
+                        )}
+                    </StyledLinksSmallScreenSection>
+                    {/* )} */}
                 </SmallScreenSection>
             </InsideWrapper>
         </Wrapper>
