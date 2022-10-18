@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SelectStyle = styled.div`
     select {
         min-width: 175px;
+        width: 100%;
         max-width: ${(props) => props.width};
         padding: 5px 35px 5px 5px;
         font-size: 16px;

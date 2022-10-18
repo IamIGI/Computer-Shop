@@ -4,10 +4,10 @@ export const Wrapper = styled.div`
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin-top: 20%;
     font-size: ${(props) => props.size};
-    /* width: 100%;
-    height: 100%; */
+    width: 100%;
+    height: 100%;
 `;
 
 export const Spinner = styled.div`

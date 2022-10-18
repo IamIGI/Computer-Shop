@@ -15,6 +15,7 @@ const ProductAddComment = ({ productName, handleOpen, comments }) => {
                 break;
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [comments.length]);
 
     return (

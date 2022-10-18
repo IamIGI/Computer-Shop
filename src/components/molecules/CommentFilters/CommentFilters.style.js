@@ -43,8 +43,6 @@ export const ConfirmedDesc = styled.div`
     }
 `;
 
-export const Sort = styled.div``;
-
 export const Checkbox = styled.input`
     transform: scale(1.8);
     margin: 8px 10px 0 10px;
@@ -60,3 +58,5 @@ export const Checkbox = styled.input`
         border: 1px solid ${({ theme }) => theme.colors.darkPurple};
     }
 `;
+
+export const Sort = styled.div``;

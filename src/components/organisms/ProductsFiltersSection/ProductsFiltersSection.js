@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Producers, Processors, filterOptions } from 'data/ProductsFilters';
-import FilterProcessors from 'components/atoms/FilterProcessors/FilterProcessors';
-import FilterProducers from 'components/atoms/FilterProducers/FilterProducers';
 import {
     InputField,
     SearchDescription,
@@ -12,29 +10,48 @@ import {
     DiscountFilter,
     DiscountDesc,
     DiscountCheckbox,
+    FilterVerticalSection,
 } from './ProductsFiltersSection.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { Button } from 'components/atoms/Button/Button';
+import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 
 const ProductsFiltersSection = ({ handleFilters }) => {
     const [sortBy, setSortBy] = useState('none');
     const [producers, setProducers] = useState([]);
+    const [clearProducers, setClearProducers] = useState(false);
     const [processors, setProcessors] = useState([]);
+    const [clearProcessors, setClearProcessors] = useState(false);
     const [ram, setRam] = useState({ min: '', max: '' });
     const [disk, setDisk] = useState({ min: '', max: '' });
     const [searchTerm, setSearchTerm] = useState('');
     const [discounts, setDiscounts] = useState(false);
-    let processorsArray = [];
 
     const handleProducers = (data) => {
-        setProducers([data]);
+        let productList = [];
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) productList.push(data[i].value);
+        }
+        setProducers(productList);
     };
+
     const handleProcessors = (data) => {
-        setProcessors([data]);
+        let processorsList = [];
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) processorsList.push(data[i].value);
+        }
+        setProcessors(processorsList);
     };
 
     const handleDiscount = () => {
         setDiscounts(!discounts);
+    };
+
+    const handleClearProducersFilters = (data) => {
+        setClearProducers(data);
+    };
+    const handleClearProcessorsFilters = (data) => {
+        setClearProcessors(data);
     };
 
     const clearFilters = () => {
@@ -44,13 +61,9 @@ const ProductsFiltersSection = ({ handleFilters }) => {
         setDisk({ min: '', max: '' });
         setSortBy('none');
         setSearchTerm('');
+        handleClearProducersFilters(true);
+        handleClearProcessorsFilters(true);
     };
-
-    // const handleKeyDown = (e) => {
-    //     if (e.key === 'Enter') {
-    //         setRefreshSearchTerm(!refreshSearchTerm);
-    //     }
-    // };
 
     const handleInput = (inputName, key, data) => {
         const changeMinMaxValue = (inputName, key, data) => {
@@ -75,25 +88,12 @@ const ProductsFiltersSection = ({ handleFilters }) => {
     };
 
     useEffect(() => {
-        //check for cpu
-        processors[0] === undefined && (processors[0] = []);
-        for (let i = 0; i < processors[0].length; i++) {
-            let filteredCPU = processors[0][i];
-            for (let j = 0; j < Processors.filters_extended.length; j++) {
-                let checkedCPU = Processors.filters_extended[j];
-                if (filteredCPU === checkedCPU.label) {
-                    processorsArray.push(checkedCPU.value);
-                    break;
-                }
-            }
-        }
-        producers[0] === undefined && (producers[0] = []);
         let productFilters = {
             searchTerm,
             filters: {
                 discounts,
-                producers: producers[0],
-                processors: processorsArray,
+                producers,
+                processors,
                 ram,
                 disk,
             },
@@ -113,7 +113,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                     placeholder="Czego szukasz?"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    // onKeyDown={handleKeyDown}
                 />
                 <SearchDescription>Wyszukiwanie</SearchDescription>
             </SearchSection>
@@ -131,32 +130,53 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                 <DiscountCheckbox type="checkbox" onChange={() => handleDiscount()} checked={discounts} />
                 <DiscountDesc onClick={() => handleDiscount()}>Promocje</DiscountDesc>
             </DiscountFilter>
-            <FilterProducers data={producers[0]} filterData={Producers} handleProducers={handleProducers} />
-            <FilterProcessors data={processors[0]} filterData={Processors} handleProcessors={handleProcessors} />
+
+            <SetFilterItems
+                width="250px"
+                description={'Produkty'}
+                filterData={Producers}
+                handleProducers={handleProducers}
+                handleClearProducersFilters={handleClearProducersFilters}
+                clearProducers={clearProducers}
+            />
+
+            <SetFilterItems
+                width="250px"
+                description={'Procesory'}
+                filterData={Processors}
+                handleProducers={handleProcessors}
+                handleClearProducersFilters={handleClearProcessorsFilters}
+                clearProducers={clearProcessors}
+            />
+
             <Title>RAM</Title>
-            <InputField
-                onChange={(e) => handleInput('ram', 'min', e.target.value)}
-                value={ram.min}
-                placeholder="od GB"
-            />{' '}
-            -
-            <InputField
-                onChange={(e) => handleInput('ram', 'max', e.target.value)}
-                value={ram.max}
-                placeholder="do GB"
-            />
+            <FilterVerticalSection>
+                <InputField
+                    onChange={(e) => handleInput('ram', 'min', e.target.value)}
+                    value={ram.min}
+                    placeholder="od GB"
+                />{' '}
+                -
+                <InputField
+                    onChange={(e) => handleInput('ram', 'max', e.target.value)}
+                    value={ram.max}
+                    placeholder="do GB"
+                />
+            </FilterVerticalSection>
             <Title>Dysk</Title>
-            <InputField
-                onChange={(e) => handleInput('disk', 'min', e.target.value)}
-                value={disk.min}
-                placeholder="od GB"
-            />{' '}
-            -
-            <InputField
-                onChange={(e) => handleInput('disk', 'max', e.target.value)}
-                value={disk.max}
-                placeholder="do GB"
-            />
+            <FilterVerticalSection>
+                <InputField
+                    onChange={(e) => handleInput('disk', 'min', e.target.value)}
+                    value={disk.min}
+                    placeholder="od GB"
+                />{' '}
+                -
+                <InputField
+                    onChange={(e) => handleInput('disk', 'max', e.target.value)}
+                    value={disk.max}
+                    placeholder="do GB"
+                />
+            </FilterVerticalSection>
             <Button onClick={() => clearFilters()}>Wyczyść filtry</Button>
         </Wrapper>
     );
