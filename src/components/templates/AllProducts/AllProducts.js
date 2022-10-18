@@ -35,7 +35,7 @@ const AllProducts = () => {
                     FilterInitPosition={FilterInitPosition}
                 />
                 <Products>
-                    <ProductPreview filterInit={filterInit} allProducts="yes" filters={filters} />
+                    <ProductPreview filterInit={filterInit} allProducts="yes" limitTheNumber="no" filters={filters} />
                 </Products>
             </Wrapper>
         </>
