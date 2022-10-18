@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button } from 'components/atoms/Button/Button';
-import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.styles';
+import { Bottom } from '../ProductPreviewItem/ProductPreviewItem.style';
 
 export const Wrapper = styled.div`
     margin: auto;

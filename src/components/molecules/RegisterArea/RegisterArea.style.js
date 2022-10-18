@@ -1,5 +1,5 @@
 import { Button } from 'components/atoms/Button/Button';
-import { Bottom } from 'components/organisms/ProductPreview/ProductPreview.styles';
+import { Bottom } from '../ProductPreviewItem/ProductPreviewItem.style';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
