@@ -96,3 +96,35 @@ export const Checkbox = styled.input`
 export const OptionDescription = styled.div`
     font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
+
+export const SmallScreen = styled.div`
+    display: none;
+    background-color: ${({ theme }) => theme.colors.lightLightGrey};
+    @media screen and (max-width: 500px) {
+        border-radius: 10px;
+        margin-top: 10px;
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        display: flex;
+        width: 100%;
+        padding: 3px;
+    }
+`;
+
+export const ApproveButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+    padding: 2px 0;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    font-weight: 700;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.lightLightGrey};
+        cursor: pointer;
+    }
+`;

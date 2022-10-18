@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
         top: 0px;
         left: ${(props) => props.position};
         background-color: white;
-        z-index: 4;
+        z-index: 3;
     }
 `;
 
@@ -129,4 +129,10 @@ export const SmallScreenSize = styled.div`
         flex-direction: column;
         justify-content: flex-start;
     }
+`;
+
+export const Margin = styled.div`
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
 `;

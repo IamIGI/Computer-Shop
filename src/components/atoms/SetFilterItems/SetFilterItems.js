@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+    ApproveButton,
     Checkbox,
     FilterOption,
     FilterOptions,
@@ -7,6 +8,7 @@ import {
     InputField,
     InputSection,
     OptionDescription,
+    SmallScreen,
     Wrapper,
 } from './SetFilterItems.style';
 
@@ -70,6 +72,9 @@ const SetFilterItems = ({
                             <OptionDescription>{item.label}</OptionDescription>
                         </FilterOption>
                     ))}
+                    <SmallScreen onClick={() => setToggle(false)}>
+                        <ApproveButton>Zatwierdź</ApproveButton>
+                    </SmallScreen>
                 </FilterOptions>
             </InputSection>
         </Wrapper>

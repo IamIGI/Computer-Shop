@@ -12,6 +12,7 @@ import {
     DiscountCheckbox,
     FilterVerticalSection,
     SmallScreenSize,
+    Margin,
 } from './ProductsFiltersSection.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { Button } from 'components/atoms/Button/Button';
@@ -178,7 +179,9 @@ const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, Fi
                     placeholder="do GB"
                 />
             </FilterVerticalSection>
-            <Button onClick={() => clearFilters()}>Wyczyść filtry</Button>
+            <Margin>
+                <Button onClick={() => clearFilters()}>Wyczyść filtry</Button>
+            </Margin>
             <SmallScreenSize>
                 <Button onClick={() => handleShowFilters(FilterInitPosition)}>Zapisz / Schowaj</Button>
             </SmallScreenSize>
