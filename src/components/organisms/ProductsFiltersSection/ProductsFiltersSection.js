@@ -113,7 +113,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                     placeholder="Czego szukasz?"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    // onKeyDown={handleKeyDown}
                 />
                 <SearchDescription>Wyszukiwanie</SearchDescription>
             </SearchSection>
@@ -150,7 +149,6 @@ const ProductsFiltersSection = ({ handleFilters }) => {
                 clearProducers={clearProcessors}
             />
 
-            {/* <FilterProcessors data={processors[0]} filterData={Processors} handleProcessors={handleProcessors} /> */}
             <Title>RAM</Title>
             <FilterVerticalSection>
                 <InputField

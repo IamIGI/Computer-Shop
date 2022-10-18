@@ -19,7 +19,6 @@ export const InsideWrapper = styled.div`
     flex-direction: row;
     justify-content: center;
     text-align: left;
-    /* align-items: center; */
 
     @media (max-width: 650px) {
         height: fit-content;

@@ -25,7 +25,6 @@ export const Title = styled.p`
 `;
 
 export const InputField = styled.input`
-    /* margin: 10px 10px 0px 10px; */
     margin: 0px 10px;
     height: 25px;
     width: 100px;
@@ -99,7 +98,6 @@ export const DiscountCheckbox = styled.input`
     margin: 8px 10px 0 10px;
     height: 20px;
     width: auto;
-    /* border-radius: 16px; */
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     color: ${({ theme }) => theme.colors.darkGrey};
     text-align: center;
