@@ -29,7 +29,7 @@ import useAuth from 'hooks/useAuth';
 import { sendCommentAPI } from 'api/comments';
 import { BiCommentError } from 'react-icons/bi';
 
-const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments, handleRefreshProductSummary }) => {
+const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments }) => {
     const alertInit = [false, { userName: '', opinion: '', rating: '' }];
 
     const { auth } = useAuth();

@@ -27,8 +27,9 @@ export const Title = styled.div`
 export const FormSection = styled.div``;
 
 export const InputLocal = styled(Input)`
-    width: 80%;
-    font-size: ${({ theme }) => theme.fontSize.l};
+    width: 90%;
+    margin: 5px 55px 5px 30px;
+    font-size: ${({ theme }) => theme.fontSize.m};
 `;
 
 export const ButtonLocal = styled(Button)``;
