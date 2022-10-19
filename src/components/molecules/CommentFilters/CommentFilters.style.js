@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
     flex-wrap: nowrap;
     justify-content: center;
     padding: 10px;
-    /* border: 1px solid red; */
     box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px;
 `;
 
@@ -23,9 +22,7 @@ export const NumberOfComments = styled.div`
     font-weight: 700;
 `;
 
-export const Filters = styled.div`
-    /* border: 1px solid ${({ theme }) => theme.colors.lightGrey}; */
-`;
+export const Filters = styled.div``;
 
 export const Confirmed = styled.div`
     margin: 0 2%;
@@ -50,7 +47,6 @@ export const Checkbox = styled.input`
     margin: 8px 10px 0 10px;
     height: 20px;
     width: auto;
-    /* border-radius: 16px; */
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     color: ${({ theme }) => theme.colors.darkGrey};
     text-align: center;
