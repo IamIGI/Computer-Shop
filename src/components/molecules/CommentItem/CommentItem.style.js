@@ -30,3 +30,29 @@ export const NoOpinionsLeft = styled.div`
     text-align: center;
     margin: 20px 0;
 `;
+
+export const NoOpinionsLeftSection = styled.div`
+    margin-top: 40px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+`;
+
+export const IconNoOpinionsLeft = styled.div`
+    color: green;
+    font-size: ${({ theme }) => theme.fontSize.xxl};
+    @media screen and (max-width: 650px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
+`;
+
+export const DescriptionNoOpinionsLeft = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
+    @media screen and (max-width: 650px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+    }
+`;

@@ -1,6 +1,12 @@
-import { Wrapper, CommentSection, ContentSection, NoOpinionsLeft } from './CommentItem.style';
-
-import { Separator } from 'components/atoms/Separator/Separator';
+import {
+    Wrapper,
+    CommentSection,
+    ContentSection,
+    NoOpinionsLeft,
+    NoOpinionsLeftSection,
+    IconNoOpinionsLeft,
+    DescriptionNoOpinionsLeft,
+} from './CommentItem.style';
 
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
@@ -8,9 +14,10 @@ import UserData from 'components/atoms/Comments/UserData/UserData';
 import ContentData from 'components/atoms/Comments/ContentData/ContentData';
 import Opinion from 'components/atoms/Comments/Opinion/Opinion';
 import CommentsScore from 'components/atoms/Comments/CommentScore/CommentsScore';
+import { FaCommentSlash } from 'react-icons/fa';
 
 const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) => {
-    const { comments: commentsArray, length: commentsSize } = comments;
+    const { comments: commentsArray, length: displayedComments } = comments;
 
     return (
         <Wrapper>
@@ -20,11 +27,15 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) 
                 </>
             ) : (
                 <>
-                    {commentsSize === 0 ? (
-                        <></>
+                    {displayedComments === 0 ? (
+                        <NoOpinionsLeftSection>
+                            <IconNoOpinionsLeft>
+                                <FaCommentSlash />
+                            </IconNoOpinionsLeft>
+                            <DescriptionNoOpinionsLeft>Brak opinii dla tego wyszukiwania</DescriptionNoOpinionsLeft>
+                        </NoOpinionsLeftSection>
                     ) : (
                         <>
-                            <Separator />
                             {commentsArray.map((comment, index) => (
                                 <CommentSection key={index}>
                                     <UserData comment={comment} />

@@ -6,6 +6,8 @@ export const Wrapper = styled.div`
     flex-wrap: nowrap;
     justify-content: center;
     padding: 10px;
+    /* border: 1px solid red; */
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px;
 `;
 
 export const Title = styled.div`
