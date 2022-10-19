@@ -28,7 +28,7 @@ const CommentFilters = ({ handleFilters, comments }) => {
 
     return (
         <>
-            {commentsSize === 0 ? (
+            {!Boolean(comments) ? (
                 <></>
             ) : (
                 <Wrapper>
