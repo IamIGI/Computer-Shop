@@ -19,6 +19,9 @@ const CommentFilters = ({ handleFilters, comments }) => {
     const [confirmed, setConfirmed] = useState(false);
     const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
     const { product } = useProduct();
+    useEffect(() => {
+        console.log(Boolean(comments));
+    }, [comments]);
 
     useEffect(() => {
         let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
@@ -28,7 +31,7 @@ const CommentFilters = ({ handleFilters, comments }) => {
 
     return (
         <>
-            {totalNumberOfComments === 0 ? (
+            {!Boolean(comments) ? (
                 <></>
             ) : (
                 <Wrapper>

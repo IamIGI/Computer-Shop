@@ -28,12 +28,20 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) 
             ) : (
                 <>
                     {displayedComments === 0 ? (
-                        <NoOpinionsLeftSection>
-                            <IconNoOpinionsLeft>
-                                <FaCommentSlash />
-                            </IconNoOpinionsLeft>
-                            <DescriptionNoOpinionsLeft>Brak opinii dla tego wyszukiwania</DescriptionNoOpinionsLeft>
-                        </NoOpinionsLeftSection>
+                        <>
+                            {!Boolean(comments) ? (
+                                <></>
+                            ) : (
+                                <NoOpinionsLeftSection>
+                                    <IconNoOpinionsLeft>
+                                        <FaCommentSlash />
+                                    </IconNoOpinionsLeft>
+                                    <DescriptionNoOpinionsLeft>
+                                        Brak opinii dla tego wyszukiwania
+                                    </DescriptionNoOpinionsLeft>
+                                </NoOpinionsLeftSection>
+                            )}
+                        </>
                     ) : (
                         <>
                             {commentsArray.map((comment, index) => (
