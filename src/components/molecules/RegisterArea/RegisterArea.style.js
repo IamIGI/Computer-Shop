@@ -1,4 +1,3 @@
-import { Button } from 'components/atoms/Button/Button';
 import { Bottom } from '../ProductPreviewItem/ProductPreviewItem.style';
 import styled from 'styled-components';
 
@@ -25,9 +24,26 @@ export const ButtonSection = styled.div`
     text-align: center;
 `;
 
-export const WrapButton = styled(Button)`
-    margin-left: 15px;
-    padding: 10px;
+export const WrapButton = styled.button`
+    margin: 15px 0px 15px 10px;
+    padding: 9px 10px;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
+    background-color: ${({ theme }) => theme.colors.lightPurple};
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.darkGrey};
+
+    &:hover {
+        cursor: pointer;
+        background-color: ${({ theme }) => theme.colors.darkPurple};
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        margin: 15px 0px 15px 19px;
+        padding: 5px 15px;
+    }
 `;
 
 export const ErrMsg = styled.div`

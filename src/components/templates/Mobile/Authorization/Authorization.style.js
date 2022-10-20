@@ -22,7 +22,6 @@ export const Wrapper = styled.div`
 `;
 
 export const LoginWrapper = styled.div`
-    border: 1px solid red;
     max-width: 230px;
     width: 100%;
     display: flex;
@@ -31,13 +30,12 @@ export const LoginWrapper = styled.div`
     align-items: center;
     text-align: center;
 
-    @media screen and (max-width: 500px) {
-        max-width: 300px;
-    }
+    /* @media screen and (max-width: 500px) {
+        max-width: 310px;
+    } */
 `;
 
 export const RegisterWrapper = styled.div`
-    border: 1px solid green;
     max-width: 230px;
     width: 100%;
     display: flex;
@@ -45,7 +43,7 @@ export const RegisterWrapper = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    @media screen and (max-width: 500px) {
-        max-width: 300px;
-    }
+    /* @media screen and (max-width: 500px) {
+        max-width: 310px;
+    } */
 `;
