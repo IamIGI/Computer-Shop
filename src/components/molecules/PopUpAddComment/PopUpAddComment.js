@@ -22,53 +22,73 @@ import {
     FailureIcon,
     FailureSection,
 } from './PopUpAddComment.style';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import StarRating from 'components/atoms/StarRating/StarRating';
 import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 import { sendCommentAPI } from 'api/comments';
 import { BiCommentError } from 'react-icons/bi';
+import { ACTIONS, INITIAL_STATE, reducerFunction } from './reducerLogic';
 
 const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments }) => {
-    const alertInit = [false, { userName: '', opinion: '', rating: '' }];
-
     const { auth } = useAuth();
-    const [rating, setRating] = useState(0);
+    const [state, dispatch] = useReducer(reducerFunction, INITIAL_STATE);
     const [userName, setUserName] = useState(Boolean(auth.userName) ? auth.userName : '');
-    const [opinion, setOpinion] = useState('');
-    const [sendComment, setSendComment] = useState(false);
-    const [alert, setAlert] = useState(alertInit);
-    const [countChar, setCountChar] = useState(0);
-    const [languageValidation, setLanguageValidation] = useState([false, '']);
+
+    const changeState = (type, value) => {
+        dispatch({
+            type,
+            payload: value,
+        });
+    };
+
+    const handleRating = (value) => {
+        dispatch({
+            type: ACTIONS.RATING,
+            payload: value,
+        });
+    };
+
+    const handleAlert = (showAlert, key, message) => {
+        dispatch({
+            type: ACTIONS.ALERT,
+            payload: { showAlert, key, message },
+        });
+    };
+
+    const handleLanguageValidation = (showAlert, message) => {
+        dispatch({
+            type: ACTIONS.LANGUAGE_VALIDATION,
+            payload: { showAlert, message },
+        });
+    };
 
     useEffect(() => {
-        if (sendComment) {
-            if (userName.length !== 0 && opinion.length > 10 && rating !== 0) {
-                const sendData = async () => {
+        if (state.sendComment) {
+            if (userName.length !== 0 && state.opinion.length > 10 && state.rating !== 0) {
+                const sendData = async (state) => {
                     const data = {
                         productId,
                         userId: Boolean(auth.id) ? auth.id : '',
                         userName,
                         content: {
-                            rating,
-                            description: opinion.replace(/\n/g, '也'),
+                            rating: state.rating,
+                            description: state.opinion.replace(/\n/g, '也'),
                         },
                     };
 
                     try {
                         const response = await sendCommentAPI(data);
                         if (response.code === 5) {
-                            setLanguageValidation([true, 'Imie zawiera słowa wulgarne']);
-                            setAlert(alertInit);
+                            handleLanguageValidation(true, 'Imie zawiera słowa wulgarne');
+                            dispatch({ type: ACTIONS.CLEAR_ALERT });
                         } else if (response.code === 1) {
-                            setLanguageValidation([true, 'Wiadomość zawiera słowa wulgarne']);
-                            setAlert(alertInit);
+                            handleLanguageValidation(true, 'Wiadomość zawiera słowa wulgarne');
+                            dispatch({ type: ACTIONS.CLEAR_ALERT });
                         } else if (response.code === 4) {
-                            console.log(`Data send successfully`);
-                            setLanguageValidation([false, '']);
-
-                            setAlert(alertInit);
-                            setSendComment(false);
+                            handleLanguageValidation(false, '');
+                            dispatch({ type: ACTIONS.RESET });
+                            changeState(ACTIONS.SEND_COMMENT, false);
                             onClose();
                             handleRefreshComments();
                         }
@@ -83,29 +103,26 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                     }
                 };
 
-                sendData();
+                sendData(state);
             } else {
-                setLanguageValidation([false, '']);
+                handleLanguageValidation(false, '');
                 console.log('Data is bad');
-                setAlert([...alert, (alert[0] = true)]);
+
                 userName.length === 0
-                    ? setAlert([...alert, (alert[1].userName = 'Brakujące pole - Podpis')])
-                    : setAlert([...alert, (alert[1].userName = '')]);
-                opinion.length <= 10
-                    ? setAlert([...alert, (alert[1].opinion = 'Brakujące pole - Opinia (min. 10 znaków)')])
-                    : setAlert([...alert, (alert[1].opinion = '')]);
-                rating === 0
-                    ? setAlert([...alert, (alert[1].rating = 'Minimalna ocena to 1')])
-                    : setAlert([...alert, (alert[1].rating = '')]);
+                    ? handleAlert(true, 'userName', 'Brakujące pole - Podpis')
+                    : handleAlert(true, 'userName', '');
+                state.opinion.length <= 10
+                    ? handleAlert(true, 'opinion', 'Brakujące pole - Opinia (min. 10 znaków)')
+                    : handleAlert(true, 'opinion', '');
+                state.rating === 0
+                    ? handleAlert(true, 'rating', 'Minimalna ocena to 1')
+                    : handleAlert(true, 'rating', '');
             }
-            setSendComment(false);
+            changeState(ACTIONS.SEND_COMMENT, false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sendComment]);
+    }, [state.sendComment]);
 
-    const handleRating = (value) => {
-        setRating(value);
-    };
     return (
         <WrapperOutside>
             <Title>Dodaj opinię</Title>
@@ -121,7 +138,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                 <Rating>
                     <Description>Oceń produkt</Description>
                     <RatingStars>
-                        <StarRating rating={rating} handleRating={handleRating} />
+                        <StarRating rating={state.rating} handleRating={handleRating} />
                     </RatingStars>
                 </Rating>
                 <Information>
@@ -148,44 +165,42 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                 <OpinionSection>
                     <TextArea
                         placeholder="Opinia"
-                        value={opinion}
-                        onChange={(e) => setOpinion(e.target.value)}
+                        value={state.opinion}
+                        onChange={(e) => dispatch({ type: ACTIONS.OPINION, payload: e.target.value })}
                         maxLength={2000}
-                        onChangeCapture={(e) => setCountChar(e.target.value.length)}
+                        onChangeCapture={(e) => changeState(ACTIONS.COUNT_CHAR, e.target.value.length)}
                     />
-                    <NumOfChars>{countChar}/2000</NumOfChars>
+                    <NumOfChars>{state.countChar}/2000</NumOfChars>
                 </OpinionSection>
                 <AddComment>
-                    <div>
-                        <BuyButton onClick={() => setSendComment(true)}>
-                            <p>Dodaj opinię</p>
-                        </BuyButton>
-                    </div>
-                    {languageValidation[0] ? (
+                    <BuyButton onClick={() => changeState(ACTIONS.SEND_COMMENT, true)}>
+                        <p>Dodaj opinię</p>
+                    </BuyButton>
+                    {state.languageValidation.showAlert ? (
                         <FailureSection>
                             <FailureIcon>
                                 <BiCommentError />
                             </FailureIcon>
-                            <FailureDescription>{languageValidation[1]}</FailureDescription>
+                            <FailureDescription>{state.languageValidation.message}</FailureDescription>
                         </FailureSection>
                     ) : (
                         <></>
                     )}
-                    {alert[0] ? (
+                    {state.alert.showAlert ? (
                         <Alert>
-                            {alert[1].userName !== '' && (
+                            {state.alert.userName !== '' && (
                                 <>
-                                    {alert[1].userName}
+                                    {state.alert.userName}
                                     <br />
                                 </>
                             )}
-                            {alert[1].opinion !== '' && (
+                            {state.alert.opinion !== '' && (
                                 <>
-                                    {alert[1].opinion}
+                                    {state.alert.opinion}
                                     <br />
                                 </>
                             )}
-                            {alert[1].rating !== '' && <>{alert[1].rating}</>}
+                            {state.alert.rating !== '' && <>{state.alert.rating}</>}
                         </Alert>
                     ) : (
                         <></>
