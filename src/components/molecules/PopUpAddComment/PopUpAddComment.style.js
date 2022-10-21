@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const WrapperOutside = styled.div`
-    /* height: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 `;
 export const WrapperInside = styled.div`
-    /* height: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const OutsideWrapper = styled.div`
-    position: 'fixed';
+    position: absolute;
+    left: 50%;
+    top: 43%;
+    transform: translate(-50%, -50%);
     width: fit-content;
-    transform: ${({ position }) => `translate(${position[0]}vw, ${position[1]}vh)`};
+    height: fit-content;
     background-color: white;
-    /* z-index: 1000; */
     border: 1px solid grey;
     border-radius: 30px;
     display: flex;
@@ -24,7 +26,6 @@ export const Overlay = styled.div`
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    /* z-index: 1000; */
 `;
 
 export const ButtonWrap = styled.div`
@@ -44,6 +45,7 @@ export const Close = styled.div`
     font-size: 19px;
     top: 5px;
     right: 5px;
+    z-index: 5;
 
     &:hover {
         cursor: pointer;
