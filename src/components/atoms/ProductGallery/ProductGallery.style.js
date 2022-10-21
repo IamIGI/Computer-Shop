@@ -16,6 +16,10 @@ export const ImageContainer = styled.div`
     img {
         width: 100%;
     }
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const SmallImagesContainer = styled.div`
