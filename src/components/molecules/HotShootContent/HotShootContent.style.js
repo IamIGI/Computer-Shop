@@ -16,8 +16,11 @@ export const Wrapper = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     border-radius: 30px;
     text-align: center;
+    transform: scale(1, 1);
+    transition: transform 0.5s ease;
 
     &:hover {
+        transform: scale(1.04, 1.04);
         border: 1px solid ${({ theme }) => theme.colors.grey};
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         border-radius: 30px;

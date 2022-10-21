@@ -17,8 +17,12 @@ export const Wrapper = styled.div`
     height: fit-content;
     border: 1px solid transparent;
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+    transform: scale(1, 1);
+    transition: transform 0.5s ease;
 
     &:hover {
+        z-index: 5;
+        transform: scale(1.05, 1.05);
         border: 1px solid ${({ theme }) => theme.colors.grey};
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         border-radius: 10px;

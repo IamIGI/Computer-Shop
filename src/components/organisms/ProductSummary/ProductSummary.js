@@ -38,6 +38,10 @@ const ProductSummary = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refreshComments, product]);
 
+    useEffect(() => {
+        console.log(comments);
+    }, [comments]);
+
     return (
         <Wrapper>
             {waitForFetchAS ? (
@@ -46,7 +50,7 @@ const ProductSummary = ({
                 </>
             ) : (
                 <>
-                    {comments.length === 0 ? (
+                    {comments?.length_AllComments === 0 ? (
                         <NoComments>
                             <p>
                                 Masz ten produkt? <br /> Bądź pierwszą osobą która skomentuje
@@ -58,7 +62,7 @@ const ProductSummary = ({
                     ) : (
                         <>
                             <ProductAverageScore averageScore={averageScore} />
-                            <ProductEachScore averageScore={averageScore} />
+                            <ProductEachScore averageScore={averageScore} errorFix={comments.length_AllComments} />
                         </>
                     )}
                 </>
