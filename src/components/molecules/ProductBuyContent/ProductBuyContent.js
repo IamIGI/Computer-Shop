@@ -20,12 +20,18 @@ import useBasket from 'hooks/useBasket';
 import { BsCartPlus, BsTruck } from 'react-icons/bs';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { RiCoinLine } from 'react-icons/ri';
+import toast from 'react-hot-toast';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const { basketItems, setBasketItems } = useBasket();
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
+    const notify = () =>
+        toast.success('Product dodany do koszyka', {
+            icon: '💻',
+            duration: 2000,
+        });
 
     const getPrice = (product) => {
         if (product.special_offer.mode) {
@@ -58,6 +64,7 @@ const ProductBuyContent = ({ product }) => {
         });
 
         if (!isFound) {
+            notify();
             setBasketItems((prevItems) => {
                 return [
                     ...prevItems,
@@ -96,7 +103,7 @@ const ProductBuyContent = ({ product }) => {
 
                 <BuySection>
                     <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} />
-                    <BuyButton onClick={addProduct}>
+                    <BuyButton onClick={() => addProduct()}>
                         <BuyIcon>
                             <BsCartPlus />
                         </BuyIcon>

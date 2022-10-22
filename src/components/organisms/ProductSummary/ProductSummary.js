@@ -38,10 +38,6 @@ const ProductSummary = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refreshComments, product]);
 
-    useEffect(() => {
-        console.log(comments);
-    }, [comments]);
-
     return (
         <Wrapper>
             {waitForFetchAS ? (

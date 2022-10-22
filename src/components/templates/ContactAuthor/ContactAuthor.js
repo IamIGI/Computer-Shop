@@ -26,9 +26,16 @@ import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { sendContactAPI } from 'api/contact';
 import { BiMessageAltCheck, BiCommentError } from 'react-icons/bi';
 import { formReducer, ACTIONS, INITIAL_STATE, MESSAGE_OPTIONS } from './formReducer';
+import toast from 'react-hot-toast';
 
 const ContactAuthor = () => {
     const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
+    const notify = () =>
+        toast.success('Wiadomość została wysłana', {
+            icon: '📧',
+            duration: 2000,
+        });
+
     const handleInput = (e) => {
         dispatch({
             type: ACTIONS.INPUT,
@@ -89,12 +96,14 @@ const ContactAuthor = () => {
             } else if (response.code === 0) {
                 handleError([false, '']);
                 handleSuccess(true);
+
                 //clear
                 handleInput((e = { target: { name: 'name', value: '' } }));
                 handleInput((e = { target: { name: 'email', value: '' } }));
                 dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: 0 });
                 handleInput((e = { target: { name: 'message', value: '' } }));
                 dispatch({ type: ACTIONS.FILES, payload: [] });
+                notify();
             }
         } catch (err) {
             if (err.response) {

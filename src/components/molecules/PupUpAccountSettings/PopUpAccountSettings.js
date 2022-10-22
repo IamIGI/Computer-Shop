@@ -3,6 +3,7 @@ import { ButtonLocal, InputLocal, Title, Wrapper, FormSection } from './PopUpAcc
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
+import toast from 'react-hot-toast';
 
 const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     const { auth, setAuth } = useAuth();
@@ -18,6 +19,11 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     const [badPassword, setBadPassword] = useState(false);
     const [isMatch, setIsMatch] = useState(true);
     const [repeatPassword, setRepeatPassword] = useState('');
+
+    const notify = () =>
+        toast.success('Dane konta zmienione', {
+            duration: 2000,
+        });
 
     const checkCapsLock = (event) => {
         if (event.getModifierState('CapsLock')) {
@@ -93,6 +99,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
             handleRefresh();
             onClose();
+            notify();
         } catch (err) {
             console.log(err);
             if (err.response.status === 406) setBadPassword(true);

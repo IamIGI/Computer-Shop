@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection } from './PopUpAccountDelete.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import toast from 'react-hot-toast';
 
 let viewedName = '';
 
@@ -15,6 +16,12 @@ const PopUpAccountDelete = ({ name, signOut }) => {
     const [matchFiledFocus, setMatchFieldFocus] = useState(false);
     const [repeatPassword, setRepeatPassword] = useState('');
 
+    const notify = () =>
+        toast.success('Konto zostało usunięte', {
+            icon: '🔨',
+            duration: 2000,
+        });
+
     const checkCapsLock = (event) => {
         if (event.getModifierState('CapsLock')) {
             setIsCapsLockOn(true);
@@ -27,6 +34,8 @@ const PopUpAccountDelete = ({ name, signOut }) => {
         case 'DeleteAccount':
             viewedName = 'Usuwanie konta';
             break;
+        default:
+            console.log('server error');
     }
 
     const handleSubmit = async (e) => {
@@ -45,6 +54,7 @@ const PopUpAccountDelete = ({ name, signOut }) => {
             const response = await axiosPrivate.post('user/delete', data);
             console.log(response);
             signOut();
+            notify();
         } catch (err) {
             console.log(err);
         }

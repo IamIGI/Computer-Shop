@@ -25,7 +25,6 @@ const Basket = () => {
 
     const { setBasketItems } = useBasket();
     const { auth } = useAuth();
-    // const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useState(initDeliveryCheckboxesOpt);
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useMultiCheckboxMemory(
         'deliveryMethod',
         initDeliveryCheckboxesOpt
