@@ -2,19 +2,22 @@ import React from 'react';
 import { StyledButton } from './BuyButton.styles';
 import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
+import toast from 'react-hot-toast';
 
 const BuyButton = ({ item }) => {
     const { basketItems, setBasketItems } = useBasket();
     const product = item;
+    const notify = () =>
+        toast.success('Product dodany do koszyka', {
+            icon: '💻',
+            duration: 2000,
+        });
     const {
         special_offer: { mode: isDiscount, price: discountValue },
         price,
     } = item;
-    // console.log(item, item.special_offer.mode, item.price, item.special_offer.price);
-
     function addProduct(product, isDiscount, price, discountValue) {
         console.log(product.name);
-        // console.log('here');
         const quantity = 1;
         let q = Number(quantity);
         // 👇️ check if array contains object with given product id
@@ -31,6 +34,7 @@ const BuyButton = ({ item }) => {
             return false;
         });
         if (!isFound) {
+            notify();
             console.log(`Adding new item to basket`);
             setBasketItems((prevItems) => {
                 return [

@@ -15,12 +15,13 @@ import { CommentsProvider } from 'context/CommentsProvider';
 import { RefreshProvider } from 'context/refreshProvider';
 import { BrowserRouter } from 'react-router-dom';
 import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
+import { Toaster } from 'react-hot-toast';
 
 const MainTemplate = ({ children }) => {
     return (
         <>
             <GlobalStyle />
-
+            <Toaster position="top-center" />
             <Wrapper>
                 <BrowserRouter>
                     <ThemeProvider theme={theme}>

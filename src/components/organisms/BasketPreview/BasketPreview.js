@@ -18,9 +18,15 @@ import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
+import toast from 'react-hot-toast';
 
 const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
     const { basketItems, setBasketItems } = useBasket();
+    const notify = () =>
+        toast.success('Produkt usunięty z koszyka', {
+            icon: '🗑️',
+            duration: 2000,
+        });
 
     const deleteProduct = (_id) => {
         let oldBasket = JSON.parse(localStorage.getItem('basketItems'));
@@ -48,6 +54,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                 return item._id !== _id;
             });
         });
+        notify();
     };
 
     useEffect(() => {

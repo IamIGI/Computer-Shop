@@ -7,13 +7,20 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { FiAlertCircle } from 'react-icons/fi';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpAccountDelete from '../PupUpAccountDelete/PopUpAccountDelete';
+import toast from 'react-hot-toast';
 
 const AccountDangerSection = () => {
     const logout = useLogout();
     const { setBasketItems } = useBasket();
     const [isOpen, setIsOpen] = useState([false, { DataName: '', value: '' }]);
+    const notify = () =>
+        toast.success('Wylogowano', {
+            icon: '🔐',
+            duration: 2000,
+        });
 
     const signOut = async () => {
+        notify();
         setBasketItems([]);
         await logout();
     };

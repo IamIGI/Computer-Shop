@@ -29,11 +29,17 @@ import useAuth from 'hooks/useAuth';
 import { sendCommentAPI } from 'api/comments';
 import { BiCommentError } from 'react-icons/bi';
 import { ACTIONS, INITIAL_STATE, reducerFunction } from './reducerLogic';
+import toast from 'react-hot-toast';
 
 const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments }) => {
     const { auth } = useAuth();
     const [state, dispatch] = useReducer(reducerFunction, INITIAL_STATE);
     const [userName, setUserName] = useState(Boolean(auth.userName) ? auth.userName : '');
+    const notify = () =>
+        toast.success('Dodano komentarz', {
+            icon: '🗨️',
+            duration: 2000,
+        });
 
     const changeState = (type, value) => {
         dispatch({
@@ -91,6 +97,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                             changeState(ACTIONS.SEND_COMMENT, false);
                             onClose();
                             handleRefreshComments();
+                            notify();
                         }
                     } catch (err) {
                         if (err.response) {
