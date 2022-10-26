@@ -15,10 +15,6 @@ const YouMayLike = () => {
     const [slidesOfProducts, setSlidesOfProducts] = useState([]);
 
     useEffect(() => {
-        console.log(products);
-    }, [products]);
-
-    useEffect(() => {
         const fetchProducts = async (data) => {
             try {
                 setWaitForFetch(true);
