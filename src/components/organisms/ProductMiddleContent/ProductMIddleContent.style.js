@@ -43,3 +43,13 @@ export const Specification = styled.div`
         font-weight: 700;
     }
 `;
+
+export const YouMayLikeSector = styled.div`
+    width: 95%;
+    border-right: 5%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;

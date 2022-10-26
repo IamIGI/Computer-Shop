@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const IconTitle = styled.div`
+    padding-top: 7px;
     font-size: ${({ theme }) => theme.fontSize.omegaBig};
     @media screen and (max-width: 650px) {
         font-size: ${({ theme }) => theme.fontSize.xxl};

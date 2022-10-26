@@ -30,46 +30,44 @@ const ROLES = {
 
 const Root = () => {
     return (
-        <>
-            <Wrapper>
-                <Routes>
-                    {/* public routes */}
-                    <Route element={<PersistLogin />}>
-                        <Route path="" element={<Home />} />
-                        <Route path="allProducts" element={<AllProducts />} />
-                        <Route path="about" element={<About />} />
-                        <Route path={`/product/:id`} element={<Product />} />
-                        <Route path="basket" element={<Basket />} />
-                        <Route path="contact" element={<ContactAuthor />} />
-                        <Route path="authorization" element={<Authorization />} />
-                        <Route path="noRealWebsite" element={<NoRealWebsitePage />} />
+        <Wrapper>
+            <Routes>
+                {/* public routes */}
+                <Route element={<PersistLogin />}>
+                    <Route path="" element={<Home />} />
+                    <Route path="allProducts" element={<AllProducts />} />
+                    <Route path="about" element={<About />} />
+                    <Route path={`/product/:id`} element={<Product />} />
+                    <Route path="basket" element={<Basket />} />
+                    <Route path="contact" element={<ContactAuthor />} />
+                    <Route path="authorization" element={<Authorization />} />
+                    <Route path="noRealWebsite" element={<NoRealWebsitePage />} />
 
-                        <Route path="*" element={<MissingPage />} />
-                        <Route path="unauthorized" element={<Unauthorized />} />
+                    <Route path="*" element={<MissingPage />} />
+                    <Route path="unauthorized" element={<Unauthorized />} />
 
-                        {/* protected routes */}
+                    {/* protected routes */}
 
-                        <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
-                            <Route path="adminSettings" element={<AdminSettings />} />
-                            <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
-                            <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
-                            <Route
-                                path={`/accountSettings/orders/history/:orderId`}
-                                element={<AccountOrderHistoryItem />}
-                            />
-                        </Route>
-
-                        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                            <Route path="adminSettings" element={<AdminSettings />} />
-                        </Route>
-
-                        <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
-                            <Route path="editorSettings" element={<EditorSettings />} />
-                        </Route>
+                    <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
+                        <Route path="adminSettings" element={<AdminSettings />} />
+                        <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
+                        <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
+                        <Route
+                            path={`/accountSettings/orders/history/:orderId`}
+                            element={<AccountOrderHistoryItem />}
+                        />
                     </Route>
-                </Routes>
-            </Wrapper>
-        </>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                        <Route path="adminSettings" element={<AdminSettings />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Editor]} />}>
+                        <Route path="editorSettings" element={<EditorSettings />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </Wrapper>
     );
 };
 export default Root;
