@@ -14,6 +14,7 @@ import { Button } from 'components/atoms/Button/Button';
 import { IoTrashBinOutline } from 'react-icons/io5';
 import useBasket from 'hooks/useBasket';
 import { MdOutlineDelete } from 'react-icons/md';
+import ScrollTop from 'helpers/ScrollToTop';
 
 const CartHint = () => {
     const { basketItems, setBasketItems } = useBasket();
@@ -51,7 +52,7 @@ const CartHint = () => {
                                     <DeleteProduct onClick={() => removeProduct(item._id)}>
                                         <MdOutlineDelete />
                                     </DeleteProduct>
-                                    <Link to={`/product/${item._id}`} key={item._id}>
+                                    <Link to={`/product/${item._id}`} key={item._id} onClick={() => ScrollTop('Top')}>
                                         <img src={item.prevImg} alt="product preview" />
                                     </Link>
                                 </Image>

@@ -1,7 +1,7 @@
 import AccountPreviewSection from 'components/organisms/AccountPreviewSection/AccountPreviewSection';
 import NavBar from 'components/organisms/NavBar/NavBar';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../Footer/Footer';
 import { theme } from 'assets/styles/theme';
 import { ThemeProvider } from 'styled-components';

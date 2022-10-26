@@ -18,8 +18,9 @@ import {
 import Star from 'components/atoms/Star/Star';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import useWindowSize from 'hooks/useWindowSize';
+import ScrollTop from 'helpers/ScrollToTop';
 
-const ProductPreviewItem = ({ item, allProducts }) => {
+const ProductPreviewItem = ({ item, allProducts, MayLikeComponent, scrollTop }) => {
     const windowSize = useWindowSize();
     const [showCPUDesc, setShowCPUDesc] = useState(true);
     const handleWindowSize = () => {
@@ -38,7 +39,7 @@ const ProductPreviewItem = ({ item, allProducts }) => {
 
     return (
         <Wrapper>
-            <Link to={`/product/${item._id}`}>
+            <Link to={`/product/${item._id}`} onClick={MayLikeComponent && (() => ScrollTop('Top'))}>
                 <Top>
                     <div>
                         <img src={item.prevImg} alt="article" />
