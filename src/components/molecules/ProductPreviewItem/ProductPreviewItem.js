@@ -20,7 +20,7 @@ import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import useWindowSize from 'hooks/useWindowSize';
 import ScrollTop from 'helpers/ScrollToTop';
 
-const ProductPreviewItem = ({ item, allProducts, MayLikeComponent, scrollTop }) => {
+const ProductPreviewItem = ({ item, allProducts, MayLikeComponent }) => {
     const windowSize = useWindowSize();
     const [showCPUDesc, setShowCPUDesc] = useState(true);
     const handleWindowSize = () => {
