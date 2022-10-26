@@ -22,7 +22,6 @@ import useWindowSize from 'hooks/useWindowSize';
 const ProductPreviewItem = ({ item, allProducts }) => {
     const windowSize = useWindowSize();
     const [showCPUDesc, setShowCPUDesc] = useState(true);
-
     const handleWindowSize = () => {
         if (windowSize.width <= 550) {
             setShowCPUDesc(false);
