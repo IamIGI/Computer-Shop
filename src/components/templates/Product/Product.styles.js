@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     flex-wrap: nowrap;
     justify-content: flex-start;
 
-    overflow-y: scroll;
+    overflow-y: auto;
     &::-webkit-scrollbar {
         display: none;
     }

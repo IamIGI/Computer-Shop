@@ -8,6 +8,7 @@ export const MenuSector = styled.div`
     height: 70px;
     width: 100%;
     box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
+    z-index: 2;
 `;
 
 export const AboutProductSector = styled.div`
@@ -52,4 +53,5 @@ export const YouMayLikeSector = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 `;

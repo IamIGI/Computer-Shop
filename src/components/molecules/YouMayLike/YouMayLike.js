@@ -80,7 +80,6 @@ const YouMayLike = () => {
     return (
         <>
             <SectionDescription title={'Polecamy również'} icon={<BiBookHeart />} />
-
             {waitForFetch ? (
                 <>
                     <LoadingAnimation loadingSize={15} />
@@ -95,13 +94,12 @@ const YouMayLike = () => {
                                         <Slide>
                                             <Items>
                                                 {slide.map((item, index) => (
-                                                    <>
-                                                        <ProductPreviewItem
-                                                            key={index}
-                                                            item={item}
-                                                            allProducts={'no'}
-                                                        />
-                                                    </>
+                                                    <ProductPreviewItem
+                                                        key={index}
+                                                        item={item}
+                                                        allProducts={'no'}
+                                                        MayLikeComponent={true}
+                                                    />
                                                 ))}
                                             </Items>
                                         </Slide>
