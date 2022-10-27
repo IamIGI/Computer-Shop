@@ -111,16 +111,17 @@ export const AnonymousUser = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     text-align: left;
+    padding-top: 7px;
 `;
 
 export const UserDescription = styled.div`
-    margin-top: 9px;
     font-size: ${({ theme }) => theme.fontSize.l_plus};
 `;
 
 export const Input = styled.input`
-    width: 50%;
+    width: 40%;
     border-radius: 10px;
     border: 1px solid lightgrey;
     margin-left: 3%;
@@ -151,7 +152,6 @@ export const AddComment = styled.div`
 `;
 
 export const Alert = styled.div`
-    border-radius: 10px;
     margin-top: 15px;
     margin-left: 2%;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
@@ -185,4 +185,17 @@ export const FailureSection = styled.div`
     justify-content: flex-start;
     align-items: center;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
+`;
+
+export const FileSection = styled.div`
+    margin: 7px 0 7px 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`;
+
+export const FilesAlert = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
+    color: red;
+    font-weight: 700;
 `;

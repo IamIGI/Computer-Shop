@@ -8,7 +8,6 @@ export const Slider = styled.div`
     width: 1400px;
     padding-top: 17px;
     /* border: 1px solid red; */
-    z-index: 1;
 
     &::before,
     &::after {
@@ -17,7 +16,6 @@ export const Slider = styled.div`
         height: 300px;
         position: absolute;
         width: 75px;
-        z-index: 2;
     }
 
     &::after {

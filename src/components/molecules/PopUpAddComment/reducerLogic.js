@@ -2,6 +2,8 @@ export const ACTIONS = {
     RATING: 'rating',
     USER_NAME: 'userName',
     OPINION: 'opinion',
+    FILES: 'files',
+    FILES_ALERT: 'filesAlert',
     SEND_COMMENT: 'sendComment',
     ALERT: 'alert',
     COUNT_CHAR: 'countChar',
@@ -14,6 +16,8 @@ export const INITIAL_STATE = {
     rating: 0,
     userName: '',
     opinion: '',
+    files: [],
+    filesAlert: { showAlert: false, message: '' },
     sendComment: false,
     alert: { showAlert: false, userName: '', opinion: '', rating: '' },
     languageValidation: { showAlert: false, message: '' },
@@ -37,6 +41,20 @@ export const reducerFunction = (state, action) => {
                 ...state,
                 opinion: action.payload,
             };
+        case ACTIONS.FILES:
+            return {
+                ...state,
+                files: action.payload,
+            };
+        case ACTIONS.FILES_ALERT:
+            return {
+                ...state,
+                filesAlert: {
+                    ...state.filesAlert,
+                    showAlert: action.payload.showAlert,
+                    message: action.payload.message,
+                },
+            };
         case ACTIONS.ALERT:
             return {
                 ...state,
@@ -57,7 +75,6 @@ export const reducerFunction = (state, action) => {
                 countChar: action.payload,
             };
         case ACTIONS.LANGUAGE_VALIDATION:
-            console.log(action.payload);
             return {
                 ...state,
                 languageValidation: {

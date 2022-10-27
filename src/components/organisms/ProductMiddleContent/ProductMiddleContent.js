@@ -23,10 +23,10 @@ const ProductMiddleContent = ({ product }) => {
                 <Specification id="Specification">
                     <SpecificationList product={product} />
                 </Specification>
+                <YouMayLikeSector>
+                    <YouMayLike />
+                </YouMayLikeSector>
             </AboutProductSector>
-            <YouMayLikeSector>
-                <YouMayLike />
-            </YouMayLikeSector>
         </>
     );
 };
