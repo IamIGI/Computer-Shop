@@ -87,35 +87,33 @@ const YouMayLike = () => {
             ) : (
                 <>
                     {slidesOfProducts.length > 0 && (
-                        <>
-                            <Slider>
-                                <SlideTrack>
-                                    {slidesOfProducts.map((slide) => (
-                                        <Slide>
-                                            <Items>
-                                                {slide.map((item, index) => (
-                                                    <ProductPreviewItem
-                                                        key={index}
-                                                        item={item}
-                                                        allProducts={'no'}
-                                                        MayLikeComponent={true}
-                                                    />
-                                                ))}
-                                            </Items>
-                                        </Slide>
-                                    ))}
+                        <Slider>
+                            <SlideTrack>
+                                {slidesOfProducts.map((slide) => (
                                     <Slide>
                                         <Items>
-                                            {slidesOfProducts[0].map((item, index) => (
-                                                <>
-                                                    <ProductPreviewItem key={index} item={item} allProducts={'no'} />
-                                                </>
+                                            {slide.map((item, index) => (
+                                                <ProductPreviewItem
+                                                    key={index}
+                                                    item={item}
+                                                    allProducts={'no'}
+                                                    MayLikeComponent={true}
+                                                />
                                             ))}
                                         </Items>
                                     </Slide>
-                                </SlideTrack>
-                            </Slider>
-                        </>
+                                ))}
+                                <Slide>
+                                    <Items>
+                                        {slidesOfProducts[0].map((item, index) => (
+                                            <>
+                                                <ProductPreviewItem key={index} item={item} allProducts={'no'} />
+                                            </>
+                                        ))}
+                                    </Items>
+                                </Slide>
+                            </SlideTrack>
+                        </Slider>
                     )}
                 </>
             )}

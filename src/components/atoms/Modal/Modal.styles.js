@@ -13,6 +13,7 @@ export const OutsideWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 3;
 `;
 
 export const InsideWrapper = styled.div`
@@ -26,6 +27,7 @@ export const Overlay = styled.div`
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
 `;
 
 export const ButtonWrap = styled.div`
