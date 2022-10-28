@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ProductSummary from 'components/organisms/ProductSummary/ProductSummary';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BiCommentDetail } from 'react-icons/bi';
+import CommentsImages from 'components/molecules/CommentsImages/CommentsImages';
 
 const CommentsSection = ({ product }) => {
     const [waitForFetchAS, setWaitForFetchAS] = useState(false);
@@ -48,6 +49,7 @@ const CommentsSection = ({ product }) => {
                 waitForFetchAS={waitForFetchAS}
                 handleWaitForFetchAS={handleWaitForFetchAS}
             />
+            {comments.length > 0 && <CommentsImages commentImages={comments.images} />}
             <CommentFilters handleFilters={handleFilters} comments={comments} />
             <Comments
                 comments={comments}
