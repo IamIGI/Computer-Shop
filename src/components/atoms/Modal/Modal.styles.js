@@ -3,8 +3,21 @@ import styled from 'styled-components';
 export const OutsideWrapper = styled.div`
     position: absolute;
     left: 50%;
-    top: 43%;
+    top: 50%;
     transform: translate(-50%, -50%);
+    z-index: 3;
+
+    @media screen and (max-width: 650px) {
+        top: 40%;
+    }
+
+    @media screen and (max-width: 450px) {
+        top: 35%;
+    }
+`;
+
+export const InsideWrapper = styled.div`
+    position: relative;
     width: fit-content;
     height: fit-content;
     background-color: white;
@@ -13,11 +26,6 @@ export const OutsideWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 3;
-`;
-
-export const InsideWrapper = styled.div`
-    position: relative;
 `;
 
 export const Overlay = styled.div`
@@ -45,8 +53,8 @@ export const Close = styled.div`
     padding-left: 16px;
     padding-top: 16px;
     font-size: 19px;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
     z-index: 5;
 
     &:hover {
