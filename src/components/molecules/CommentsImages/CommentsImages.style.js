@@ -58,49 +58,6 @@ export const Wrapper = styled.div`
     scroll-behavior: smooth;
 `;
 
-export const ScrollButton = styled.div`
-    z-index: 3;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(189, 195, 199, 0.6);
-    color: black;
-    border-radius: 25%;
-    position: absolute;
-    top: 29px;
-    ${(props) => (props.direction === 'right' ? 'right: 0;' : 'left: 0;')}
-
-    display: ${(props) => (props.width > 1200 ? 'flex' : 'none')};
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 25px;
-    font-weight: 700;
-
-    transform: scale(1, 1);
-    transition: transform 0.5s ease;
-    :hover {
-        cursor: pointer;
-        transform: scale(1.2, 1.2);
-        background-color: rgba(189, 195, 199, 0.7);
-    }
-
-    @media screen and (max-width: 1000px) {
-        display: ${(props) => (props.width > 1000 ? 'flex' : 'none')};
-    }
-
-    @media screen and (max-width: 800px) {
-        display: ${(props) => (props.width > 800 ? 'flex' : 'none')};
-    }
-
-    @media screen and (max-width: 515px) {
-        display: ${(props) => (props.width > 515 ? 'flex' : 'none')};
-        top: 21px;
-        width: 35px;
-        height: 35px;
-    }
-`;
-
 export const Image = styled.img`
     height: 90px;
     max-width: 90px;

@@ -1,21 +1,49 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+    padding-left: 30px;
     h1 {
-        font-size: 26px;
-        margin-left: 20px;
-        line-height: 40px;
+        font-size: ${({ theme }) => theme.fontSize.xl};
+        line-height: 30px;
+        margin: 0px;
+        padding: 0px;
     }
 
     p {
-        margin-left: 20px;
         font-size: ${({ theme }) => theme.fontSize.l};
         color: grey;
-        padding-bottom: 1%;
     }
 
     span {
         color: black;
         font-weight: 700;
+    }
+
+    @media screen and (max-width: 1400px) {
+        h1 {
+            font-size: 21px;
+        }
+
+        p {
+            font-size: ${({ theme }) => theme.fontSize.m_plus};
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+        h1 {
+            line-height: 22px;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        padding-left: 20px;
+        h1 {
+            line-height: 20px;
+            font-size: ${({ theme }) => theme.fontSize.l_plus};
+        }
+
+        p {
+            font-size: ${({ theme }) => theme.fontSize.m};
+        }
     }
 `;

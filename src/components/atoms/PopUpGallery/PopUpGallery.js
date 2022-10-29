@@ -1,4 +1,4 @@
-import { ScrollButton } from 'components/molecules/CommentsImages/CommentsImages.style';
+import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import { Wrapper, ImageContainer, SmallImagesContainer, SmallImage, SmallImageWrapper } from './PopUpGallery.style';
@@ -6,7 +6,12 @@ import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
     const [index, setIndex] = useState(initIndex);
-    const WrapperWidth = images.length * 90 + (images.length - 1) * 20;
+    const sumOfElementsWidth = images.length * 90 + (images.length - 1) * 20;
+
+    const [divWidth, setDivWidth] = useState(10000);
+    setInterval(async () => {
+        setDivWidth(document.getElementById('containerBigImage').offsetWidth);
+    }, 2000);
 
     const scrollCommentImages = (direction) => {
         switch (direction) {
@@ -44,10 +49,20 @@ const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
                         />
                     ))}
                 </SmallImagesContainer>
-                <ScrollButton width={WrapperWidth} direction="right" onClick={() => scrollCommentImages('right')}>
+                <ScrollButton
+                    childWidth={sumOfElementsWidth}
+                    parentWidth={divWidth}
+                    direction="right"
+                    onClick={() => scrollCommentImages('right')}
+                >
                     <AiOutlineRight />
                 </ScrollButton>
-                <ScrollButton width={WrapperWidth} direction="left" onClick={() => scrollCommentImages('left')}>
+                <ScrollButton
+                    childWidth={sumOfElementsWidth}
+                    parentWidth={divWidth}
+                    direction="left"
+                    onClick={() => scrollCommentImages('left')}
+                >
                     <AiOutlineLeft />
                 </ScrollButton>
             </SmallImageWrapper>

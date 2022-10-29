@@ -1,33 +1,76 @@
 import React, { useState } from 'react';
-import { ImageContainer, SmallImage, SmallImagesContainer, Wrapper } from './ProductGallery.style';
+import { ImageContainer, SmallImage, SmallImagesContainer, SmallImageWrapper, Wrapper } from './ProductGallery.style';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
+import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 const ProductGallery = ({ images, addServerPrefix }) => {
     const [index, setIndex] = useState(0);
     const [isOpen, setIsOpen] = useState([false]);
     const [chosenImage, setChoseImage] = useState(0);
+    const sumOfElementsWidth = images.length * 70 + (images.length - 1) * 20;
+
+    const [divWidth, setDivWidth] = useState(10000);
+    setInterval(async () => {
+        setDivWidth(document.getElementById('containerProductGallery').offsetWidth);
+    }, 2000);
 
     const handleChosenImage = (index) => {
         setChoseImage(index);
         setIsOpen([true]);
     };
+
+    const scrollCommentImages = (direction) => {
+        switch (direction) {
+            case 'left':
+                document.getElementById('containerProductGallery').scrollLeft -= 90;
+                break;
+            case 'right':
+                document.getElementById('containerProductGallery').scrollLeft += 90;
+                break;
+
+            default:
+                console.log('bad case value');
+                break;
+        }
+    };
+
     return (
         <Wrapper>
             <ImageContainer>
                 <img src={images[index]} alt="Show product" key={index} onClick={() => handleChosenImage(index)} />
             </ImageContainer>
-            <SmallImagesContainer>
-                {images.map((item, i) => (
-                    <SmallImage
-                        key={i}
-                        src={addServerPrefix ? `http://localhost:5000/${item}` : item}
-                        alt="products gallery"
-                        onMouseEnter={() => setIndex(i)}
-                        border={i === index ? true : false}
-                    />
-                ))}
-            </SmallImagesContainer>
+            <SmallImageWrapper>
+                <SmallImagesContainer id="containerProductGallery">
+                    {images.map((item, i) => (
+                        <SmallImage
+                            key={i}
+                            src={addServerPrefix ? `http://localhost:5000/${item}` : item}
+                            alt="products gallery"
+                            onMouseEnter={() => setIndex(i)}
+                            border={i === index ? true : false}
+                        />
+                    ))}
+                </SmallImagesContainer>
+
+                <ScrollButton
+                    childWidth={sumOfElementsWidth}
+                    parentWidth={divWidth}
+                    direction="right"
+                    onClick={() => scrollCommentImages('right')}
+                >
+                    <AiOutlineRight />
+                </ScrollButton>
+                <ScrollButton
+                    childWidth={sumOfElementsWidth}
+                    parentWidth={divWidth}
+                    direction="left"
+                    onClick={() => scrollCommentImages('left')}
+                >
+                    <AiOutlineLeft />
+                </ScrollButton>
+            </SmallImageWrapper>
             <Modal position={[25, -86]} open={isOpen} onClose={() => setIsOpen([false])}>
                 <PopUpGallery images={images} addServerPrefix={false} initIndex={chosenImage} />
             </Modal>
