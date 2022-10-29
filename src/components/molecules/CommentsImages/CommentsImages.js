@@ -1,17 +1,10 @@
-import { useState } from 'react';
 import { Wrapper, Image, ScrollButton, OutsideWrapper } from './CommentsImages.style';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
-const CommentsImages = ({ commentImages }) => {
-    const [isOpen, setIsOpen] = useState([false]);
-    const [chosenImage, setChoseImage] = useState(0);
+const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage, handleOpenModal }) => {
     const WrapperWidth = commentImages.length * 90 + (commentImages.length - 1) * 20;
-    const handleChosenImage = (index) => {
-        setChoseImage(index);
-        setIsOpen([true]);
-    };
 
     const scrollCommentImages = (direction) => {
         switch (direction) {
@@ -32,7 +25,6 @@ const CommentsImages = ({ commentImages }) => {
         <>
             {commentImages.length > 0 && (
                 <>
-                    {console.log(WrapperWidth)}
                     <OutsideWrapper numberOfImages={commentImages.length}>
                         <Wrapper id="container">
                             {commentImages.map((urlImage, index) => (
@@ -56,7 +48,7 @@ const CommentsImages = ({ commentImages }) => {
                             <AiOutlineLeft />
                         </ScrollButton>
                     </OutsideWrapper>
-                    <Modal open={isOpen} onClose={() => setIsOpen([false])}>
+                    <Modal open={isOpen} onClose={() => handleOpenModal([false])}>
                         <PopUpGallery images={commentImages} addServerPrefix={true} initIndex={chosenImage} />
                     </Modal>
                 </>

@@ -6,6 +6,8 @@ import {
     NoOpinionsLeftSection,
     IconNoOpinionsLeft,
     DescriptionNoOpinionsLeft,
+    ImagesSection,
+    Image,
 } from './CommentItem.style';
 
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
@@ -16,8 +18,13 @@ import Opinion from 'components/atoms/Comments/Opinion/Opinion';
 import CommentsScore from 'components/atoms/Comments/CommentScore/CommentsScore';
 import { FaCommentSlash } from 'react-icons/fa';
 
-const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) => {
+const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, handleChosenImage }) => {
     const { comments: commentsArray, length: displayedComments } = comments;
+
+    const findImage = (url) => {
+        const searchedElement_Index = comments.images.indexOf(url, 0);
+        handleChosenImage(searchedElement_Index);
+    };
 
     return (
         <Wrapper>
@@ -50,6 +57,22 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments }) 
                                     <ContentSection>
                                         <ContentData comment={comment} />
                                         <Opinion comment={comment} />
+                                        <ImagesSection>
+                                            {comment.image.added ? (
+                                                <>
+                                                    {comment.image.images.map((url, index) => (
+                                                        <Image
+                                                            src={`http://localhost:5000/${url}`}
+                                                            key={index}
+                                                            alt="comment"
+                                                            onClick={() => findImage(url)}
+                                                        />
+                                                    ))}
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )}
+                                        </ImagesSection>
                                         <CommentsScore
                                             comment={comment}
                                             handleRefreshComments={handleRefreshComments}

@@ -86,10 +86,15 @@ export const ScrollButton = styled.div`
     }
 
     @media screen and (max-width: 1000px) {
-        display: flex;
+        display: ${(props) => (props.width > 1000 ? 'flex' : 'none')};
+    }
+
+    @media screen and (max-width: 800px) {
+        display: ${(props) => (props.width > 800 ? 'flex' : 'none')};
     }
 
     @media screen and (max-width: 515px) {
+        display: ${(props) => (props.width > 515 ? 'flex' : 'none')};
         top: 21px;
         width: 35px;
         height: 35px;

@@ -56,10 +56,6 @@ export const ImageContainer = styled.div`
         width: 1000px;
     }
 
-    :hover {
-        cursor: pointer;
-    }
-
     @media screen and (max-width: 1980px) {
         min-height: 700px;
         max-height: 700px;
@@ -67,7 +63,6 @@ export const ImageContainer = styled.div`
         img {
             width: 850px;
             max-height: 700px;
-            /* max-height: 700px; */
         }
     }
 
@@ -165,7 +160,6 @@ export const SmallImagesContainer = styled.div`
     align-items: center;
     gap: 20px;
     width: 100%;
-    /* margin: auto; */
     padding: 0 15px;
     overflow-x: scroll;
     height: 100%;

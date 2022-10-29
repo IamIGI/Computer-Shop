@@ -17,6 +17,18 @@ const CommentsSection = ({ product }) => {
         filters: { rating: 0, confirmed: false },
         sortBy: 'date',
     });
+    //open PopUpGallery
+    const [isOpen, setIsOpen] = useState([false]);
+    const [chosenImage, setChoseImage] = useState(0);
+    const handleChosenImage = (index) => {
+        setChoseImage(index);
+        setIsOpen([true]);
+    };
+
+    const handleOpenModal = (data) => {
+        setIsOpen(data);
+    };
+
     const handleFilters = (data) => {
         setFilterComments(data);
     };
@@ -49,7 +61,15 @@ const CommentsSection = ({ product }) => {
                 waitForFetchAS={waitForFetchAS}
                 handleWaitForFetchAS={handleWaitForFetchAS}
             />
-            {comments.length > 0 && <CommentsImages commentImages={comments.images} />}
+            {comments.length > 0 && (
+                <CommentsImages
+                    commentImages={comments.images}
+                    isOpen={isOpen}
+                    chosenImage={chosenImage}
+                    handleChosenImage={handleChosenImage}
+                    handleOpenModal={handleOpenModal}
+                />
+            )}
             <CommentFilters handleFilters={handleFilters} comments={comments} />
             <Comments
                 comments={comments}
@@ -57,6 +77,10 @@ const CommentsSection = ({ product }) => {
                 filterComments={filterComments}
                 handleComments={handleComments}
                 handleRefreshComments={handleRefreshComments}
+                isOpen={isOpen}
+                chosenImage={chosenImage}
+                handleChosenImage={handleChosenImage}
+                handleOpenModal={handleOpenModal}
             />
         </Wrapper>
     );

@@ -56,3 +56,24 @@ export const DescriptionNoOpinionsLeft = styled.div`
         font-size: ${({ theme }) => theme.fontSize.m};
     }
 `;
+
+export const ImagesSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    height: fit-content;
+    width: fit-content;
+`;
+
+export const Image = styled.img`
+    border-radius: 20px;
+    min-height: 80px;
+    max-height: 80px;
+    width: 85px;
+
+    :hover {
+        cursor: pointer;
+    }
+`;
