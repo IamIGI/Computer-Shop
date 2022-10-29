@@ -4,7 +4,14 @@ import useProduct from 'hooks/useProduct';
 import CommentItem from 'components/molecules/CommentItem/CommentItem';
 import { getAllComments } from 'api/comments';
 
-const Comments = ({ refreshComments, filterComments, handleComments, comments, handleRefreshComments }) => {
+const Comments = ({
+    refreshComments,
+    filterComments,
+    handleComments,
+    comments,
+    handleRefreshComments,
+    handleChosenImage,
+}) => {
     const [waitForFetchComments, setWaitForFetchComments] = useState(false);
     const { product } = useProduct();
 
@@ -25,6 +32,7 @@ const Comments = ({ refreshComments, filterComments, handleComments, comments, h
                 comments={comments}
                 waitForFetchComments={waitForFetchComments}
                 handleRefreshComments={handleRefreshComments}
+                handleChosenImage={handleChosenImage}
             />
         </Wrapper>
     );

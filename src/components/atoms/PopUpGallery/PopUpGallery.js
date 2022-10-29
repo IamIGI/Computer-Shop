@@ -5,7 +5,6 @@ import { Wrapper, ImageContainer, SmallImagesContainer, SmallImage, SmallImageWr
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
-    console.log(initIndex);
     const [index, setIndex] = useState(initIndex);
     const WrapperWidth = images.length * 90 + (images.length - 1) * 20;
 
