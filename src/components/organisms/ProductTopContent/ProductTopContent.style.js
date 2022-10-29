@@ -25,7 +25,6 @@ export const BottomWrapper = styled.div`
 
     @media screen and (max-width: 625px) {
         width: 100%;
-        /* padding: 0px 20px; */
     }
 `;
 

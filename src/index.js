@@ -7,7 +7,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
     <MainTemplate>
-        <Root id="Root" />
+        <Root />
     </MainTemplate>
     // </React.StrictMode>
 );
