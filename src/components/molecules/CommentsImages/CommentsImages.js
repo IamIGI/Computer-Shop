@@ -1,10 +1,17 @@
-import { Wrapper, Image, ScrollButton, OutsideWrapper } from './CommentsImages.style';
+import { Wrapper, Image, OutsideWrapper } from './CommentsImages.style';
+import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { useState } from 'react';
 
 const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage, handleOpenModal }) => {
-    const WrapperWidth = commentImages.length * 90 + (commentImages.length - 1) * 20;
+    const sumOfElementsWidth = commentImages.length * 90 + (commentImages.length - 1) * 20;
+
+    const [divWidth, setDivWidth] = useState(10000);
+    setInterval(async () => {
+        setDivWidth(document.getElementById('container').offsetWidth);
+    }, 2000);
 
     const scrollCommentImages = (direction) => {
         switch (direction) {
@@ -38,13 +45,19 @@ const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage,
                             ))}
                         </Wrapper>
                         <ScrollButton
-                            width={WrapperWidth}
+                            childWidth={sumOfElementsWidth}
+                            parentWidth={divWidth}
                             direction="right"
                             onClick={() => scrollCommentImages('right')}
                         >
                             <AiOutlineRight />
                         </ScrollButton>
-                        <ScrollButton width={WrapperWidth} direction="left" onClick={() => scrollCommentImages('left')}>
+                        <ScrollButton
+                            childWidth={sumOfElementsWidth}
+                            parentWidth={divWidth}
+                            direction="left"
+                            onClick={() => scrollCommentImages('left')}
+                        >
                             <AiOutlineLeft />
                         </ScrollButton>
                     </OutsideWrapper>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const Separator = styled.hr`
-    width: 70%;
+    width: 80%;
 `;

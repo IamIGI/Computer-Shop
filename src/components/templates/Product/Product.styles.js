@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -17,12 +16,40 @@ export const Wrapper = styled.div`
     scroll-behavior: smooth;
 `;
 
+export const TitleWhenSmallScreen = styled.div`
+    display: none;
+    @media screen and (max-width: 900px) {
+        margin: 25px 0 10px 5%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media screen and (max-width: 450px) {
+        margin: 25px 0 5px 0;
+    }
+`;
+
+export const HandyMenuBigScreen = styled.div`
+    display: flex;
+
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+`;
+
 export const TopWrapper = styled.div`
-    height: 100%;
+    height: fit-content;
     width: 100%;
-    display: grid;
-    grid-template-columns: 630px 1fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 export const MidWrapper = styled.div`

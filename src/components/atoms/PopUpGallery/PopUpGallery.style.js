@@ -121,9 +121,8 @@ export const SmallImageWrapper = styled.div`
     /* width: calc(${(props) => props.numberOfImages} * 90px + (${(props) => props.numberOfImages}-1) * 20px); */
 
     height: 130px;
-
+    border: 1px solid red;
     display: flex;
-    flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -156,14 +155,15 @@ export const SmallImagesContainer = styled.div`
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    width: 100%;
+    width: fit-content;
     padding: 0 15px;
-    overflow-x: scroll;
+
     height: 100%;
 
+    overflow-x: scroll;
     &::-webkit-scrollbar {
         display: none;
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from './PrevDataProduct.style';
+import { Wrapper, SpecificationDescription, Icon, SpecificationLinkSection } from './PrevDataProduct.style';
 import { BsChevronDoubleDown } from 'react-icons/bs';
 
 const PrevDataProduct = ({ productData: { processor, ram, graphic_card, screen_size } }) => {
@@ -21,11 +21,14 @@ const PrevDataProduct = ({ productData: { processor, ram, graphic_card, screen_s
             </ul>
             <p>
                 <a href="#Specification">
-                    {' '}
-                    <span>
-                        <BsChevronDoubleDown />
-                    </span>{' '}
-                    Przewiń do pełnej specyfikacji
+                    <SpecificationLinkSection>
+                        <span>
+                            <Icon>
+                                <BsChevronDoubleDown />
+                            </Icon>
+                        </span>
+                        <SpecificationDescription>Przewiń do pełnej specyfikacji</SpecificationDescription>
+                    </SpecificationLinkSection>
                 </a>
             </p>
         </Wrapper>
