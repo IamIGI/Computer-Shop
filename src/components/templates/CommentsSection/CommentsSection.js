@@ -77,10 +77,7 @@ const CommentsSection = ({ product }) => {
                 filterComments={filterComments}
                 handleComments={handleComments}
                 handleRefreshComments={handleRefreshComments}
-                isOpen={isOpen}
-                chosenImage={chosenImage}
                 handleChosenImage={handleChosenImage}
-                handleOpenModal={handleOpenModal}
             />
         </Wrapper>
     );
