@@ -23,11 +23,12 @@ import {
     FailureSection,
     FileSection,
     FilesAlert,
-    FilesInput,
+    ButtonName,
+    UserDescriptionSmall,
+    ButtonAddComment,
 } from './PopUpAddComment.style';
-import { useState, useReducer, useEffect } from 'react';
+import { useState, useReducer } from 'react';
 import StarRating from 'components/atoms/StarRating/StarRating';
-import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 import { sendCommentAPI } from 'api/comments';
 import { BiCommentError } from 'react-icons/bi';
@@ -166,16 +167,15 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                     </Information>
                     {/* Check is it logged user*/}
                     {Object.keys(auth).length === 0 ? (
-                        <>
-                            <AnonymousUser>
-                                <UserDescription>Powiedz nam jak się nazywasz</UserDescription>
-                                <Input
-                                    placeholder="Podpis"
-                                    value={userName}
-                                    onChange={(e) => setUserName(e.target.value)}
-                                />
-                            </AnonymousUser>
-                        </>
+                        <AnonymousUser>
+                            <UserDescription>Powiedz nam jak się nazywasz</UserDescription>
+                            <UserDescriptionSmall>Jak się nazywasz</UserDescriptionSmall>
+                            <Input
+                                placeholder="Podpis"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
+                        </AnonymousUser>
                     ) : (
                         <></>
                     )}
@@ -201,9 +201,9 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                         <NumOfChars>{state.countChar}/2000</NumOfChars>
                     </OpinionSection>
                     <AddComment>
-                        <BuyButton name="Submit">
-                            <p>Dodaj opinię</p>
-                        </BuyButton>
+                        <ButtonAddComment name="Submit">
+                            <ButtonName>Dodaj opinię</ButtonName>
+                        </ButtonAddComment>
                         {state.languageValidation.showAlert ? (
                             <FailureSection>
                                 <FailureIcon>

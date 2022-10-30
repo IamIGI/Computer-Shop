@@ -64,7 +64,7 @@ const ProductSummary = ({
                 </>
             )}
             <ProductAddComment productName={product.name} handleOpen={handleOpen} comments={comments} />
-            <Modal position={[25, -86]} open={isOpen} onClose={() => setIsOpen([false])}>
+            <Modal open={isOpen} onClose={() => setIsOpen([false])}>
                 <PopUpAddComment
                     onClose={() => setIsOpen([false])}
                     name={product.name}

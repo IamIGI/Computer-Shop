@@ -1,4 +1,4 @@
-import { Wrapper, ScoreDescription, Icon3, LikeNumber, Alert, Icon4 } from './CommentScore.style';
+import { Wrapper, InsideWrapper, ScoreDescription, Icon3, LikeNumber, Alert, Icon4 } from './CommentScore.style';
 import { useState } from 'react';
 import useProduct from 'hooks/useProduct';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
@@ -49,15 +49,17 @@ const CommentsScore = ({ comment, handleRefreshComments }) => {
     };
     return (
         <Wrapper>
-            <ScoreDescription>Czy ta opinia była pomocna?</ScoreDescription>{' '}
-            <Icon3 onClick={() => onLikeComment([true, comment])}>
-                <AiOutlineLike />
-            </Icon3>
-            <LikeNumber>{comment.likes.up}</LikeNumber>
-            <Icon3 onClick={() => onLikeComment([false, comment])}>
-                <AiOutlineDislike />
-            </Icon3>
-            <LikeNumber>{comment.likes.down}</LikeNumber>
+            <InsideWrapper>
+                <ScoreDescription>Czy ta opinia była pomocna?</ScoreDescription>{' '}
+                <Icon3 onClick={() => onLikeComment([true, comment])}>
+                    <AiOutlineLike />
+                </Icon3>
+                <LikeNumber>{comment.likes.up}</LikeNumber>
+                <Icon3 onClick={() => onLikeComment([false, comment])}>
+                    <AiOutlineDislike />
+                </Icon3>
+                <LikeNumber>{comment.likes.down}</LikeNumber>
+            </InsideWrapper>
             <Alert>
                 {notLoggedIn[0] && notLoggedIn[1] === comment._id ? (
                     <>
