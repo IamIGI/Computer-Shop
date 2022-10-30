@@ -11,6 +11,20 @@ export const Wrapper = styled.div`
 
 export const ScoreDescription = styled.div`
     padding-top: 6px;
+    @media screen and (max-width: 860px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+        padding-top: 4px;
+    }
+
+    @media screen and (max-width: 700px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        padding-top: 4px;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        padding-top: 4px;
+    }
 `;
 
 export const Icon3 = styled.div`
@@ -22,11 +36,22 @@ export const Icon3 = styled.div`
         cursor: pointer;
         color: ${({ theme }) => theme.colors.successDark};
     }
+
+    @media screen and (max-width: 860px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
+
+    @media screen and (max-width: 700px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
 `;
 
 export const LikeNumber = styled.div`
     padding-top: 7px;
     padding-left: 4px;
+    @media screen and (max-width: 860px) {
+        padding-top: 5px;
+    }
 `;
 
 export const Alert = styled.div`

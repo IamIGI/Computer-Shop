@@ -30,7 +30,7 @@ const CommentFilters = ({ handleFilters, comments }) => {
 
     return (
         <>
-            {!Boolean(comments) ? (
+            {Boolean(comments) && comments?.comments?.length === 0 ? (
                 <></>
             ) : (
                 <>

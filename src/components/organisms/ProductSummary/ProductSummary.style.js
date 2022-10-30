@@ -37,4 +37,8 @@ export const NoComments = styled.div`
     div {
         font-size: ${({ theme }) => theme.fontSize.omegaBig};
     }
+
+    @media screen and (max-width: 895px) {
+        display: none;
+    }
 `;
