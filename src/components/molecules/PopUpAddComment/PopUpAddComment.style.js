@@ -1,9 +1,20 @@
 import styled from 'styled-components';
+import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 
 export const WrapperOutside = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    border: 1px solid red;
+    min-width: 560px;
+
+    @media screen and (max-width: 625px) {
+        min-width: 400px;
+    }
+
+    @media screen and (max-width: 450px) {
+        min-width: 300px;
+    }
 `;
 export const WrapperInside = styled.div`
     display: flex;
@@ -21,6 +32,19 @@ export const Title = styled.div`
     font-size: ${({ theme }) => theme.fontSize.xl};
     font-weight: 700;
     border-bottom: 1px solid grey;
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+        padding: 15px 0px 15px 7%;
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
 `;
 
 export const ProductDescription = styled.div`
@@ -33,6 +57,11 @@ export const ProductDescription = styled.div`
     padding-bottom: 1%;
     border-bottom: 1px solid grey;
     margin-bottom: 2%;
+
+    @media screen and (max-width: 450px) {
+        padding-bottom: 0;
+        margin-top: 0;
+    }
 `;
 
 export const Image = styled.div`
@@ -41,12 +70,42 @@ export const Image = styled.div`
         width: 160px;
         height: auto;
     }
+
+    @media screen and (max-width: 900px) {
+        img {
+            width: 145px;
+        }
+    }
+
+    @media screen and (max-width: 625px) {
+        img {
+            width: 130px;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        img {
+            width: 110px;
+        }
+    }
 `;
 
 export const ProductName = styled.div`
     padding-top: 3%;
     padding-left: 5%;
-    font-size: ${({ theme }) => theme.fontSize.xl}; ;
+    font-size: ${({ theme }) => theme.fontSize.xl};
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
 `;
 
 export const Rating = styled.div`
@@ -63,6 +122,19 @@ export const Description = styled.div`
     font-size: ${({ theme }) => theme.fontSize.xl};
     margin-bottom: 2%;
     padding-left: 1%;
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+        margin-bottom: 1%;
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
 `;
 
 export const RatingStars = styled.div`
@@ -70,6 +142,14 @@ export const RatingStars = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     font-size: ${({ theme }) => theme.fontSize.omegaBig};
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.xxl};
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.xl};
+    }
 `;
 
 export const Information = styled.div`
@@ -83,27 +163,17 @@ export const LittleDescription = styled.div`
     padding-left: 1%;
     font-size: ${({ theme }) => theme.fontSize.l};
     color: grey;
-`;
 
-export const TextArea = styled.textarea`
-    width: 100%;
-    height: 160px;
-    margin-top: 10px;
-    padding: 12px 20px;
-    border: 1px solid lightgrey;
-    font-size: ${({ theme }) => theme.fontSize.l_plus};
-    color: grey;
-    border-radius: 20px;
-    resize: none;
-
-    :hover {
-        border: 1px solid grey;
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
     }
 
-    :focus {
-        outline: none !important;
-        border: 1px solid grey;
-        /* box-shadow: 0 0 10px #719ece; */
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.s};
     }
 `;
 
@@ -114,10 +184,35 @@ export const AnonymousUser = styled.div`
     align-items: center;
     text-align: left;
     padding-top: 7px;
+
+    @media screen and (max-width: 450px) {
+        justify-content: space-between;
+    }
 `;
 
 export const UserDescription = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l_plus};
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+
+    @media screen and (max-width: 450px) {
+        display: none;
+    }
+`;
+
+export const UserDescriptionSmall = styled.div`
+    margin-right: 10px;
+    display: none;
+    font-size: ${({ theme }) => theme.fontSize.m};
+    @media screen and (max-width: 450px) {
+        display: flex;
+    }
 `;
 
 export const Input = styled.input`
@@ -135,7 +230,21 @@ export const Input = styled.input`
     :focus {
         outline: none !important;
         border: 1px solid grey;
-        /* box-shadow: 0 0 10px #719ece; */
+    }
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        padding: 5px 10px;
+        margin-left: 0;
+        width: 50%;
     }
 `;
 
@@ -155,10 +264,61 @@ export const Alert = styled.div`
     margin-top: 15px;
     margin-left: 2%;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.s};
+    }
 `;
 
 export const OpinionSection = styled.div`
     position: relative;
+`;
+
+export const TextArea = styled.textarea`
+    width: 100%;
+    height: 160px;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: 1px solid lightgrey;
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
+    color: grey;
+    border-radius: 20px;
+    resize: none;
+
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    scroll-behavior: smooth;
+
+    :hover {
+        border: 1px solid grey;
+    }
+
+    :focus {
+        outline: none !important;
+        border: 1px solid grey;
+    }
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+        height: 130px;
+    }
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        height: 110px;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        height: 100px;
+    }
 `;
 
 export const NumOfChars = styled.div`
@@ -166,11 +326,24 @@ export const NumOfChars = styled.div`
     right: 15px;
     bottom: 10px;
     color: ${({ theme }) => theme.colors.darkGrey};
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        right: 12px;
+        bottom: 6px;
+    }
 `;
 
 export const FailureIcon = styled.div`
     padding-top: 8px;
     font-size: ${({ theme }) => theme.fontSize.xl};
+
+    @media screen and (max-width: 625x) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
 `;
 export const FailureDescription = styled.div`
     margin-left: 5px;
@@ -185,6 +358,10 @@ export const FailureSection = styled.div`
     justify-content: flex-start;
     align-items: center;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.s};
+    }
 `;
 
 export const FileSection = styled.div`
@@ -198,4 +375,27 @@ export const FilesAlert = styled.div`
     font-size: ${({ theme }) => theme.fontSize.m_plus};
     color: red;
     font-weight: 700;
+`;
+
+export const ButtonName = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
+
+    @media screen and (max-width: 625px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+`;
+
+export const ButtonAddComment = styled(BuyButton)`
+    @media screen and (max-width: 625px) {
+        height: 45px;
+    }
+
+    @media screen and (max-width: 450px) {
+        margin-top: 20px;
+        height: 35px;
+    }
 `;

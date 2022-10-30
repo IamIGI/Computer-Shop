@@ -7,12 +7,12 @@ export const OutsideWrapper = styled.div`
     transform: translate(-50%, -50%);
     z-index: 3;
 
-    @media screen and (max-width: 650px) {
-        top: 40%;
+    @media screen and (max-width: 625px) {
+        top: 45%;
     }
 
     @media screen and (max-width: 450px) {
-        top: 35%;
+        top: 40%;
     }
 `;
 
@@ -50,8 +50,9 @@ export const Close = styled.div`
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    padding-left: 16px;
-    padding-top: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 19px;
     top: 10px;
     right: 10px;
@@ -61,5 +62,17 @@ export const Close = styled.div`
         cursor: pointer;
         color: black;
         background-color: ${({ theme }) => theme.colors.grey};
+    }
+
+    @media screen and (max-width: 900px) {
+        height: 40px;
+        width: 40px;
+    }
+
+    @media screen and (max-width: 450px) {
+        height: 35px;
+        width: 35px;
+        top: 8px;
+        right: 8px;
     }
 `;
