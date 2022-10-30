@@ -23,4 +23,11 @@ export const StyledButton = styled.button`
         color: ${({ theme }) => theme.colors.white};
         border: 1px solid ${({ theme }) => theme.colors.error};
     }
+
+    @media screen and (max-width: 1800px) {
+        bottom: 5px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+    }
 `;

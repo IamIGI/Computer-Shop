@@ -4,15 +4,25 @@ import useRefresh from 'hooks/useRefresh';
 import { filterInit } from 'data/Products';
 import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import ProductPreviewItem from 'components/molecules/ProductPreviewItem/ProductPreviewItem';
+import MayLikeItem from 'components/molecules/MayLikeItem/MayLikeItem';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BiBookHeart } from 'react-icons/bi';
+import { handleProductsArray, NumberOfProductOnWidthChange } from './YouMayLikeLogic';
 
 const YouMayLike = () => {
     const [products, setProducts] = useState([]);
     const [waitForFetch, setWaitForFetch] = useState(true);
     const { refresh } = useRefresh();
     const [slidesOfProducts, setSlidesOfProducts] = useState([]);
+    const [divWidth, setDivWidth] = useState(10000);
+    setInterval(async () => {
+        setDivWidth(document.getElementById('Slider').offsetWidth);
+    }, 2000);
+
+    useEffect(() => {
+        if (products.length > 0) setSlidesOfProducts(NumberOfProductOnWidthChange(divWidth, products));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [divWidth]);
 
     useEffect(() => {
         const fetchProducts = async (data) => {
@@ -35,45 +45,8 @@ const YouMayLike = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh]);
 
-    let slides = [];
-    const handleProductsArray = (products, numberOfSlides, numberOfProductsInSlide) => {
-        slides = [];
-        switch (numberOfSlides) {
-            case 1:
-                slides = [[]];
-                break;
-            case 2:
-                slides = [[], []];
-                break;
-            case 3:
-                slides = [[], [], []];
-                break;
-            case 4:
-                slides = [[], [], [], []];
-                break;
-            default:
-                break;
-        }
-
-        const createArrayOfProducts = (products, slideNumber, numberOfProductsInSlide) => {
-            for (
-                let i = (slideNumber + 1) * numberOfProductsInSlide - numberOfProductsInSlide;
-                i < (slideNumber + 1) * numberOfProductsInSlide;
-                i++
-            ) {
-                slides[slideNumber].push(products[i]);
-            }
-            return slides;
-        };
-
-        for (let j = 0; j < numberOfSlides; j++) {
-            createArrayOfProducts(products, j, numberOfProductsInSlide);
-        }
-        setSlidesOfProducts(slides);
-    };
-
     useEffect(() => {
-        if (products.length > 0) handleProductsArray(products, 2, 4);
+        if (products.length > 0) setSlidesOfProducts(handleProductsArray(products, 2, 4));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [products]);
 
@@ -87,13 +60,13 @@ const YouMayLike = () => {
             ) : (
                 <>
                     {slidesOfProducts.length > 0 && (
-                        <Slider>
+                        <Slider id="Slider">
                             <SlideTrack>
                                 {slidesOfProducts.map((slide) => (
                                     <Slide>
                                         <Items>
                                             {slide.map((item, index) => (
-                                                <ProductPreviewItem
+                                                <MayLikeItem
                                                     key={index}
                                                     item={item}
                                                     allProducts={'no'}
@@ -107,7 +80,7 @@ const YouMayLike = () => {
                                     <Items>
                                         {slidesOfProducts[0].map((item, index) => (
                                             <>
-                                                <ProductPreviewItem key={index} item={item} allProducts={'no'} />
+                                                <MayLikeItem key={index} item={item} />
                                             </>
                                         ))}
                                     </Items>

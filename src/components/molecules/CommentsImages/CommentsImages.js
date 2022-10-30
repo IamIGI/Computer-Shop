@@ -10,7 +10,7 @@ const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage,
 
     const [divWidth, setDivWidth] = useState(10000);
     setInterval(async () => {
-        setDivWidth(document.getElementById('container').offsetWidth);
+        setDivWidth(document.getElementById('container') !== null && document.getElementById('container').offsetWidth);
     }, 2000);
 
     const scrollCommentImages = (direction) => {

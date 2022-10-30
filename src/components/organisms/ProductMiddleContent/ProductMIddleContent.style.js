@@ -9,6 +9,14 @@ export const MenuSector = styled.div`
     width: 100%;
     box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
     z-index: 1;
+
+    @media screen and (max-width: 700px) {
+        height: 60px;
+    }
+
+    @media screen and (max-width: 450px) {
+        height: 55px;
+    }
 `;
 
 export const AboutProductSector = styled.div`
@@ -33,6 +41,22 @@ export const Description = styled.div`
         margin-left: 10%;
         width: 80%;
     }
+
+    @media screen and (max-width: 1200px) {
+        width: 80%;
+    }
+
+    @media screen and (max-width: 1000px) {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    @media screen and (max-width: 700px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        p {
+            line-height: 24px;
+        }
+    }
 `;
 
 export const Specification = styled.div`
@@ -43,11 +67,20 @@ export const Specification = styled.div`
         color: ${({ theme }) => theme.colors.darkGrey};
         font-weight: 700;
     }
+
+    @media screen and (max-width: 700px) {
+        margin-left: 4%;
+        width: 90%;
+    }
+
+    @media screen and (max-width: 550px) {
+        width: 94%;
+    }
 `;
 
 export const YouMayLikeSector = styled.div`
     width: 95%;
-    border-right: 5%;
+    margin: auto;
     height: fit-content;
     display: flex;
     flex-direction: column;

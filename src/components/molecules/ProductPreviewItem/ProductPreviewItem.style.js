@@ -223,18 +223,12 @@ export const PriceSection = styled.div`
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: baseline;
-    /* span {
-        font-size: ${({ theme }) => theme.fontSize.styled};
-    } */
 `;
 export const PriceOldValue = styled.div`
     text-decoration: line-through;
     margin-right: 10px;
 
     color: ${({ theme }) => theme.colors.darkGrey};
-    /* span {
-        font-size: ${({ theme }) => theme.fontSize.l};
-    } */
 `;
 
 export const PriceValue = styled.div`
