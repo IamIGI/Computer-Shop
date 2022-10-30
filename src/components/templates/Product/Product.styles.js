@@ -56,7 +56,6 @@ export const MidWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     justify-content: flex-start;
 `;
 

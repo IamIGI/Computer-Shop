@@ -121,7 +121,6 @@ export const SmallImageWrapper = styled.div`
     /* width: calc(${(props) => props.numberOfImages} * 90px + (${(props) => props.numberOfImages}-1) * 20px); */
 
     height: 130px;
-    border: 1px solid red;
     display: flex;
     text-align: center;
     justify-content: center;

@@ -14,6 +14,10 @@ export const IconTitle = styled.div`
     @media screen and (max-width: 650px) {
         font-size: ${({ theme }) => theme.fontSize.xxl};
     }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.xl};
+    }
 `;
 
 export const ContentTitle = styled.div`
@@ -26,6 +30,10 @@ export const ContentTitle = styled.div`
     @media screen and (max-width: 650px) {
         margin-left: 10px;
         font-size: ${({ theme }) => theme.fontSize.xl};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
     }
 `;
 export const ContentDescription = styled.div`

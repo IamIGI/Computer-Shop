@@ -1,32 +1,33 @@
 import styled from 'styled-components';
 
 export const Slider = styled.div`
-    /* background-color: white; */
     height: 300px;
     overflow: hidden;
     position: relative;
     width: 1400px;
     padding-top: 17px;
-    /* border: 1px solid red; */
 
-    &::before,
-    &::after {
-        background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-        content: '';
-        height: 300px;
-        position: absolute;
-        width: 75px;
+    @media screen and (max-width: 1800px) {
+        width: 1200px;
     }
 
-    &::after {
-        right: 0;
-        top: 0;
-        transform: rotateZ(180deg);
+    @media screen and (max-width: 1600px) {
+        width: 1000px;
     }
 
-    &::before {
-        left: 0;
-        top: 0;
+    @media screen and (max-width: 1100px) {
+        width: 800px;
+        padding-top: 10px;
+    }
+
+    @media screen and (max-width: 900px) {
+        padding-top: 7px;
+        width: 600px;
+    }
+
+    @media screen and (max-width: 650px) {
+        padding-top: 2px;
+        width: 360px;
     }
 `;
 
@@ -57,11 +58,31 @@ export const SlideTrack = styled.div`
     :hover {
         animation-play-state: paused;
     }
+
+    @media screen and (max-width: 1800px) {
+        width: calc(1200px * 3); // for 2 slides
+    }
+
+    @media screen and (max-width: 1600px) {
+        width: calc(1000px * 3); // for 2 slides
+    }
+
+    @media screen and (max-width: 1100px) {
+        width: calc(800px * 3); // for 2 slides
+    }
+
+    @media screen and (max-width: 900px) {
+        width: calc(600px * 3); // for 2 slides
+    }
+
+    @media screen and (max-width: 650px) {
+        width: calc(360px * 3); // for 2 slides
+    }
 `;
 
 export const Slide = styled.div`
-    height: 290px;
-    width: 1385px;
+    height: 100%;
+    width: 100%;
 `;
 
 export const Items = styled.div`
@@ -71,4 +92,8 @@ export const Items = styled.div`
     align-items: center;
     gap: 10px;
     padding: 0 50px;
+
+    @media screen and (max-width: 1100px) {
+        padding: 0 10px;
+    }
 `;

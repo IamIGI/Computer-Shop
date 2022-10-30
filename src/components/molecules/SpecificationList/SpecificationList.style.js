@@ -13,6 +13,15 @@ export const List = styled.ul`
     li:last-child {
         border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
     }
+    line-height: 20px;
+
+    @media screen and (max-width: 900px) {
+        padding: 0px;
+    }
+
+    @media screen and (max-width: 500px) {
+        line-height: 18px;
+    }
 `;
 
 export const LiWrapper = styled.div`
@@ -20,40 +29,46 @@ export const LiWrapper = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     padding: 7px 0;
+
+    @media screen and (max-width: 700px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        padding: 5px 0;
+    }
 `;
 
 export const LiName = styled.div`
     width: 35%;
+    min-width: 100px;
     padding-left: 7%;
-    /* border: 1px solid green; */
+    margin-right: 15px;
+
+    @media screen and (max-width: 700px) {
+        padding-left: 3%;
+    }
 `;
 export const LiDesc = styled.div`
     width: 40%;
-    /* border: 1px solid blue; */
     p {
         line-height: 15px;
     }
-`;
 
-export const DescWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-`;
+    @media screen and (max-width: 1000px) {
+        width: 60%;
+    }
 
-export const IconTitle = styled.div`
-    padding-top: 7px;
-    font-size: ${({ theme }) => theme.fontSize.omegaBig};
-`;
+    @media screen and (max-width: 700px) {
+        p {
+            margin: 8px 0;
+        }
+    }
 
-export const ContentTitle = styled.div`
-    padding-top: 7px;
-    margin-left: 30px;
-    font-size: ${({ theme }) => theme.fontSize.xxl};
-`;
-
-export const Line = styled.div`
-    margin-left: 30px;
-    width: 95%;
-    margin-bottom: 40px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey}; ;
+    @media screen and (max-width: 500px) {
+        p {
+            margin: 6px 0;
+        }
+    }
 `;
