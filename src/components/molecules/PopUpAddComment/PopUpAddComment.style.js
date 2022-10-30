@@ -5,7 +5,6 @@ export const WrapperOutside = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border: 1px solid red;
     min-width: 560px;
 
     @media screen and (max-width: 625px) {
