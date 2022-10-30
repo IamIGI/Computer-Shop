@@ -2,7 +2,7 @@ import ProductAverageScore from 'components/molecules/ProductAverageScore/Produc
 import ProductEachScore from 'components/molecules/ProductEachScore/ProductEachScore';
 import React, { useEffect } from 'react';
 
-import { NoComments, Wrapper } from './ProductSummary.style';
+import { NoComments, Wrapper, InsideWrapper } from './ProductSummary.style';
 import { useState } from 'react';
 import ProductAddComment from 'components/molecules/ProductAddComment/ProductAddComment';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
@@ -56,10 +56,10 @@ const ProductSummary = ({
                             </div>
                         </NoComments>
                     ) : (
-                        <>
+                        <InsideWrapper>
                             <ProductAverageScore averageScore={averageScore} />
                             <ProductEachScore averageScore={averageScore} errorFix={comments.length_AllComments} />
-                        </>
+                        </InsideWrapper>
                     )}
                 </>
             )}

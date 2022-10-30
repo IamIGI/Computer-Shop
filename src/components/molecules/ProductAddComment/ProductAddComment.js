@@ -33,9 +33,7 @@ const ProductAddComment = ({ productName, handleOpen, comments }) => {
                         </Icon>
                     </>
                 ) : (
-                    <BuyButton onClick={handleOpen}>
-                        <p>Dodaj opinię</p>
-                    </BuyButton>
+                    <BuyButton onClick={handleOpen}>Dodaj opinię</BuyButton>
                 )}
             </AddComment>
         </Wrapper>
