@@ -7,23 +7,29 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     flex-wrap: nowrap;
     color: ${({ theme }) => theme.colors.darkGrey};
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+    }
+`;
+
+export const InsideWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: fit-content;
 `;
 
 export const ScoreDescription = styled.div`
     padding-top: 6px;
     @media screen and (max-width: 860px) {
-        font-size: ${({ theme }) => theme.fontSize.l};
-        padding-top: 4px;
-    }
-
-    @media screen and (max-width: 700px) {
         font-size: ${({ theme }) => theme.fontSize.m_plus};
         padding-top: 4px;
     }
 
     @media screen and (max-width: 450px) {
-        font-size: ${({ theme }) => theme.fontSize.m};
-        padding-top: 4px;
+        display: none;
     }
 `;
 
@@ -61,8 +67,20 @@ export const Alert = styled.div`
     flex-wrap: nowrap;
     color: ${({ theme }) => theme.colors.error};
     margin: 6px 0 0 15px;
+
+    @media screen and (max-width: 900px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+    }
+
+    @media screen and (max-width: 800px) {
+        margin: 6px 0 0 0px;
+    }
 `;
 
 export const Icon4 = styled.div`
     margin: 3px 0 0 5px;
+
+    /* @media screen and (max-width: 800px) {
+        display: none;
+    } */
 `;
