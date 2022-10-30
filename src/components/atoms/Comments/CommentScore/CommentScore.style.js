@@ -79,8 +79,4 @@ export const Alert = styled.div`
 
 export const Icon4 = styled.div`
     margin: 3px 0 0 5px;
-
-    /* @media screen and (max-width: 800px) {
-        display: none;
-    } */
 `;
