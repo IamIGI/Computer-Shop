@@ -1,28 +1,59 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+    gap: 10px;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px;
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
+
+    @media screen and (max-width: 1150px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 1050px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        padding: 10px 0;
+    }
+    @media screen and (max-width: 920px) {
+        justify-content: flex-start;
+        padding-left: 9%;
+        box-shadow: white 0px 0px 0px 0px;
+    }
+
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+        padding-left: 20px;
+    }
 `;
 
 export const Title = styled.div`
     padding-top: 7px;
     padding-right: 15px;
-    font-size: ${({ theme }) => theme.fontSize.l_plus};
     font-weight: 700;
+
+    @media screen and (max-width: 1050px) {
+        padding-right: 6px;
+    }
 `;
 export const NumberOfComments = styled.div`
-    margin-right: 5%;
     padding-top: 7px;
-    font-size: ${({ theme }) => theme.fontSize.l_plus};
     font-weight: 700;
+
+    @media screen and (max-width: 760px) {
+        display: none;
+    }
 `;
 
-export const Filters = styled.div``;
+export const Filters = styled.div`
+    width: fit-content;
+    display: flex;
+    height: fit-content;
+`;
 
 export const Confirmed = styled.div`
     margin: 0 2%;
@@ -30,11 +61,14 @@ export const Confirmed = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    align-items: center;
+
+    @media screen and (max-width: 1050px) {
+        margin: 0 1%;
+    }
 `;
 
 export const ConfirmedDesc = styled.div`
-    margin-top: 7px;
-    font-size: ${({ theme }) => theme.fontSize.l_plus};
     font-weight: 700;
 
     :hover {
@@ -44,7 +78,7 @@ export const ConfirmedDesc = styled.div`
 
 export const Checkbox = styled.input`
     transform: scale(1.8);
-    margin: 8px 10px 0 10px;
+    margin: 0 10px;
     height: 20px;
     width: auto;
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
@@ -55,6 +89,47 @@ export const Checkbox = styled.input`
     &:hover {
         border: 1px solid ${({ theme }) => theme.colors.darkPurple};
     }
+
+    @media screen and (max-width: 1050px) {
+        height: 15px;
+        transform: scale(1.5);
+    }
 `;
 
-export const Sort = styled.div``;
+export const Sort = styled.div`
+    width: fit-content;
+    display: flex;
+    height: fit-content;
+`;
+
+export const BigScreen = styled.div`
+    width: 270px;
+    display: flex;
+    @media screen and (max-width: 1150px) {
+        width: 245px;
+    }
+    @media screen and (max-width: 1050px) {
+        width: 200px;
+    }
+    @media screen and (max-width: 920px) {
+        display: none;
+    }
+`;
+
+export const SmallScreen = styled.div`
+    width: 200px;
+    display: none;
+    @media screen and (max-width: 920px) {
+        width: 100%;
+        padding: 5px 0 5px 7%;
+        display: flex;
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+        box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px;
+    }
+
+    @media screen and (max-width: 600px) {
+        padding: 5px 0 5px 9px;
+        display: flex;
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+`;

@@ -7,6 +7,23 @@ export const Wrapper = styled.div`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+    }
+`;
+
+export const InsideWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 64%;
+    gap: 10px;
+    @media screen and (max-width: 800px) {
+        width: 100%;
+    }
 `;
 
 export const NoComments = styled.div`
@@ -19,5 +36,9 @@ export const NoComments = styled.div`
 
     div {
         font-size: ${({ theme }) => theme.fontSize.omegaBig};
+    }
+
+    @media screen and (max-width: 895px) {
+        display: none;
     }
 `;

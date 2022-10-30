@@ -96,6 +96,14 @@ export const BuyButton = styled(Button)`
         font-size: ${({ theme }) => theme.fontSize.l};
     }
 
+    @media screen and (max-width: 1000px) {
+        font-size: 15px;
+    }
+
+    @media screen and (max-width: 800px) {
+        margin-left: 0px;
+    }
+
     @media screen and (max-width: 625px) {
         width: 100%;
     }

@@ -7,6 +7,8 @@ import {
     ConfirmedDesc,
     Checkbox,
     NumberOfComments,
+    SmallScreen,
+    BigScreen,
 } from './CommentFilters.style';
 import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { useState, useEffect } from 'react';
@@ -28,42 +30,59 @@ const CommentFilters = ({ handleFilters, comments }) => {
 
     return (
         <>
-            {!Boolean(comments) ? (
+            {Boolean(comments) && comments?.comments?.length === 0 ? (
                 <></>
             ) : (
-                <Wrapper>
-                    <NumberOfComments>
-                        Wyniki: {commentsSize} z {totalNumberOfComments}
-                    </NumberOfComments>
-                    <Title>Filtruj: </Title>
-                    <Filters>
-                        <SelectStyle width="200px">
-                            <select onChange={(e) => setRating(e.target.value)}>
-                                {ratingOptions.map((option, index) => (
-                                    <option value={option.value} key={index}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </SelectStyle>
-                    </Filters>
-                    <Confirmed>
-                        <Checkbox type="checkbox" onChange={() => setConfirmed(!confirmed)} checked={confirmed} />
-                        <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>Potwierdzone zakupy</ConfirmedDesc>
-                    </Confirmed>
-                    <Title>Sortuj:</Title>
-                    <Sort>
-                        <SelectStyle width="200px">
-                            <select onChange={(e) => setSortBy(e.target.value)}>
-                                {filterOptions.map((option, index) => (
-                                    <option value={option.value} key={index}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </SelectStyle>
-                    </Sort>
-                </Wrapper>
+                <>
+                    <Wrapper>
+                        <NumberOfComments>
+                            Wyniki: {commentsSize} z {totalNumberOfComments}
+                        </NumberOfComments>
+                        <Filters>
+                            <Title>Filtruj: </Title>
+
+                            <SelectStyle width="200px">
+                                <select onChange={(e) => setRating(e.target.value)}>
+                                    {ratingOptions.map((option, index) => (
+                                        <option value={option.value} key={index}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </SelectStyle>
+                        </Filters>
+                        <BigScreen>
+                            <Confirmed>
+                                <Checkbox
+                                    type="checkbox"
+                                    onChange={() => setConfirmed(!confirmed)}
+                                    checked={confirmed}
+                                />
+                                <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>
+                                    Potwierdzone zakupy
+                                </ConfirmedDesc>
+                            </Confirmed>
+                        </BigScreen>
+                        <Sort>
+                            <Title>Sortuj:</Title>
+                            <SelectStyle width="200px">
+                                <select onChange={(e) => setSortBy(e.target.value)}>
+                                    {filterOptions.map((option, index) => (
+                                        <option value={option.value} key={index}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </SelectStyle>
+                        </Sort>
+                    </Wrapper>
+                    <SmallScreen>
+                        <Confirmed>
+                            <Checkbox type="checkbox" onChange={() => setConfirmed(!confirmed)} checked={confirmed} />
+                            <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>Potwierdzone zakupy</ConfirmedDesc>
+                        </Confirmed>
+                    </SmallScreen>
+                </>
             )}
         </>
     );

@@ -3,6 +3,19 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     margin: 10px 7%;
     padding-bottom: 25px;
+
+    @media screen and (max-width: 1050px) {
+        margin: 10px 5%;
+    }
+
+    @media screen and (max-width: 1050px) {
+        margin: 10px 2%;
+    }
+
+    @media screen and (max-width: 450px) {
+        padding-bottom: 0px;
+        font-size: ${({ theme }) => theme.fontSize.m};
+    }
 `;
 
 export const CommentSection = styled.div`
@@ -14,6 +27,10 @@ export const CommentSection = styled.div`
     margin: 15px 0;
     padding-bottom: 10px;
     border-bottom: 1px solid gray;
+
+    @media screen and (max-width: 950px) {
+        width: 100%;
+    }
 `;
 
 export const ContentSection = styled.div`
@@ -24,11 +41,18 @@ export const ContentSection = styled.div`
     width: 80%;
     padding-left: 5%;
     min-width: 200px;
+
+    @media screen and (max-width: 450px) {
+        padding-left: 2%;
+    }
 `;
 
 export const NoOpinionsLeft = styled.div`
     text-align: center;
     margin: 20px 0;
+    @media screen and (max-width: 450px) {
+        margin: 10px 0;
+    }
 `;
 
 export const NoOpinionsLeftSection = styled.div`
@@ -40,12 +64,20 @@ export const NoOpinionsLeftSection = styled.div`
     justify-content: center;
     text-align: center;
     gap: 20px;
+
+    @media screen and (max-width: 500px) {
+        margin-top: 20px;
+        gap: 10px;
+    }
 `;
 
 export const IconNoOpinionsLeft = styled.div`
     color: green;
     font-size: ${({ theme }) => theme.fontSize.xxl};
     @media screen and (max-width: 650px) {
+        font-size: ${({ theme }) => theme.fontSize.xl};
+    }
+    @media screen and (max-width: 500px) {
         font-size: ${({ theme }) => theme.fontSize.l_plus};
     }
 `;
@@ -53,7 +85,11 @@ export const IconNoOpinionsLeft = styled.div`
 export const DescriptionNoOpinionsLeft = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l_plus};
     @media screen and (max-width: 650px) {
-        font-size: ${({ theme }) => theme.fontSize.m};
+        font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
     }
 `;
 
@@ -75,5 +111,19 @@ export const Image = styled.img`
 
     :hover {
         cursor: pointer;
+    }
+
+    @media screen and (max-width: 800px) {
+        min-height: 70px;
+        max-height: 70px;
+        width: 75px;
+        border-radius: 15px;
+    }
+
+    @media screen and (max-width: 450px) {
+        min-height: 60px;
+        max-height: 60px;
+        width: 65px;
+        border-radius: 10px;
     }
 `;

@@ -3,7 +3,6 @@ import { MdStar } from 'react-icons/md';
 const ProductEachScore = ({ averageScore, errorFix }) => {
     return (
         <Wrapper>
-            {/* {console.log(averageScore)} */}
             {errorFix > 0 &&
                 averageScore.eachScore
                     .slice(0)

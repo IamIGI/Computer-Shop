@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SelectStyle = styled.div`
     select {
-        min-width: 175px;
+        min-width: ${(props) => props.width};
         width: 100%;
         max-width: ${(props) => props.width};
         padding: 5px 35px 5px 5px;
@@ -33,6 +33,14 @@ export const SelectStyle = styled.div`
                 linear-gradient(-135deg, transparent 50%, ${({ theme }) => theme.colors.lightGrey} 50%),
                 linear-gradient(-225deg, transparent 50%, ${({ theme }) => theme.colors.lightGrey} 50%),
                 linear-gradient(${({ theme }) => theme.colors.lightGrey} 42%, gray 42%);
+        }
+
+        @media screen and (max-width: 1050px) {
+            height: 29px;
+        }
+
+        @media screen and (max-width: 500px) {
+            font-size: 13px;
         }
     }
 
