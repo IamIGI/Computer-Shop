@@ -124,11 +124,9 @@ const Basket = () => {
 
         //main statement
         if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
-            console.log(orderTemplateDocument);
             if (finishOrder === true) {
                 const sendUserOrder = async () => {
                     try {
-                        console.log(orderTemplateDocument);
                         const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
                         setOrderId(response.data.OrderId);
                     } catch (err) {
