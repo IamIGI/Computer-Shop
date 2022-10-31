@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     width: 47%;
-    border: 1px solid red;
 `;
 
 export const InputLocal = styled.input`
