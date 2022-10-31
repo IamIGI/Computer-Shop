@@ -5,6 +5,10 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     width: 47%;
+    @media screen and (max-width: 550px) {
+        width: 90%;
+        margin: auto;
+    }
 `;
 
 export const InputLocal = styled.input`
@@ -17,6 +21,14 @@ export const InputLocal = styled.input`
     display: block;
     width: 90%;
     font-size: 16px;
+
+    @media screen and (max-width: 1000px) {
+        font-size: 14px;
+    }
+    @media screen and (max-width: 450px) {
+        font-size: 14px;
+        margin: 10px 10px 10px 10px;
+    }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -26,4 +38,8 @@ export const ButtonWrapper = styled.div`
 
 export const Error = styled.div`
     margin-left: 5%;
+
+    @media screen and (max-width: 450px) {
+        font-size: 13px;
+    }
 `;

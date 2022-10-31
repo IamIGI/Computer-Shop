@@ -1,5 +1,5 @@
 import React from 'react';
-import { Description, Icon, Section, Wrapper } from './DeliveryPreview.style';
+import { Description, Icon, Section, Wrapper, LineSeparator } from './DeliveryPreview.style';
 import { BsTruck, BsCalendarEvent } from 'react-icons/bs';
 import { FaCashRegister } from 'react-icons/fa';
 import { GrHomeRounded } from 'react-icons/gr';
@@ -11,8 +11,8 @@ const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt, orderSt
     const deliveryDate = getDeliveryDate();
 
     return (
-        <>
-            <Wrapper>
+        <Wrapper>
+            <a href="#delivery">
                 <Section>
                     <Icon>
                         <BsTruck />
@@ -22,6 +22,9 @@ const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt, orderSt
                         <p>{deliveryDescriptionOpt}</p>
                     </Description>
                 </Section>
+                <LineSeparator />
+            </a>
+            <a href="#payment">
                 <Section>
                     <Icon>
                         <FaCashRegister />
@@ -31,6 +34,9 @@ const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt, orderSt
                         <p>{deliveryDescriptionPay}</p>
                     </Description>
                 </Section>
+                <LineSeparator />
+            </a>
+            <a href="#recipient">
                 <Section>
                     <Icon>
                         <GrHomeRounded />
@@ -40,17 +46,18 @@ const DeliveryPreview = ({ deliveryCheckboxesPay, deliveryCheckboxesOpt, orderSt
                         {orderStreet === '' ? <p>Wypełnij formularz</p> : <p>{orderStreet}</p>}
                     </Description>
                 </Section>
-                <Section>
-                    <Icon>
-                        <BsCalendarEvent />
-                    </Icon>
-                    <Description>
-                        <h5>Data dostarczenia:</h5>
-                        <p>{deliveryDate}</p>
-                    </Description>
-                </Section>
-            </Wrapper>
-        </>
+                <LineSeparator />
+            </a>
+            <Section>
+                <Icon>
+                    <BsCalendarEvent />
+                </Icon>
+                <Description>
+                    <h5>Data dostarczenia:</h5>
+                    <p>{deliveryDate}</p>
+                </Description>
+            </Section>
+        </Wrapper>
     );
 };
 

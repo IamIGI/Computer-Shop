@@ -13,6 +13,7 @@ import {
     OldPrice,
     CurrentPrice,
     Title,
+    ItemSection,
 } from './BasketPreview.style';
 import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
@@ -74,22 +75,20 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
         <>
             <Wrapper>
                 {basketItems.length === 0 ? (
-                    <>
-                        <Section>
-                            <Icon>
-                                <BsBasket3 />
-                            </Icon>
-                            <DescriptionAreaMissing>
-                                <h4>Brak produktów w koszyku </h4>
-                            </DescriptionAreaMissing>
-                        </Section>
-                    </>
+                    <Section>
+                        <Icon>
+                            <BsBasket3 />
+                        </Icon>
+                        <DescriptionAreaMissing>
+                            <h4>Brak produktów w koszyku </h4>
+                        </DescriptionAreaMissing>
+                    </Section>
                 ) : (
                     <List>
                         {basketItems.map((item, index) => (
                             <>
                                 <li id={index}>
-                                    <Section key={index}>
+                                    <ItemSection key={index}>
                                         <ImageArea>
                                             <img src={item.prevImg} alt="Product prev" />
                                         </ImageArea>
@@ -120,7 +119,7 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                                                 </CurrentPrice>
                                             )}
                                         </PriceArea>
-                                    </Section>
+                                    </ItemSection>
                                 </li>
                             </>
                         ))}

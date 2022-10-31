@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     margin-bottom: 20px;
+    @media screen and (max-width: 450px) {
+        gap: 5px;
+    }
 `;
 
 export const Section = styled.div`
@@ -17,12 +20,16 @@ export const Section = styled.div`
     padding: 0 20px;
     display: flex;
     flex-direction: row;
-    /* margin-bottom: 20px; */
     justify-content: flex-start;
+    align-items: center;
 
     :hover {
         cursor: pointer;
         border: 1px solid ${({ theme }) => theme.colors.successDark};
+    }
+
+    @media screen and (max-width: 450px) {
+        padding: 5px 20px;
     }
 `;
 
@@ -32,10 +39,21 @@ export const CheckboxLocal = styled(Checkbox)`
     height: 30px;
     margin-left: 20px;
     margin-right: 3%;
-    margin-top: 25px;
     cursor: pointer;
     &:hover {
         border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    }
+
+    @media screen and (max-width: 1100px) {
+        width: 25px;
+        height: 25px;
+        margin-left: 12px;
+    }
+
+    @media screen and (max-width: 450px) {
+        width: 22px;
+        height: 22px;
+        margin-left: 0px;
     }
 `;
 
@@ -50,13 +68,37 @@ export const Description = styled.div`
     span {
         color: ${({ theme }) => theme.colors.darkGrey};
     }
+
+    @media screen and (max-width: 550px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        margin: 0px;
+        h4 {
+            margin: 3px;
+        }
+    }
 `;
 
 export const SectionTitle = styled.div`
     margin-left: 40px;
+
+    @media screen and (max-width: 450px) {
+        margin-left: 20px;
+    }
 `;
 
 export const Icon = styled.div`
-    padding-top: 20px;
+    margin-top: 10px;
     font-size: ${({ theme }) => theme.fontSize.omegaBig};
+
+    @media screen and (max-width: 1100px) {
+        font-size: 40px;
+    }
+
+    @media screen and (max-width: 550px) {
+        font-size: 30px;
+    }
 `;

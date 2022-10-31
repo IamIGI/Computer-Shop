@@ -21,7 +21,7 @@ const PaymentOptions = ({ initDeliveryCheckboxesPay, deliveryCheckboxesPay, setD
 
     return (
         <>
-            <SectionTitle>
+            <SectionTitle id="payment">
                 <SectionDescription title={'Sposób płatności'} icon={<MdOutlinePayment />} />
             </SectionTitle>
             <Wrapper>
