@@ -19,7 +19,7 @@ const DeliveryOptions = ({ initDeliveryCheckboxesOpt, deliveryCheckboxesOpt, set
 
     return (
         <>
-            <SectionTitle>
+            <SectionTitle id="delivery">
                 <SectionDescription title={'Sposób dostawy'} icon={<MdOutlineDeliveryDining />} />
             </SectionTitle>
             <Wrapper>

@@ -3,25 +3,35 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     width: 100%;
-    /* padding-left: 5%; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     background-color: ${({ theme }) => theme.colors.lightPurple};
-    border-radius: 40px;
-    /* border: 1px solid grey */
+    border-radius: 20px;
     border-top: 1px solid gray;
 `;
 
 export const Section = styled.div`
     margin-left: 5%;
     width: 80%;
+
+    @media screen and (max-width: 1510px) {
+        width: 90%;
+    }
+
+    @media screen and (max-width: 500px) {
+        margin-left: 1%;
+    }
 `;
 
 export const ListSection = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media screen and (max-width: 550px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
 `;
 
 export const List = styled.ul`
@@ -31,18 +41,30 @@ export const List = styled.ul`
     }
 
     li:last-child {
-        /* background-color: red; */
         padding-top: 30px;
         border-top: 1px solid grey;
         font-size: ${({ theme }) => theme.fontSize.l};
         font-weight: 700;
     }
+
+    @media screen and (max-width: 500px) {
+        li {
+            margin-bottom: 10px;
+        }
+
+        li:last-child {
+            padding-top: 15px;
+        }
+    }
 `;
 
 export const Name = styled.div`
-    /* width: 200px; */
     text-align: left;
     padding-left: 20px;
+
+    @media screen and (max-width: 500px) {
+        padding-left: 10px;
+    }
 `;
 
 export const Price = styled.div`
@@ -62,6 +84,14 @@ export const LocalButton = styled(Button)`
     :hover {
         background-color: ${({ theme }) => theme.colors.successDark};
         color: black;
+    }
+
+    @media screen and (max-width: 1510px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
+
+    @media screen and (max-width: 550px) {
+        font-size: ${({ theme }) => theme.fontSize.l};
     }
 `;
 

@@ -13,7 +13,7 @@ const RecipientDetails = ({ handleOrderData }) => {
     };
     return (
         <>
-            <SectionTitle>
+            <SectionTitle id="recipient">
                 <SectionDescription title={'Dane Odbiorcy'} icon={<CgUserList />} />
             </SectionTitle>
             <Wrapper>

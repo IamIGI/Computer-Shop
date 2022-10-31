@@ -88,8 +88,8 @@ export const OrderDescription = styled.div`
     min-width: 350px;
     width: fit-content;
     /* grid-column: 1/2; */
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     background-color: ${({ theme }) => theme.colors.lightLightGrey};
     text-align: left;
     padding-left: 5%;
@@ -101,8 +101,8 @@ export const OrderDescription = styled.div`
 `;
 
 export const OrderProducts = styled.div`
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     height: 100%;
     width: 100%;
     justify-content: left;
