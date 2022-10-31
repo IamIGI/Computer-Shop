@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+    display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-top: 20%;
     font-size: ${(props) => props.size};
     width: 100%;
     height: 100%;
+    margin: auto;
 `;
 
 export const Spinner = styled.div`
