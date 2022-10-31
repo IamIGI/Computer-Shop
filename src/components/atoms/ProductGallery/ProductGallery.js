@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageContainer, SmallImage, SmallImagesContainer, SmallImageWrapper, Wrapper } from './ProductGallery.style';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
@@ -12,9 +12,14 @@ const ProductGallery = ({ images, addServerPrefix }) => {
     const sumOfElementsWidth = images.length * 70 + (images.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
-    setInterval(async () => {
-        setDivWidth(document.getElementById('containerProductGallery').offsetWidth);
-    }, 2000);
+    useEffect(() => {
+        setInterval(async () => {
+            setDivWidth(
+                document.getElementById('containerProductGallery') !== null &&
+                    document.getElementById('containerProductGallery').offsetWidth
+            );
+        }, 2000);
+    }, []);
 
     const handleChosenImage = (index) => {
         setChoseImage(index);

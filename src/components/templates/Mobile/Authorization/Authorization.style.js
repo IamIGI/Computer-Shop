@@ -22,28 +22,21 @@ export const Wrapper = styled.div`
 `;
 
 export const LoginWrapper = styled.div`
-    max-width: 230px;
+    max-width: 240px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-
-    /* @media screen and (max-width: 500px) {
-        max-width: 310px;
-    } */
 `;
 
 export const RegisterWrapper = styled.div`
-    max-width: 230px;
+    max-width: 240px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* @media screen and (max-width: 500px) {
-        max-width: 310px;
-    } */
 `;

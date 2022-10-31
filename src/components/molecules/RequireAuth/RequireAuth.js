@@ -8,12 +8,12 @@ const RequireAuth = ({ allowedRoles }) => {
     //check roles if roles missing, check if user is logged in if not navigate him to page where he come
     return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
         <>
-            {console.log('Access granted: protected routes ')}
+            {/* {console.log('Access granted: protected routes ')} */}
             <Outlet /> {/*//Show protected Routes */}
         </>
     ) : auth?.accessToken ? (
         <>
-            {console.log('Unauthorized')}
+            {/* {console.log('Unauthorized')} */}
             <Navigate to="unauthorized" state={{ from: location }} replace />
         </>
     ) : (

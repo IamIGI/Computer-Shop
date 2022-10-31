@@ -3,10 +3,12 @@ import { Bottom } from '../ProductPreviewItem/ProductPreviewItem.style';
 
 export const Wrapper = styled.div`
     margin: auto;
+    min-width: 230px;
 `;
 
 export const BottomLogin = styled(Bottom)`
     /* margin: 10px 0 0 14%; */
+
     margin-top: 10px;
     align-items: center;
     display: flex;

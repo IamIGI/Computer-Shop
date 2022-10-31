@@ -16,7 +16,7 @@ const YouMayLike = () => {
     const [slidesOfProducts, setSlidesOfProducts] = useState([]);
     const [divWidth, setDivWidth] = useState(10000);
     setInterval(async () => {
-        setDivWidth(document.getElementById('Slider').offsetWidth);
+        setDivWidth(document.getElementById('Slider') !== null && document.getElementById('Slider').offsetWidth);
     }, 2000);
 
     useEffect(() => {
