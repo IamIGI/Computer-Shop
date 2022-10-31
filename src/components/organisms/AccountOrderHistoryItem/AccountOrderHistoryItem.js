@@ -144,7 +144,7 @@ const AccountOrderHistoryItem = () => {
                         </OrderSection>
                         <ProductSection>
                             <OrderSectionTitle>Zamówienie</OrderSectionTitle>
-                            {orderItem.products.map((product, index) => (
+                            {orderItem.products.map((product) => (
                                 <ProductElement to={`/product/${product._id}`} key={product._id}>
                                     <ProductImage>
                                         <img src={product.prevImg} alt="images of product" />
@@ -166,8 +166,10 @@ const AccountOrderHistoryItem = () => {
                                 <li>
                                     <div> Wartość koszyka:</div>
                                     <div>
-                                        {orderItem.transactionInfo.price -
-                                            getDeliveryPrice(orderItem.transactionInfo.deliveryMethod)}{' '}
+                                        {(
+                                            orderItem.transactionInfo.price -
+                                            getDeliveryPrice(orderItem.transactionInfo.deliveryMethod)
+                                        ).toFixed(2)}
                                         zł
                                     </div>
                                 </li>

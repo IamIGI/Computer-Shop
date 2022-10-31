@@ -1,19 +1,23 @@
 import styled from 'styled-components';
-import { Input } from 'components/atoms/Input/Input';
 
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 47%;
+    border: 1px solid red;
 `;
 
-export const InputLocal = styled(Input)`
+export const InputLocal = styled.input`
+    margin: 10px 10px 20px 10px;
+    height: 32px;
+    border-radius: 16px;
+    border: 1px solid lightgrey;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    text-align: center;
     display: block;
     width: 90%;
     font-size: 16px;
-    height: 40px;
-    margin-bottom: 20px;
 `;
 
 export const ButtonWrapper = styled.div`

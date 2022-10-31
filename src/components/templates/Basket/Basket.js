@@ -105,7 +105,7 @@ const Basket = () => {
                 break;
         }
 
-        const finalPrice = priceToPay + priceForDelivery;
+        const finalPrice = (priceToPay + priceForDelivery).toFixed(2);
         orderTemplateDocument = {
             status: 1, //all orders have to start from "In realization" status
             products: productsInBasket,

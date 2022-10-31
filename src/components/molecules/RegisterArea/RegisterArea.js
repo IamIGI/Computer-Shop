@@ -103,6 +103,8 @@ function RegisterArea() {
                 dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Brak łączyności z serwerem' });
             } else if (err.response?.status === 409) {
                 dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Email jest już używany' });
+            } else if (err.response?.status === 418) {
+                dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Użyte imie jest wulgarne' });
             } else {
                 console.log(err);
                 dispatch({ type: ACTIONS.ERROR_MESSAGE, payload: 'Nieznany błąd' });

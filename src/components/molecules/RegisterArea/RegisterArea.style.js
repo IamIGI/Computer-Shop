@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     margin: auto;
+    min-width: 230px;
 `;
 
 export const BottomRegister = styled(Bottom)`

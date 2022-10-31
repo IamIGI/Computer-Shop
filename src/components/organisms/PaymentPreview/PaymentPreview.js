@@ -35,13 +35,13 @@ const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery, isUserLog
                         <li>
                             <ListSection>
                                 <Name>Płatność</Name>
-                                <Price>0zł</Price>
+                                <Price>0 zł</Price>
                             </ListSection>
                         </li>
                         <li>
                             <ListSection>
                                 <Name>Podsumowanie </Name>
-                                <Price>{priceToPay + priceForDelivery} zł</Price>
+                                <Price>{(priceToPay + priceForDelivery).toFixed(2)} zł</Price>
                             </ListSection>
                         </li>
                     </List>

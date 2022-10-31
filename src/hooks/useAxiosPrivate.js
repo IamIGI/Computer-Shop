@@ -27,7 +27,7 @@ const useAxiosPrivate = () => {
                 if (error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
                     const newAccessToken = await refresh();
-                    console.log('Token refreshed. Saving new access token');
+                    // console.log('Token refreshed. Saving new access token');
                     //save new token
                     prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
                     return axiosPrivate(prevRequest); //jump to api/axiosPrivate
