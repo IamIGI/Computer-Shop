@@ -69,6 +69,8 @@ export const ProductPrevWrapper = styled.div`
     align-items: center;
     flex-wrap: wrap;
     gap: 0px;
+    height: fit-content;
+    width: 100%;
 
     @media screen and (max-width: 650px) {
         align-items: center;
