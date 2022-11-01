@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
+    width: fit-content;
 `;
 
 export const StarsWrapper = styled.div`

@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 0 5px;
 `;
 
 export const DiscountSize = styled.div`

@@ -44,6 +44,7 @@ export const ContentSection = styled.div`
 
     @media screen and (max-width: 450px) {
         padding-left: 2%;
+        width: 95%;
     }
 `;
 
@@ -120,10 +121,38 @@ export const Image = styled.img`
         border-radius: 15px;
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 500px) {
         min-height: 60px;
         max-height: 60px;
         width: 65px;
         border-radius: 10px;
     }
+`;
+
+export const BigScreen = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    @media screen and (max-width: 500px) {
+        display: none;
+    }
+`;
+
+export const SmallScreen = styled.div`
+    display: none;
+
+    @media screen and (max-width: 500px) {
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+`;
+
+export const UserDataWhenSmallScreen = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 `;

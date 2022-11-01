@@ -36,32 +36,30 @@ const Product = () => {
 
     return (
         <Wrapper>
-            <>
-                {waitForFetchProduct ? (
-                    <>
-                        <LoadingAnimation loadingSize={15} />
-                    </>
-                ) : (
-                    <>
-                        <TitleWhenSmallScreen>
-                            <TitleContent product={product} />
-                            <Separator />
-                        </TitleWhenSmallScreen>
-                        <HandyMenuBigScreen>
-                            <ProductHandyMenu productId={product._id} />
-                        </HandyMenuBigScreen>
-                        <TopWrapper id="Top">
-                            <ProductTopContent product={product} />
-                        </TopWrapper>
-                        <MidWrapper>
-                            <ProductMiddleContent product={product} />
-                        </MidWrapper>
-                        <BottomWrapper>
-                            <CommentsSection product={product} />
-                        </BottomWrapper>
-                    </>
-                )}
-            </>
+            {waitForFetchProduct ? (
+                <>
+                    <LoadingAnimation loadingSize={15} />
+                </>
+            ) : (
+                <>
+                    <TitleWhenSmallScreen>
+                        <TitleContent product={product} />
+                        <Separator />
+                    </TitleWhenSmallScreen>
+                    <HandyMenuBigScreen>
+                        <ProductHandyMenu productId={product._id} />
+                    </HandyMenuBigScreen>
+                    <TopWrapper id="Top">
+                        <ProductTopContent product={product} />
+                    </TopWrapper>
+                    <MidWrapper>
+                        <ProductMiddleContent product={product} />
+                    </MidWrapper>
+                    <BottomWrapper>
+                        <CommentsSection product={product} />
+                    </BottomWrapper>
+                </>
+            )}
         </Wrapper>
     );
 };

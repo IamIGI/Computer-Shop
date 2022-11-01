@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     gap: 30px;
     width: fit-content;
     margin: auto;
-    min-width: 380px;
+    min-width: 350px;
 
     a {
         text-decoration: none;
