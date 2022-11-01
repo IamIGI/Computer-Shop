@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -14,6 +13,7 @@ export const Wrapper = styled.div`
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     scroll-behavior: smooth;
+    margin: 0px;
 `;
 
 export const TitleWhenSmallScreen = styled.div`
@@ -31,7 +31,6 @@ export const TitleWhenSmallScreen = styled.div`
 
 export const HandyMenuBigScreen = styled.div`
     display: flex;
-
     @media screen and (max-width: 1200px) {
         display: none;
     }
@@ -60,6 +59,6 @@ export const MidWrapper = styled.div`
 `;
 
 export const BottomWrapper = styled.div`
-    height: 100%;
+    height: fit-content;
     width: 100%;
 `;

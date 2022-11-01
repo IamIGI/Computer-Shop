@@ -8,6 +8,9 @@ import {
     DescriptionNoOpinionsLeft,
     ImagesSection,
     Image,
+    BigScreen,
+    SmallScreen,
+    UserDataWhenSmallScreen,
 } from './CommentItem.style';
 
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
@@ -53,9 +56,16 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
                         <>
                             {commentsArray.map((comment, index) => (
                                 <CommentSection key={index}>
-                                    <UserData comment={comment} />
+                                    <BigScreen>
+                                        <UserData comment={comment} />
+                                    </BigScreen>
                                     <ContentSection>
-                                        <ContentData comment={comment} />
+                                        <UserDataWhenSmallScreen>
+                                            <SmallScreen>
+                                                <UserData comment={comment} />
+                                            </SmallScreen>
+                                            <ContentData comment={comment} />
+                                        </UserDataWhenSmallScreen>
                                         <Opinion comment={comment} />
                                         <ImagesSection>
                                             {comment.image.added ? (

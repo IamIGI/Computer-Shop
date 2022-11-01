@@ -5,9 +5,13 @@ export const Wrapper = styled.div`
     min-width: 200px;
     max-width: 300px;
     padding: 10px 1%;
-
     @media screen and (max-width: 600px) {
         min-width: 140px;
+    }
+
+    @media screen and (max-width: 500px) {
+        padding: 0px 1%;
+        padding-top: 5px;
     }
 `;
 
@@ -69,4 +73,8 @@ export const UserDataApproved = styled.div`
     flex-wrap: nowrap;
     font-size: ${({ theme }) => theme.fontSize.l};
     margin-top: 4px;
+
+    @media screen and (max-width: 500px) {
+        margin-top: 0px;
+    }
 `;
