@@ -22,6 +22,11 @@ const Product = () => {
     const code = useParams().id;
     const [waitForFetchProduct, setWaitForFetchProduct] = useState(true);
     const { product, setProduct } = useProduct();
+    const [refreshProduct, setRefreshProduct] = useState(false);
+
+    const handleRefreshProduct = () => {
+        setRefreshProduct(!refreshProduct);
+    };
 
     useEffect(() => {
         const fetchProduct = async (code) => {
@@ -32,7 +37,7 @@ const Product = () => {
 
         fetchProduct(code);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [code]);
+    }, [code, refreshProduct]);
 
     return (
         <Wrapper>
@@ -56,7 +61,7 @@ const Product = () => {
                         <ProductMiddleContent product={product} />
                     </MidWrapper>
                     <BottomWrapper>
-                        <CommentsSection product={product} />
+                        <CommentsSection handleRefreshProduct={handleRefreshProduct} product={product} />
                     </BottomWrapper>
                 </>
             )}
