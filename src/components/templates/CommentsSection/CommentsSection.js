@@ -7,7 +7,7 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { BiCommentDetail } from 'react-icons/bi';
 import CommentsImages from 'components/molecules/CommentsImages/CommentsImages';
 
-const CommentsSection = ({ product }) => {
+const CommentsSection = ({ product, handleRefreshProduct }) => {
     const [waitForFetchAS, setWaitForFetchAS] = useState(false);
     const [refreshComments, setRefreshComments] = useState(false);
     const [averageScore, setAverageScore] = useState({});
@@ -38,6 +38,7 @@ const CommentsSection = ({ product }) => {
     };
 
     const handleRefreshComments = () => {
+        handleRefreshProduct();
         setRefreshComments(!refreshComments);
     };
 

@@ -109,6 +109,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                     });
                     dispatch({ type: ACTIONS.CLEAR_ALERT });
                 } else if (response.code === 104) {
+                    //happyPath
                     handleLanguageValidation(false, '');
                     dispatch({ type: ACTIONS.RESET });
                     changeState(ACTIONS.SEND_COMMENT, false);
