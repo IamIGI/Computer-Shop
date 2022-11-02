@@ -1,8 +1,8 @@
 import { testEmailRegex } from 'data/Regex';
 
 export const MESSAGE_OPTIONS = [
-    { label: 'Błąd', value: 0 },
-    { label: 'Współpraca', value: 1 },
+    { label: 'Błąd', value: 0, checked: false },
+    { label: 'Współpraca', value: 1, checked: false },
 ];
 
 export const ACTIONS = {

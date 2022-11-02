@@ -14,12 +14,12 @@ import {
     SmallScreenSize,
     Margin,
 } from './ProductsFiltersSection.style';
-import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { Button } from 'components/atoms/Button/Button';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 
 const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, FilterInitPosition }) => {
     const [sortBy, setSortBy] = useState('none');
+    const [clearSortBy, setClearSortBy] = useState(false);
     const [producers, setProducers] = useState([]);
     const [clearProducers, setClearProducers] = useState(false);
     const [processors, setProcessors] = useState([]);
@@ -28,6 +28,20 @@ const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, Fi
     const [disk, setDisk] = useState({ min: '', max: '' });
     const [searchTerm, setSearchTerm] = useState('');
     const [discounts, setDiscounts] = useState(false);
+
+    const handleSortBy = (data) => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) {
+                setSortBy(data[i].value);
+                break;
+            }
+        }
+    };
+
+    const handleClearSortByFilters = (data) => {
+        setSortBy('date');
+        setClearSortBy(data);
+    };
 
     const handleProducers = (data) => {
         let productList = [];
@@ -118,15 +132,17 @@ const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, Fi
                 />
                 <SearchDescription>Wyszukiwanie</SearchDescription>
             </SearchSection>
-            <SelectStyle width="250px">
-                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                    {filterOptions.map((option, index) => (
-                        <option value={option.value} key={index}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
-            </SelectStyle>
+
+            <SetFilterItems
+                OneTimeChoice={true}
+                width="250px"
+                description={'Sortuj'}
+                filterData={filterOptions}
+                handleItems={handleSortBy}
+                handleClearItemsFilters={handleClearSortByFilters}
+                clearItems={clearSortBy}
+            />
+
             <Title>Status</Title>
             <DiscountFilter>
                 <DiscountCheckbox type="checkbox" onChange={() => handleDiscount()} checked={discounts} />
@@ -134,21 +150,23 @@ const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, Fi
             </DiscountFilter>
 
             <SetFilterItems
+                OneTimeChoice={false}
                 width="250px"
                 description={'Produkty'}
                 filterData={Producers}
-                handleProducers={handleProducers}
-                handleClearProducersFilters={handleClearProducersFilters}
-                clearProducers={clearProducers}
+                handleItems={handleProducers}
+                handleClearItemsFilters={handleClearProducersFilters}
+                clearItems={clearProducers}
             />
 
             <SetFilterItems
+                OneTimeChoice={false}
                 width="250px"
                 description={'Procesory'}
                 filterData={Processors}
-                handleProducers={handleProcessors}
-                handleClearProducersFilters={handleClearProcessorsFilters}
-                clearProducers={clearProcessors}
+                handleItems={handleProcessors}
+                handleClearItemsFilters={handleClearProcessorsFilters}
+                clearItems={clearProcessors}
             />
 
             <Title>RAM</Title>

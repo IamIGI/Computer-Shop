@@ -6,7 +6,8 @@ export const Wrapper = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    gap: 20px;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px;
     font-size: ${({ theme }) => theme.fontSize.l_plus};
@@ -27,22 +28,15 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 600px) {
         flex-direction: column;
-        padding-left: 20px;
+        align-items: flex-start;
+        /* padding-left: 20px; */
+        gap: 2px;
+        padding: 10px 0 2px 20px;
     }
 `;
 
-export const Title = styled.div`
-    padding-top: 7px;
-    padding-right: 15px;
-    font-weight: 700;
-
-    @media screen and (max-width: 1050px) {
-        padding-right: 6px;
-    }
-`;
 export const NumberOfComments = styled.div`
-    padding-top: 7px;
-    font-weight: 700;
+    font-weight: 400;
 
     @media screen and (max-width: 760px) {
         display: none;
@@ -66,10 +60,14 @@ export const Confirmed = styled.div`
     @media screen and (max-width: 1050px) {
         margin: 0 1%;
     }
+
+    @media screen and (max-width: 920px) {
+        margin-bottom: 10px;
+    }
 `;
 
 export const ConfirmedDesc = styled.div`
-    font-weight: 700;
+    font-weight: 400;
 
     :hover {
         cursor: pointer;
