@@ -1,6 +1,5 @@
 import {
     Wrapper,
-    Title,
     Filters,
     Confirmed,
     Sort,
@@ -10,13 +9,15 @@ import {
     SmallScreen,
     BigScreen,
 } from './CommentFilters.style';
-import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
 import { useState, useEffect } from 'react';
 import useProduct from 'hooks/useProduct';
 import { ratingOptions, filterOptions } from './CommentFilters.logic';
+import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 
 const CommentFilters = ({ handleFilters, comments }) => {
     const [rating, setRating] = useState(0);
+    const [clearRating, setClearRating] = useState(false);
+    const [clearSortBy, setClearSortBy] = useState(false);
     const [sortBy, setSortBy] = useState('date');
     const [confirmed, setConfirmed] = useState(false);
     const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
@@ -27,6 +28,34 @@ const CommentFilters = ({ handleFilters, comments }) => {
         handleFilters(filters);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rating, sortBy, confirmed, product]);
+
+    const handleSortBy = (data) => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) {
+                setSortBy(data[i].value);
+                break;
+            }
+        }
+    };
+
+    const handleClearSortByFilters = (data) => {
+        setSortBy('date');
+        setClearSortBy(data);
+    };
+
+    const handleRating = (data) => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) {
+                setRating(data[i].value);
+                break;
+            }
+        }
+    };
+
+    const handleClearRatingFilters = (data) => {
+        setRating(0);
+        setClearRating(data);
+    };
 
     return (
         <>
@@ -39,17 +68,15 @@ const CommentFilters = ({ handleFilters, comments }) => {
                             Wyniki: {commentsSize} z {totalNumberOfComments}
                         </NumberOfComments>
                         <Filters>
-                            <Title>Filtruj: </Title>
-
-                            <SelectStyle width="200px">
-                                <select onChange={(e) => setRating(e.target.value)}>
-                                    {ratingOptions.map((option, index) => (
-                                        <option value={option.value} key={index}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </SelectStyle>
+                            <SetFilterItems
+                                OneTimeChoice={true}
+                                width="230px"
+                                description={'Oceny'}
+                                filterData={ratingOptions}
+                                handleItems={handleRating}
+                                handleClearItemsFilters={handleClearRatingFilters}
+                                clearItems={clearRating}
+                            />
                         </Filters>
                         <BigScreen>
                             <Confirmed>
@@ -64,16 +91,15 @@ const CommentFilters = ({ handleFilters, comments }) => {
                             </Confirmed>
                         </BigScreen>
                         <Sort>
-                            <Title>Sortuj:</Title>
-                            <SelectStyle width="200px">
-                                <select onChange={(e) => setSortBy(e.target.value)}>
-                                    {filterOptions.map((option, index) => (
-                                        <option value={option.value} key={index}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </SelectStyle>
+                            <SetFilterItems
+                                OneTimeChoice={true}
+                                width="230px"
+                                description={'Sortuj'}
+                                filterData={filterOptions}
+                                handleItems={handleSortBy}
+                                handleClearItemsFilters={handleClearSortByFilters}
+                                clearItems={clearSortBy}
+                            />
                         </Sort>
                     </Wrapper>
                     <SmallScreen>

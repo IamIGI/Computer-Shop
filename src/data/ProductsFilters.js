@@ -17,9 +17,9 @@ export const Processors = [
 ];
 
 export const filterOptions = [
-    { label: 'Brak sortowania', value: 'none' },
-    { label: 'Najpopularniejsze', value: 'popular' },
-    { label: 'Najlepiej oceniane', value: 'rating' },
-    { label: 'Cena: od najtańszych', value: '-price' },
-    { label: 'Cena: od najdroższych', value: 'price' },
+    { label: 'Brak sortowania', value: 'none', checked: false },
+    { label: 'Najpopularniejsze', value: 'popular', checked: false },
+    { label: 'Najlepiej oceniane', value: 'rating', checked: false },
+    { label: 'Cena: od najtańszych', value: '-price', checked: false },
+    { label: 'Cena: od najdroższych', value: 'price', checked: false },
 ];

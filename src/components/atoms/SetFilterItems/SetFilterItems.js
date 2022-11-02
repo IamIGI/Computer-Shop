@@ -16,23 +16,37 @@ const SetFilterItems = ({
     width,
     description,
     filterData,
-    handleProducers,
-    handleClearProducersFilters,
-    clearProducers,
+    handleItems,
+    handleClearItemsFilters,
+    clearItems,
+    OneTimeChoice,
 }) => {
     const [toggle, setToggle] = useState(false);
     const [check, setCheck] = useState(filterData);
     const [quantity, setQuantity] = useState(0);
+    const [placeholder, setPlaceHolder] = useState(OneTimeChoice ? filterData[0].label : '');
 
     const handleCheck = (key, value) => {
-        setCheck((prevValues) =>
-            prevValues.map((obj) => {
-                if (obj.value === key) {
-                    return { ...obj, checked: !value };
-                }
-                return obj;
-            })
-        );
+        if (!OneTimeChoice) {
+            setCheck((prevValues) =>
+                prevValues.map((obj) => {
+                    if (obj.value === key) {
+                        return { ...obj, checked: !value };
+                    }
+                    return obj;
+                })
+            );
+        } else {
+            setCheck(
+                filterData.map((obj) => {
+                    if (obj.value === key) {
+                        setPlaceHolder(obj.label);
+                        return { ...obj, checked: !value };
+                    }
+                    return obj;
+                })
+            );
+        }
     };
 
     useEffect(() => {
@@ -41,29 +55,29 @@ const SetFilterItems = ({
             if (check[i].checked) ++count;
         }
         setQuantity(count);
-        handleProducers(check);
+        handleItems(check);
 
-        if (clearProducers) {
-            handleClearProducersFilters(false);
+        if (clearItems) {
+            handleClearItemsFilters(false);
             setCheck(filterData);
-            handleProducers(check);
+            handleItems(check);
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [check, clearProducers]);
+    }, [check, clearItems]);
 
     return (
         <Wrapper>
             <InputSection>
                 <InputField
                     width={width}
-                    placeholder="Wybierz"
+                    placeholder={OneTimeChoice ? placeholder : 'Wybierz'}
                     onClick={() => {
                         setToggle(true);
                     }}
                 />
                 <InputDescription>
-                    {description} {quantity !== 0 && `(${quantity})`}
+                    {description} {!OneTimeChoice && quantity !== 0 && `(${quantity})`}
                 </InputDescription>
                 <FilterOptions display={toggle} width={width} onMouseLeave={() => setToggle(false)}>
                     {check.map((item) => (

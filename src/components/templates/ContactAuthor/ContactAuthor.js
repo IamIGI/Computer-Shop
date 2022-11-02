@@ -20,9 +20,9 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { BsEnvelope } from 'react-icons/bs';
 import { TextArea } from 'components/molecules/PopUpAddComment/PopUpAddComment.style';
 import { Input } from 'components/atoms/Input/Input';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import { BuyButton } from 'components/molecules/ProductBuyContent/ProductBuyContent.style';
-import { SelectStyle } from 'components/atoms/SelectStyle/SelectStyle';
+import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import { sendContactAPI } from 'api/contact';
 import { BiMessageAltCheck, BiCommentError } from 'react-icons/bi';
 import { formReducer, ACTIONS, INITIAL_STATE, MESSAGE_OPTIONS } from './formReducer';
@@ -30,11 +30,26 @@ import toast from 'react-hot-toast';
 
 const ContactAuthor = () => {
     const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
+    const [clearMessageType, setClearMessageType] = useState('false');
     const notify = () =>
         toast.success('Wiadomość została wysłana', {
             icon: '📧',
             duration: 2000,
         });
+
+    const handleMessageType = (data) => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) {
+                dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: data[i].value });
+                break;
+            }
+        }
+    };
+
+    const handleClearMessageTypeFilters = (data) => {
+        dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: 0 });
+        setClearMessageType(data);
+    };
 
     const handleInput = (e) => {
         dispatch({
@@ -164,20 +179,15 @@ const ContactAuthor = () => {
                             )}
                         </EmailSection>
                         <SelectSection>
-                            <SelectStyle width="200px">
-                                <select
-                                    value={state.messageCategory}
-                                    onChange={(e) =>
-                                        dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: e.target.value })
-                                    }
-                                >
-                                    {MESSAGE_OPTIONS.map((option, index) => (
-                                        <option value={option.value} key={index}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </SelectStyle>
+                            <SetFilterItems
+                                OneTimeChoice={true}
+                                width="230px"
+                                description={'Typ wiadomości'}
+                                filterData={MESSAGE_OPTIONS}
+                                handleItems={handleMessageType}
+                                handleClearItemsFilters={handleClearMessageTypeFilters}
+                                clearItems={clearMessageType}
+                            />
                         </SelectSection>
                         <FileSection>
                             <input
