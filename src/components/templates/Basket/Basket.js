@@ -43,7 +43,6 @@ const Basket = () => {
     const [priceForDelivery, setPriceForDelivery] = useState();
     const [isOpen, setIsOpen] = useState([false]);
     const [orderId, setOrderId] = useState('');
-    const [isSuccess, setIsSuccess] = useState({ isTrue: false, message: '' });
     const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
 
     useEffect(() => {
@@ -60,7 +59,6 @@ const Basket = () => {
             } catch (err) {
                 console.log(err);
             }
-            setIsSuccess({ isTrue: true, message: '' });
             setIsOpen([true]);
             let stateObj = { foo: 'bar' };
             window.history.replaceState(stateObj, 'page 3', 'basket.html');
@@ -191,7 +189,6 @@ const Basket = () => {
                 isMounted && sendUserOrder();
                 //clearData
                 if (orderTemplateDocument.transactionInfo.paymentMethod !== 'card') {
-                    setIsSuccess({ isTrue: true, message: '' });
                     setIsOpen([true]);
                 }
             }
@@ -242,12 +239,7 @@ const Basket = () => {
                 </PrevWrapper>
             </Prev>
             <Modal position={[30, -80]} width={600} open={isOpen} onClose={onPopUpClose}>
-                <BoughtPopUp
-                    onClose={onPopUpClose}
-                    orderId={orderId}
-                    isUserLogIn={Boolean(auth.id)}
-                    isSuccess={isSuccess}
-                />
+                <BoughtPopUp onClose={onPopUpClose} orderId={orderId} isUserLogIn={Boolean(auth.id)} />
             </Modal>
         </Wrapper>
     );
