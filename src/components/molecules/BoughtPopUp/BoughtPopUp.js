@@ -16,7 +16,7 @@ import useBasket from 'hooks/useBasket';
 import useOrder from 'hooks/useOrder';
 import { BASE_URL } from 'data/GlobalVariables';
 
-const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
+const BoughtPopUp = ({ onClose, orderId, isUserLogIn, isSuccess = true }) => {
     const { basketItems } = useBasket();
     const { setOrderItem } = useOrder();
 
@@ -30,38 +30,54 @@ const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
                 <div>
                     <RiCake3Line />
                 </div>
-                <TitleDescription> Gratulacje !</TitleDescription>
+                <TitleDescription> {isSuccess.isTrue ? 'Gratulacje !' : 'Przerwano zamówienie'}</TitleDescription>
             </TitleSection>
             <InsideWrapper>
-                <ListOfProducts>
-                    <p>Zakupione produkty:</p>
-                    {basketItems.map((product) => (
-                        <Product key={product._id}>
-                            <Description>
-                                <span>&#x2022;</span>
-                                {product.name.substring(0, 30)} ...
-                            </Description>
-                            <Quantity> {product.quantity} szt.</Quantity>
-                        </Product>
-                    ))}
-                </ListOfProducts>
+                {isSuccess.isTrue ? (
+                    <ListOfProducts>
+                        <p>Zakupione produkty:</p>
+                        {basketItems.map((product) => (
+                            <Product key={product._id}>
+                                <Description>
+                                    <span>&#x2022;</span>
+                                    {product.name.substring(0, 30)} ...
+                                </Description>
+                                <Quantity> {product.quantity} szt.</Quantity>
+                            </Product>
+                        ))}
+                    </ListOfProducts>
+                ) : (
+                    <p>{isSuccess.message}</p>
+                )}
+
                 <BottomSection>
-                    {isUserLogIn ? (
+                    {isSuccess.isTrue ? (
                         <>
-                            <Link
-                                onClick={() => goToOrderItem({ _id: orderId })}
-                                to={`/accountSettings/orders/history/${orderId}`}
-                            >
-                                <Button onClick={() => onClose()}>Status zamówienia</Button>
-                            </Link>
+                            {' '}
+                            {isUserLogIn ? (
+                                <>
+                                    <Link
+                                        onClick={() => {
+                                            onClose();
+                                            goToOrderItem({ _id: orderId });
+                                        }}
+                                        to={`/accountSettings/orders/history/${orderId}`}
+                                    >
+                                        <Button>Status zamówienia</Button>
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <a href={`${BASE_URL}/order/pdf/${orderId}`}>
+                                        <Button>Pobierz fakturę</Button>
+                                    </a>
+                                </>
+                            )}
                         </>
                     ) : (
-                        <>
-                            <a href={`${BASE_URL}/order/pdf/${orderId}`}>
-                                <Button>Pobierz fakturę</Button>{' '}
-                            </a>
-                        </>
+                        <></>
                     )}
+
                     <Button onClick={() => onClose()}>Wyjdź</Button>
                 </BottomSection>
             </InsideWrapper>

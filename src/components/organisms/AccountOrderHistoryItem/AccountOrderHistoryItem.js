@@ -70,7 +70,9 @@ const AccountOrderHistoryItem = () => {
                             <SectionTitle>
                                 <SectionDescription
                                     title={`Zamówienie `}
-                                    description={`nr. ${orderItem._id} | ${getDate(orderItem.transactionInfo.date)}`}
+                                    description={`nr. ${orderItem._id} | ${getDate(
+                                        orderItem.transactionInfo.date.split(':')[0]
+                                    )}`}
                                     icon={<BsBox />}
                                 />
                             </SectionTitle>
