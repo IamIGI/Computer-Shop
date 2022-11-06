@@ -21,7 +21,7 @@ const MainTemplate = ({ children }) => {
     return (
         <>
             <GlobalStyle />
-            <Toaster position="top-center" />
+            <Toaster position="bottom-left" />
             <Wrapper>
                 <BrowserRouter>
                     <ThemeProvider theme={theme}>

@@ -49,7 +49,10 @@ const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
                     {isUserLogIn ? (
                         <>
                             <Link
-                                onClick={() => goToOrderItem({ _id: orderId })}
+                                onClick={() => {
+                                    onClose();
+                                    goToOrderItem({ _id: orderId });
+                                }}
                                 to={`/accountSettings/orders/history/${orderId}`}
                             >
                                 <Button onClick={() => onClose()}>Status zamówienia</Button>

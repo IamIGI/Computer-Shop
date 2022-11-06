@@ -28,7 +28,7 @@ const ProductBuyContent = ({ product }) => {
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
     const notify = () =>
-        toast.success('Product dodany do koszyka', {
+        toast.success('Produkt dodany do koszyka', {
             icon: '💻',
             duration: 2000,
         });

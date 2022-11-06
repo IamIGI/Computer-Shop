@@ -121,12 +121,12 @@ const AccountSettingsOrders = () => {
                                         >
                                             <OrderDescription>
                                                 <h4>{getStatus(item.status)}</h4>
-                                                {/* <br /> */}
-                                                <DateDecorator>{getDate(item.transactionInfo.date)}</DateDecorator>
+                                                <DateDecorator>
+                                                    {getDate(item.transactionInfo.date.split(':')[0])}
+                                                </DateDecorator>
                                                 nr {item._id}
                                                 <br />
                                                 <h4>{item.transactionInfo.price} zł</h4>
-                                                {/* <br /> */}
                                             </OrderDescription>
                                             <OrderProducts>
                                                 {item.products.map((product, index) => (

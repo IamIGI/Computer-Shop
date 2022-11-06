@@ -16,6 +16,7 @@ import Modal from 'components/atoms/Modal/Modal';
 import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
 import { initDeliveryCheckboxesOpt, initDeliveryCheckboxesPay, initRecipientDetails } from './Basket.logic';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -42,10 +43,44 @@ const Basket = () => {
     const [priceForDelivery, setPriceForDelivery] = useState();
     const [isOpen, setIsOpen] = useState([false]);
     const [orderId, setOrderId] = useState('');
+    const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
 
-    const clearLocalStorage = () => {
-        localStorage.removeItem('basketItems');
+    useEffect(() => {
+        // Check to see if this is a redirect back from Checkout
+        const query = new URLSearchParams(window.location.search);
+
+        if (query.get('success')) {
+            try {
+                async function saveOrder() {
+                    const response = await axiosPrivate.post(`order/make`, orderTemplateData);
+                    setOrderId(response.data.OrderId);
+                }
+                saveOrder();
+            } catch (err) {
+                console.log(err);
+            }
+            setIsOpen([true]);
+            let stateObj = { foo: 'bar' };
+            window.history.replaceState(stateObj, 'page 3', 'basket.html');
+        }
+        // eslint-disable-next-line
+    }, []);
+
+    const resetAllData = () => {
+        setProducts([]);
         setBasketItems([]);
+        setOrderData(initRecipientDetails);
+        setFinishOrder(false);
+        setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
+        setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
+        localStorage.removeItem('basketItems');
+        localStorage.removeItem('orderData');
+        localStorage.removeItem('deliveryMethod');
+        localStorage.removeItem('paymentMethod');
+    };
+
+    const onPopUpClose = () => {
+        resetAllData();
         setIsOpen([false]);
     };
 
@@ -127,24 +162,35 @@ const Basket = () => {
             if (finishOrder === true) {
                 const sendUserOrder = async () => {
                     try {
-                        const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
-                        setOrderId(response.data.OrderId);
+                        if (orderTemplateDocument.transactionInfo.paymentMethod === 'card') {
+                            const products = [];
+                            orderTemplateDocument.products.map((product) =>
+                                products.push({ id: product._id, quantity: product.quantity })
+                            );
+
+                            const stripeObj = {
+                                products,
+                                delivery: orderTemplateDocument.transactionInfo.deliveryMethod,
+                            };
+
+                            const response = await axiosPrivate.post(`stripe/checkout`, stripeObj);
+                            setOrderTemplateData(orderTemplateDocument);
+                            window.location = response.data.url;
+                        } else {
+                            const response = await axiosPrivate.post(`order/make`, orderTemplateDocument);
+                            setOrderId(response.data.OrderId);
+                        }
                     } catch (err) {
                         console.log(err);
                         await logout();
-                        console.log(auth);
                         navigate('/', { state: { from: location }, replace: true });
                     }
                 };
                 isMounted && sendUserOrder();
                 //clearData
-
-                setProducts([]);
-                setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
-                setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
-                setOrderData(initRecipientDetails);
-                setFinishOrder(false);
-                setIsOpen([true]);
+                if (orderTemplateDocument.transactionInfo.paymentMethod !== 'card') {
+                    setIsOpen([true]);
+                }
             }
         } else {
             setFinishOrder(false);
@@ -192,8 +238,8 @@ const Basket = () => {
                     />
                 </PrevWrapper>
             </Prev>
-            <Modal position={[30, -80]} width={600} open={isOpen} onClose={() => clearLocalStorage()}>
-                <BoughtPopUp onClose={() => clearLocalStorage()} orderId={orderId} isUserLogIn={Boolean(auth.id)} />
+            <Modal position={[30, -80]} width={600} open={isOpen} onClose={onPopUpClose}>
+                <BoughtPopUp onClose={onPopUpClose} orderId={orderId} isUserLogIn={Boolean(auth.id)} />
             </Modal>
         </Wrapper>
     );

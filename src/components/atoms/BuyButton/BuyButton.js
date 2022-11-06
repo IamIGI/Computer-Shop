@@ -8,7 +8,7 @@ const BuyButton = ({ item }) => {
     const { basketItems, setBasketItems } = useBasket();
     const product = item;
     const notify = () =>
-        toast.success('Product dodany do koszyka', {
+        toast.success('Produkt dodany do koszyka', {
             icon: '💻',
             duration: 2000,
         });
