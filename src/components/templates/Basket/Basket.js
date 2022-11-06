@@ -174,9 +174,8 @@ const Basket = () => {
                                 products,
                                 delivery: orderTemplateDocument.transactionInfo.deliveryMethod,
                             };
-                            const orderData = { stripeObj, orderTemplateDocument };
 
-                            const response = await axiosPrivate.post(`stripe/checkout`, orderData);
+                            const response = await axiosPrivate.post(`stripe/checkout`, stripeObj);
                             setOrderTemplateData(orderTemplateDocument);
                             window.location = response.data.url;
                         } else {
