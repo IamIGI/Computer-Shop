@@ -62,7 +62,7 @@ export const recipientDetails = yup
     .object({
         name: yup
             .string()
-            .matches(/^[a-zA-Z\s]*$/)
+            .matches(/^[\s\p{L}]+$/u)
             .required(),
         street: yup.string().required(),
         zipCode: yup
