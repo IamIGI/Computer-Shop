@@ -100,15 +100,15 @@ const ContactAuthor = () => {
         try {
             const response = await sendContactAPI(formData);
 
-            if (response.code === 1) {
+            if (response.code === '001') {
                 handleError([true, 'Wiadomość zawiera słowa wulgarne']);
-            } else if (response.code === 2) {
+            } else if (response.code === '002') {
                 handleError([true, 'Imie zawiera słowa wulgarne']);
-            } else if (response.code === 3) {
+            } else if (response.code === '003') {
                 handleError([true, "Dopuszczalne rozszerznia: '.png', '.jpg', 'jpeg'"]);
-            } else if (response.code === 4) {
+            } else if (response.code === '004') {
                 handleError([true, 'Maksymalan waga pliku: 1MB']);
-            } else if (response.code === 0) {
+            } else if (response.code === '000') {
                 handleError([false, '']);
                 handleSuccess(true);
 
