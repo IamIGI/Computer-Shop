@@ -7,12 +7,8 @@ const articlesApi = axios.create({
 });
 
 const getAllArticles = async (type) => {
-    const data = {
-        type,
-    };
-
     try {
-        const response = await articlesApi.post(`/all`, data);
+        const response = await articlesApi.get(`/all/${type}`);
         return response.data;
     } catch (err) {
         if (err.response) {

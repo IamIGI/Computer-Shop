@@ -63,7 +63,7 @@ const NavBar = () => {
                     )}
 
                     <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
-                    <StyledLink target={'/articles'} icon={<BiNews />} description={'Artykuły'} />
+                    <StyledLink target={'/articles/all/none'} icon={<BiNews />} description={'Artykuły'} />
                     <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
                     <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
                     <MediumScreenSection>
@@ -140,7 +140,7 @@ const NavBar = () => {
                             <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
                         </div>
                         <div onClick={() => setToggleMenu(MenuInitPosition)}>
-                            <StyledLink target={'/articles'} icon={<BiNews />} description={'Artykuły'} />
+                            <StyledLink target={'/articles/all/none'} icon={<BiNews />} description={'Artykuły'} />
                         </div>
                         <div onClick={() => setToggleMenu(MenuInitPosition)}>
                             <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
