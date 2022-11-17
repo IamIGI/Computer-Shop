@@ -19,15 +19,14 @@ import useAuth from 'hooks/useAuth';
 import useLogout from 'hooks/useLogout';
 import NoRealWebsiteAlert from 'components/molecules/NoRealWebisteAlert/NoRealWebsiteAlert';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { RiUserReceived2Line } from 'react-icons/ri';
-import { VscAccount } from 'react-icons/vsc';
+import { RiUserReceived2Line, RiCloseFill } from 'react-icons/ri';
+import { VscAccount, VscVm } from 'react-icons/vsc';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsBasket3 } from 'react-icons/bs';
+import { BiNews } from 'react-icons/bi';
 import useBasket from 'hooks/useBasket';
 import StyledLink from 'components/atoms/StyledLink/StyledLink';
 import WebsiteLogo from 'components/atoms/WebsiteLogo/WebsiteLogo';
-import { RiCloseFill } from 'react-icons/ri';
-import { VscVm } from 'react-icons/vsc';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
@@ -64,6 +63,7 @@ const NavBar = () => {
                     )}
 
                     <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
+                    <StyledLink target={'/articles'} icon={<BiNews />} description={'Artykuły'} />
                     <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
                     <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
                     <MediumScreenSection>
@@ -138,6 +138,9 @@ const NavBar = () => {
                         )}
                         <div onClick={() => setToggleMenu(MenuInitPosition)}>
                             <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
+                        </div>
+                        <div onClick={() => setToggleMenu(MenuInitPosition)}>
+                            <StyledLink target={'/articles'} icon={<BiNews />} description={'Artykuły'} />
                         </div>
                         <div onClick={() => setToggleMenu(MenuInitPosition)}>
                             <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />

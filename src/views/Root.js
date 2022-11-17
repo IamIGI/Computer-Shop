@@ -21,6 +21,8 @@ import AccountOrderHistoryItem from 'components/organisms/AccountOrderHistoryIte
 import ContactAuthor from 'components/templates/ContactAuthor/ContactAuthor';
 import Authorization from 'components/templates/Mobile/Authorization/Authorization';
 import NoRealWebsitePage from 'components/templates/NoRealWebsite/NoRealWebsitePage';
+import Articles from 'components/templates/Articles/Articles';
+import Article from 'components/templates/Article/Article';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -37,7 +39,9 @@ const Root = () => {
                     <Route path="" element={<Home />} />
                     <Route path="allProducts" element={<AllProducts />} />
                     <Route path="about" element={<About />} />
-                    <Route path={`/product/:id`} element={<Product />} />
+                    <Route path="articles" element={<Articles />} />
+                    <Route path="articles/:id" element={<Article />} />
+                    <Route path="product/:id" element={<Product />} />
                     <Route path="basket" element={<Basket />} />
                     <Route path="contact" element={<ContactAuthor />} />
                     <Route path="authorization" element={<Authorization />} />
