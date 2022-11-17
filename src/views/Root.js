@@ -39,7 +39,7 @@ const Root = () => {
                     <Route path="" element={<Home />} />
                     <Route path="allProducts" element={<AllProducts />} />
                     <Route path="about" element={<About />} />
-                    <Route path="articles" element={<Articles />} />
+                    <Route path="articles/all/:type" element={<Articles />} />
                     <Route path="articles/:id" element={<Article />} />
                     <Route path="product/:id" element={<Product />} />
                     <Route path="basket" element={<Basket />} />
