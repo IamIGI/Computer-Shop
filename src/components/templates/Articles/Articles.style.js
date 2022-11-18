@@ -179,20 +179,15 @@ export const ArticleContainer = styled(NavLink)`
     justify-content: flex-start;
     align-items: flex-start;
     padding: 7px 10px;
-    height: 100%;
-    max-height: 230px;
-    min-height: 230px;
+    height: fit-content;
     gap: 10px;
     width: fit-content;
     border-bottom: 1px solid grey;
-
-    @media screen and (max-width: 750px) {
-        max-height: 270px;
-    }
+    border-radius: 10px;
 
     :hover {
         cursor: pointer;
-        border: 0px;
+        border-bottom: 1px solid transparent;
         box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
         border-radius: 10px;
     }
@@ -232,19 +227,6 @@ export const DescriptionContainer = styled.div`
         h2 {
             font-size: ${({ theme }) => theme.fontSize.m_plus};
         }
-    }
-`;
-
-export const Date = styled.div`
-    width: 100%;
-    align-items: left;
-    text-align: left;
-    padding-left: 4%;
-    color: #989898;
-
-    @media screen and (max-width: 500px) {
-        font-size: ${({ theme }) => theme.fontSize.m};
-        padding-left: 2%;
     }
 `;
 

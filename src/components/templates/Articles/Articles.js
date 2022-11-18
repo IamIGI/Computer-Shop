@@ -7,7 +7,6 @@ import {
     Category,
     ArticleContainer,
     DescriptionContainer,
-    Date,
     PrevImage,
     MenuOptionHover,
     MenuOptionNoHover,
@@ -17,31 +16,8 @@ import { useParams } from 'react-router-dom';
 import articlesApi from '../../../api/articles';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import useWindowSize from 'hooks/useWindowSize';
-
-function getCategoryName(type) {
-    switch (type) {
-        case 'news':
-            return 'Aktualności';
-        case 'guide':
-            return 'Poradniki';
-        case 'none':
-            return 'Wszystko';
-        default:
-            console.log('Bade type');
-            break;
-    }
-}
-
-function getPrevDescription(desc, limit) {
-    let description = [];
-    if (desc.length > limit) {
-        description.push(desc.substr(0, limit));
-        description.push('...');
-        return `${description[0]} ${description[1]}`;
-    } else {
-        return desc;
-    }
-}
+import articlesUtils from './Articles.utils';
+import { Author, InfoWrapper, Date } from '../Article/Article.style';
 
 const Articles = () => {
     const articleType = useParams().type;
@@ -104,7 +80,7 @@ const Articles = () => {
                         </MenuOption>
                     </Menu>
                     <Category>
-                        <h1>{getCategoryName(articleType)}</h1>
+                        <h1>{articlesUtils.getCategoryName(articleType)}</h1>
                     </Category>
                     <ArticleWrapper>
                         {articles.map((article) => (
@@ -112,9 +88,12 @@ const Articles = () => {
                                 <DescriptionContainer>
                                     <div>
                                         <h2>{article.title}</h2>
-                                        <p>{getPrevDescription(article.prevDescription, descriptionSize)}</p>
+                                        <p>{articlesUtils.trimText(article.prevDescription, descriptionSize)}</p>
                                     </div>
-                                    <Date>{article.updatedAt.split('-')[0]}</Date>
+                                    <InfoWrapper>
+                                        <Date>{article.updatedAt.split('-')[0]}</Date>
+                                        <Author>{article.author}</Author>
+                                    </InfoWrapper>
                                 </DescriptionContainer>
                                 <PrevImage>
                                     <img src={article.prevImage} alt="article" />
