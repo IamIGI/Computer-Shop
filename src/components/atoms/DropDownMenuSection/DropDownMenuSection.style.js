@@ -59,7 +59,6 @@ export const ActiveDropDown = styled.div`
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-top: ${(props) => (props.display ? '1px solid grey' : '1px solid transparent')};
-    /* border-left: ${(props) => (props.display ? '1px solid grey' : '1px solid transparent')}; */
     border-right: ${(props) => (props.display ? '1px solid grey' : '1px solid transparent')};
 
     &:hover {
@@ -79,14 +78,12 @@ export const ProperMenu = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
-    //--------style box
     background-color: white;
     z-index: 5;
     padding: 5px 10px 8px 2px;
-    /* border-top-left-radius: 10px; */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    /* border-left: 1px solid grey; */
+
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
     width: fit-content;
