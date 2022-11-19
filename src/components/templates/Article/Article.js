@@ -4,21 +4,15 @@ import {
     LoadingWrapper,
     ArticleWrapper,
     ContentsWrapper,
-    Contents,
     TitlesWrapper,
     TitleContainer,
     Number,
     TitleContents,
     Legend,
     InfoWrapper,
-    Title,
     Date,
     Author,
-    PrevDescription,
     DescriptionWrapper,
-    DescriptionTitle,
-    ContentWrapper,
-    Content,
     DescriptionImg,
     BigScreen,
     SmallScreen,
@@ -27,8 +21,6 @@ import { useParams } from 'react-router-dom';
 import articlesApi from '../../../api/articles';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import articlesUtils from '../Articles/Articles.utils';
-import { map } from 'lodash';
-import articles from '../../../api/articles';
 
 const Article = () => {
     const articleId = useParams().id;

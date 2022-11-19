@@ -183,8 +183,6 @@ export const Author = styled.div`
     text-align: right;
 `;
 
-export const PrevDescription = styled.div``;
-
 export const DescriptionWrapper = styled.div`
     h2 {
         font-size: ${({ theme }) => theme.fontSize.l_plus};
@@ -211,8 +209,6 @@ export const DescriptionWrapper = styled.div`
     }
 `;
 
-export const DescriptionTitle = styled.div``;
-
 export const DescriptionImg = styled.div`
     margin: 10px 0px 0px 0px;
     img {
@@ -222,8 +218,6 @@ export const DescriptionImg = styled.div`
 `;
 
 export const ContentContainer = styled.div``;
-
-export const Content = styled.div``;
 
 export const BigScreen = styled.div`
     display: flex;
