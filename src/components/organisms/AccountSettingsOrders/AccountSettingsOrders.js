@@ -39,6 +39,8 @@ import { HiDotsVertical } from 'react-icons/hi';
 import { GrDocumentPdf } from 'react-icons/gr';
 import { BASE_URL } from 'data/GlobalVariables';
 
+import PageMenu from 'components/molecules/PageMenu/PageMenu';
+
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
     const { setOrderItem } = useOrder();
@@ -188,13 +190,7 @@ const AccountSettingsOrders = () => {
                 </BodySection>
                 <Line />
                 <FooterSection>
-                    <>
-                        {countPageButtons.map((item, index) => (
-                            <PageButton key={index} onClick={() => buttonClicked(item)}>
-                                {item}
-                            </PageButton>
-                        ))}
-                    </>
+                    <PageMenu countPageButtons={countPageButtons} pageNr={pageNr} buttonClicked={buttonClicked} />
                 </FooterSection>
             </Wrapper>
         </AccountSettings>

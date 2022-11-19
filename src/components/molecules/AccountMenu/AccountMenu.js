@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Wrapper, List, Nav, StyledLink } from './AccountMenu.style';
 import { FiSettings, FiPackage } from 'react-icons/fi';
 

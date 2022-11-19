@@ -5,6 +5,10 @@ export const Wrapper = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 300px 1fr;
+
+    @media screen and (max-width: 1210px) {
+        grid-template-columns: 230px 1fr;
+    }
 `;
 
 export const LeftWrapper = styled.div`
