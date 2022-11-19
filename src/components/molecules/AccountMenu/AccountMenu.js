@@ -13,7 +13,6 @@ const AccountMenu = () => {
                         <StyledLink to="/accountSettings/Settings">
                             <div>
                                 <span>
-                                    {' '}
                                     <FiSettings />
                                 </span>
                             </div>
@@ -24,7 +23,6 @@ const AccountMenu = () => {
                         <StyledLink to="/accountSettings/Orders">
                             <div>
                                 <span>
-                                    {' '}
                                     <FiPackage />
                                 </span>
                             </div>

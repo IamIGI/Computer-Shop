@@ -23,10 +23,12 @@ import { RiUserReceived2Line, RiCloseFill } from 'react-icons/ri';
 import { VscAccount, VscVm } from 'react-icons/vsc';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsBasket3 } from 'react-icons/bs';
-import { BiNews } from 'react-icons/bi';
+import { FiPackage, FiSettings } from 'react-icons/fi';
+import { BiNews, BiBuildingHouse } from 'react-icons/bi';
 import useBasket from 'hooks/useBasket';
 import StyledLink from 'components/atoms/StyledLink/StyledLink';
 import WebsiteLogo from 'components/atoms/WebsiteLogo/WebsiteLogo';
+import DropDownMenuSection from 'components/atoms/DropDownMenuSection/DropDownMenuSection';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
@@ -36,6 +38,7 @@ const NavBar = () => {
     const { auth } = useAuth();
     const logout = useLogout();
     const { basketItems } = useBasket();
+    const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
 
     const getQuantityOfItems = () => {
         let temp = 0;
@@ -47,7 +50,6 @@ const NavBar = () => {
         setToggleMenu(false);
         await logout();
     };
-    const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
 
     return (
         <Wrapper>
@@ -64,26 +66,27 @@ const NavBar = () => {
 
                     <StyledLink target={'/allProducts'} icon={<VscInspect />} description={'Produkty'} />
                     <StyledLink target={'/articles/all/none'} icon={<BiNews />} description={'Artykuły'} />
-                    <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
-                    <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
+                    <DropDownMenuSection icon={<BiBuildingHouse />} description={'O Firmie'}>
+                        <StyledLink target={'/about'} icon={<VscMilestone />} description={'O Nas'} />
+                        <StyledLink target={'/contact'} icon={<BsEnvelope />} description={'Kontakt'} />
+                    </DropDownMenuSection>
                     <MediumScreenSection>
-                        <div style={{ position: 'relative' }}>
-                            <StyledLink target={'basket'} icon={<BsBasket3 />} description={'Koszyk'} />
-                            {getQuantityOfItems() !== 0 && (
-                                <QuantityOfProductMediumScreen>{getQuantityOfItems()}</QuantityOfProductMediumScreen>
-                            )}
-                        </div>
                         {Object.keys(auth).length !== 0 ? (
-                            <>
+                            <DropDownMenuSection icon={<VscAccount />} description={'Konto'}>
                                 <StyledLink
                                     target={'accountSettings/Settings'}
-                                    icon={<VscAccount />}
-                                    description={'Konto'}
+                                    icon={<FiSettings />}
+                                    description={'Ustawienia'}
+                                />
+                                <StyledLink
+                                    target={'/accountSettings/orders'}
+                                    icon={<FiPackage />}
+                                    description={'Zamówienia'}
                                 />
                                 <div onClick={signOut}>
                                     <StyledLink target={''} icon={<RiLogoutCircleLine />} description={'Wyloguj się'} />
                                 </div>
-                            </>
+                            </DropDownMenuSection>
                         ) : (
                             <StyledLink
                                 target={'/authorization'}
@@ -91,23 +94,26 @@ const NavBar = () => {
                                 description={'Logowanie'}
                             />
                         )}
+
+                        {getQuantityOfItems() !== 0 && (
+                            <div style={{ position: 'relative' }}>
+                                <StyledLink target={'basket'} icon={<BsBasket3 />} description={'Koszyk'} />
+
+                                <QuantityOfProductMediumScreen>{getQuantityOfItems()}</QuantityOfProductMediumScreen>
+                            </div>
+                        )}
                     </MediumScreenSection>
                 </NormalScreenSection>
                 <SmallScreenSection>
                     <SmallScreenMenuPreview>
                         {getQuantityOfItems() !== 0 && (
                             <div style={{ position: 'relative' }}>
-                                <StyledLink
-                                    target={'/basket'}
-                                    icon={<BsBasket3 />}
-                                    description={''}
-                                    smallScreen={true}
-                                />
+                                <StyledLink target={'/basket'} icon={<BsBasket3 />} smallScreen={true} />
                                 <QuantityOfProductSmallScreen>{getQuantityOfItems()}</QuantityOfProductSmallScreen>
                             </div>
                         )}
                         <HamburgerMenu>
-                            <GiHamburgerMenu onClick={() => setToggleMenu('0px')} />
+                            <GiHamburgerMenu onClick={() => setToggleMenu('-5px')} />
                         </HamburgerMenu>
                     </SmallScreenMenuPreview>
                     <StyledLinksSmallScreenSection

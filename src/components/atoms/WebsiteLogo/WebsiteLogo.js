@@ -6,7 +6,6 @@ const WebsiteLogo = () => {
     return (
         <Wrapper to="/">
             <Home>
-                {' '}
                 <Icon>
                     <span>
                         <VscVm />

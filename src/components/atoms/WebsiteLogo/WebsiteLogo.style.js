@@ -15,15 +15,18 @@ export const Home = styled.div`
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
-    padding: 12px;
+    padding: 4px 12px 6px 6px;
     font-size: ${({ theme }) => theme.fontSize.xl};
     border-bottom-left-radius: 30px;
     border-bottom: 2px solid grey;
     border-left: 2px solid grey;
 
+    margin-bottom: 5px;
     @media screen and (max-width: 650px) {
         font-size: ${({ theme }) => theme.fontSize.l};
-        padding: 10px;
+        padding: 2px 6px 3px 3px;
+        border-bottom-left-radius: 20px;
+        margin-bottom: 12px;
     }
 
     :hover {

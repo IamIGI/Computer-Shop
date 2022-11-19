@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
     margin-top: 10px;
-    padding: 10px 0;
+    padding: 10px 0px 0px 0px;
     padding-right: 3%;
 `;
 
@@ -15,7 +15,7 @@ export const InsideWrapper = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     padding-left: 5%;
 
     min-height: fit-content;
@@ -114,7 +114,6 @@ export const HamburgerMenu = styled.div`
 //-------------SMALL SCREEN--------------
 export const StyledLinksSmallScreenSection = styled.div`
     padding: 10px 20px 10px 10px;
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -126,13 +125,15 @@ export const StyledLinksSmallScreenSection = styled.div`
     right: ${(props) => props.position};
     width: 230px;
     height: fit-content;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     border: 1px solid gray;
 
     background-color: white;
     z-index: 5;
+    gap: 10px;
 
     @media screen and (max-width: 650px) {
-        font-size: ${({ theme }) => theme.fontSize.xl};
         gap: 20px;
         align-items: center;
         top: 0px;
