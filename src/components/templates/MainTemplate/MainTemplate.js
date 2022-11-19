@@ -33,7 +33,7 @@ const MainTemplate = ({ children }) => {
                                             <ChangeHotShootTimer />
                                             <AuthProvider>
                                                 <NavBar />
-                                                <InsideWrapper>
+                                                <InsideWrapper id="insideWrapper">
                                                     {children}
                                                     <AccountPreviewSection />
                                                 </InsideWrapper>

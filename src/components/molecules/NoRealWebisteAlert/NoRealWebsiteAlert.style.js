@@ -6,9 +6,9 @@ export const Wrapper = styled.div`
     top: 10px;
     left: 15px;
 
-    /* @media screen and (max-width: 650px) {
-        left: 200px;
-    } */
+    @media screen and (max-width: 650px) {
+        top: 12px;
+    }
 `;
 
 export const Link = styled(NavLink)`
