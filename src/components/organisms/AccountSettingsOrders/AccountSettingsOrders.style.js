@@ -30,7 +30,7 @@ export const OrderContent = styled(NavLink)`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    border-radius: 40px;
+    border-radius: 10px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
 
     &:hover {
@@ -84,32 +84,37 @@ export const DateDecorator = styled.div`
 `;
 
 export const OrderDescription = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     height: 100%;
     min-width: 350px;
     width: fit-content;
-    /* grid-column: 1/2; */
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     background-color: ${({ theme }) => theme.colors.lightLightGrey};
     text-align: left;
-    padding-left: 5%;
-    padding-top: 30px;
+    padding-left: 4%;
     h4 {
         padding: 7px 0;
         margin: 0;
     }
+
+    @media screen and (max-width: 1250px) {
+        min-width: 300px;
+    }
 `;
 
 export const OrderProducts = styled.div`
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     height: 100%;
     width: 100%;
-    justify-content: left;
-    padding-left: 5%;
+    padding-left: 4%;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    flex-direction: row;
 `;
 export const ProductImage = styled.div`
     position: relative;
@@ -137,26 +142,6 @@ export const ProductDescription = styled.div`
     padding-left: 5%;
     p {
         font-size: ${({ theme }) => theme.fontSize.l};
-    }
-`;
-
-export const PageButton = styled.div`
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    border: 1px solid ${({ theme }) => theme.colors.grey};
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    background-color: ${({ theme }) => theme.colors.lightLightGrey};
-    margin-left: 10px;
-    padding-top: 15px;
-    font-size: ${({ theme }) => theme.fontSize.l};
-
-    &:hover {
-        border: 1px solid ${({ theme }) => theme.colors.black};
-        box-shadow: 1px 1px 12px 1px ${({ theme }) => theme.colors.grey};
-        cursor: pointer;
     }
 `;
 

@@ -4,6 +4,15 @@ import { NavLink } from 'react-router-dom';
 export const Wrapper = styled.div`
     margin-top: 2%;
     width: 100%;
+    h2 {
+        font-size: ${({ theme }) => theme.fontSize.xl};
+    }
+
+    @media screen and (max-width: 1210px) {
+        h2 {
+            font-size: ${({ theme }) => theme.fontSize.l_plus};
+        }
+    }
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -16,6 +25,7 @@ export const StyledLink = styled(NavLink)`
     flex-direction: row;
     justify-content: flex-start;
     margin-bottom: 15px;
+
     div {
         margin-right: 10px;
     }
@@ -33,6 +43,10 @@ export const StyledLink = styled(NavLink)`
         span {
             color: ${({ theme }) => theme.colors.success};
         }
+    }
+
+    @media screen and (max-width: 1210px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
     }
 `;
 
