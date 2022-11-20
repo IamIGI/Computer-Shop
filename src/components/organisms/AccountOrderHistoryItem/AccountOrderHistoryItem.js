@@ -35,8 +35,10 @@ import {
     getDeliveryPrice,
 } from './AccountOrderHistoryItem.logic';
 import { BASE_URL } from 'data/GlobalVariables';
+import useWindowSize from 'hooks/useWindowSize';
 
 const AccountOrderHistoryItem = () => {
+    const windowSize = useWindowSize();
     const orderId = useParams().orderId;
     const axiosPrivate = useAxiosPrivate();
     const [waitForFetch, setWaitForFetch] = useState(true);
@@ -45,7 +47,6 @@ const AccountOrderHistoryItem = () => {
     useEffect(() => {
         const fetchOrder = async (orderId) => {
             try {
-                // const response = await axiosPrivate.get(`/orderhistory/${orderId}`);
                 const response = await axiosPrivate.get(`user/orderhistory/${orderId}`);
                 setOrderItem(response.data);
                 setWaitForFetch(false);
@@ -69,8 +70,9 @@ const AccountOrderHistoryItem = () => {
                         <OrderTitleSection>
                             <SectionTitle>
                                 <SectionDescription
+                                    showTitle={windowSize.width <= 470 ? false : true}
                                     title={`Zamówienie `}
-                                    description={`nr. ${orderItem._id} | ${getDate(
+                                    description={`nr. ${orderItem._id} 也 ${getDate(
                                         orderItem.transactionInfo.date.split(':')[0]
                                     )}`}
                                     icon={<BsBox />}
@@ -82,7 +84,6 @@ const AccountOrderHistoryItem = () => {
                         </HistorySection>
                         <OrderSection>
                             <OrderSectionTitle>Dostawa</OrderSectionTitle>
-
                             <OrderSectionDescription>
                                 <Icon>
                                     {getDeliveryMethodDescription(orderItem.transactionInfo.deliveryMethod).icon}
@@ -95,7 +96,6 @@ const AccountOrderHistoryItem = () => {
                         <UserDataSection>
                             <DeliveryData>
                                 <OrderSectionTitle>Adres odbioru</OrderSectionTitle>
-
                                 <UserDataDescription>
                                     <ul>
                                         <li>{orderItem.transactionInfo.recipientDetails.street}</li>
@@ -108,7 +108,6 @@ const AccountOrderHistoryItem = () => {
                             </DeliveryData>
                             <UserData>
                                 <OrderSectionTitle>Dane odbiorcy</OrderSectionTitle>
-
                                 <UserDataDescription>
                                     <ul>
                                         <li>

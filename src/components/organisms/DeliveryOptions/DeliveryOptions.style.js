@@ -98,7 +98,7 @@ export const Description = styled.div`
 
 export const SectionTitle = styled.div`
     margin-left: 40px;
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 500px) {
         margin-left: 20px;
     }
 `;

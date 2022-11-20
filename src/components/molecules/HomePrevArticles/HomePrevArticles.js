@@ -48,7 +48,6 @@ const HomePrevArticles = () => {
             try {
                 setWaitForFetch(true);
                 const response = await articlesApi.getAllArticles('none');
-                console.log(response);
                 setArticles(response);
                 setWaitForFetch(false);
             } catch (err) {
