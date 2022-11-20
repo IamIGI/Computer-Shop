@@ -37,6 +37,9 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 500px) {
         margin: 10px auto;
+        &:hover {
+            transform: scale(1, 1);
+        }
     }
 `;
 

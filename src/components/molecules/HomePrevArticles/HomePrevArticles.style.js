@@ -38,6 +38,10 @@ export const ArticleWrapper = styled(NavLink)`
     }
 
     @media screen and (max-width: 475px) {
+        &:hover {
+            transform: scale(1, 1);
+        }
+
         width: 300px;
         height: 400px;
     }

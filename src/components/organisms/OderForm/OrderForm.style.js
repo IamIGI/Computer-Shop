@@ -25,6 +25,11 @@ export const InputLocal = styled.input`
     @media screen and (max-width: 1000px) {
         font-size: 14px;
     }
+
+    @media screen and (max-width: 960px) {
+        margin: 10px 10px 15px 10px;
+    }
+
     @media screen and (max-width: 450px) {
         font-size: 14px;
         margin: 10px 10px 10px 10px;

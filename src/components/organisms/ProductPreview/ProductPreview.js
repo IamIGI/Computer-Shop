@@ -67,19 +67,13 @@ const ProductPreview = ({ filterInit, allProducts, filters, limitTheNumber }) =>
     return (
         <>
             {waitForFetch ? (
-                <>
-                    <LoadingAnimation loadingSize={15} />
-                </>
+                <LoadingAnimation loadingSize={15} />
             ) : products.length === 0 ? (
-                <>
-                    <BadFiltersInfo />
-                </>
+                <BadFiltersInfo />
             ) : (
                 <>
                     {showProducts.map((item, index) => (
-                        <>
-                            <ProductPreviewItem key={index} item={item} allProducts={allProducts} />
-                        </>
+                        <ProductPreviewItem key={index} item={item} allProducts={allProducts} />
                     ))}
                 </>
             )}

@@ -70,8 +70,11 @@ export const OrderContent = styled(NavLink)`
     justify-content: flex-start;
     border-radius: 10px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    transform: scale(1, 1);
+    transition: transform 0.5s ease;
 
     &:hover {
+        transform: scale(1.03, 1.03);
         border: 1px solid ${({ theme }) => theme.colors.grey};
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         cursor: pointer;
@@ -84,6 +87,9 @@ export const OrderContent = styled(NavLink)`
     }
 
     @media screen and (max-width: 440px) {
+        &:hover {
+            transform: scale(1, 1);
+        }
         height: 220px;
     }
 `;

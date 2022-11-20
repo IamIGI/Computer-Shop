@@ -42,6 +42,12 @@ export const Wrapper = styled.div`
             box-shadow: 3px 3px 5px 1px ${({ theme }) => theme.colors.grey};
         }
     }
+
+    @media screen and (max-width: 500px) {
+        &:hover {
+            transform: scale(1, 1);
+        }
+    }
 `;
 export const Link = styled(NavLink)`
     text-decoration: none;
