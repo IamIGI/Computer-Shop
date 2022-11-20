@@ -69,6 +69,7 @@ export const Description = styled.div`
     justify-content: center;
     margin: 10px 0;
     padding-left: 5%;
+    padding-right: 10px;
 
     @media screen and (max-width: 1510px) {
         width: 75%;

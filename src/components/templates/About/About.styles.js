@@ -8,11 +8,12 @@ export const Wrapper = styled.div`
     justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: flex-start;
-    overflow-y: scroll;
+
     padding: 0px 3% 50px 3%;
     font-size: ${({ theme }) => theme.fontSize.l};
     line-height: 27px;
 
+    overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
     }

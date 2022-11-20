@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getWebUpdates } from 'api/webUpdates';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { BASE_URL } from 'data/GlobalVariables';
-import { Title, Subtitle, ListSection, BottomWrapper, GitLink, GetPDF } from './NoRealWebsiteContent.style';
+import { Title, Subtitle, ListSection, BottomWrapper, GitLink, GetPDF, Wrapper } from './NoRealWebsiteContent.style';
 import { InsideWrapper } from './NoRealWebsiteContent.style';
 
 const NoRealWebsiteContent = () => {
@@ -27,6 +27,7 @@ const NoRealWebsiteContent = () => {
                 <>
                     <Title>This is website is not real e-commerce website !!</Title>
                     <Subtitle>Date: {lastUpdate.date}</Subtitle>
+                    <Subtitle>Version: {lastUpdate.version}</Subtitle>
                     <Subtitle>Things implemented last patch:</Subtitle>
                     <br />
                     <Subtitle>Added:</Subtitle>
