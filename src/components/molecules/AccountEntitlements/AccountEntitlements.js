@@ -66,62 +66,60 @@ const AccountEntitlements = ({ accountEnlistments }) => {
                 {enlistments === undefined ? (
                     <LoadingAnimation loadingSize={10} />
                 ) : (
-                    <>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <SectionChange>
-                                <CheckboxLocal
-                                    type="checkbox"
-                                    {...register('email')}
-                                    onChange={(e) => handleCheck('email', e.target.checked)}
-                                    checked={enlistments.email}
-                                />
-                                <LabelArea>
-                                    Chcę otrzymywać informacje o aktualnych ofertach oraz promocjach w wiadomości e‑mail
-                                </LabelArea>
-                            </SectionChange>
-                            <SectionChange>
-                                <CheckboxLocal
-                                    type="checkbox"
-                                    {...register('sms')}
-                                    onChange={(e) => handleCheck('sms', e.target.checked)}
-                                    checked={enlistments.sms}
-                                />
-                                <LabelArea>Chcę otrzymywać wiadomości SMS.</LabelArea>
-                            </SectionChange>
-                            <SectionChange>
-                                <CheckboxLocal
-                                    type="checkbox"
-                                    {...register('phone')}
-                                    onChange={(e) => handleCheck('phone', e.target.checked)}
-                                    checked={enlistments.phone}
-                                />
-                                <LabelArea>Chcę otrzymywać informacje telefonicznie</LabelArea>
-                            </SectionChange>
-                            <SectionChange>
-                                <CheckboxLocal
-                                    type="checkbox"
-                                    {...register('adjustedOffers')}
-                                    onChange={(e) => handleCheck('adjustedOffers', e.target.checked)}
-                                    checked={enlistments.adjustedOffers}
-                                />
-                                <LabelArea>Chcę otrzymywać ofertę dopasowaną do moich potrzeb</LabelArea>
-                            </SectionChange>
-                            <BottomWrapper>
-                                <Button type="submit">Zapisz Zgody</Button>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <SectionChange>
+                            <CheckboxLocal
+                                type="checkbox"
+                                {...register('email')}
+                                onChange={(e) => handleCheck('email', e.target.checked)}
+                                checked={enlistments.email}
+                            />
+                            <LabelArea>
+                                Chcę otrzymywać informacje o aktualnych ofertach oraz promocjach w wiadomości e‑mail
+                            </LabelArea>
+                        </SectionChange>
+                        <SectionChange>
+                            <CheckboxLocal
+                                type="checkbox"
+                                {...register('sms')}
+                                onChange={(e) => handleCheck('sms', e.target.checked)}
+                                checked={enlistments.sms}
+                            />
+                            <LabelArea>Chcę otrzymywać wiadomości SMS.</LabelArea>
+                        </SectionChange>
+                        <SectionChange>
+                            <CheckboxLocal
+                                type="checkbox"
+                                {...register('phone')}
+                                onChange={(e) => handleCheck('phone', e.target.checked)}
+                                checked={enlistments.phone}
+                            />
+                            <LabelArea>Chcę otrzymywać informacje telefonicznie</LabelArea>
+                        </SectionChange>
+                        <SectionChange>
+                            <CheckboxLocal
+                                type="checkbox"
+                                {...register('adjustedOffers')}
+                                onChange={(e) => handleCheck('adjustedOffers', e.target.checked)}
+                                checked={enlistments.adjustedOffers}
+                            />
+                            <LabelArea>Chcę otrzymywać ofertę dopasowaną do moich potrzeb</LabelArea>
+                        </SectionChange>
+                        <BottomWrapper>
+                            <Button type="submit">Zapisz Zgody</Button>
 
-                                {isSaved ? (
-                                    <SavedInfo>
-                                        <SavedIcon>
-                                            <AiOutlineSave />
-                                        </SavedIcon>
-                                        <SavedDescription>Zapisano</SavedDescription>
-                                    </SavedInfo>
-                                ) : (
-                                    <></>
-                                )}
-                            </BottomWrapper>
-                        </form>
-                    </>
+                            {isSaved ? (
+                                <SavedInfo>
+                                    <SavedIcon>
+                                        <AiOutlineSave />
+                                    </SavedIcon>
+                                    <SavedDescription>Zapisano</SavedDescription>
+                                </SavedInfo>
+                            ) : (
+                                <></>
+                            )}
+                        </BottomWrapper>
+                    </form>
                 )}
             </Wrapper>
         </>

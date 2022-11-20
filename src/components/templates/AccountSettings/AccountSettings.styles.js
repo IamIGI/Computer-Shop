@@ -21,8 +21,8 @@ export const LeftWrapper = styled.div`
     width: 100%;
     grid-column: 1/2;
     display: flex;
-    justify-content: left;
     flex-direction: column;
+    justify-content: flex-start;
 
     @media screen and (max-width: 1050px) {
         grid-column: 1;
@@ -32,6 +32,11 @@ export const LeftWrapper = styled.div`
         border-bottom-left-radius: 10px;
         box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
         z-index: 2;
+    }
+
+    @media screen and (max-width: 700px) {
+        align-items: center;
+        justify-content: center;
     }
 `;
 

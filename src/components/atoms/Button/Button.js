@@ -15,10 +15,17 @@ export const Button = styled.button`
         background-color: ${({ theme }) => theme.colors.darkPurple};
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 520px) {
         min-width: 100px;
         font-size: ${({ theme }) => theme.fontSize.m};
         margin: 9px 0;
         padding: 5px 15px;
+    }
+
+    @media screen and (max-width: 450px) {
+        min-width: 90px;
+        font-size: 12px;
+        margin: 9px 0;
+        padding: 5px 13px;
     }
 `;

@@ -16,9 +16,8 @@ const AccountData = ({ accountInfo, handleRefresh }) => {
             </SectionTitle>
 
             <Wrapper>
-                <div>
-                    <h3>Dane konta</h3>
-                </div>
+                <h3>Dane konta</h3>
+
                 <SectionChange>
                     <LabelArea>Imię</LabelArea>
                     <InputLocal value={accountInfo.firstName} name="firstName" disabled={true} />

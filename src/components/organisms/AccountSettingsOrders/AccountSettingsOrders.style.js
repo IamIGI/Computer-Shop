@@ -165,7 +165,6 @@ export const ProductImage = styled.div`
     position: relative;
     height: 120px;
     width: auto;
-    border: 1px solid green;
     img {
         max-height: 100%;
         max-width: auto;
@@ -192,7 +191,6 @@ export const ProductImageSmall = styled.div`
     margin-left: 3%;
     height: 70px;
     width: auto;
-    border: 1px solid green;
     img {
         max-height: 100%;
         max-width: auto;

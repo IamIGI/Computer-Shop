@@ -1,4 +1,3 @@
-import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -15,13 +14,28 @@ export const Section = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    p {
+        margin: 6px 0px;
+    }
+
+    @media screen and (max-width: 650px) {
+        width: 70%;
+    }
+
+    @media screen and (max-width: 520px) {
+        margin-left: 16%;
+
+        h3 {
+            font-size: ${({ theme }) => theme.fontSize.l};
+            margin: 5px 0px;
+        }
+
+        p {
+            font-size: ${({ theme }) => theme.fontSize.m_plus};
+            margin: 5px 0px;
+        }
+    }
 `;
-
-export const Title = styled.div``;
-
-export const Description = styled.div``;
-
-export const ButtonWrapper = styled.div``;
 
 export const SectionTitle = styled.div`
     margin-left: 40px;

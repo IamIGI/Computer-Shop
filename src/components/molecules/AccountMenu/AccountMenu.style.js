@@ -22,6 +22,27 @@ export const Wrapper = styled.div`
     }
 `;
 
+export const Nav = styled.nav`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+
+    @media screen and (max-width: 1050px) {
+        flex-direction: row;
+    }
+
+    @media screen and (max-width: 800px) {
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media screen and (max-width: 560px) {
+        gap: 7px;
+    }
+`;
+
 export const StyledLink = styled(NavLink)`
     font-size: ${({ theme }) => theme.fontSize.xl};
     width: 91%;
@@ -59,6 +80,10 @@ export const StyledLink = styled(NavLink)`
         width: 250px;
     }
 
+    @media screen and (max-width: 800px) {
+        justify-content: center;
+    }
+
     @media screen and (max-width: 560px) {
         width: 200px;
         font-size: ${({ theme }) => theme.fontSize.l};
@@ -67,27 +92,5 @@ export const StyledLink = styled(NavLink)`
     @media screen and (max-width: 470px) {
         width: fit-content;
         font-size: ${({ theme }) => theme.fontSize.m_plus};
-    }
-`;
-
-export const Nav = styled.nav`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 15px;
-
-    @media screen and (max-width: 1050px) {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    @media screen and (max-width: 560px) {
-        gap: 7px;
-        padding-top: 10px;
-    }
-
-    @media screen and (max-width: 470px) {
-        /* flex-direction: column; */
     }
 `;

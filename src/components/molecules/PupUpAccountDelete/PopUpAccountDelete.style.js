@@ -19,11 +19,40 @@ export const Title = styled.div`
     text-align: left;
     padding-left: 6%;
     color: red;
-    padding-top: 8px;
+    padding-top: 3px;
+
     font-size: ${({ theme }) => theme.fontSize.m_plus};
+
+    @media screen and (max-width: 520px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        h3 {
+            margin: 10px 0px;
+        }
+    }
 `;
 
-export const FormSection = styled.div``;
+export const OuterFormWrapper = styled.div`
+    width: fit-content;
+
+    @media screen and (max-width: 520px) {
+        width: 250px;
+    }
+`;
+
+export const FormSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+
+    @media screen and (max-width: 520px) {
+        p {
+            margin: 7px 0px 0px 0px;
+            font-size: ${({ theme }) => theme.fontSize.m_plus};
+        }
+    }
+`;
 
 export const InputLocal = styled(Input)``;
 
