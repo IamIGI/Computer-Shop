@@ -6,7 +6,6 @@ import {
     OrderContent,
     OrderDescription,
     OrderProducts,
-    PageButton,
     ProductDescription,
     ProductImage,
     Line,
@@ -31,7 +30,6 @@ import { useEffect, useState } from 'react';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { BsBox } from 'react-icons/bs';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import { SectionTitle } from 'components/molecules/AccountData/AccountData.style';
 import useOrder from 'hooks/useOrder';
 import { BsLaptop } from 'react-icons/bs';
 import { getStatus, getDate } from './AccountSettingsOrders.logic';
@@ -97,96 +95,89 @@ const AccountSettingsOrders = () => {
         <AccountSettings>
             <Wrapper onClick={() => setShowHandyOptions('')}>
                 <TitleSection>
-                    <SectionTitle>
-                        <SectionDescription title={'Zamówienia'} icon={<BsBox />} />
-                    </SectionTitle>
+                    <SectionDescription title={'Zamówienia'} icon={<BsBox />} />
                 </TitleSection>
                 <BodySection>
-                    <>
-                        {waitForFetch ? (
-                            <LoadingAnimation loadingSize={15} />
-                        ) : orderHistory.length === 0 ? (
-                            <NoOrders>
-                                <NoOrderIcon>
-                                    <BsLaptop />
-                                </NoOrderIcon>
-                                <NoOrderDescription>Zamień ten wirtualny laptop na coś lepszego !!!</NoOrderDescription>
-                            </NoOrders>
-                        ) : (
-                            <>
-                                {orderHistory.map((item, index) => (
-                                    <InsideWrapper>
-                                        <OrderContent
-                                            key={index}
-                                            onClick={() => goToOrderItem(item)}
-                                            to={isActiveLink ? `/accountSettings/orders/history/${item._id}` : ''}
-                                        >
-                                            <OrderDescription>
-                                                <h4>{getStatus(item.status)}</h4>
-                                                <DateDecorator>
-                                                    {getDate(item.transactionInfo.date.split(':')[0])}
-                                                </DateDecorator>
-                                                nr {item._id}
-                                                <br />
-                                                <h4>{item.transactionInfo.price} zł</h4>
-                                            </OrderDescription>
-                                            <OrderProducts>
-                                                {item.products.map((product, index) => (
-                                                    <>
-                                                        {item.products.length > 1 ? (
-                                                            <ProductImageSmall>
+                    {waitForFetch ? (
+                        <LoadingAnimation loadingSize={15} />
+                    ) : orderHistory.length === 0 ? (
+                        <NoOrders>
+                            <NoOrderIcon>
+                                <BsLaptop />
+                            </NoOrderIcon>
+                            <NoOrderDescription>Zamień ten wirtualny laptop na coś lepszego !!!</NoOrderDescription>
+                        </NoOrders>
+                    ) : (
+                        <>
+                            {orderHistory.map((item, index) => (
+                                <InsideWrapper>
+                                    <OrderContent
+                                        key={index}
+                                        onClick={() => goToOrderItem(item)}
+                                        to={isActiveLink ? `/accountSettings/orders/history/${item._id}` : ''}
+                                    >
+                                        <OrderDescription>
+                                            <h4>{getStatus(item.status)}</h4>
+                                            <DateDecorator>
+                                                {getDate(item.transactionInfo.date.split(':')[0])}
+                                            </DateDecorator>
+                                            nr {item._id}
+                                            <br />
+                                            <h4>{item.transactionInfo.price} zł</h4>
+                                        </OrderDescription>
+                                        <OrderProducts>
+                                            {item.products.map((product, index) => (
+                                                <>
+                                                    {item.products.length > 1 ? (
+                                                        <ProductImageSmall>
+                                                            <Quantity height={30} width={30}>
+                                                                {product.quantity}
+                                                            </Quantity>
+                                                            <img src={product.prevImg} alt="images of product" />
+                                                        </ProductImageSmall>
+                                                    ) : (
+                                                        <>
+                                                            <ProductImage>
                                                                 <Quantity height={30} width={30}>
                                                                     {product.quantity}
                                                                 </Quantity>
                                                                 <img src={product.prevImg} alt="images of product" />
-                                                            </ProductImageSmall>
-                                                        ) : (
-                                                            <>
-                                                                <ProductImage>
-                                                                    <Quantity height={30} width={30}>
-                                                                        {product.quantity}
-                                                                    </Quantity>
-                                                                    <img
-                                                                        src={product.prevImg}
-                                                                        alt="images of product"
-                                                                    />
-                                                                </ProductImage>
-                                                                <ProductDescription>
-                                                                    <p>{product.name}</p>
-                                                                </ProductDescription>
-                                                            </>
-                                                        )}
-                                                    </>
-                                                ))}
-                                            </OrderProducts>
-                                            <GetPDF
-                                                onMouseOver={() => {
-                                                    setShowHandyOptions(item._id);
-                                                    setIsActiveLink(false);
-                                                }}
-                                            >
-                                                <HiDotsVertical />
-                                            </GetPDF>
-                                        </OrderContent>
-                                        {showHandyOptions === item._id ? (
-                                            <>
-                                                <a href={`${BASE_URL}/order/pdf/${item._id}`}>
-                                                    <HandyMenu>
-                                                        <IconPDF>
-                                                            <GrDocumentPdf />
-                                                        </IconPDF>
-                                                        <DescriptionPDF>Dokument faktury</DescriptionPDF>
-                                                    </HandyMenu>
-                                                </a>
-                                            </>
-                                        ) : (
-                                            <></>
-                                        )}
-                                    </InsideWrapper>
-                                ))}
-                            </>
-                        )}
-                    </>
+                                                            </ProductImage>
+                                                            <ProductDescription>
+                                                                <p>{product.name}</p>
+                                                            </ProductDescription>
+                                                        </>
+                                                    )}
+                                                </>
+                                            ))}
+                                        </OrderProducts>
+                                        <GetPDF
+                                            onMouseOver={() => {
+                                                setShowHandyOptions(item._id);
+                                                setIsActiveLink(false);
+                                            }}
+                                        >
+                                            <HiDotsVertical />
+                                        </GetPDF>
+                                    </OrderContent>
+                                    {showHandyOptions === item._id ? (
+                                        <>
+                                            <a href={`${BASE_URL}/order/pdf/${item._id}`}>
+                                                <HandyMenu>
+                                                    <IconPDF>
+                                                        <GrDocumentPdf />
+                                                    </IconPDF>
+                                                    <DescriptionPDF>Dokument faktury</DescriptionPDF>
+                                                </HandyMenu>
+                                            </a>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </InsideWrapper>
+                            ))}
+                        </>
+                    )}
                 </BodySection>
                 <Line />
                 <FooterSection>
