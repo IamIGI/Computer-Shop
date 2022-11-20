@@ -15,7 +15,7 @@ export const IconTitle = styled.div`
         font-size: ${({ theme }) => theme.fontSize.xxl};
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 800px) {
         font-size: ${({ theme }) => theme.fontSize.xl};
     }
 `;
@@ -32,7 +32,7 @@ export const ContentTitle = styled.div`
         font-size: ${({ theme }) => theme.fontSize.xl};
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 800px) {
         font-size: ${({ theme }) => theme.fontSize.l_plus};
     }
 `;
@@ -43,6 +43,10 @@ export const ContentDescription = styled.div`
 
     @media screen and (max-width: 1100px) {
         font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+
+    @media screen and (max-width: 700px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
     }
 `;
 
