@@ -69,10 +69,17 @@ export const Close = styled.div`
         width: 40px;
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 520px) {
         height: 35px;
         width: 35px;
         top: 8px;
         right: 8px;
     }
+
+    /* @media screen and (max-width: 450px) {
+        height: 35px;
+        width: 35px;
+        top: 8px;
+        right: 8px;
+    } */
 `;

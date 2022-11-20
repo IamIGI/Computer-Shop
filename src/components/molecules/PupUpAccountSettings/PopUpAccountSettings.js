@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ButtonLocal, InputLocal, Title, Wrapper, FormSection } from './PopUpAccountSettiings.style';
+import { ButtonLocal, InputLocal, Title, Wrapper, FormSection, OuterFormWrapper } from './PopUpAccountSettiings.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
@@ -107,15 +107,15 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     };
 
     return (
-        <>
-            <Wrapper>
-                <Title>
-                    <h3>
-                        <span> Edytuj:</span> {viewedName}
-                    </h3>
-                </Title>
-                <FormSection>
-                    <form onSubmit={handleSubmit}>
+        <Wrapper>
+            <Title>
+                <h3>
+                    <span> Edytuj:</span> {viewedName}
+                </h3>
+            </Title>
+            <OuterFormWrapper>
+                <form onSubmit={handleSubmit}>
+                    <FormSection>
                         <div>
                             <InputLocal
                                 name="name"
@@ -187,13 +187,12 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
                         {badPassword ? <p>Złe hasło</p> : <></>}
                         {!isMatch ? <p>Hasła muszą być takie same</p> : <></>}
-                        <div>
-                            <ButtonLocal type="submit">Zapisz</ButtonLocal>
-                        </div>
-                    </form>
-                </FormSection>
-            </Wrapper>
-        </>
+
+                        <ButtonLocal type="submit">Zapisz</ButtonLocal>
+                    </FormSection>
+                </form>
+            </OuterFormWrapper>
+        </Wrapper>
     );
 };
 

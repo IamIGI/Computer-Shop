@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    /* z-index: 1; */
 
     input {
         display: block;
@@ -23,7 +22,27 @@ export const SectionTitle = styled.div`
 export const SectionChange = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 520px) {
+        margin-bottom: 12px;
+    }
+`;
+
+export const CheckboxLocal = styled(Checkbox)`
+    color: black;
+    margin: 0px;
+    margin-right: 10px;
+    transform: scale(1.4);
+    cursor: pointer;
+    &:hover {
+        border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    }
+
+    @media screen and (max-width: 520px) {
+        transform: scale(1.2);
+    }
 `;
 
 export const LabelArea = styled.div`
@@ -31,18 +50,15 @@ export const LabelArea = styled.div`
     border-left: 1px solid grey;
     text-align: left;
     justify-content: center;
-    padding-top: 5px;
     padding-left: 5%;
-`;
 
-export const CheckboxLocal = styled(Checkbox)`
-    color: black;
-    margin: 0px;
-    margin-right: 10px;
-    margin-top: 4px;
-    cursor: pointer;
-    &:hover {
-        border: 1px solid ${({ theme }) => theme.colors.darkGrey};
+    @media screen and (max-width: 520px) {
+        font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+
+    @media screen and (max-width: 400px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+        width: 100%;
     }
 `;
 
@@ -51,19 +67,33 @@ export const BottomWrapper = styled.div`
     justify-content: flex-start;
     flex-direction: row;
     align-items: center;
+
+    @media screen and (max-width: 400px) {
+        height: 30px;
+    }
 `;
 
 export const SavedInfo = styled.div`
-    margin-top: 10px;
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
     align-items: baseline;
     color: ${({ theme }) => theme.colors.successDark};
     font-weight: 700;
+
+    @media screen and (max-width: 400px) {
+        align-items: center;
+    }
 `;
 
 export const SavedIcon = styled.div`
     margin: 0 10px;
+    @media screen and (max-width: 400px) {
+        margin-top: 5px;
+    }
 `;
-export const SavedDescription = styled.div``;
+export const SavedDescription = styled.div`
+    @media screen and (max-width: 400px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+    }
+`;

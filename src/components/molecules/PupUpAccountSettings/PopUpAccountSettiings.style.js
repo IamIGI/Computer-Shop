@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: center;
+
+    /* @media screen and (max-width: 520px) {
+        width: 110%;
+    } */
 `;
 
 export const Title = styled.div`
@@ -17,19 +21,47 @@ export const Title = styled.div`
     border-top-right-radius: 25px;
     text-align: left;
     padding-left: 10%;
-    margin-bottom: 10px;
 
     span {
         font-weight: 400;
     }
+
+    @media screen and (max-width: 520px) {
+        h3 {
+            font-size: ${({ theme }) => theme.fontSize.l};
+            margin-bottom: 10px;
+        }
+    }
 `;
 
-export const FormSection = styled.div``;
+export const FormSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+
+    @media screen and (max-width: 520px) {
+        p {
+            margin: 7px 0px 0px 0px;
+            font-size: ${({ theme }) => theme.fontSize.m_plus};
+        }
+    }
+`;
 
 export const InputLocal = styled(Input)`
     width: 90%;
-    margin: 5px 55px 5px 30px;
     font-size: ${({ theme }) => theme.fontSize.m};
 `;
 
-export const ButtonLocal = styled(Button)``;
+export const ButtonLocal = styled(Button)`
+    margin: 10px 0px 8px 0px;
+`;
+
+export const OuterFormWrapper = styled.div`
+    width: fit-content;
+
+    @media screen and (max-width: 520px) {
+        width: 250px;
+    }
+`;

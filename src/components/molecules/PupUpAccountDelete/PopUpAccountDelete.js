@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ButtonLocal, InputLocal, Title, Wrapper, FormSection } from './PopUpAccountDelete.style';
+import { ButtonLocal, InputLocal, Title, Wrapper, FormSection, OuterFormWrapper } from './PopUpAccountDelete.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import toast from 'react-hot-toast';
@@ -66,40 +66,42 @@ const PopUpAccountDelete = ({ name, signOut }) => {
                 <Title>
                     <h3>{viewedName}</h3>
                 </Title>
-                <FormSection>
+                <OuterFormWrapper>
                     <form onSubmit={handleSubmit}>
-                        <div>
-                            <InputLocal
-                                name="name"
-                                placeholder="hasło"
-                                type="password"
-                                value={pwd}
-                                onChange={(e) => setPwd(e.target.value)}
-                                onFocus={() => setPwdFieldFocus(true)}
-                                onBlur={() => setPwdFieldFocus(false)}
-                                onKeyUp={checkCapsLock}
-                            />
-                        </div>
-                        {pwdFieldFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
-                        <div>
-                            <InputLocal
-                                name="password"
-                                placeholder="Podaj hasło ponownie"
-                                type="password"
-                                value={repeatPassword}
-                                onFocus={() => setMatchFieldFocus(true)}
-                                onBlur={() => setMatchFieldFocus(false)}
-                                onChange={(e) => setRepeatPassword(e.target.value)}
-                                onKeyUp={checkCapsLock}
-                            />
-                        </div>
-                        {matchFiledFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
-                        {!isMatch ? <p>Hasła muszą być takie same</p> : <></>}
-                        <div>
-                            <ButtonLocal type="submit">Usuń</ButtonLocal>
-                        </div>
+                        <FormSection>
+                            <div>
+                                <InputLocal
+                                    name="name"
+                                    placeholder="hasło"
+                                    type="password"
+                                    value={pwd}
+                                    onChange={(e) => setPwd(e.target.value)}
+                                    onFocus={() => setPwdFieldFocus(true)}
+                                    onBlur={() => setPwdFieldFocus(false)}
+                                    onKeyUp={checkCapsLock}
+                                />
+                            </div>
+                            {pwdFieldFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
+                            <div>
+                                <InputLocal
+                                    name="password"
+                                    placeholder="Podaj hasło ponownie"
+                                    type="password"
+                                    value={repeatPassword}
+                                    onFocus={() => setMatchFieldFocus(true)}
+                                    onBlur={() => setMatchFieldFocus(false)}
+                                    onChange={(e) => setRepeatPassword(e.target.value)}
+                                    onKeyUp={checkCapsLock}
+                                />
+                            </div>
+                            {matchFiledFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
+                            {!isMatch ? <p>Hasła muszą być takie same</p> : <></>}
+                            <div>
+                                <ButtonLocal type="submit">Usuń</ButtonLocal>
+                            </div>
+                        </FormSection>
                     </form>
-                </FormSection>
+                </OuterFormWrapper>
             </Wrapper>
         </>
     );
