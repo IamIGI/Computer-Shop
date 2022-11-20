@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, List, Nav, StyledLink } from './AccountMenu.style';
+import { Wrapper, Nav, StyledLink } from './AccountMenu.style';
 import { FiSettings, FiPackage } from 'react-icons/fi';
 
 const AccountMenu = () => {
@@ -7,28 +7,23 @@ const AccountMenu = () => {
         <Wrapper>
             <h2>Menu Konta</h2>
             <Nav>
-                <List>
-                    <li>
-                        <StyledLink to="/accountSettings/Settings">
-                            <div>
-                                <span>
-                                    <FiSettings />
-                                </span>
-                            </div>
-                            <div>Ustawienia konta</div>
-                        </StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink to="/accountSettings/Orders">
-                            <div>
-                                <span>
-                                    <FiPackage />
-                                </span>
-                            </div>
-                            <div> Zamowienia</div>
-                        </StyledLink>
-                    </li>
-                </List>
+                <StyledLink to="/accountSettings/Settings">
+                    <div>
+                        <span>
+                            <FiSettings />
+                        </span>
+                    </div>
+                    <div>Ustawienia konta</div>
+                </StyledLink>
+
+                <StyledLink to="/accountSettings/Orders">
+                    <div>
+                        <span>
+                            <FiPackage />
+                        </span>
+                    </div>
+                    <div> Zamowienia</div>
+                </StyledLink>
             </Nav>
         </Wrapper>
     );

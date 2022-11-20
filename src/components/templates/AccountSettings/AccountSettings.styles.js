@@ -9,6 +9,11 @@ export const Wrapper = styled.div`
     @media screen and (max-width: 1210px) {
         grid-template-columns: 230px 1fr;
     }
+
+    @media screen and (max-width: 1050px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55px 1fr;
+    }
 `;
 
 export const LeftWrapper = styled.div`
@@ -18,6 +23,16 @@ export const LeftWrapper = styled.div`
     display: flex;
     justify-content: left;
     flex-direction: column;
+
+    @media screen and (max-width: 1050px) {
+        grid-column: 1;
+        grid-row: 1/2;
+        padding-left: 20px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
+        z-index: 2;
+    }
 `;
 
 export const RightWrapper = styled.div`
@@ -26,8 +41,8 @@ export const RightWrapper = styled.div`
     width: 100%;
     grid-column: 2/2;
     display: flex;
-    justify-content: left;
     flex-direction: column;
+    justify-content: left;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -38,4 +53,10 @@ export const RightWrapper = styled.div`
 
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+
+    @media screen and (max-width: 1050px) {
+        grid-column: 1;
+        grid-row: 2/2;
+        border-left: 1px solid transparent;
+    }
 `;
