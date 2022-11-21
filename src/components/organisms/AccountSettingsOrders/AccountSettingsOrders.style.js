@@ -235,6 +235,7 @@ export const ProductDescription = styled.div`
 `;
 
 export const NoOrders = styled.div`
+    border: 1px solid red;
     width: 100%;
     height: 100%;
     display: flex;
@@ -243,6 +244,7 @@ export const NoOrders = styled.div`
     align-items: center;
     text-align: center;
     font-size: 100%;
+    padding: 15px;
 `;
 
 export const NoOrderIcon = styled.div`
@@ -251,6 +253,14 @@ export const NoOrderIcon = styled.div`
 
 export const NoOrderDescription = styled.div`
     font-size: 30px;
+
+    @media screen and (max-width: 800px) {
+        font-size: ${({ theme }) => theme.fontSize.xl};
+    }
+
+    @media screen and (max-width: 600px) {
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
+    }
 `;
 
 export const Quantity = styled.div`
