@@ -68,8 +68,6 @@ function LoginArea({ mobileView }) {
                 navigate('/', { replace: true });
             }
         } catch (err) {
-            console.log(err.response);
-            console.log(err.response.status);
             if (!err?.response) {
                 setErrMsg('Brak łącznośći z serwerem');
             } else if (err.response?.status === 400) {
