@@ -1,18 +1,17 @@
-import { Bottom } from '../ProductPreviewItem/ProductPreviewItem.style';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     margin: auto;
-    min-width: 230px;
+    min-width: 240px;
 `;
 
-export const BottomRegister = styled(Bottom)`
+export const BottomRegister = styled.div`
+    width: 240px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
-    padding-top: 0;
-    padding-bottom: 0;
     font-size: ${({ theme }) => theme.fontSize.m};
     color: ${({ theme }) => theme.colors.darkGrey};
 

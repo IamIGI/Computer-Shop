@@ -1,26 +1,19 @@
 import styled from 'styled-components';
-import { Bottom } from '../ProductPreviewItem/ProductPreviewItem.style';
 
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-width: 230px;
+    min-width: 240px;
 `;
 
-export const BottomLogin = styled(Bottom)`
-    /* margin: 10px 0 0 14%; */
-
+export const BottomLogin = styled.div`
+    width: 240px;
     margin-top: 10px;
-    align-items: center;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    /* width: fit-content; */
-    padding-top: 0px;
-    padding-bottom: 0px;
-
+    justify-content: center;
+    align-items: center;
     font-size: ${({ theme }) => theme.fontSize.m};
     color: ${({ theme }) => theme.colors.darkGrey};
 
@@ -80,6 +73,7 @@ export const Instructions = styled.div`
     color: ${({ theme }) => theme.colors.white};
     padding: 0.25rem;
     position: relative;
-    bottom: -7px;
+    /* bottom: -7px; */
     margin-left: 10%;
+    margin-top: 7px;
 `;
