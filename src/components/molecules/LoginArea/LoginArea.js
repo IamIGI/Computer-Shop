@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { BsFillCaretUpFill } from 'react-icons/bs';
-import { WrapButton, ErrMsg, Instructions, Wrapper, BottomLogin } from './LoginArea.style';
+import { WrapButton, ErrMsg, Instructions, Wrapper, BottomLogin, ErrMsgContainer } from './LoginArea.style';
 import useAuth from 'hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'api/axios';
@@ -68,6 +68,8 @@ function LoginArea({ mobileView }) {
                 navigate('/', { replace: true });
             }
         } catch (err) {
+            console.log(err.response);
+            console.log(err.response.status);
             if (!err?.response) {
                 setErrMsg('Brak łącznośći z serwerem');
             } else if (err.response?.status === 400) {
@@ -80,6 +82,7 @@ function LoginArea({ mobileView }) {
                 console.log(err);
                 setErrMsg('Nieznany bład');
             }
+            setWaitForLogIn(false);
             errRef.current.focus();
         }
     };
@@ -99,14 +102,9 @@ function LoginArea({ mobileView }) {
                 <LoadingAnimation loadingSize={10} />
             ) : (
                 <Wrapper>
-                    <div ref={errRef}>
-                        {' '}
-                        {errMsg && (
-                            <>
-                                <ErrMsg aria-live="assertive">{errMsg}</ErrMsg>
-                            </>
-                        )}
-                    </div>
+                    <ErrMsgContainer ref={errRef}>
+                        {errMsg && <ErrMsg aria-live="assertive">{errMsg}</ErrMsg>}
+                    </ErrMsgContainer>
                     <form onSubmit={handleSubmit}>
                         {expanded && <Button onClick={() => setExpanded(!expanded)}>Logowanie</Button>}
                         {!expanded && (
