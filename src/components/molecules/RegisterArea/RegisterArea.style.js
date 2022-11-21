@@ -66,7 +66,7 @@ export const UnValid = styled.span`
 
 export const Instructions = styled.div`
     text-align: center;
-    width: 50%;
+    width: 60%;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
     border-radius: 0.5rem;
     background: ${({ theme }) => theme.colors.grey};
@@ -74,5 +74,5 @@ export const Instructions = styled.div`
     padding: 0.25rem;
     position: relative;
     bottom: -7px;
-    margin-left: 24%;
+    margin-left: 20%;
 `;
