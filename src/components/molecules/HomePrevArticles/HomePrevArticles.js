@@ -21,11 +21,12 @@ const HomePrevArticles = () => {
         if (windowSize.width <= 964 && windowSize.width > 685) {
             setSizeOfPrevDescription(initDescriptionSize);
             setNumberOfArticles(2);
-        } else if (windowSize.width <= 964 && windowSize.width > 475) {
+        } else if (windowSize.width <= 685 && windowSize.width > 475) {
             setSizeOfPrevDescription(200);
             setNumberOfArticles(1);
         } else if (windowSize.width <= 475 && windowSize.width > 0) {
             setSizeOfPrevDescription(100);
+            setNumberOfArticles(1);
         } else {
             setNumberOfArticles(3);
             setSizeOfPrevDescription(initDescriptionSize);
