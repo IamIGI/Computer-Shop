@@ -5,9 +5,7 @@ import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    // <React.StrictMode>
     <MainTemplate>
         <Root />
     </MainTemplate>
-    // </React.StrictMode>
 );

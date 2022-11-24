@@ -24,8 +24,8 @@ export const TitleSection = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l_plus};
     border-bottom: 1px solid gray;
     background-color: ${({ theme }) => theme.colors.lightPurple};
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     color: ${({ theme }) => theme.colors.successDark};
 
     @media screen and (max-width: 450px) {

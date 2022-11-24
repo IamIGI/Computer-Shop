@@ -24,8 +24,8 @@ export const WrapperInside = styled.div`
 `;
 
 export const Title = styled.div`
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     background-color: ${({ theme }) => theme.colors.lightPurple};
     padding: 20px 0px 20px 7%;
     font-size: ${({ theme }) => theme.fontSize.xl};

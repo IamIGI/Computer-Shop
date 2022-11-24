@@ -54,7 +54,7 @@ const AccountData = ({ accountInfo, handleRefresh }) => {
                     </ButtonLocal>
                 </SectionChange>
 
-                <Modal position={[40, -80]} open={isOpen} onClose={() => setIsOpen([false, {}])}>
+                <Modal open={isOpen} onClose={() => setIsOpen([false, {}])}>
                     <PopUpAccountSettings
                         name={isOpen[1].DataName}
                         value={isOpen[1].value}

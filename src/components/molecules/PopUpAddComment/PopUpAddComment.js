@@ -90,19 +90,19 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
             try {
                 const response = await sendCommentAPI(formData);
 
-                if (response.code === 105) {
+                if (response.code === '105') {
                     handleLanguageValidation(true, 'Imie zawiera słowa wulgarne');
                     dispatch({ type: ACTIONS.CLEAR_ALERT });
-                } else if (response.code === 101) {
+                } else if (response.code === '101') {
                     handleLanguageValidation(true, 'Wiadomość zawiera słowa wulgarne');
                     dispatch({ type: ACTIONS.CLEAR_ALERT });
-                } else if (response.code === 3) {
+                } else if (response.code === '003') {
                     dispatch({
                         type: ACTIONS.FILES_ALERT,
                         payload: { showAlert: true, message: "Dopuszczalne rozszerznia: '.png', '.jpg', 'jpeg'" },
                     });
                     dispatch({ type: ACTIONS.CLEAR_ALERT });
-                } else if (response.code === 4) {
+                } else if (response.code === '004') {
                     dispatch({
                         type: ACTIONS.FILES_ALERT,
                         payload: { showAlert: true, message: 'Maksymalan waga pliku: 1MB' },
