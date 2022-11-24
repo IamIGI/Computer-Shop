@@ -19,6 +19,7 @@ import toast from 'react-hot-toast';
 import ProductBuyHint from 'components/atoms/ProductBuyHint/ProductBuyHint';
 import PopUpInstallment from 'components/organisms/PopUpInstallment/PopUpInstallment';
 import { FiSmartphone } from 'react-icons/fi';
+import PopUpFreeDelivery from 'components/organisms/PopUpFreeDelivery/PopUpFreeDelivery';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -112,7 +113,12 @@ const ProductBuyContent = ({ product }) => {
                     <ProductBuyHint icon={<FiSmartphone />} title="Zakupy z aplikacji" ask="Dowiedz się więcej" />
                 </ArticleLink>
                 <Separator />
-                <ProductBuyHint icon={<BsTruck />} title="Darmowa dostawa" ask="Sprawdź szczegóły" />
+                <ProductBuyHint
+                    icon={<BsTruck />}
+                    title="Darmowa dostawa"
+                    ask="Sprawdź szczegóły"
+                    popUp={<PopUpFreeDelivery product={product} />}
+                />
                 <Separator />
                 <ProductBuyHint
                     icon={<RiCoinLine />}
