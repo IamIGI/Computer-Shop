@@ -10,17 +10,15 @@ import {
     CurrentPrice,
     BuySection,
     BuyIcon,
-    HintSection,
-    HintIcon,
-    HintDescription,
-    HintTitle,
-    HintAsk,
+    ArticleLink,
 } from './ProductBuyContent.style';
 import useBasket from 'hooks/useBasket';
 import { BsCartPlus, BsTruck } from 'react-icons/bs';
-import { AiOutlineClockCircle } from 'react-icons/ai';
 import { RiCoinLine } from 'react-icons/ri';
 import toast from 'react-hot-toast';
+import ProductBuyHint from 'components/atoms/ProductBuyHint/ProductBuyHint';
+import PopUpInstallment from 'components/organisms/PopUpInstallment/PopUpInstallment';
+import { FiSmartphone } from 'react-icons/fi';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -110,37 +108,18 @@ const ProductBuyContent = ({ product }) => {
                         <div> Dodaj do koszyka</div>
                     </BuyButton>
                 </BuySection>
-                <HintSection>
-                    <HintIcon>
-                        <AiOutlineClockCircle />
-                    </HintIcon>
-                    <HintDescription>
-                        <HintTitle>Wydłużony czas dostawy</HintTitle>
-                        <HintAsk>Zapytaj o termin</HintAsk>
-                    </HintDescription>
-                </HintSection>
+                <ArticleLink to={'/articles/63754235f4d73ff45867a613'}>
+                    <ProductBuyHint icon={<FiSmartphone />} title="Zakupy z aplikacji" ask="Dowiedz się więcej" />
+                </ArticleLink>
                 <Separator />
-                <HintSection>
-                    <HintIcon>
-                        <BsTruck />
-                    </HintIcon>
-                    <HintDescription>
-                        <HintTitle>Darmowa dostawa</HintTitle>
-                        <HintAsk>Sprawdź szczegóły</HintAsk>
-                    </HintDescription>
-                </HintSection>
+                <ProductBuyHint icon={<BsTruck />} title="Darmowa dostawa" ask="Sprawdź szczegóły" />
                 <Separator />
-                <HintSection>
-                    <HintIcon>
-                        <RiCoinLine />
-                    </HintIcon>
-                    <HintDescription>
-                        <HintTitle>
-                            Rata tylko {(product.price / 24).toFixed(2)} zł <br />
-                        </HintTitle>
-                        <HintAsk>Oblicz ratę</HintAsk>
-                    </HintDescription>
-                </HintSection>
+                <ProductBuyHint
+                    icon={<RiCoinLine />}
+                    title={` Rata tylko ${(product.price / 24).toFixed(2)} zł`}
+                    ask="Oblicz ratę"
+                    popUp={<PopUpInstallment product={product} />}
+                />
             </Wrapper>
         </>
     );

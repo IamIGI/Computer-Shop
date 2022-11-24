@@ -4,13 +4,14 @@ import { GrClose } from 'react-icons/gr';
 
 import { Close, InsideWrapper, Overlay, OutsideWrapper } from './Modal.styles';
 
-export default function Modal({ position, width, open, children, onClose }) {
+export default function Modal({ width, open, children, onClose }) {
     if (!open[0]) return null;
+    console.log('here');
 
     return ReactDOM.createPortal(
         <>
             <Overlay onClick={onClose} />
-            <OutsideWrapper width={width} position={position}>
+            <OutsideWrapper width={width}>
                 <InsideWrapper>
                     <Close onClick={onClose}>
                         <GrClose />

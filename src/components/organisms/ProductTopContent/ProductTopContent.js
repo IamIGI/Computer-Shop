@@ -14,6 +14,7 @@ import ProductBuyContent from 'components/molecules/ProductBuyContent/ProductBuy
 import { Separator } from 'components/atoms/Separator/Separator';
 import ProductGallery from 'components/atoms/ProductGallery/ProductGallery';
 import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandyMenu';
+
 const ProductTopContent = ({ product }) => {
     return (
         <>

@@ -22,7 +22,7 @@ export const InsideWrapper = styled.div`
     height: fit-content;
     background-color: white;
     border: 1px solid grey;
-    border-radius: 30px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
