@@ -1,15 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection, OuterFormWrapper } from './PopUpAccountSettiings.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
+import { popUpAccountSettingsReducer, ACTIONS, INITIAL_STATE } from './PopUpAccountSettings.reducer';
 import toast from 'react-hot-toast';
 
 const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     const { auth, setAuth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
-    const [pwd, setPwd] = useState('');
-    const [editedField, setEditedField] = useState('');
+
+    const [state, dispatch] = useReducer(popUpAccountSettingsReducer, INITIAL_STATE);
+
+    const handleInput = (e) => {
+        dispatch({
+            type: ACTIONS.INPUT,
+            payload: { name: e.target.name, value: e.target.value },
+        });
+    };
+
     const [validateEditedField, setValidateEditedField] = useState(false);
     const [fieldFocus, setFieldFocus] = useState(false);
     const [pwdFieldFocus, setPwdFieldFocus] = useState(false);
@@ -18,7 +27,6 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
     const [badPassword, setBadPassword] = useState(false);
     const [isMatch, setIsMatch] = useState(true);
-    const [repeatPassword, setRepeatPassword] = useState('');
 
     const notify = () =>
         toast.success('Dane konta zmienione', {
@@ -35,19 +43,19 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
     useEffect(() => {
         if (name === 'email') {
-            setValidateEditedField(testEmailRegex(editedField));
+            setValidateEditedField(testEmailRegex(state.input.editedField));
             return;
         } else if (name === 'hashedPassword') {
-            setValidateEditedField(testPasswordRegex(editedField));
+            setValidateEditedField(testPasswordRegex(state.input.editedField));
             return;
         } else if (name === 'firstName' || name === 'lastName') {
-            setValidateEditedField(testNameRegex(editedField));
+            setValidateEditedField(testNameRegex(state.input.editedField));
             return;
         } else {
             return;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [editedField]);
+    }, [state.input.editedField]);
 
     let viewedName = '';
     switch (name) {
@@ -76,11 +84,11 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
         const data = {
             _id: auth.id,
             fieldName: name,
-            edited: editedField,
-            password: pwd,
+            edited: state.input.editedField,
+            password: state.input.pwd,
         };
 
-        if (name === 'hashedPassword' && editedField !== repeatPassword) {
+        if (name === 'hashedPassword' && state.input.editedField !== state.input.repeatPassword) {
             setIsMatch(false);
             return;
         }
@@ -92,7 +100,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                 setAuth((prevValue) => {
                     return {
                         ...prevValue,
-                        userName: editedField,
+                        userName: state.input.editedField,
                     };
                 });
             }
@@ -118,11 +126,11 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                     <FormSection>
                         <div>
                             <InputLocal
-                                name="name"
+                                name="editedField"
                                 type={name === 'hashedPassword' && 'password'}
                                 placeholder={`Zmieniasz: ${value}`}
-                                value={editedField}
-                                onChange={(e) => setEditedField(e.target.value)}
+                                value={state.input.editedField}
+                                onChange={(e) => handleInput(e)}
                                 onFocus={() => setFieldFocus(true)}
                                 onBlur={() => setFieldFocus(false)}
                                 onKeyUp={name === 'hashedPassword' ? checkCapsLock : undefined}
@@ -134,7 +142,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                             <></>
                         )}
                         {fieldFocus &&
-                            editedField &&
+                            state.input.editedField &&
                             !validateEditedField &&
                             (name === 'email' ? (
                                 <p>Email jest nie poprawny.</p>
@@ -157,10 +165,10 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                                     name="repeat_password"
                                     type="password"
                                     placeholder={`Powtórz hasło`}
-                                    value={repeatPassword}
+                                    value={state.input.repeatPassword}
                                     onFocus={() => setMatchFieldFocus(true)}
                                     onBlur={() => setMatchFieldFocus(false)}
-                                    onChange={(e) => setRepeatPassword(e.target.value)}
+                                    onChange={(e) => handleInput(e)}
                                     onKeyUp={checkCapsLock}
                                 />
                             </div>
@@ -176,8 +184,8 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                                 name="password"
                                 placeholder="Podaj hasło aby zatwierdzić"
                                 type="password"
-                                value={pwd}
-                                onChange={(e) => setPwd(e.target.value)}
+                                value={state.input.pwd}
+                                onChange={(e) => handleInput(e)}
                                 onFocus={() => setPwdFieldFocus(true)}
                                 onBlur={() => setPwdFieldFocus(false)}
                                 onKeyUp={checkCapsLock}
