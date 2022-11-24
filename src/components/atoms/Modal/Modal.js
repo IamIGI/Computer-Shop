@@ -6,7 +6,6 @@ import { Close, InsideWrapper, Overlay, OutsideWrapper } from './Modal.styles';
 
 export default function Modal({ width, open, children, onClose }) {
     if (!open[0]) return null;
-    console.log('here');
 
     return ReactDOM.createPortal(
         <>
