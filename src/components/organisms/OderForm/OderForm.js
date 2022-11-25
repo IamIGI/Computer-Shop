@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { recipientDetails } from 'data/FormSchema';
 
-const OrderForm = ({ handleOrderData, comment, handleOrderComment }) => {
+const OrderForm = ({ handleOrderData, comment = '', handleOrderComment }) => {
     //form logic
     const {
         register,

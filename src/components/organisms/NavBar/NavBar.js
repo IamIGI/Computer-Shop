@@ -14,7 +14,7 @@ import {
     XmarkIcon,
 } from './NavBar.styles';
 import { VscMilestone, VscInspect } from 'react-icons/vsc';
-import { BsEnvelope } from 'react-icons/bs';
+import { BsEnvelope, BsFillPersonLinesFill } from 'react-icons/bs';
 import useAuth from 'hooks/useAuth';
 import useLogout from 'hooks/useLogout';
 import NoRealWebsiteAlert from 'components/molecules/NoRealWebisteAlert/NoRealWebsiteAlert';
@@ -82,6 +82,11 @@ const NavBar = () => {
                                     target={'/accountSettings/orders'}
                                     icon={<FiPackage />}
                                     description={'Zamówienia'}
+                                />
+                                <StyledLink
+                                    target={'/accountSettings/recipientTemplates'}
+                                    icon={<BsFillPersonLinesFill />}
+                                    description={'Odbiorcy'}
                                 />
                                 <div onClick={signOut}>
                                     <StyledLink target={''} icon={<RiLogoutCircleLine />} description={'Wyloguj się'} />

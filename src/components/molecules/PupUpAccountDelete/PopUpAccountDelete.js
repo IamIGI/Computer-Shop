@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection, OuterFormWrapper } from './PopUpAccountDelete.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
@@ -64,7 +64,7 @@ const PopUpAccountDelete = ({ name, signOut }) => {
         };
 
         try {
-            const response = await axiosPrivate.post('user/delete', data);
+            const response = await axiosPrivate.delete('user/delete', { headers: {}, data });
             console.log(response);
             signOut();
             notify();

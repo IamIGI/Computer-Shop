@@ -7,7 +7,7 @@ export const initDeliveryCheckboxesPay = {
     installment: false,
 };
 export const initRecipientDetails = {
-    name: ``,
+    name: '',
     street: '',
     zipCode: '',
     place: '',
