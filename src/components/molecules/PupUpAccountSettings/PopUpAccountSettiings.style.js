@@ -17,8 +17,8 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
     background-color: ${({ theme }) => theme.colors.lightPurple};
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     text-align: left;
     padding-left: 10%;
 
@@ -40,13 +40,7 @@ export const FormSection = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 20px;
-
-    @media screen and (max-width: 520px) {
-        p {
-            margin: 7px 0px 0px 0px;
-            font-size: ${({ theme }) => theme.fontSize.m_plus};
-        }
-    }
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
 
 export const InputLocal = styled(Input)`
