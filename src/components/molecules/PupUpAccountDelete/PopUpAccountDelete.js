@@ -63,8 +63,6 @@ const PopUpAccountDelete = ({ name, signOut }) => {
             password: state.input.pwd1,
         };
 
-        console.log(data);
-
         try {
             const response = await axiosPrivate.post('user/delete', data);
             console.log(response);
