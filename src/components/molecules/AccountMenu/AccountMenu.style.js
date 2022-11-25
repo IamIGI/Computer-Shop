@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     width: 100%;
     z-index: 3;
     h2 {
-        font-size: ${({ theme }) => theme.fontSize.xl};
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
     }
 
     @media screen and (max-width: 1210px) {
@@ -44,7 +44,7 @@ export const Nav = styled.nav`
 `;
 
 export const StyledLink = styled(NavLink)`
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
     width: 91%;
     margin-right: 5%;
     text-decoration: none;

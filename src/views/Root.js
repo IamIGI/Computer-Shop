@@ -23,6 +23,7 @@ import Authorization from 'components/templates/Mobile/Authorization/Authorizati
 import NoRealWebsitePage from 'components/templates/NoRealWebsite/NoRealWebsitePage';
 import Articles from 'components/templates/Articles/Articles';
 import Article from 'components/templates/Article/Article';
+import AccountRecipientTemplate from 'components/organisms/AccountRecipientTemplate/AccountRecipientTemplate';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -60,6 +61,7 @@ const Root = () => {
                             path={`/accountSettings/orders/history/:orderId`}
                             element={<AccountOrderHistoryItem />}
                         />
+                        <Route path="/accountSettings/recipientTemplates" element={<AccountRecipientTemplate />} />
                     </Route>
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

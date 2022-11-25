@@ -1,6 +1,7 @@
 import React from 'react';
 import { Wrapper, Nav, StyledLink } from './AccountMenu.style';
 import { FiSettings, FiPackage } from 'react-icons/fi';
+import { BsFillPersonLinesFill } from 'react-icons/bs';
 
 const AccountMenu = () => {
     return (
@@ -13,7 +14,7 @@ const AccountMenu = () => {
                             <FiSettings />
                         </span>
                     </div>
-                    <div>Ustawienia konta</div>
+                    <div>Ustawienia</div>
                 </StyledLink>
 
                 <StyledLink to="/accountSettings/Orders">
@@ -23,6 +24,15 @@ const AccountMenu = () => {
                         </span>
                     </div>
                     <div> Zamowienia</div>
+                </StyledLink>
+
+                <StyledLink to="/accountSettings/recipientTemplates">
+                    <div>
+                        <span>
+                            <BsFillPersonLinesFill />
+                        </span>
+                    </div>
+                    <div>Odbiorcy</div>
                 </StyledLink>
             </Nav>
         </Wrapper>
