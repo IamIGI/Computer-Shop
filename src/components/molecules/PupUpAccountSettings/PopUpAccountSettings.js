@@ -1,53 +1,59 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection, OuterFormWrapper } from './PopUpAccountSettiings.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
-import { testEmailRegex, testNameRegex, testPasswordRegex } from 'data/Regex';
+import { popUpAccountSettingsReducer, ACTIONS, INITIAL_STATE } from './PopUpAccountSettings.reducer';
 import toast from 'react-hot-toast';
 
 const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     const { auth, setAuth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
-    const [pwd, setPwd] = useState('');
-    const [editedField, setEditedField] = useState('');
-    const [validateEditedField, setValidateEditedField] = useState(false);
-    const [fieldFocus, setFieldFocus] = useState(false);
-    const [pwdFieldFocus, setPwdFieldFocus] = useState(false);
-    const [matchFiledFocus, setMatchFieldFocus] = useState(false);
-    const [isCapsLockOn, setIsCapsLockOn] = useState(false);
-
-    const [badPassword, setBadPassword] = useState(false);
-    const [isMatch, setIsMatch] = useState(true);
-    const [repeatPassword, setRepeatPassword] = useState('');
+    const [state, dispatch] = useReducer(popUpAccountSettingsReducer, INITIAL_STATE);
 
     const notify = () =>
         toast.success('Dane konta zmienione', {
             duration: 2000,
         });
 
-    const checkCapsLock = (event) => {
-        if (event.getModifierState('CapsLock')) {
-            setIsCapsLockOn(true);
-        } else {
-            setIsCapsLockOn(false);
-        }
+    const handleInput = (e) => {
+        dispatch({
+            type: ACTIONS.INPUT,
+            payload: { name: e.target.name, value: e.target.value },
+        });
+    };
+
+    const handleFocus = (e, value) => {
+        dispatch({
+            type: ACTIONS.FOCUS,
+            payload: { name: e.target.name, value },
+        });
+    };
+    /** In edited field we can have name type like: email, password, name */
+    const handleValidation = (name, value) => {
+        dispatch({
+            type: ACTIONS.VALID_EDITED_FIELD,
+            payload: { name, value },
+        });
+    };
+
+    const handleCapsLock = (e) => {
+        dispatch({
+            type: ACTIONS.CAPS_LOCK,
+            payload: e,
+        });
+    };
+
+    const handleIsMatchPassword = (pwd1, pwd2) => {
+        dispatch({
+            type: ACTIONS.IS_MATCH,
+            payload: { pwd1, pwd2 },
+        });
     };
 
     useEffect(() => {
-        if (name === 'email') {
-            setValidateEditedField(testEmailRegex(editedField));
-            return;
-        } else if (name === 'hashedPassword') {
-            setValidateEditedField(testPasswordRegex(editedField));
-            return;
-        } else if (name === 'firstName' || name === 'lastName') {
-            setValidateEditedField(testNameRegex(editedField));
-            return;
-        } else {
-            return;
-        }
+        handleValidation(name, state.input.editedField);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [editedField]);
+    }, [state.input.editedField]);
 
     let viewedName = '';
     switch (name) {
@@ -73,17 +79,18 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (name === 'hashedPassword') {
+            handleIsMatchPassword(state.input.editedField, state.input.repeatPassword);
+            return;
+        }
+
         const data = {
             _id: auth.id,
             fieldName: name,
-            edited: editedField,
-            password: pwd,
+            edited: state.input.editedField,
+            password: state.input.password,
         };
-
-        if (name === 'hashedPassword' && editedField !== repeatPassword) {
-            setIsMatch(false);
-            return;
-        }
 
         try {
             const response = await axiosPrivate.put('user/accountData', data);
@@ -92,7 +99,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                 setAuth((prevValue) => {
                     return {
                         ...prevValue,
-                        userName: editedField,
+                        userName: state.input.editedField,
                     };
                 });
             }
@@ -102,7 +109,8 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
             notify();
         } catch (err) {
             console.log(err);
-            if (err.response.status === 406) setBadPassword(true);
+            // if (err.response.status === 406) setBadPassword(true);
+            if (err.response.status === 406) dispatch({ type: ACTIONS.BAD_PASSWORD, payload: true });
         }
     };
 
@@ -116,77 +124,71 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
             <OuterFormWrapper>
                 <form onSubmit={handleSubmit}>
                     <FormSection>
-                        <div>
-                            <InputLocal
-                                name="name"
-                                type={name === 'hashedPassword' && 'password'}
-                                placeholder={`Zmieniasz: ${value}`}
-                                value={editedField}
-                                onChange={(e) => setEditedField(e.target.value)}
-                                onFocus={() => setFieldFocus(true)}
-                                onBlur={() => setFieldFocus(false)}
-                                onKeyUp={name === 'hashedPassword' ? checkCapsLock : undefined}
-                            />
-                        </div>
-                        {fieldFocus && isCapsLockOn && name === 'hashedPassword' ? (
+                        <InputLocal
+                            name="editedField"
+                            type={name === 'hashedPassword' && 'password'}
+                            placeholder={name === 'hashedPassword' ? 'Nowe hasło' : `Zmieniasz: ${value}`}
+                            value={state.input.editedField}
+                            onChange={(e) => handleInput(e)}
+                            onFocus={(e) => handleFocus(e, true)}
+                            onBlur={(e) => handleFocus(e, false)}
+                            onKeyUp={name === 'hashedPassword' ? (e) => handleCapsLock(e) : undefined}
+                        />
+
+                        {state.focus.editedField && state.isCapsLock && name === 'hashedPassword' ? (
                             <p>Caps Lock jest wciśnięty</p>
                         ) : (
                             <></>
                         )}
-                        {fieldFocus &&
-                            editedField &&
-                            !validateEditedField &&
+                        {state.focus.editedField &&
+                            state.input.editedField &&
+                            !state.validEditedField &&
                             (name === 'email' ? (
                                 <p>Email jest nie poprawny.</p>
                             ) : name === 'hashedPassword' ? (
-                                <>
-                                    <p>
-                                        8-24 znaków. <br />
-                                        Muszą zawierać małe i duże litery, <br />
-                                        liczby oraz znaki specjalne.
-                                    </p>
-                                </>
+                                <p>
+                                    8-24 znaków. <br />
+                                    Muszą zawierać małe i duże litery, <br />
+                                    liczby oraz znaki specjalne.
+                                </p>
                             ) : name === 'firstName' || name === 'lastName' ? (
                                 <p>Tylko litery</p>
                             ) : (
                                 <></>
                             ))}
                         {name === 'hashedPassword' && (
-                            <div>
-                                <InputLocal
-                                    name="repeat_password"
-                                    type="password"
-                                    placeholder={`Powtórz hasło`}
-                                    value={repeatPassword}
-                                    onFocus={() => setMatchFieldFocus(true)}
-                                    onBlur={() => setMatchFieldFocus(false)}
-                                    onChange={(e) => setRepeatPassword(e.target.value)}
-                                    onKeyUp={checkCapsLock}
-                                />
-                            </div>
+                            <InputLocal
+                                name="repeat_password"
+                                type="password"
+                                placeholder={`Powtórz hasło`}
+                                value={state.input.repeatPassword}
+                                onFocus={(e) => handleFocus(e, true)}
+                                onBlur={(e) => handleFocus(e, false)}
+                                onChange={(e) => handleInput(e)}
+                                onKeyUp={(e) => handleCapsLock(e)}
+                            />
                         )}
-                        {matchFiledFocus && isCapsLockOn && name === 'hashedPassword' ? (
+                        {state.focus.repeat_password && state.isCapsLock && name === 'hashedPassword' ? (
                             <p>Caps Lock jest wciśnięty</p>
                         ) : (
                             <></>
                         )}
 
-                        <div>
-                            <InputLocal
-                                name="password"
-                                placeholder="Podaj hasło aby zatwierdzić"
-                                type="password"
-                                value={pwd}
-                                onChange={(e) => setPwd(e.target.value)}
-                                onFocus={() => setPwdFieldFocus(true)}
-                                onBlur={() => setPwdFieldFocus(false)}
-                                onKeyUp={checkCapsLock}
-                            />
-                        </div>
-                        {pwdFieldFocus && isCapsLockOn ? <p>Caps Lock jest wciśnięty</p> : <></>}
+                        <InputLocal
+                            name="password"
+                            placeholder="Podaj hasło aby zatwierdzić"
+                            type="password"
+                            value={state.input.pwd}
+                            onChange={(e) => handleInput(e)}
+                            onFocus={(e) => handleFocus(e, true)}
+                            onBlur={(e) => handleFocus(e, false)}
+                            onKeyUp={(e) => handleCapsLock(e)}
+                        />
 
-                        {badPassword ? <p>Złe hasło</p> : <></>}
-                        {!isMatch ? <p>Hasła muszą być takie same</p> : <></>}
+                        {state.focus.password && state.isCapsLock ? <p>Caps Lock jest wciśnięty</p> : <></>}
+
+                        {state.badPassword && <p>Złe hasło</p>}
+                        {!state.isMatch && <p>Hasła muszą być takie same</p>}
 
                         <ButtonLocal type="submit">Zapisz</ButtonLocal>
                     </FormSection>
