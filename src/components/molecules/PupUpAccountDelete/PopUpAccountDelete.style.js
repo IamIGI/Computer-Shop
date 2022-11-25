@@ -14,8 +14,8 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
     background-color: ${({ theme }) => theme.colors.lightPurple};
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     text-align: left;
     padding-left: 6%;
     color: red;

@@ -4,16 +4,15 @@ export const INITIAL_STATE = {
     input: {
         password: '',
         editedField: '',
-        repeat_password: '',
+        repeatPassword: '',
     },
     validEditedField: false,
     focus: {
         password: false,
         editedField: false,
-        repeat_password: false,
+        repeatPassword: false,
     },
     isCapsLock: false,
-    isMatch: true,
     badPassword: false,
 };
 
@@ -22,7 +21,6 @@ export const ACTIONS = {
     VALID_EDITED_FIELD: 'valid',
     FOCUS: 'focus',
     CAPS_LOCK: 'isCapsLock',
-    IS_MATCH: 'isMatch',
     BAD_PASSWORD: 'badPassword',
 };
 
@@ -71,11 +69,6 @@ export const popUpAccountSettingsReducer = (state, action) => {
             return {
                 ...state,
                 isCapsLock: action.payload.getModifierState('CapsLock'),
-            };
-        case ACTIONS.IS_MATCH:
-            return {
-                ...state,
-                isMatch: action.payload.pwd1 === action.payload.pwd2,
             };
         case ACTIONS.BAD_PASSWORD:
             return {
