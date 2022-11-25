@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { ButtonLocal, InputLocal, Title, Wrapper, FormSection, OuterFormWrapper } from './PopUpAccountSettiings.style';
 import useAuth from 'hooks/useAuth';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
@@ -9,6 +9,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     const { auth, setAuth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
     const [state, dispatch] = useReducer(popUpAccountSettingsReducer, INITIAL_STATE);
+    const [isMatchPwd, setIsMatchPwd] = useState(true);
 
     const notify = () =>
         toast.success('Dane konta zmienione', {
@@ -43,13 +44,6 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
         });
     };
 
-    const handleIsMatchPassword = (pwd1, pwd2) => {
-        dispatch({
-            type: ACTIONS.IS_MATCH,
-            payload: { pwd1, pwd2 },
-        });
-    };
-
     useEffect(() => {
         handleValidation(name, state.input.editedField);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,8 +74,8 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (name === 'hashedPassword') {
-            handleIsMatchPassword(state.input.editedField, state.input.repeatPassword);
+        if (name === 'hashedPassword' && state.input.editedField !== state.input.repeatPassword) {
+            setIsMatchPwd(false);
             return;
         }
 
@@ -109,7 +103,6 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
             notify();
         } catch (err) {
             console.log(err);
-            // if (err.response.status === 406) setBadPassword(true);
             if (err.response.status === 406) dispatch({ type: ACTIONS.BAD_PASSWORD, payload: true });
         }
     };
@@ -158,7 +151,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                             ))}
                         {name === 'hashedPassword' && (
                             <InputLocal
-                                name="repeat_password"
+                                name="repeatPassword"
                                 type="password"
                                 placeholder={`Powtórz hasło`}
                                 value={state.input.repeatPassword}
@@ -168,7 +161,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                                 onKeyUp={(e) => handleCapsLock(e)}
                             />
                         )}
-                        {state.focus.repeat_password && state.isCapsLock && name === 'hashedPassword' ? (
+                        {state.focus.repeatPassword && state.isCapsLock && name === 'hashedPassword' ? (
                             <p>Caps Lock jest wciśnięty</p>
                         ) : (
                             <></>
@@ -188,7 +181,7 @@ const PopUpAccountSettings = ({ name, value, onClose, handleRefresh }) => {
                         {state.focus.password && state.isCapsLock ? <p>Caps Lock jest wciśnięty</p> : <></>}
 
                         {state.badPassword && <p>Złe hasło</p>}
-                        {!state.isMatch && <p>Hasła muszą być takie same</p>}
+                        {!isMatchPwd && <p>Hasła muszą być takie same</p>}
 
                         <ButtonLocal type="submit">Zapisz</ButtonLocal>
                     </FormSection>
