@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     width: fit-content;
     position: relative;
 
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
     transition: 0.5s ease;
 
     @media screen and (max-width: 1100px) {

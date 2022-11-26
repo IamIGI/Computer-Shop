@@ -33,13 +33,15 @@ export const Nav = styled.nav`
         flex-direction: row;
     }
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 850px) {
+        gap: 5px;
         justify-content: center;
         align-items: center;
     }
 
-    @media screen and (max-width: 560px) {
-        gap: 7px;
+    @media screen and (max-width: 500px) {
+        justify-content: space-evenly;
+        align-items: flex-start;
     }
 `;
 
@@ -80,17 +82,38 @@ export const StyledLink = styled(NavLink)`
         width: 250px;
     }
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 850px) {
+        width: 150px;
         justify-content: center;
     }
 
     @media screen and (max-width: 560px) {
-        width: 200px;
         font-size: ${({ theme }) => theme.fontSize.l};
+    }
+
+    @media screen and (max-width: 500px) {
+        align-items: center;
+        height: 40px;
+        width: 100%;
+        margin-right: 0%;
+        width: 50px;
+        div {
+            margin-right: 0px;
+        }
+        span {
+            font-size: ${({ theme }) => theme.fontSize.xl};
+        }
     }
 
     @media screen and (max-width: 470px) {
         width: fit-content;
         font-size: ${({ theme }) => theme.fontSize.m_plus};
+    }
+`;
+
+export const Description = styled.div`
+    display: flex;
+    @media screen and (max-width: 500px) {
+        display: none;
     }
 `;
