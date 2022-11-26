@@ -8,13 +8,12 @@ export const Wrapper = styled(NavLink)`
     justify-content: center;
     align-items: baseline;
     margin-left: 5px;
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
     padding: 6px 10px 13px 10px;
     transition: 0.5s ease;
 
     @media screen and (max-width: 1100px) {
         border: none;
-        font-size: ${({ theme }) => theme.fontSize.l_plus};
         padding: 10px;
         justify-content: flex-start;
     }

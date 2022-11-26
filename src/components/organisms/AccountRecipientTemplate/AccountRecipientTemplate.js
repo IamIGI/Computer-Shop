@@ -8,18 +8,9 @@ import { useState } from 'react';
 import { BsPersonLinesFill } from 'react-icons/bs';
 import { SectionTitle } from '../DeliveryOptions/DeliveryOptions.style';
 import OrderForm from '../OderForm/OderForm';
-import {
-    ChangeRecipient,
-    DeleteRecipient,
-    FormWrapper,
-    LoadingWrapper,
-    NoTemplates,
-    TemplateContainer,
-    TemplateWrapper,
-    Wrapper,
-} from './AccountRecipientTemplate.style';
+import { FormWrapper, LoadingWrapper, NoTemplates, Wrapper } from './AccountRecipientTemplate.style';
 import { initRecipientDetails } from 'components/templates/Basket/Basket.logic';
-import { MdOutlineDeleteOutline } from 'react-icons/md';
+import RecipientTemplates from 'components/molecules/RecipientTemplates/RecipientTemplates';
 
 const AccountRecipientTemplate = () => {
     const { auth } = useAuth();
@@ -119,6 +110,7 @@ const AccountRecipientTemplate = () => {
         getAccountRecipientTemplate(data);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh]);
+
     return (
         <AccountSettings>
             {waitForFetch ? (
@@ -133,26 +125,12 @@ const AccountRecipientTemplate = () => {
                     {recipientTemplates.length === 0 ? (
                         <NoTemplates>Nie masz stworzonych żadnych szablonów</NoTemplates>
                     ) : (
-                        <TemplateWrapper>
-                            {recipientTemplates.map((template) => (
-                                <TemplateContainer>
-                                    <ul>
-                                        <li>{template.name}</li>
-                                        <li>{template.email}</li>
-                                        <li>{template.phone}</li>
-                                        <li>{template.place}</li>
-                                        <li>{template.street}</li>
-                                        <li>{template.zipCode}</li>
-                                    </ul>
-                                    <ChangeRecipient onClick={() => handlePreloadValues(template)}>
-                                        Zmień
-                                    </ChangeRecipient>
-                                    <DeleteRecipient onClick={() => handleDelete(template._id)}>
-                                        <MdOutlineDeleteOutline />
-                                    </DeleteRecipient>
-                                </TemplateContainer>
-                            ))}
-                        </TemplateWrapper>
+                        <RecipientTemplates
+                            showOptions={true}
+                            recipientTemplates={recipientTemplates}
+                            handlePreloadValues={handlePreloadValues}
+                            handleDelete={handleDelete}
+                        />
                     )}
 
                     {recipientTemplates.length < 4 && (

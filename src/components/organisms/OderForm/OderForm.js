@@ -69,7 +69,7 @@ const OrderForm = ({
                     {accountRecipientTemplate && Object.keys(preloadedValues).length === 0 ? (
                         <Button type="submit"> Zapisz </Button>
                     ) : (
-                        <Button type="submit"> Zmień </Button>
+                        <Button type="submit"> Użyj </Button>
                     )}
                 </ButtonWrapper>
             </form>
