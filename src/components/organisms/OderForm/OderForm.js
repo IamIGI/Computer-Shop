@@ -1,11 +1,23 @@
 import { Wrapper, InputLocal, ButtonWrapper, Error } from './OrderForm.style';
-
 import { Button } from 'components/atoms/Button/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { recipientDetails } from 'data/FormSchema';
+import { useEffect } from 'react';
 
-const OrderForm = ({ handleOrderData, comment = '', handleOrderComment }) => {
+const OrderForm = ({
+    accountRecipientTemplate = false,
+    handlePreloadValues,
+    handleOrderData,
+    comment = '',
+    handleOrderComment,
+    preloadedValues = {},
+}) => {
+    useEffect(() => {
+        accountRecipientTemplate && Object.keys(preloadedValues).length !== 0 && reset(preloadedValues);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [preloadedValues]);
+
     //form logic
     const {
         register,
@@ -13,14 +25,28 @@ const OrderForm = ({ handleOrderData, comment = '', handleOrderComment }) => {
         formState: { errors },
         reset,
     } = useForm({
+        defaultValues: preloadedValues,
         resolver: yupResolver(recipientDetails),
     });
 
     //there could be issue with that (data)
     const onSubmit = (data) => {
-        handleOrderData(data.name, data.street, data.zipCode, data.place, data.email, data.phone, comment);
+        handleOrderData(
+            data.name,
+            data.street,
+            data.zipCode,
+            data.place,
+            data.email,
+            data.phone,
+            comment,
+            preloadedValues?._id
+        );
         //clear data
         reset({ name: '', street: '', zipCode: '', place: '', email: '', phone: '' });
+        if (accountRecipientTemplate) {
+            handlePreloadValues({});
+        }
+
         handleOrderComment('');
     };
 
@@ -40,7 +66,11 @@ const OrderForm = ({ handleOrderData, comment = '', handleOrderComment }) => {
                 <InputLocal name="phone" placeholder="Telefon" {...register('phone')} />
                 <Error>{errors.phone && 'Wpisz poprawny numer'}</Error>
                 <ButtonWrapper>
-                    <Button type="submit"> Zapisz </Button>
+                    {accountRecipientTemplate && Object.keys(preloadedValues).length === 0 ? (
+                        <Button type="submit"> Zapisz </Button>
+                    ) : (
+                        <Button type="submit"> Zmień </Button>
+                    )}
                 </ButtonWrapper>
             </form>
         </Wrapper>
