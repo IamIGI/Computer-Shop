@@ -28,13 +28,18 @@ const AccountRecipientTemplate = () => {
     const [waitForFetch, setWaitForFetch] = useState(true);
     const [refresh, setRefresh] = useState(false);
     const [recipientFormData, setRecipientFormData] = useState(initRecipientDetails);
+    const [preloadValues, setPreloadValues] = useState({});
+
+    const handlePreloadValues = (values) => {
+        setPreloadValues(values);
+    };
 
     const handleRefresh = () => {
         setRefresh(!refresh);
     };
 
-    const handleRecipientFormData = (name, street, zipCode, place, email, phone, comment) => {
-        setRecipientFormData({ name, street, zipCode, place, email, phone, comment });
+    const handleRecipientFormData = (name, street, zipCode, place, email, phone, comment, recipientId) => {
+        setRecipientFormData({ name, street, zipCode, place, email, phone, comment, recipientId });
     };
 
     const handleDelete = (recipientId) => {
@@ -66,12 +71,32 @@ const AccountRecipientTemplate = () => {
                 }
             };
 
-            const data = {
-                userId: auth.id,
-                recipientTemplate: recipientFormData,
+            const editAccountRecipientTemplate = async (data) => {
+                try {
+                    await axiosPrivate.post('/user/template/edit', data);
+                    setRecipientFormData(initRecipientDetails);
+                    handleRefresh();
+                } catch (err) {
+                    console.log(err);
+                }
             };
 
-            addAccountRecipientTemplate(data);
+            if (!recipientFormData.recipientId) {
+                const addData = {
+                    userId: auth.id,
+                    recipientTemplate: recipientFormData,
+                };
+
+                addAccountRecipientTemplate(addData);
+            } else {
+                const editData = {
+                    userId: auth.id,
+                    recipientId: recipientFormData.recipientId,
+                    recipientTemplate: recipientFormData,
+                };
+
+                editAccountRecipientTemplate(editData);
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [recipientFormData]);
@@ -119,7 +144,9 @@ const AccountRecipientTemplate = () => {
                                         <li>{template.street}</li>
                                         <li>{template.zipCode}</li>
                                     </ul>
-                                    <ChangeRecipient>Zmień</ChangeRecipient>
+                                    <ChangeRecipient onClick={() => handlePreloadValues(template)}>
+                                        Zmień
+                                    </ChangeRecipient>
                                     <DeleteRecipient onClick={() => handleDelete(template._id)}>
                                         <MdOutlineDeleteOutline />
                                     </DeleteRecipient>
@@ -131,7 +158,12 @@ const AccountRecipientTemplate = () => {
                     {recipientTemplates.length < 4 && (
                         <FormWrapper>
                             <h2>Dodaj nowy szablon</h2>
-                            <OrderForm handleOrderData={handleRecipientFormData} />
+                            <OrderForm
+                                accountRecipientTemplate={true}
+                                handlePreloadValues={handlePreloadValues}
+                                preloadedValues={preloadValues}
+                                handleOrderData={handleRecipientFormData}
+                            />
                         </FormWrapper>
                     )}
                 </Wrapper>
