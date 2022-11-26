@@ -1,4 +1,4 @@
-import { Wrapper, SectionTitle, LoadingWrapper } from './RecipientDetails.style';
+import { Wrapper, SectionTitle, LoadingWrapper, RecipientTemplatesWrapper } from './RecipientDetails.style';
 import OrderForm from 'components/organisms/OderForm/OderForm';
 import OrderComment from 'components/molecules/OrderComment/OrderComment';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
@@ -43,7 +43,7 @@ const RecipientDetails = ({ handleOrderData }) => {
 
         Boolean(auth.id) && getAccountRecipientTemplate(data);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [auth.id]);
 
     return (
         <>
@@ -52,7 +52,7 @@ const RecipientDetails = ({ handleOrderData }) => {
             </SectionTitle>
             <Wrapper>
                 {Boolean(auth.id) && (
-                    <>
+                    <RecipientTemplatesWrapper>
                         {waitForFetch ? (
                             <LoadingWrapper>
                                 <LoadingAnimation loadingSize={15} />
@@ -64,7 +64,7 @@ const RecipientDetails = ({ handleOrderData }) => {
                                 handlePreloadValues={handlePreloadValues}
                             />
                         )}
-                    </>
+                    </RecipientTemplatesWrapper>
                 )}
 
                 <OrderForm

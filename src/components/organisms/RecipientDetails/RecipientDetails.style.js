@@ -29,6 +29,11 @@ export const Wrapper = styled.div`
     }
 `;
 
+export const RecipientTemplatesWrapper = styled.div`
+    width: 100%;
+    margin-bottom: 20px;
+`;
+
 export const SectionTitle = styled.div`
     margin-left: 40px;
 
