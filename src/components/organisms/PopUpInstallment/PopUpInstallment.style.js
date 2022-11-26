@@ -82,6 +82,7 @@ export const Image = styled.div`
 `;
 
 export const ProductName = styled.div`
+    width: 100%;
     font-size: 22px;
 
     @media screen and (max-width: 1100px) {
