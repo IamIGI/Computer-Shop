@@ -12,7 +12,6 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 
 const RecipientDetails = ({ handleOrderData }) => {
     const { auth } = useAuth();
-    console.log(Boolean(auth.id));
     const axiosPrivate = useAxiosPrivate();
     const [waitForFetch, setWaitForFetch] = useState(true);
     const [recipientTemplates, setRecipientTemplates] = useState([]);
@@ -32,11 +31,9 @@ const RecipientDetails = ({ handleOrderData }) => {
             try {
                 setWaitForFetch(true);
                 const response = await axiosPrivate.post('user/template/get', data);
-                console.log(response);
                 setRecipientTemplates(response.data);
                 setWaitForFetch(false);
             } catch (err) {
-                console.log(err.response.status);
                 console.log(err);
             }
         };
