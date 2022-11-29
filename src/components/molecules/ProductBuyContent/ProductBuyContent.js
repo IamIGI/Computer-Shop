@@ -72,6 +72,7 @@ const ProductBuyContent = ({ product }) => {
                         _id: product._id,
                         quantity: q,
                         name: product.name,
+                        brand: product.brand,
                         price: product.price,
                         isDiscount,
                         priceBeforeDiscount: priceBeforeDiscount,

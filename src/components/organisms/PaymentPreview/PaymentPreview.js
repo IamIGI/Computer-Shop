@@ -11,18 +11,60 @@ import {
     NoUserAlert,
     AlertIcon,
     AlertDescription,
+    PromoInput,
+    PromoSection,
+    PromoButton,
+    CustomPromoForm,
+    PromoDescription,
+    PromoCodeAlert,
+    PromoCodeAlertSection,
+    PromoCodeIcon,
 } from './PaymentPreview.style';
 import { FiAlertCircle } from 'react-icons/fi';
+import { TbShoppingCartDiscount } from 'react-icons/tb';
 
-const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery, isUserLogIn }) => {
+const PaymentPreview = ({
+    priceToPay,
+    finishHandler,
+    priceForDelivery,
+    isUserLogIn,
+    handlePromoCode,
+    promoCode,
+    handlePromoCodeSubmit,
+    promoCodeInputDisabled,
+    promoCodeAlert,
+}) => {
     return (
         <Wrapper>
             <Section>
+                <PromoSection>
+                    <PromoDescription>Posiadasz kod promocyjny?</PromoDescription>
+                    <CustomPromoForm onSubmit={handlePromoCodeSubmit}>
+                        <PromoInput
+                            placeholder="..."
+                            type="text"
+                            id="promoCode"
+                            value={promoCode}
+                            onChange={(e) => handlePromoCode(e.target.value)}
+                            disabled={promoCodeInputDisabled}
+                        />
+                        <PromoButton>Aktywuj</PromoButton>
+                    </CustomPromoForm>
+                    {promoCodeAlert !== '' && (
+                        <PromoCodeAlertSection>
+                            <PromoCodeIcon>
+                                <TbShoppingCartDiscount />
+                            </PromoCodeIcon>
+                            <PromoCodeAlert>{promoCodeAlert}</PromoCodeAlert>
+                        </PromoCodeAlertSection>
+                    )}
+                </PromoSection>
+
                 <List>
                     <li>
                         <ListSection>
                             <Name>Wartość koszyka:</Name>
-                            <Price>{priceToPay} zł</Price>
+                            <Price>{priceToPay.toFixed(2)} zł</Price>
                         </ListSection>
                     </li>
                     <li>
@@ -39,7 +81,7 @@ const PaymentPreview = ({ priceToPay, finishHandler, priceForDelivery, isUserLog
                     </li>
                     <li>
                         <ListSection>
-                            <Name>Podsumowanie: </Name>
+                            <Name>Podsumowanie:</Name>
                             <Price>{(priceToPay + priceForDelivery).toFixed(2)} zł</Price>
                         </ListSection>
                     </li>

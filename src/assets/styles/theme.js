@@ -11,7 +11,7 @@ export const theme = {
         error: '#FF8383',
         warning: '#E1D888',
         darkPurple: '#C0C7D6',
-        lightPurple: '#ECEFF7',
+        lightPurple: '#f0f0f0',
         darkPro: '#2f3c4f',
         lightDarkPro: '#506e86',
         OrangePro: '#de703b',
