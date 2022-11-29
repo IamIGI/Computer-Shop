@@ -17,6 +17,7 @@ import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
 import { initDeliveryCheckboxesOpt, initDeliveryCheckboxesPay, initRecipientDetails } from './Basket.logic';
 import useLocalStorage from 'hooks/useLocalStorage';
+import promoCodeApi from '../../../api/promoCodes';
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -24,7 +25,7 @@ const Basket = () => {
     const location = useLocation();
     const logout = useLogout();
 
-    const { setBasketItems } = useBasket();
+    const { basketItems, setBasketItems } = useBasket();
     const { auth } = useAuth();
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useMultiCheckboxMemory(
         'deliveryMethod',
@@ -44,6 +45,59 @@ const Basket = () => {
     const [isOpen, setIsOpen] = useState([false]);
     const [orderId, setOrderId] = useState('');
     const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
+    const [promoCode, setPromoCode] = useState('');
+    const [promoCodeInputDisabled, setPromoCodeInputDisabled] = useState(
+        JSON.parse(localStorage.getItem('promoCodeInputDisabled')) == null
+            ? false
+            : JSON.parse(localStorage.getItem('promoCodeInputDisabled'))
+    );
+    const [promoCodeAlert, setPromoCodeAlert] = useState('');
+
+    useEffect(() => {
+        if (productsInBasket !== null && productsInBasket.length === 0) {
+            localStorage.setItem('promoCodeInputDisabled', JSON.stringify(false));
+            setPromoCodeInputDisabled(false);
+        }
+    }, [productsInBasket]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setPromoCodeAlert('');
+        }, 4000);
+    }, [promoCodeAlert]);
+
+    const handlePromoCodeSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = { code: promoCode, products: basketItems };
+        const response = await promoCodeApi.getDiscount(data);
+
+        if (response?.errCode === '001') {
+            setPromoCodeAlert('Podano zły kod');
+            return;
+        }
+        if (response?.errCode === '002') {
+            setPromoCodeAlert('Podany kod nie przecenia żadnego z produktów');
+            return;
+        }
+
+        localStorage.setItem('promoCodeInputDisabled', JSON.stringify(true));
+        setPromoCodeInputDisabled(true);
+        setPromoCodeAlert('Przeceniono produkt');
+
+        const discountProduct_Id = response[0]._id;
+
+        const newBasketItems = basketItems.filter((item) => {
+            return item._id !== discountProduct_Id;
+        });
+        response.map((item) => newBasketItems.push(item));
+        setBasketItems(newBasketItems);
+        setPromoCode('');
+    };
+
+    const handlePromoCode = (value) => {
+        setPromoCode(value);
+    };
 
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -71,12 +125,14 @@ const Basket = () => {
         setBasketItems([]);
         setOrderData(initRecipientDetails);
         setFinishOrder(false);
+        setPromoCodeInputDisabled(false);
         setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
         setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
         localStorage.removeItem('basketItems');
         localStorage.removeItem('orderData');
         localStorage.removeItem('deliveryMethod');
         localStorage.removeItem('paymentMethod');
+        localStorage.removeItem('promoCodeInputDisabled');
     };
 
     const onPopUpClose = () => {
@@ -142,7 +198,7 @@ const Basket = () => {
 
         const finalPrice = (priceToPay + priceForDelivery).toFixed(2);
         orderTemplateDocument = {
-            status: 1, //all orders have to start from "In realization" status
+            status: 1, //all orders have to start from "In realization" status // for now
             products: productsInBasket,
             transactionInfo: {
                 deliveryMethod: tempOpt,
@@ -169,7 +225,7 @@ const Basket = () => {
                             );
 
                             const stripeObj = {
-                                products,
+                                products: productsInBasket,
                                 delivery: orderTemplateDocument.transactionInfo.deliveryMethod,
                             };
 
@@ -231,6 +287,11 @@ const Basket = () => {
                         orderStreet={street}
                     />
                     <PaymentPreview
+                        promoCodeAlert={promoCodeAlert}
+                        promoCodeInputDisabled={promoCodeInputDisabled}
+                        handlePromoCodeSubmit={handlePromoCodeSubmit}
+                        handlePromoCode={handlePromoCode}
+                        promoCode={promoCode}
                         isUserLogIn={Boolean(auth.id)}
                         priceToPay={priceToPay}
                         finishHandler={finishHandler}

@@ -44,6 +44,7 @@ const BuyButton = ({ item }) => {
                         _id: product._id,
                         quantity: q,
                         name: product.name,
+                        brand: product.brand,
                         price: product.price,
                         isDiscount,
                         priceBeforeDiscount: isDiscount ? price + discountValue : price,
