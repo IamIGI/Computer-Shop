@@ -11,18 +11,10 @@ import {
     NoUserAlert,
     AlertIcon,
     AlertDescription,
-    PromoInput,
-    PromoSection,
-    PromoButton,
-    CustomPromoForm,
-    PromoDescription,
-    PromoCodeAlert,
-    PromoCodeAlertSection,
-    PromoCodeIcon,
 } from './PaymentPreview.style';
 import { FiAlertCircle } from 'react-icons/fi';
-import { TbShoppingCartDiscount } from 'react-icons/tb';
 import useAuth from 'hooks/useAuth';
+import PromoSectionComponent from 'components/molecules/PromoSection/PromoSection';
 
 const PaymentPreview = ({
     priceToPay,
@@ -40,28 +32,13 @@ const PaymentPreview = ({
         <Wrapper>
             <Section>
                 {Boolean(auth.id) && (
-                    <PromoSection>
-                        <PromoDescription>Posiadasz kod promocyjny?</PromoDescription>
-                        <CustomPromoForm onSubmit={handlePromoCodeSubmit}>
-                            <PromoInput
-                                placeholder="..."
-                                type="text"
-                                id="promoCode"
-                                value={promoCode}
-                                onChange={(e) => handlePromoCode(e.target.value)}
-                                disabled={promoCodeInputDisabled}
-                            />
-                            <PromoButton>Aktywuj</PromoButton>
-                        </CustomPromoForm>
-                        {promoCodeAlert !== '' && (
-                            <PromoCodeAlertSection>
-                                <PromoCodeIcon>
-                                    <TbShoppingCartDiscount />
-                                </PromoCodeIcon>
-                                <PromoCodeAlert>{promoCodeAlert}</PromoCodeAlert>
-                            </PromoCodeAlertSection>
-                        )}
-                    </PromoSection>
+                    <PromoSectionComponent
+                        handlePromoCodeSubmit={handlePromoCodeSubmit}
+                        promoCode={promoCode}
+                        handlePromoCode={handlePromoCode}
+                        promoCodeInputDisabled={promoCodeInputDisabled}
+                        promoCodeAlert={promoCodeAlert}
+                    />
                 )}
 
                 <List>

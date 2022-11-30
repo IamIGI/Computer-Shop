@@ -173,6 +173,7 @@ export const ArticleWrapper = styled.div`
 `;
 
 export const ArticleContainer = styled(NavLink)`
+    max-width: 940px;
     color: black;
     text-decoration: none;
     display: flex;

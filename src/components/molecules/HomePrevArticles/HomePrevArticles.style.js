@@ -69,13 +69,17 @@ export const ContentWrapper = styled.div`
 export const Image = styled.div`
     width: 100%;
     max-width: 300px;
+    min-height: 215px;
+
     justify-content: center;
-    align-self: center;
+    align-content: center;
+
     border: 1px solid ${({ theme }) => theme.colors.grey};
     border-radius: 10px;
     padding: 5px;
     img {
         width: 100%;
+
         max-height: 200px;
     }
 `;
