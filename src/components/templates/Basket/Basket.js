@@ -17,7 +17,6 @@ import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
 import { initDeliveryCheckboxesOpt, initDeliveryCheckboxesPay, initRecipientDetails } from './Basket.logic';
 import useLocalStorage from 'hooks/useLocalStorage';
-import promoCodeApi from '../../../api/promoCodes';
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -46,6 +45,7 @@ const Basket = () => {
     const [orderId, setOrderId] = useState('');
     const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
     const [promoCode, setPromoCode] = useState('');
+    const [successfullyUsedPromoCode, setSuccessfullyUsedPromoCode] = useState(false);
     const [promoCodeInputDisabled, setPromoCodeInputDisabled] = useState(
         JSON.parse(localStorage.getItem('promoCodeInputDisabled')) == null
             ? false
@@ -69,30 +69,35 @@ const Basket = () => {
     const handlePromoCodeSubmit = async (e) => {
         e.preventDefault();
 
-        const data = { code: promoCode, products: basketItems };
-        const response = await promoCodeApi.getDiscount(data);
-
-        if (response?.errCode === '001') {
+        const data = { code: promoCode, products: basketItems, auth: auth.id };
+        const response = await axiosPrivate.post('/promocodes/checkproducts', data);
+        console.log(response);
+        const promoCodesResponse = response.data;
+        if (promoCodesResponse?.errCode === '001') {
             setPromoCodeAlert('Podano zły kod');
             return;
         }
-        if (response?.errCode === '002') {
+        if (promoCodesResponse?.errCode === '002') {
             setPromoCodeAlert('Podany kod nie przecenia żadnego z produktów');
+            return;
+        }
+        if (promoCodesResponse?.errCode === '003') {
+            setPromoCodeAlert('Podany kod został już użyty');
             return;
         }
 
         localStorage.setItem('promoCodeInputDisabled', JSON.stringify(true));
         setPromoCodeInputDisabled(true);
+        setSuccessfullyUsedPromoCode(true);
         setPromoCodeAlert('Przeceniono produkt');
-
-        const discountProduct_Id = response[0]._id;
+        console.log(promoCodesResponse);
+        const discountProduct_Id = promoCodesResponse[0]._id;
 
         const newBasketItems = basketItems.filter((item) => {
             return item._id !== discountProduct_Id;
         });
-        response.map((item) => newBasketItems.push(item));
+        promoCodesResponse.map((item) => newBasketItems.push(item));
         setBasketItems(newBasketItems);
-        setPromoCode('');
     };
 
     const handlePromoCode = (value) => {
@@ -126,6 +131,8 @@ const Basket = () => {
         setOrderData(initRecipientDetails);
         setFinishOrder(false);
         setPromoCodeInputDisabled(false);
+        setSuccessfullyUsedPromoCode(false);
+        setPromoCode('');
         setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
         setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
         localStorage.removeItem('basketItems');
@@ -207,6 +214,7 @@ const Basket = () => {
                 recipientDetails: orderData,
             },
             user: auth.id,
+            usedPromoCode: { isUsed: successfullyUsedPromoCode, code: promoCode },
         };
 
         const { transactionInfo } = orderTemplateDocument;

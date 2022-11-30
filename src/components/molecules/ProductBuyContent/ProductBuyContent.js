@@ -13,13 +13,14 @@ import {
     ArticleLink,
 } from './ProductBuyContent.style';
 import useBasket from 'hooks/useBasket';
-import { BsCartPlus, BsTruck } from 'react-icons/bs';
+import { BsCartPlus } from 'react-icons/bs';
 import { RiCoinLine } from 'react-icons/ri';
 import toast from 'react-hot-toast';
 import ProductBuyHint from 'components/atoms/ProductBuyHint/ProductBuyHint';
 import PopUpInstallment from 'components/organisms/PopUpInstallment/PopUpInstallment';
 import { FiSmartphone } from 'react-icons/fi';
 import PopUpFreeDelivery from 'components/organisms/PopUpFreeDelivery/PopUpFreeDelivery';
+import { TbShoppingCartDiscount } from 'react-icons/tb';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -115,8 +116,8 @@ const ProductBuyContent = ({ product }) => {
                 </ArticleLink>
                 <Separator />
                 <ProductBuyHint
-                    icon={<BsTruck />}
-                    title="Darmowa dostawa"
+                    icon={<TbShoppingCartDiscount />}
+                    title="Dzień zniżek"
                     ask="Sprawdź szczegóły"
                     popUp={<PopUpFreeDelivery product={product} />}
                 />
