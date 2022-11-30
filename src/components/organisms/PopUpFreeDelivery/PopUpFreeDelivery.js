@@ -21,7 +21,7 @@ const PopUpFreeDelivery = ({ product }) => {
 
     return (
         <Wrapper>
-            <Title>Oblicz ratę</Title>
+            <Title>Dzień zniżek</Title>
             <InsideWrapper>
                 <ProductSection>
                     <Image>
@@ -30,8 +30,8 @@ const PopUpFreeDelivery = ({ product }) => {
                     <ProductName>{product.name}</ProductName>
                 </ProductSection>
                 <Info>
-                    <InfoDescription>Tylko dzisiaj darmowa dostawa z kodem:</InfoDescription>
-                    <InfoCode onClick={() => copyToClipboard('DELIVERY_24')}>DELIVERY_24</InfoCode>
+                    <InfoDescription>Skorzystaj z dnia zniżek:</InfoDescription>
+                    <InfoCode onClick={() => copyToClipboard('do_kieszeni')}>do_kieszeni</InfoCode>
                 </Info>
             </InsideWrapper>
         </Wrapper>

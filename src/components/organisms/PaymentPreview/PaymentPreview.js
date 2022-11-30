@@ -22,6 +22,7 @@ import {
 } from './PaymentPreview.style';
 import { FiAlertCircle } from 'react-icons/fi';
 import { TbShoppingCartDiscount } from 'react-icons/tb';
+import useAuth from 'hooks/useAuth';
 
 const PaymentPreview = ({
     priceToPay,
@@ -34,31 +35,34 @@ const PaymentPreview = ({
     promoCodeInputDisabled,
     promoCodeAlert,
 }) => {
+    const { auth } = useAuth();
     return (
         <Wrapper>
             <Section>
-                <PromoSection>
-                    <PromoDescription>Posiadasz kod promocyjny?</PromoDescription>
-                    <CustomPromoForm onSubmit={handlePromoCodeSubmit}>
-                        <PromoInput
-                            placeholder="..."
-                            type="text"
-                            id="promoCode"
-                            value={promoCode}
-                            onChange={(e) => handlePromoCode(e.target.value)}
-                            disabled={promoCodeInputDisabled}
-                        />
-                        <PromoButton>Aktywuj</PromoButton>
-                    </CustomPromoForm>
-                    {promoCodeAlert !== '' && (
-                        <PromoCodeAlertSection>
-                            <PromoCodeIcon>
-                                <TbShoppingCartDiscount />
-                            </PromoCodeIcon>
-                            <PromoCodeAlert>{promoCodeAlert}</PromoCodeAlert>
-                        </PromoCodeAlertSection>
-                    )}
-                </PromoSection>
+                {Boolean(auth.id) && (
+                    <PromoSection>
+                        <PromoDescription>Posiadasz kod promocyjny?</PromoDescription>
+                        <CustomPromoForm onSubmit={handlePromoCodeSubmit}>
+                            <PromoInput
+                                placeholder="..."
+                                type="text"
+                                id="promoCode"
+                                value={promoCode}
+                                onChange={(e) => handlePromoCode(e.target.value)}
+                                disabled={promoCodeInputDisabled}
+                            />
+                            <PromoButton>Aktywuj</PromoButton>
+                        </CustomPromoForm>
+                        {promoCodeAlert !== '' && (
+                            <PromoCodeAlertSection>
+                                <PromoCodeIcon>
+                                    <TbShoppingCartDiscount />
+                                </PromoCodeIcon>
+                                <PromoCodeAlert>{promoCodeAlert}</PromoCodeAlert>
+                            </PromoCodeAlertSection>
+                        )}
+                    </PromoSection>
+                )}
 
                 <List>
                     <li>

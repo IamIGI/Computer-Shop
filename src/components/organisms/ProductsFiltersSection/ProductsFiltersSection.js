@@ -19,15 +19,16 @@ import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 
 const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, FilterInitPosition }) => {
     const [sortBy, setSortBy] = useState('none');
-    const [clearSortBy, setClearSortBy] = useState(false);
     const [producers, setProducers] = useState([]);
-    const [clearProducers, setClearProducers] = useState(false);
     const [processors, setProcessors] = useState([]);
-    const [clearProcessors, setClearProcessors] = useState(false);
     const [ram, setRam] = useState({ min: '', max: '' });
     const [disk, setDisk] = useState({ min: '', max: '' });
     const [searchTerm, setSearchTerm] = useState('');
     const [discounts, setDiscounts] = useState(false);
+
+    const [clearSortBy, setClearSortBy] = useState(false);
+    const [clearProducers, setClearProducers] = useState(false);
+    const [clearProcessors, setClearProcessors] = useState(false);
 
     const handleSortBy = (data) => {
         for (let i = 0; i < data.length; i++) {
