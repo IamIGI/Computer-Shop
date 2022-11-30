@@ -71,7 +71,7 @@ const Basket = () => {
 
         const data = { code: promoCode, products: basketItems, auth: auth.id };
         const response = await axiosPrivate.post('/promocodes/checkproducts', data);
-        console.log(response);
+
         const promoCodesResponse = response.data;
         if (promoCodesResponse?.errCode === '001') {
             setPromoCodeAlert('Podano zły kod');
@@ -90,7 +90,7 @@ const Basket = () => {
         setPromoCodeInputDisabled(true);
         setSuccessfullyUsedPromoCode(true);
         setPromoCodeAlert('Przeceniono produkt');
-        console.log(promoCodesResponse);
+
         const discountProduct_Id = promoCodesResponse[0]._id;
 
         const newBasketItems = basketItems.filter((item) => {
