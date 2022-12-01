@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
     BuyButton,
-    NumberInput,
     Separator,
     Wrapper,
     DiscountSize,
@@ -118,7 +117,6 @@ const ProductBuyContent = ({ product }) => {
                 )}
 
                 <BuySection>
-                    {/* <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} /> */}
                     <SetFilterItems
                         afterClickWrap={true}
                         selectOptionsInCenter={true}
