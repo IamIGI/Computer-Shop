@@ -65,17 +65,6 @@ export const BuySection = styled.div`
         margin-bottom: 5px;
     }
 `;
-export const NumberInput = styled(Input)`
-    width: 50px;
-    height: 50px;
-    padding: 0;
-    margin: 0;
-
-    @media screen and (max-width: 1400px) {
-        width: 45px;
-        height: 45px;
-    }
-`;
 
 export const BuyButton = styled(Button)`
     color: white;
