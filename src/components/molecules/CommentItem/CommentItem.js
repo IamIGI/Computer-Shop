@@ -11,6 +11,7 @@ import {
     BigScreen,
     SmallScreen,
     UserDataWhenSmallScreen,
+    LoadCommentsButton,
 } from './CommentItem.style';
 
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
@@ -20,13 +21,21 @@ import ContentData from 'components/atoms/Comments/ContentData/ContentData';
 import Opinion from 'components/atoms/Comments/Opinion/Opinion';
 import CommentsScore from 'components/atoms/Comments/CommentScore/CommentsScore';
 import { FaCommentSlash } from 'react-icons/fa';
+import { useState } from 'react';
 
 const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, handleChosenImage }) => {
     const { comments: commentsArray, length: displayedComments } = comments;
+    const [limitViewedComments, setLimitViewedComments] = useState(5);
 
     const findImage = (url) => {
         const searchedElement_Index = comments.images.indexOf(url, 0);
         handleChosenImage(searchedElement_Index);
+    };
+
+    const handleLimitOfViewedComments = () => {
+        setLimitViewedComments((prevValue) => {
+            return prevValue + 5;
+        });
     };
 
     return (
@@ -54,7 +63,7 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
                         </>
                     ) : (
                         <>
-                            {commentsArray.map((comment, index) => (
+                            {commentsArray.slice(0, limitViewedComments).map((comment, index) => (
                                 <CommentSection key={index}>
                                     <BigScreen>
                                         <UserData comment={comment} />
@@ -90,9 +99,17 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
                                     </ContentSection>
                                 </CommentSection>
                             ))}
-                            <NoOpinionsLeft>
-                                <p>Koniec opinii</p>
-                            </NoOpinionsLeft>
+                            {limitViewedComments < displayedComments ? (
+                                <NoOpinionsLeft>
+                                    <LoadCommentsButton onClick={() => handleLimitOfViewedComments()}>
+                                        Więcej opinii ({commentsArray.length - limitViewedComments})
+                                    </LoadCommentsButton>
+                                </NoOpinionsLeft>
+                            ) : (
+                                <NoOpinionsLeft>
+                                    <p>Koniec opinii</p>
+                                </NoOpinionsLeft>
+                            )}
                         </>
                     )}
                 </>
