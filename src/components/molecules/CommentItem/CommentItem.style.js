@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from 'components/atoms/Button/Button';
 
 export const Wrapper = styled.div`
     margin: 10px 7%;
@@ -53,6 +54,18 @@ export const NoOpinionsLeft = styled.div`
     margin: 20px 0;
     @media screen and (max-width: 450px) {
         margin: 10px 0;
+    }
+`;
+
+export const LoadCommentsButton = styled(Button)`
+    width: 80%;
+    padding: 11px 0px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 20px;
+
+    :hover {
+        background-color: #f5f5f5;
     }
 `;
 
