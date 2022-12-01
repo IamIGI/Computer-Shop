@@ -19,7 +19,10 @@ const SetFilterItems = ({
     handleItems,
     handleClearItemsFilters,
     clearItems,
-    OneTimeChoice,
+    OneTimeChoice = false,
+    displayCheckbox = false,
+    selectOptionsInCenter = false,
+    afterClickWrap = false,
 }) => {
     const [toggle, setToggle] = useState(false);
     const [check, setCheck] = useState(filterData);
@@ -47,6 +50,8 @@ const SetFilterItems = ({
                 })
             );
         }
+
+        if (afterClickWrap) setToggle(false);
     };
 
     useEffect(() => {
@@ -70,6 +75,7 @@ const SetFilterItems = ({
         <Wrapper>
             <InputSection>
                 <InputField
+                    display={toggle}
                     width={width}
                     placeholder={OneTimeChoice ? placeholder : 'Wybierz'}
                     onClick={() => {
@@ -81,8 +87,13 @@ const SetFilterItems = ({
                 </InputDescription>
                 <FilterOptions display={toggle} width={width} onMouseLeave={() => setToggle(false)}>
                     {check.map((item) => (
-                        <FilterOption key={item.label} onClick={() => handleCheck(item.value, item.checked)}>
-                            <Checkbox type="checkbox" checked={item.checked} readOnly={true} />
+                        <FilterOption
+                            activeChoice={item.checked}
+                            selectOptionsInCenter={selectOptionsInCenter}
+                            key={item.label}
+                            onClick={() => handleCheck(item.value, item.checked)}
+                        >
+                            {displayCheckbox && <Checkbox type="checkbox" checked={item.checked} readOnly={true} />}
                             <OptionDescription>{item.label}</OptionDescription>
                         </FilterOption>
                     ))}

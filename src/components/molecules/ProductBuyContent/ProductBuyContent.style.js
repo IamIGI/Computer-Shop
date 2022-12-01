@@ -102,10 +102,6 @@ export const BuyButton = styled(Button)`
         font-size: 15px;
     }
 
-    @media screen and (max-width: 800px) {
-        margin-left: 0px;
-    }
-
     @media screen and (max-width: 625px) {
         width: 100%;
     }
