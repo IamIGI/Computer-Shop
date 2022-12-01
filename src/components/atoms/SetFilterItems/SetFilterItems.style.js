@@ -16,7 +16,7 @@ export const InputDescription = styled.div`
 `;
 
 export const InputField = styled.input`
-    text-align: left;
+    caret-color: transparent;
     height: 25px;
     width: ${(props) => props.width};
     border-radius: 10px;
@@ -25,6 +25,8 @@ export const InputField = styled.input`
     padding-left: 20px;
     text-align: left;
     height: 30px;
+    border-bottom-left-radius: ${(props) => (props.display ? '0px' : '10px')};
+    border-bottom-right-radius: ${(props) => (props.display ? '0px' : '10px')};
 
     &:hover {
         border: 1px solid grey;
@@ -43,13 +45,15 @@ export const FilterOptions = styled.div`
     height: fit-content;
     gap: 5px;
     position: absolute;
-    top: 10px;
+    top: 30px;
     right: 0px;
     background-color: white;
-    padding: 0 10px 8px 10px;
+    /* padding: 0 10px 8px 10px; */
+    padding-bottom: 5px;
     border-left: 1px solid grey;
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
+    /* border: 1px solid grey; */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: white;
@@ -64,14 +68,16 @@ export const FilterOptions = styled.div`
 export const FilterOption = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: ${(props) => (props.selectOptionsInCenter ? 'center' : 'flex-start')};
     align-items: center;
     flex-wrap: nowrap;
     gap: 10px;
     width: 100%;
-    padding: 2px 0;
+    padding: 4px 0px 4px 0px;
+    padding-left: ${(props) => (props.selectOptionsInCenter ? '0px' : '10px')};
     border-radius: 3px;
     border: 1px solid transparent;
+    background-color: ${(props) => (props.activeChoice ? '#ededed' : 'white')};
 
     &:hover {
         background-color: ${({ theme }) => theme.colors.lightLightGrey};

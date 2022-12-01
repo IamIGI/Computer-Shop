@@ -21,6 +21,8 @@ import PopUpInstallment from 'components/organisms/PopUpInstallment/PopUpInstall
 import { FiSmartphone } from 'react-icons/fi';
 import PopUpFreeDelivery from 'components/organisms/PopUpFreeDelivery/PopUpFreeDelivery';
 import { TbShoppingCartDiscount } from 'react-icons/tb';
+import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
+import { numberOptions } from './ProductBuyContent.logic';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -41,6 +43,19 @@ const ProductBuyContent = ({ product }) => {
             setPriceBeforeDiscount(0); // don't matter
             setIsDiscount(false);
         }
+    };
+
+    const handleQuantity = (data) => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) {
+                setQuantity(data[i].value);
+                break;
+            }
+        }
+    };
+
+    const handleClearQuantity = (data) => {
+        setQuantity(1);
     };
 
     useEffect(() => {
@@ -103,7 +118,17 @@ const ProductBuyContent = ({ product }) => {
                 )}
 
                 <BuySection>
-                    <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} />
+                    {/* <NumberInput placeholder="1" onChange={(e) => setQuantity(e.target.value)} /> */}
+                    <SetFilterItems
+                        afterClickWrap={true}
+                        selectOptionsInCenter={true}
+                        OneTimeChoice={true}
+                        width="50px"
+                        description={''}
+                        filterData={numberOptions}
+                        handleItems={handleQuantity}
+                        handleClearItemsFilters={handleClearQuantity}
+                    />
                     <BuyButton onClick={() => addProduct()}>
                         <BuyIcon>
                             <BsCartPlus />
