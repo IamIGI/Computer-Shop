@@ -73,6 +73,7 @@ const AccountOrderHistoryItem = () => {
                             value={orderItem.transactionInfo.deliveryMethod}
                             type="delivery"
                         />
+                        s
                         <OrderUserDataSection value={orderItem} />
                         <OrderSection
                             title="Płatności"
@@ -83,7 +84,7 @@ const AccountOrderHistoryItem = () => {
                         <ProductSection>
                             <OrderSectionTitle>Zamówienie</OrderSectionTitle>
                             {orderItem.products.map((product) => (
-                                <OrderProductElement product={product} />
+                                <OrderProductElement key={product._id} product={product} />
                             ))}
                         </ProductSection>
                         <Line />

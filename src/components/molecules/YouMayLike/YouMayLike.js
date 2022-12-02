@@ -62,8 +62,8 @@ const YouMayLike = () => {
                     {slidesOfProducts.length > 0 && (
                         <Slider id="Slider">
                             <SlideTrack>
-                                {slidesOfProducts.map((slide) => (
-                                    <Slide>
+                                {slidesOfProducts.map((slide, index) => (
+                                    <Slide key={index}>
                                         <Items>
                                             {slide.map((item, index) => (
                                                 <MayLikeItem
@@ -79,9 +79,7 @@ const YouMayLike = () => {
                                 <Slide>
                                     <Items>
                                         {slidesOfProducts[0].map((item, index) => (
-                                            <>
-                                                <MayLikeItem key={index} item={item} />
-                                            </>
+                                            <MayLikeItem key={index} item={item} />
                                         ))}
                                     </Items>
                                 </Slide>

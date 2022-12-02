@@ -19,18 +19,17 @@ const PrevDataProduct = ({ productData: { processor, ram, graphic_card, screen_s
                     <span>Przekątna ekranu:</span> {screen_size}
                 </li>
             </ul>
-            <p>
-                <a href="#Specification">
-                    <SpecificationLinkSection>
-                        <span>
-                            <Icon>
-                                <BsChevronDoubleDown />
-                            </Icon>
-                        </span>
-                        <SpecificationDescription>Przewiń do pełnej specyfikacji</SpecificationDescription>
-                    </SpecificationLinkSection>
-                </a>
-            </p>
+
+            <a href="#Specification">
+                <SpecificationLinkSection>
+                    <span>
+                        <Icon>
+                            <BsChevronDoubleDown />
+                        </Icon>
+                    </span>
+                    <SpecificationDescription>Przewiń do pełnej specyfikacji</SpecificationDescription>
+                </SpecificationLinkSection>
+            </a>
         </Wrapper>
     );
 };

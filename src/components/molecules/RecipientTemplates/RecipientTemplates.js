@@ -5,8 +5,8 @@ import { ChangeRecipient, DeleteRecipient, TemplateContainer, TemplateWrapper } 
 const RecipientTemplates = ({ showOptions = false, recipientTemplates, handlePreloadValues, handleDelete }) => {
     return (
         <TemplateWrapper>
-            {recipientTemplates.map((template) => (
-                <TemplateContainer>
+            {recipientTemplates.map((template, index) => (
+                <TemplateContainer key={index}>
                     <ul>
                         <li>{template.name}</li>
                         <li>{template.email}</li>
