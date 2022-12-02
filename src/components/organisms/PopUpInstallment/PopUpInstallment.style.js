@@ -175,11 +175,11 @@ export const SumUp = styled.div`
 export const SumUpDescription = styled.div``;
 
 export const SumUpAmount = styled.div`
-    width: 100px;
+    width: 110px;
     font-size: ${({ theme }) => theme.fontSize.xl};
 
     @media screen and (max-width: 950px) {
-        width: 90px;
+        width: 100px;
         font-size: ${({ theme }) => theme.fontSize.l_plus};
     }
 `;

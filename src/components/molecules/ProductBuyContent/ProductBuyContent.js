@@ -148,7 +148,7 @@ const ProductBuyContent = ({ product }) => {
                 <Separator />
                 <ProductBuyHint
                     icon={<RiCoinLine />}
-                    title={` Rata tylko ${(formatPrices(product.price) / 24).toFixed(2)} zł`}
+                    title={` Rata tylko ${formatPrices((product.price / 24).toFixed(2))} zł`}
                     ask="Oblicz ratę"
                     popUp={<PopUpInstallment product={product} />}
                 />
