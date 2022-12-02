@@ -1,6 +1,5 @@
 import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
-import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { Wrapper, ImageContainer, SmallImagesContainer, SmallImage, SmallImageWrapper } from './PopUpGallery.style';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
@@ -9,9 +8,16 @@ const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
     const sumOfElementsWidth = images.length * 90 + (images.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
-    setInterval(async () => {
-        setDivWidth(document.getElementById('containerBigImage').offsetWidth);
-    }, 2000);
+    useEffect(() => {
+        const timer = setInterval(async () => {
+            setDivWidth(document.getElementById('containerBigImage').offsetWidth);
+        }, 2000);
+
+        return () => {
+            //clear timeouts and intervals, otherwise it is still working. Even if you close component
+            clearInterval(timer);
+        };
+    }, []);
 
     const scrollCommentImages = (direction) => {
         switch (direction) {

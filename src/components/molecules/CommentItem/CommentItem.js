@@ -41,9 +41,7 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
     return (
         <Wrapper>
             {waitForFetchComments ? (
-                <>
-                    <LoadingAnimation loadingSize={15} />
-                </>
+                <LoadingAnimation loadingSize={15} />
             ) : (
                 <>
                     {displayedComments === 0 ? (
