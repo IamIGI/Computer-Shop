@@ -19,11 +19,12 @@ import {
     PriceField,
 } from './PopUpInstallment.style';
 import Slider from 'components/atoms/Slider/Slider';
+import formatPrices from 'helpers/formatPrices';
 
 const PopUpInstallment = ({ product }) => {
     const maxSelfDeposit = product.special_offer.mode
-        ? (product.price - product.special_offer.price).toFixed(2)
-        : product.price;
+        ? (formatPrices(product.price) - product.special_offer.price).toFixed(2)
+        : formatPrices(product.price);
     const maxNumberOfInstallment = 48;
     const [selfDeposit, setSelfDeposit] = useState(0);
     const [numberOfInstallment, setNumberOfInstallment] = useState(12);
@@ -46,8 +47,8 @@ const PopUpInstallment = ({ product }) => {
 
     const calculateInstallmentAmount = (numberOfInstallment, selfDeposit) => {
         const productPrice = product.special_offer.mode
-            ? Number((product.price - product.special_offer.price).toFixed(2))
-            : Number(product.price);
+            ? Number((formatPrices(product.price) - product.special_offer.price).toFixed(2))
+            : Number(formatPrices(product.price));
         const installment = Math.floor(((productPrice - selfDeposit) / numberOfInstallment) * 100) / 100;
         return isFinite(installment) ? installment : 0;
     };
@@ -67,8 +68,8 @@ const PopUpInstallment = ({ product }) => {
                     <InstallmentDescription>Wartość produktu</InstallmentDescription>
                     <PriceField>
                         {product.special_offer.mode
-                            ? (product.price - product.special_offer.price).toFixed(2)
-                            : product.price}{' '}
+                            ? (formatPrices(product.price) - product.special_offer.price).toFixed(2)
+                            : formatPrices(product.price)}{' '}
                         <InstallmentCurrency>zł</InstallmentCurrency>
                     </PriceField>
                 </InstallmentSection>

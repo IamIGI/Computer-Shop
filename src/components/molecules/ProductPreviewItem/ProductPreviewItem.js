@@ -19,6 +19,7 @@ import Star from 'components/atoms/Star/Star';
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import useWindowSize from 'hooks/useWindowSize';
 import ScrollTop from 'helpers/ScrollToTop';
+import formatPrices from 'helpers/formatPrices';
 
 const ProductPreviewItem = ({ item, allProducts, MayLikeComponent }) => {
     const windowSize = useWindowSize();
@@ -78,14 +79,14 @@ const ProductPreviewItem = ({ item, allProducts, MayLikeComponent }) => {
                         {item.special_offer.mode ? (
                             <PriceSection>
                                 <PriceOldValue>
-                                    <span>{item.price + item.special_offer.price} zł</span>
+                                    <span>{formatPrices(item.price + item.special_offer.price)} zł</span>
                                 </PriceOldValue>
                                 <PriceValue>
-                                    <span>{item.price} zł</span>
+                                    <span>{formatPrices(item.price)} zł</span>
                                 </PriceValue>
                             </PriceSection>
                         ) : (
-                            <span>{item.price} zł</span>
+                            <span>{formatPrices(item.price)} zł</span>
                         )}
                     </Bottom>
                 </ProductInfo>

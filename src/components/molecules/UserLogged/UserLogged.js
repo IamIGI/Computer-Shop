@@ -14,6 +14,7 @@ import { Line } from 'components/atoms/Line/Line';
 import { VscAccount } from 'react-icons/vsc';
 import { BsPerson } from 'react-icons/bs';
 import { RiLogoutCircleLine } from 'react-icons/ri';
+import capitalizeFirstLetter from 'helpers/capitalizeFirstLetter';
 
 const UserLogged = () => {
     const { auth } = useAuth();
@@ -33,7 +34,7 @@ const UserLogged = () => {
                 <Title>Twoje Konto</Title>
             </TitleSection>
             <UserDescription>
-                <p>Witaj {auth.userName}</p>
+                <p>witaj {capitalizeFirstLetter(auth.userName)}</p>
             </UserDescription>
             <Line />
 

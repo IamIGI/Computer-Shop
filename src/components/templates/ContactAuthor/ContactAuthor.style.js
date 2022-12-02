@@ -8,6 +8,15 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `;
 
 export const TopWrapper = styled.div`

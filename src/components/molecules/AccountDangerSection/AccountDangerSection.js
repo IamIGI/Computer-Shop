@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useLogout from 'hooks/useLogout';
 import useBasket from 'hooks/useBasket';
-import { ButtonWrapper, Section, Wrapper, SectionTitle } from './AccountDangerSection.style';
+import { Section, Wrapper, SectionTitle } from './AccountDangerSection.style';
 import { Button } from 'components/atoms/Button/Button';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { FiAlertCircle } from 'react-icons/fi';

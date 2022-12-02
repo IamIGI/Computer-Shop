@@ -73,7 +73,7 @@ export const recipientDetails = yup
         email: yup.string().email().required(),
         phone: yup
             .string()
-            .matches(/^\d{9}$/)
+            .matches(/^(?<!\w)(\(?(\+|00)?48\)?)?[ -]?\d{3}[ -]?\d{3}[ -]?\d{3}(?!\w)/)
             .required(),
     })
     .required();

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -12,12 +13,14 @@ export const Wrapper = styled.div`
     border-right: 1px solid ${({ theme }) => theme.colors.darkGrey};
 
     @media screen and (max-width: 1100px) {
+        padding-left: 19px;
+        /* width: 291px; */
         transition: 0.6s ease;
         position: absolute;
         top: 0px;
         left: ${(props) => props.position};
         background-color: white;
-        z-index: 3;
+        z-index: 6;
     }
 `;
 

@@ -17,6 +17,7 @@ import { getHotShootPromotion } from 'api/hotShoot';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { TimerCount } from './HotShootContent.logic';
 import useRefresh from 'hooks/useRefresh';
+import formatPrices from 'helpers/formatPrices';
 
 const HotShootContent = () => {
     const [counters, setCounters] = useState([1, 2, 3]);
@@ -59,9 +60,11 @@ const HotShootContent = () => {
                     <PromoDescription>
                         <Price>
                             <p>
-                                <span>{hotShoot.productData.price} zł</span>
+                                <span>{formatPrices(hotShoot.productData.price)} zł</span>
                             </p>
-                            <h3>{hotShoot.productData.price - hotShoot.productData.special_offer.price} zł</h3>
+                            <h3>
+                                {formatPrices(hotShoot.productData.price - hotShoot.productData.special_offer.price)} zł
+                            </h3>
                         </Price>
                         <DescTimer>
                             <h3>

@@ -235,7 +235,6 @@ export const ProductDescription = styled.div`
 `;
 
 export const NoOrders = styled.div`
-    border: 1px solid red;
     width: 100%;
     height: 100%;
     display: flex;

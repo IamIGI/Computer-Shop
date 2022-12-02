@@ -38,6 +38,7 @@ import { GrDocumentPdf } from 'react-icons/gr';
 import { BASE_URL } from 'data/GlobalVariables';
 
 import PageMenu from 'components/molecules/PageMenu/PageMenu';
+import formatPrices from 'helpers/formatPrices';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
@@ -123,7 +124,7 @@ const AccountSettingsOrders = () => {
                                             </DateDecorator>
                                             nr {item._id}
                                             <br />
-                                            <h4>{item.transactionInfo.price} zł</h4>
+                                            <h4>{formatPrices(item.transactionInfo.price.toFixed(2))} zł</h4>
                                         </OrderDescription>
                                         <OrderProducts>
                                             {item.products.map((product, index) => (

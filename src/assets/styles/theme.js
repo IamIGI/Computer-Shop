@@ -27,6 +27,8 @@ export const theme = {
         m_plus: '16px',
         m: '15px',
         s: '14px',
-        s_minus: '11px',
+        s_minus: '13px',
+        micro_plus: '12px',
+        micro: '10px',
     },
 };

@@ -1,4 +1,3 @@
-import { Button } from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -75,15 +74,23 @@ export const FinishSection = styled.div`
     width: 100%;
 `;
 
-export const LocalButton = styled(Button)`
-    margin-left: 5%;
-    width: 90%;
+export const LocalButton = styled.button`
+    margin: 15px 0;
+    padding: 8px 25px;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
     background-color: ${({ theme }) => theme.colors.success};
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    min-width: 115px;
+    width: 80%;
+    margin-left: 10%;
 
-    :hover {
-        background-color: ${({ theme }) => theme.colors.successDark};
-        color: black;
+    &:hover {
+        cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
+        background-color: ${({ disabled }) => (disabled ? '8FCB81' : '#0f9922')};
+        color: ${({ disabled }) => (disabled ? '#737C8E' : 'black')};
     }
 
     @media screen and (max-width: 1510px) {

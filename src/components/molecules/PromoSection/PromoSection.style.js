@@ -80,12 +80,21 @@ export const PromoInput = styled.input`
     }
 `;
 
-export const PromoButton = styled(Button)`
+export const PromoButton = styled.button`
+    margin: 15px 0;
+    padding: 8px 25px;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
     background-color: ${({ theme }) => theme.colors.success};
-    padding: 5.5px 25px;
-    :hover {
-        background-color: ${({ theme }) => theme.colors.successDark};
-        color: black;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    min-width: 115px;
+
+    &:hover {
+        cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
+        background-color: ${({ disabled }) => (disabled ? '8FCB81' : '#0f9922')};
+        color: ${({ disabled }) => (disabled ? '#737C8E' : 'black')};
     }
 
     @media screen and (max-width: 1510px) {
@@ -93,10 +102,18 @@ export const PromoButton = styled(Button)`
     }
 
     @media screen and (max-width: 550px) {
+        min-width: 100px;
+        font-size: ${({ theme }) => theme.fontSize.m};
+        margin: 9px 0;
+        padding: 5px 15px;
         font-size: ${({ theme }) => theme.fontSize.l};
     }
 
     @media screen and (max-width: 440px) {
+        min-width: 90px;
+        font-size: 12px;
+        margin: 9px 0;
+        padding: 5px 13px;
         width: 80%;
     }
 `;

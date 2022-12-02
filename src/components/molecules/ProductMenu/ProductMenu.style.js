@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
     a {
         text-decoration: none;
-        font-size: ${({ theme }) => theme.fontSize.xl};
+        font-size: ${({ theme }) => theme.fontSize.l_plus};
         border-bottom: 2px solid white;
         color: ${({ theme }) => theme.colors.darkGrey};
 
@@ -25,14 +25,11 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 700px) {
         a {
-            font-size: ${({ theme }) => theme.fontSize.l_plus};
+            font-size: ${({ theme }) => theme.fontSize.l};
         }
     }
 
     @media screen and (max-width: 450px) {
-        a {
-            font-size: ${({ theme }) => theme.fontSize.l};
-        }
         gap: 20px;
     }
 

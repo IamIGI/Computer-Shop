@@ -22,6 +22,7 @@ import PopUpFreeDelivery from 'components/organisms/PopUpFreeDelivery/PopUpFreeD
 import { TbShoppingCartDiscount } from 'react-icons/tb';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import { numberOptions } from './ProductBuyContent.logic';
+import formatPrices from 'helpers/formatPrices';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
@@ -104,14 +105,14 @@ const ProductBuyContent = ({ product }) => {
                     <>
                         <DiscountSize>Oszczędzasz {product.special_offer.price} zł </DiscountSize>
                         <PriceSection>
-                            <OldPrice>{priceBeforeDiscount} zł</OldPrice>
-                            <CurrentPrice> {product.price} zł</CurrentPrice>
+                            <OldPrice>{formatPrices(priceBeforeDiscount)} zł</OldPrice>
+                            <CurrentPrice> {formatPrices(product.price)} zł</CurrentPrice>
                         </PriceSection>
                     </>
                 ) : (
                     <>
                         <PriceSection>
-                            <CurrentPrice> {product.price} zł</CurrentPrice>
+                            <CurrentPrice> {formatPrices(product.price)} zł</CurrentPrice>
                         </PriceSection>
                     </>
                 )}
@@ -147,7 +148,7 @@ const ProductBuyContent = ({ product }) => {
                 <Separator />
                 <ProductBuyHint
                     icon={<RiCoinLine />}
-                    title={` Rata tylko ${(product.price / 24).toFixed(2)} zł`}
+                    title={` Rata tylko ${(formatPrices(product.price) / 24).toFixed(2)} zł`}
                     ask="Oblicz ratę"
                     popUp={<PopUpInstallment product={product} />}
                 />
