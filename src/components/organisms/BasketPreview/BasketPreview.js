@@ -111,7 +111,6 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                                                     <OldPrice>
                                                         <span>{item.priceBeforeDiscount} zł</span>
                                                     </OldPrice>
-                                                    {console.log(item.price)}
                                                     <CurrentPrice>{item.price} zł</CurrentPrice>
                                                 </>
                                             ) : (
