@@ -111,9 +111,8 @@ const AccountSettingsOrders = () => {
                     ) : (
                         <>
                             {orderHistory.map((item, index) => (
-                                <InsideWrapper>
+                                <InsideWrapper key={item._id}>
                                     <OrderContent
-                                        key={index}
                                         onClick={() => goToOrderItem(item)}
                                         to={isActiveLink ? `/accountSettings/orders/history/${item._id}` : ''}
                                     >
@@ -130,7 +129,7 @@ const AccountSettingsOrders = () => {
                                             {item.products.map((product, index) => (
                                                 <>
                                                     {item.products.length > 1 ? (
-                                                        <ProductImageSmall>
+                                                        <ProductImageSmall key={index}>
                                                             <Quantity height={30} width={30}>
                                                                 {product.quantity}
                                                             </Quantity>
@@ -138,7 +137,7 @@ const AccountSettingsOrders = () => {
                                                         </ProductImageSmall>
                                                     ) : (
                                                         <>
-                                                            <ProductImage>
+                                                            <ProductImage key={index}>
                                                                 <Quantity height={30} width={30}>
                                                                     {product.quantity}
                                                                 </Quantity>

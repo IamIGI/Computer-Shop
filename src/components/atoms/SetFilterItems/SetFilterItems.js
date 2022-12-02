@@ -75,7 +75,7 @@ const SetFilterItems = ({
         <Wrapper>
             <InputSection>
                 <InputField
-                    display={toggle}
+                    display={toggle ? 'true' : undefined}
                     width={width}
                     placeholder={OneTimeChoice ? placeholder : 'Wybierz'}
                     onClick={() => {
@@ -85,7 +85,11 @@ const SetFilterItems = ({
                 <InputDescription>
                     {description} {!OneTimeChoice && quantity !== 0 && `(${quantity})`}
                 </InputDescription>
-                <FilterOptions display={toggle} width={width} onMouseLeave={() => setToggle(false)}>
+                <FilterOptions
+                    display={toggle ? 'true' : undefined}
+                    width={width}
+                    onMouseLeave={() => setToggle(false)}
+                >
                     {check.map((item) => (
                         <FilterOption
                             activeChoice={item.checked}

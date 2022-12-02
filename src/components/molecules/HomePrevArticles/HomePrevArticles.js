@@ -76,7 +76,7 @@ const HomePrevArticles = () => {
             ) : (
                 <Wrapper>
                     {showArticles.map((article) => (
-                        <ArticleWrapper to={`/articles/${article._id}`}>
+                        <ArticleWrapper to={`/articles/${article._id}`} key={article._id}>
                             <ContentWrapper>
                                 <Image>
                                     <img src={article.prevImage} alt="article" />

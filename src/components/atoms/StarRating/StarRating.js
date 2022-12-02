@@ -9,7 +9,7 @@ const StarRating = ({ rating, handleRating }) => {
             {[...Array(6)].map((star, index) => {
                 index += 1;
                 return (
-                    <StarWrapper>
+                    <StarWrapper key={index}>
                         {index <= (hover || rating) ? (
                             <On>
                                 <MdStar

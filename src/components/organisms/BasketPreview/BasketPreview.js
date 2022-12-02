@@ -86,42 +86,40 @@ const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
                 ) : (
                     <List>
                         {basketItems.map((item, index) => (
-                            <>
-                                <li id={index}>
-                                    <ItemSection key={index}>
-                                        <ImageArea>
-                                            <img src={item.prevImg} alt="Product prev" />
-                                        </ImageArea>
-                                        <DescriptionArea>
-                                            <Link to={`/product/${item._id}`}>
-                                                <Title>{item.name}</Title>
-                                            </Link>
-                                            <DescriptionBottom>
-                                                <div>{item.quantity} szt.</div>
-                                                <div>
-                                                    <StyledButton onClick={() => deleteProduct(item._id)}>
-                                                        <AiOutlineDelete />
-                                                    </StyledButton>
-                                                </div>
-                                            </DescriptionBottom>
-                                        </DescriptionArea>
-                                        <PriceArea>
-                                            {item.isDiscount ? (
-                                                <>
-                                                    <OldPrice>
-                                                        <span>{item.priceBeforeDiscount} zł</span>
-                                                    </OldPrice>
-                                                    <CurrentPrice>{item.price} zł</CurrentPrice>
-                                                </>
-                                            ) : (
-                                                <CurrentPrice>
-                                                    <p>{item.price} zł</p>
-                                                </CurrentPrice>
-                                            )}
-                                        </PriceArea>
-                                    </ItemSection>
-                                </li>
-                            </>
+                            <li id={index} key={index}>
+                                <ItemSection>
+                                    <ImageArea>
+                                        <img src={item.prevImg} alt="Product prev" />
+                                    </ImageArea>
+                                    <DescriptionArea>
+                                        <Link to={`/product/${item._id}`}>
+                                            <Title>{item.name}</Title>
+                                        </Link>
+                                        <DescriptionBottom>
+                                            <div>{item.quantity} szt.</div>
+                                            <div>
+                                                <StyledButton onClick={() => deleteProduct(item._id)}>
+                                                    <AiOutlineDelete />
+                                                </StyledButton>
+                                            </div>
+                                        </DescriptionBottom>
+                                    </DescriptionArea>
+                                    <PriceArea>
+                                        {item.isDiscount ? (
+                                            <>
+                                                <OldPrice>
+                                                    <span>{item.priceBeforeDiscount} zł</span>
+                                                </OldPrice>
+                                                <CurrentPrice>{item.price} zł</CurrentPrice>
+                                            </>
+                                        ) : (
+                                            <CurrentPrice>
+                                                <p>{item.price} zł</p>
+                                            </CurrentPrice>
+                                        )}
+                                    </PriceArea>
+                                </ItemSection>
+                            </li>
                         ))}
                     </List>
                 )}

@@ -15,11 +15,12 @@ const DropDownMenuSection = ({ icon, description, smallScreen, children }) => {
     return (
         <Wrapper onMouseEnter={() => setToggle(true)} onMouseLeave={() => setToggle(false)}>
             <DivRelative>
-                <ActiveDropDown display={toggle}>
+                {/** $ - prevent the prop being passed to the DOM element */}
+                <ActiveDropDown $display={toggle}>
                     <span>{smallScreen ? <BigIcon>{icon}</BigIcon> : <Icon>{icon}</Icon>}</span>
                     {description !== '' && <LinkDescription>{description}</LinkDescription>}
                 </ActiveDropDown>
-                <ProperMenu display={toggle}>{children}</ProperMenu>
+                <ProperMenu $display={toggle}>{children}</ProperMenu>
             </DivRelative>
         </Wrapper>
     );

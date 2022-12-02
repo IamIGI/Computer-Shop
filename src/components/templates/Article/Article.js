@@ -75,15 +75,15 @@ const Article = () => {
                             <p>{article.prevDescription}</p>
                         </BigScreen>
                         {article.description.map((desc, index) => (
-                            <DescriptionWrapper id={`desc_${index}`}>
+                            <DescriptionWrapper id={`desc_${index}`} key={index}>
                                 <h2>{desc.title}</h2>
                                 {desc.image && (
                                     <DescriptionImg>
                                         <img src={desc.image} alt="description" />
                                     </DescriptionImg>
                                 )}
-                                {desc.content.map((item) => (
-                                    <p>{item.p}</p>
+                                {desc.content.map((item, index) => (
+                                    <p key={index}>{item.p}</p>
                                 ))}
                             </DescriptionWrapper>
                         ))}
@@ -98,7 +98,7 @@ const Article = () => {
                                 </TitleContainer>
                             </a>
                             {article.description.map((desc, index) => (
-                                <a href={`#desc_${index}`}>
+                                <a href={`#desc_${index}`} key={index}>
                                     <TitleContainer>
                                         <Number>{index + 1}</Number>
                                         <TitleContents>{desc.title}</TitleContents>
