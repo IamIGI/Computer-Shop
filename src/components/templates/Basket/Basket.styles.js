@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     @media screen and (max-width: 960px) {
         flex-direction: column;
         justify-content: flex-start;
-        margin-top: 20px;
+        padding-top: 20px;
 
         overflow-y: scroll;
         &::-webkit-scrollbar {
@@ -103,6 +103,7 @@ export const PrevWrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     margin: auto;
+    margin-bottom: 15px;
 
     @media screen and (max-width: 1510px) {
         width: 410px;

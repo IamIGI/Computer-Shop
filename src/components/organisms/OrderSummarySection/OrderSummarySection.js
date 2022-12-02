@@ -2,6 +2,7 @@ import React from 'react';
 import { getDeliveryPrice } from '../AccountOrderHistoryItem/AccountOrderHistoryItem.logic';
 import { Line } from '../AccountOrderHistoryItem/AccountOrderHistoryItem.style';
 import { Wrapper } from './OrderSummarySection.style';
+import formatPrices from 'helpers/formatPrices';
 
 const OrderSummarySection = ({ value }) => {
     return (
@@ -10,9 +11,11 @@ const OrderSummarySection = ({ value }) => {
                 <li>
                     <div> Wartość koszyka:</div>
                     <div>
-                        {(value.transactionInfo.price - getDeliveryPrice(value.transactionInfo.deliveryMethod)).toFixed(
-                            2
-                        )}
+                        {formatPrices(
+                            (
+                                value.transactionInfo.price - getDeliveryPrice(value.transactionInfo.deliveryMethod)
+                            ).toFixed(2)
+                        )}{' '}
                         zł
                     </div>
                 </li>
@@ -23,7 +26,7 @@ const OrderSummarySection = ({ value }) => {
                 <Line />
                 <li>
                     <div>Razem: </div>
-                    <div>{value.transactionInfo.price} zł</div>
+                    <div>{formatPrices(value.transactionInfo.price.toFixed(2))} zł</div>
                 </li>
             </ul>
         </Wrapper>

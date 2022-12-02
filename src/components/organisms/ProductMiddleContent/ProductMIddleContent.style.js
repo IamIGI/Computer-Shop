@@ -11,11 +11,11 @@ export const MenuSector = styled.div`
     z-index: 1;
 
     @media screen and (max-width: 700px) {
-        height: 60px;
+        height: 55px;
     }
 
     @media screen and (max-width: 450px) {
-        height: 55px;
+        height: 50px;
     }
 `;
 

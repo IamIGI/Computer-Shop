@@ -1,3 +1,4 @@
+import formatPrices from 'helpers/formatPrices';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { ChangeRecipient, DeleteRecipient, TemplateContainer, TemplateWrapper } from './RecipientTemplates.style';
 
@@ -9,7 +10,7 @@ const RecipientTemplates = ({ showOptions = false, recipientTemplates, handlePre
                     <ul>
                         <li>{template.name}</li>
                         <li>{template.email}</li>
-                        <li>{template.phone}</li>
+                        <li>{formatPrices(template.phone)}</li>
                         <li>{template.place}</li>
                         <li>{template.street}</li>
                         <li>{template.zipCode}</li>

@@ -46,6 +46,7 @@ const Basket = () => {
     const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
     const [promoCode, setPromoCode] = useState('');
     const [successfullyUsedPromoCode, setSuccessfullyUsedPromoCode] = useState(false);
+    const [orderReady, setOrderReady] = useState(false);
     const [promoCodeInputDisabled, setPromoCodeInputDisabled] = useState(
         JSON.parse(localStorage.getItem('promoCodeInputDisabled')) == null
             ? false
@@ -221,6 +222,12 @@ const Basket = () => {
         const { deliveryMethod, paymentMethod, price, recipientDetails } = transactionInfo;
         const { email } = recipientDetails;
 
+        if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
+            setOrderReady(true);
+        } else {
+            setOrderReady(false);
+        }
+
         //main statement
         if (price !== 0 && deliveryMethod !== '' && paymentMethod !== '' && email !== '') {
             if (finishOrder === true) {
@@ -295,6 +302,7 @@ const Basket = () => {
                         orderStreet={street}
                     />
                     <PaymentPreview
+                        orderReady={orderReady}
                         promoCodeAlert={promoCodeAlert}
                         promoCodeInputDisabled={promoCodeInputDisabled}
                         handlePromoCodeSubmit={handlePromoCodeSubmit}

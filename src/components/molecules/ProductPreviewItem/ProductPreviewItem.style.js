@@ -113,7 +113,7 @@ export const Top = styled.div`
         h1 {
             /* max-width: 50px; */
             height: 80px;
-            font-size: ${({ theme }) => theme.fontSize.m};
+            font-size: ${({ theme }) => theme.fontSize.s};
         }
     }
 `;
@@ -148,10 +148,10 @@ export const Rating = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    font-size: ${({ theme }) => theme.fontSize.s};
+    font-size: ${({ theme }) => theme.fontSize.micro_plus};
 
-    @media screen and (max-width: 400px) {
-        font-size: ${({ theme }) => theme.fontSize.s_minus};
+    @media screen and (max-width: 430px) {
+        font-size: ${({ theme }) => theme.fontSize.micro};
     }
 `;
 
@@ -159,6 +159,10 @@ export const Opinions = styled.div`
     color: black;
     padding-top: 5px;
     font-size: ${({ theme }) => theme.fontSize.l};
+
+    @media screen and (max-width: 430px) {
+        font-size: ${({ theme }) => theme.fontSize.m};
+    }
 `;
 
 export const StyledList = styled.ul`
@@ -175,7 +179,7 @@ export const StyledRecord = styled.li`
     position: relative;
 
     padding-left: 10px;
-    font-size: ${({ theme }) => theme.fontSize.m};
+    font-size: ${({ theme }) => theme.fontSize.s_minus};
     color: ${({ theme }) => theme.colors.black};
 
     &:not(:last-child)::after {

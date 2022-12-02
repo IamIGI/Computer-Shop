@@ -29,7 +29,11 @@ export const Icon = styled.div`
 
 export const Title = styled.div``;
 
-export const UserDescription = styled.div``;
+export const UserDescription = styled.div`
+    p::first-letter {
+        text-transform: capitalize;
+    }
+`;
 
 export const List = styled.ul`
     list-style: none;

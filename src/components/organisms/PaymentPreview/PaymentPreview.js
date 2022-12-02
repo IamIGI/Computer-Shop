@@ -17,6 +17,7 @@ import useAuth from 'hooks/useAuth';
 import PromoSectionComponent from 'components/molecules/PromoSection/PromoSection';
 
 const PaymentPreview = ({
+    orderReady,
     priceToPay,
     finishHandler,
     priceForDelivery,
@@ -81,7 +82,9 @@ const PaymentPreview = ({
                 ) : (
                     <></>
                 )}
-                <LocalButton onClick={() => finishHandler()}>Zakończ</LocalButton>
+                <LocalButton disabled={!orderReady} onClick={() => finishHandler()}>
+                    Zakończ
+                </LocalButton>
             </FinishSection>
         </Wrapper>
     );

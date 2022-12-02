@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProductDescription, ProductImage, ProductQuantity, Wrapper } from './OrderProductElement.style';
+import formatPrices from 'helpers/formatPrices';
 
 const OrderProductElement = ({ product }) => {
     return (
@@ -10,8 +11,12 @@ const OrderProductElement = ({ product }) => {
             <ProductDescription>
                 <p>{product.name}</p>
                 <p>
-                    {product.price} zł &emsp;
-                    {product.isDiscount ? <span>{product.priceBeforeDiscount} zł</span> : <></>}
+                    {formatPrices(formatPrices(product.price.toFixed(2)))} zł &emsp;
+                    {product.isDiscount ? (
+                        <span>{formatPrices(product.priceBeforeDiscount.toFixed(2))} zł</span>
+                    ) : (
+                        <></>
+                    )}
                 </p>
             </ProductDescription>
             <ProductQuantity>{product.quantity} szt.</ProductQuantity>

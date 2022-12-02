@@ -29,7 +29,7 @@ const PromoSectionComponent = ({
                     onChange={(e) => handlePromoCode(e.target.value)}
                     disabled={promoCodeInputDisabled}
                 />
-                <PromoButton>Aktywuj</PromoButton>
+                <PromoButton disabled={promoCodeInputDisabled}>Aktywuj</PromoButton>
             </CustomPromoForm>
             {promoCodeAlert !== '' && (
                 <PromoCodeAlertSection>

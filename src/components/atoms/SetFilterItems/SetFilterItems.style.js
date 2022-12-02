@@ -58,7 +58,6 @@ export const FilterOptions = styled.div`
     border-bottom-right-radius: 10px;
     background-color: white;
     z-index: 5;
-    width: 100%;
 
     flex-direction: column;
     justify-content: flex-start;

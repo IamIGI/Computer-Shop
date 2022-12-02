@@ -9,6 +9,7 @@ import {
     ApprovedDescription,
 } from './UserData.style';
 import { BsPerson, BsCheckCircle } from 'react-icons/bs';
+import capitalizeFirstLetter from 'helpers/capitalizeFirstLetter';
 
 const UserData = ({ comment }) => {
     return (
@@ -17,7 +18,7 @@ const UserData = ({ comment }) => {
                 <Icon1>
                     <BsPerson />
                 </Icon1>
-                <UserName>{comment.userName}</UserName>
+                <UserName>{capitalizeFirstLetter(comment.userName)}</UserName>
             </UserDataDescription>
             <UserDataApproved>
                 {comment.confirmed && (

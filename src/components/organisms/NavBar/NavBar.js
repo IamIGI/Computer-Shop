@@ -47,7 +47,7 @@ const NavBar = () => {
     };
 
     const signOut = async () => {
-        setToggleMenu(false);
+        setToggleMenu(MenuInitPosition);
         await logout();
     };
 
