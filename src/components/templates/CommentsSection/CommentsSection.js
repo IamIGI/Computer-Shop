@@ -20,7 +20,9 @@ const CommentsSection = ({ product, handleRefreshProduct }) => {
     //open PopUpGallery
     const [isOpen, setIsOpen] = useState([false]);
     const [chosenImage, setChoseImage] = useState(0);
+
     const handleChosenImage = (index) => {
+        console.log(index);
         setChoseImage(index);
         setIsOpen([true]);
     };

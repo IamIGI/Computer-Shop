@@ -28,6 +28,8 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
     const [limitViewedComments, setLimitViewedComments] = useState(5);
 
     const findImage = (url) => {
+        console.log(url);
+        console.log(comments.images);
         const searchedElement_Index = comments.images.indexOf(url, 0);
         handleChosenImage(searchedElement_Index);
     };
@@ -41,9 +43,7 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
     return (
         <Wrapper>
             {waitForFetchComments ? (
-                <>
-                    <LoadingAnimation loadingSize={15} />
-                </>
+                <LoadingAnimation loadingSize={15} />
             ) : (
                 <>
                     {displayedComments === 0 ? (
