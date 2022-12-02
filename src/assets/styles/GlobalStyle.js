@@ -15,14 +15,17 @@ export const GlobalStyle = createGlobalStyle`
   
 
 body {
+  
+
+
     background-color: white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato', 'Montserrat',sans-serif;
     margin: 0;
     padding: 0;
   }
   
   a, button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato','Montserrat', sans-serif;
   } 
 
 `;
