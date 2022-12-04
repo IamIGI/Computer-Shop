@@ -77,5 +77,3 @@ export const Instructions = styled.div`
     margin-left: 10%;
     margin-top: 7px;
 `;
-
-export const LoginButton = styled(Button)``;
