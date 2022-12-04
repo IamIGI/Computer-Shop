@@ -35,7 +35,7 @@ export const LiWrapper = styled.div`
     }
 
     @media screen and (max-width: 500px) {
-        font-size: ${({ theme }) => theme.fontSize.m};
+        font-size: ${({ theme }) => theme.fontSize.s};
         padding: 5px 0;
     }
 `;

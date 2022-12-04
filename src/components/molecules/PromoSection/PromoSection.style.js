@@ -1,4 +1,3 @@
-import { Button } from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 
 export const PromoCodeAlertSection = styled.div`

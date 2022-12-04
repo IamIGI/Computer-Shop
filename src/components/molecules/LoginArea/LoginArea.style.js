@@ -1,3 +1,4 @@
+import { Button } from 'components/atoms/Button/Button';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -73,7 +74,8 @@ export const Instructions = styled.div`
     color: ${({ theme }) => theme.colors.white};
     padding: 0.25rem;
     position: relative;
-    /* bottom: -7px; */
     margin-left: 10%;
     margin-top: 7px;
 `;
+
+export const LoginButton = styled(Button)``;

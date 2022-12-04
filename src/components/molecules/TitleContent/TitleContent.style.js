@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     padding-left: 30px;
+    width: 95%;
     h1 {
         font-size: ${({ theme }) => theme.fontSize.xl};
         line-height: 30px;
@@ -36,14 +37,14 @@ export const Wrapper = styled.div`
     }
 
     @media screen and (max-width: 450px) {
-        padding-left: 20px;
+        padding-left: 15px;
         h1 {
             line-height: 20px;
-            font-size: ${({ theme }) => theme.fontSize.l_plus};
+            font-size: ${({ theme }) => theme.fontSize.l};
         }
 
         p {
-            font-size: ${({ theme }) => theme.fontSize.m};
+            font-size: ${({ theme }) => theme.fontSize.s};
         }
     }
 `;

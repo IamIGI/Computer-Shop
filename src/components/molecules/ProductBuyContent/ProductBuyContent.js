@@ -10,6 +10,7 @@ import {
     BuySection,
     BuyIcon,
     ArticleLink,
+    BuyButtonMargin,
 } from './ProductBuyContent.style';
 import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
@@ -128,12 +129,14 @@ const ProductBuyContent = ({ product }) => {
                         handleItems={handleQuantity}
                         handleClearItemsFilters={handleClearQuantity}
                     />
-                    <BuyButton onClick={() => addProduct()}>
-                        <BuyIcon>
-                            <BsCartPlus />
-                        </BuyIcon>
-                        <div> Dodaj do koszyka</div>
-                    </BuyButton>
+                    <BuyButtonMargin>
+                        <BuyButton onClick={() => addProduct()}>
+                            <BuyIcon>
+                                <BsCartPlus />
+                            </BuyIcon>
+                            <div> Dodaj do koszyka</div>
+                        </BuyButton>
+                    </BuyButtonMargin>
                 </BuySection>
                 <ArticleLink to={'/articles/63754235f4d73ff45867a613'}>
                     <ProductBuyHint icon={<FiSmartphone />} title="Zakupy z aplikacji" ask="Dowiedz się więcej" />

@@ -2,7 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
 import { BsFillCaretUpFill } from 'react-icons/bs';
-import { WrapButton, ErrMsg, Instructions, Wrapper, BottomLogin, ErrMsgContainer } from './LoginArea.style';
+import {
+    WrapButton,
+    ErrMsg,
+    Instructions,
+    Wrapper,
+    BottomLogin,
+    ErrMsgContainer,
+    LoginButton,
+} from './LoginArea.style';
 import useAuth from 'hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'api/axios';
