@@ -8,7 +8,6 @@ export const BasketProvider = ({ children }) => {
         JSON.parse(localStorage.getItem('basketItems')) == null ? [] : JSON.parse(localStorage.getItem('basketItems'))
     );
 
-    const [promoCodeInputDisabled, setPromoCodeInputDisabled] = useState(false);
     const [priceToPay, setPriceToPay] = useState(0);
 
     const notifyAddProduct = () =>
@@ -31,8 +30,6 @@ export const BasketProvider = ({ children }) => {
         setPriceToPay(() => {
             return temp;
         });
-
-        if (basketItems !== null && basketItems.length === 0) setPromoCodeInputDisabled(false);
     }, [basketItems]);
 
     function addProductToBasket(product, quantity) {
@@ -96,26 +93,15 @@ export const BasketProvider = ({ children }) => {
 
     // PromoCodes
 
-    const promoCodeDisabled = () => {
-        setPromoCodeInputDisabled(true);
-    };
-
-    const promoCodeEnabled = () => {
-        setPromoCodeInputDisabled(false);
-    };
-
     return (
         <BasketContext.Provider
             value={{
                 priceToPay,
                 basketItems,
-                promoCodeInputDisabled,
                 setBasketItems,
                 addProductToBasket,
                 removeBasket,
                 deleteProduct,
-                promoCodeDisabled,
-                promoCodeEnabled,
             }}
         >
             {children}

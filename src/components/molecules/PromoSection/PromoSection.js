@@ -1,4 +1,4 @@
-import useBasket from 'hooks/useBasket';
+import usePromoCodes from 'hooks/usePromoCodes';
 import { TbShoppingCartDiscount } from 'react-icons/tb';
 import {
     PromoButton,
@@ -11,8 +11,14 @@ import {
     PromoInput,
 } from './PromoSection.style';
 
-const PromoSectionComponent = ({ handlePromoCodeSubmit, promoCode, handlePromoCode, promoCodeAlert }) => {
-    const { promoCodeInputDisabled } = useBasket();
+const PromoSectionComponent = () => {
+    const { promoCodeAlert, promoCode, promoCodeInputDisabled, sendPromoCode, promoCodeSubmit } = usePromoCodes();
+
+    const handlePromoCodeSubmit = (e) => {
+        e.preventDefault();
+        promoCodeSubmit();
+    };
+
     return (
         <PromoSection>
             <PromoDescription>Posiadasz kod promocyjny?</PromoDescription>
@@ -22,7 +28,7 @@ const PromoSectionComponent = ({ handlePromoCodeSubmit, promoCode, handlePromoCo
                     type="text"
                     id="promoCode"
                     value={promoCode}
-                    onChange={(e) => handlePromoCode(e.target.value)}
+                    onChange={(e) => sendPromoCode(e.target.value)}
                     disabled={promoCodeInputDisabled}
                 />
                 <PromoButton disabled={promoCodeInputDisabled}>Aktywuj</PromoButton>

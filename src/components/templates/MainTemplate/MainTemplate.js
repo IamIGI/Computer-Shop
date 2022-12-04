@@ -16,6 +16,7 @@ import { RefreshProvider } from 'context/refreshProvider';
 import { BrowserRouter } from 'react-router-dom';
 import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
 import { Toaster } from 'react-hot-toast';
+import { PromoCodesProvider } from 'context/PromoCodesProvider';
 
 const MainTemplate = ({ children }) => {
     return (
@@ -34,7 +35,7 @@ const MainTemplate = ({ children }) => {
                                             <AuthProvider>
                                                 <NavBar />
                                                 <InsideWrapper>
-                                                    {children}
+                                                    <PromoCodesProvider>{children}</PromoCodesProvider>
                                                     <AccountPreviewSection />
                                                 </InsideWrapper>
                                                 <Footer />
