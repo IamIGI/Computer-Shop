@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button } from 'components/atoms/Button/Button';
-import { Input } from 'components/atoms/Input/Input';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div`
@@ -66,6 +65,10 @@ export const BuySection = styled.div`
     }
 `;
 
+export const BuyButtonMargin = styled.div`
+    margin-left: 10px;
+`;
+
 export const BuyButton = styled(Button)`
     color: white;
     background-color: green;
@@ -76,7 +79,6 @@ export const BuyButton = styled(Button)`
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
 
     &:hover {
         cursor: pointer;

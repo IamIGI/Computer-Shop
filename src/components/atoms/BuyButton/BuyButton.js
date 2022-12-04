@@ -3,7 +3,6 @@ import { StyledButton } from './BuyButton.styles';
 import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
 import toast from 'react-hot-toast';
-import formatPrices from 'helpers/formatPrices';
 
 const BuyButton = ({ item }) => {
     const { basketItems, setBasketItems } = useBasket();

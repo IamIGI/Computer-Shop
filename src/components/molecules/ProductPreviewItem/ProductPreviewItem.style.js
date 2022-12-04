@@ -78,8 +78,7 @@ export const Top = styled.div`
 
     h1 {
         height: fit-content;
-        width: 95%;
-        margin-left: 2.5%;
+        width: 100%;
 
         font-size: ${({ theme }) => theme.fontSize.l};
         font-weight: 400;
@@ -88,7 +87,7 @@ export const Top = styled.div`
 
     @media screen and (max-width: 685px) {
         max-width: 200px;
-        padding-left: 10px;
+        padding-left: 5px;
         img {
             max-height: auto;
             max-width: 120px;
@@ -104,16 +103,19 @@ export const Top = styled.div`
     }
 
     @media screen and (max-width: 480px) {
-        max-width: 150px;
-        padding-left: 7px;
+        max-width: 140px;
+        justify-content: space-between;
+
         img {
             max-height: auto;
             max-width: 100px;
         }
         h1 {
             /* max-width: 50px; */
+            margin: 0px;
+            padding: 0px;
             height: 80px;
-            font-size: ${({ theme }) => theme.fontSize.s};
+            font-size: ${({ theme }) => theme.fontSize.s_minus};
         }
     }
 `;
@@ -132,7 +134,8 @@ export const ProductInfo = styled.div`
 export const ProductOpinionsShort = styled.div`
     border-top: 1px solid ${({ theme }) => theme.colors.grey};
     padding-top: 5px;
-    margin: 0 3%;
+    /* margin: 0 3%; */
+    padding-left: 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -169,6 +172,7 @@ export const StyledList = styled.ul`
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-left: 5px;
 `;
 
 export const StyledRecord = styled.li`
@@ -178,7 +182,6 @@ export const StyledRecord = styled.li`
     align-items: center;
     position: relative;
 
-    padding-left: 10px;
     font-size: ${({ theme }) => theme.fontSize.s_minus};
     color: ${({ theme }) => theme.colors.black};
 
@@ -197,8 +200,7 @@ export const StyledRecord = styled.li`
     }
 
     @media screen and (max-width: 440px) {
-        width: 95%;
-        font-size: ${({ theme }) => theme.fontSize.s};
+        width: 100%;
     }
 `;
 
@@ -222,7 +224,7 @@ export const Bottom = styled.div`
 
     @media screen and (max-width: 440px) {
         span {
-            font-size: ${({ theme }) => theme.fontSize.m_plus};
+            font-size: ${({ theme }) => theme.fontSize.m};
         }
     }
 `;

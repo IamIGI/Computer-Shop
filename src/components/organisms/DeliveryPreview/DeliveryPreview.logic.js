@@ -18,6 +18,7 @@ export const showPaymentMethod = (deliveryCheckboxesPay) => {
     let deliveryOptionPay = '';
     let deliveryDescriptionPay = '';
 
+    // eslint-disable-next-line array-callback-return
     Object.values(deliveryCheckboxesPay).map((x, index) => {
         if (x === true) {
             deliveryOptionPay = Object.keys(deliveryCheckboxesPay)[index];
@@ -53,6 +54,7 @@ export const showDeliveryMethod = (deliveryCheckboxesOpt) => {
     let deliveryOptionOpt = '';
     let deliveryDescriptionOpt = '';
 
+    // eslint-disable-next-line array-callback-return
     Object.values(deliveryCheckboxesOpt).map((x, index) => {
         if (x === true) {
             deliveryOptionOpt = Object.keys(deliveryCheckboxesOpt)[index];

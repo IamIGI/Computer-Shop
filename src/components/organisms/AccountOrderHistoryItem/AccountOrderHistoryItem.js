@@ -73,7 +73,6 @@ const AccountOrderHistoryItem = () => {
                             value={orderItem.transactionInfo.deliveryMethod}
                             type="delivery"
                         />
-                        s
                         <OrderUserDataSection value={orderItem} />
                         <OrderSection
                             title="Płatności"
