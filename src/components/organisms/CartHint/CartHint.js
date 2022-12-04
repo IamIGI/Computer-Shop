@@ -17,20 +17,12 @@ import { MdOutlineDelete } from 'react-icons/md';
 import ScrollTop from 'helpers/ScrollToTop';
 
 const CartHint = () => {
-    const { basketItems, setBasketItems } = useBasket();
+    const { basketItems, removeBasket, deleteProduct } = useBasket();
 
     const getQuantityOfItems = () => {
         let temp = 0;
         basketItems.map((item) => (temp += item.quantity));
         return temp;
-    };
-
-    const removeBasket = () => {
-        setBasketItems([]);
-    };
-
-    const removeProduct = (id) => {
-        setBasketItems(basketItems.filter((product) => product._id !== id));
     };
 
     return (
@@ -49,7 +41,7 @@ const CartHint = () => {
                             {basketItems.map((item, index) => (
                                 <Image key={index}>
                                     <ProductQuantity>{item.quantity}</ProductQuantity>
-                                    <DeleteProduct onClick={() => removeProduct(item._id)}>
+                                    <DeleteProduct onClick={() => deleteProduct(item._id)}>
                                         <MdOutlineDelete />
                                     </DeleteProduct>
                                     <Link to={`/product/${item._id}`} key={item._id} onClick={() => ScrollTop('Top')}>

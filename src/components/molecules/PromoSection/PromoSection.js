@@ -1,3 +1,4 @@
+import useBasket from 'hooks/useBasket';
 import { TbShoppingCartDiscount } from 'react-icons/tb';
 import {
     PromoButton,
@@ -10,13 +11,8 @@ import {
     PromoInput,
 } from './PromoSection.style';
 
-const PromoSectionComponent = ({
-    handlePromoCodeSubmit,
-    promoCode,
-    handlePromoCode,
-    promoCodeInputDisabled,
-    promoCodeAlert,
-}) => {
+const PromoSectionComponent = ({ handlePromoCodeSubmit, promoCode, handlePromoCode, promoCodeAlert }) => {
+    const { promoCodeInputDisabled } = useBasket();
     return (
         <PromoSection>
             <PromoDescription>Posiadasz kod promocyjny?</PromoDescription>

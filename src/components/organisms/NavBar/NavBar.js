@@ -32,7 +32,7 @@ import DropDownMenuSection from 'components/atoms/DropDownMenuSection/DropDownMe
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
-const MenuInitPosition = '-230px';
+const MenuInitPosition = '-270px';
 
 const NavBar = () => {
     const { auth } = useAuth();

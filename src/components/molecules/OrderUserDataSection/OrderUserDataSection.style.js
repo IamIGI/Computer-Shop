@@ -55,6 +55,7 @@ export const UserDataDescription = styled.div`
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     border-radius: 10px;
+    font-size: ${({ theme }) => theme.fontSize.l};
 
     ul {
         margin-top: 10px;

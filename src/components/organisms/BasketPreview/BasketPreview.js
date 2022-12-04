@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     DescriptionArea,
     ImageArea,
@@ -19,57 +19,9 @@ import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
-import toast from 'react-hot-toast';
 
-const BasketPreview = ({ setPriceToPay, setProductsInBasket, setProducts }) => {
-    const { basketItems, setBasketItems } = useBasket();
-    const notify = () =>
-        toast.success('Produkt usunięty z koszyka', {
-            icon: '🗑️',
-            duration: 2000,
-        });
-
-    const deleteProduct = (_id) => {
-        let oldBasket = JSON.parse(localStorage.getItem('basketItems'));
-
-        if (oldBasket.length === 1) {
-            localStorage.removeItem('basketItems');
-            setPriceToPay(() => {
-                return 0;
-            });
-        } else {
-            let newBasket = oldBasket.filter((item) => {
-                return item._id !== _id;
-            });
-            localStorage.setItem('productsInBasket', JSON.stringify(newBasket));
-        }
-
-        setBasketItems((prevItems) => {
-            return prevItems.filter((item) => {
-                return item._id !== _id;
-            });
-        });
-
-        setProducts((prevItems) => {
-            return prevItems.filter((item) => {
-                return item._id !== _id;
-            });
-        });
-        notify();
-    };
-
-    useEffect(() => {
-        let temp = 0;
-        basketItems.map((item) => (temp += item.price * item.quantity));
-        setPriceToPay(() => {
-            return temp;
-        });
-
-        setProductsInBasket(() => {
-            return basketItems;
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [basketItems]);
+const BasketPreview = () => {
+    const { basketItems, deleteProduct } = useBasket();
 
     return (
         <>

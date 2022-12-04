@@ -6,7 +6,7 @@ export const OrderSection = styled.div`
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 
     @media screen and (max-width: 800px) {
         height: 120px;
@@ -56,6 +56,7 @@ export const UserDataDescription = styled.div`
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     border-radius: 10px;
+    font-size: ${({ theme }) => theme.fontSize.l};
 
     ul {
         margin-top: 10px;

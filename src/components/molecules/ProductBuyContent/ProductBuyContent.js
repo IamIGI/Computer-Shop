@@ -15,7 +15,6 @@ import {
 import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
 import { RiCoinLine } from 'react-icons/ri';
-import toast from 'react-hot-toast';
 import ProductBuyHint from 'components/atoms/ProductBuyHint/ProductBuyHint';
 import PopUpInstallment from 'components/organisms/PopUpInstallment/PopUpInstallment';
 import { FiSmartphone } from 'react-icons/fi';
@@ -27,14 +26,13 @@ import formatPrices from 'helpers/formatPrices';
 
 const ProductBuyContent = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
-    const { basketItems, setBasketItems } = useBasket();
+    const { addProductToBasket } = useBasket();
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
-    const notify = () =>
-        toast.success('Produkt dodany do koszyka', {
-            icon: '💻',
-            duration: 2000,
-        });
+
+    useEffect(() => {
+        console.log(quantity);
+    }, [quantity]);
 
     const getPrice = (product) => {
         if (product.special_offer.mode) {
@@ -62,42 +60,6 @@ const ProductBuyContent = ({ product }) => {
     useEffect(() => {
         getPrice(product);
     }, [product]);
-
-    const addProduct = () => {
-        let q = Number(quantity);
-        // 👇️ check if array contains object with given product id
-        const isFound = basketItems.some((item, index) => {
-            if (item._id === product._id) {
-                //set quantity to given product
-                setBasketItems((prevItems) => {
-                    return prevItems.map((item) => {
-                        return item._id === product._id ? { ...item, quantity: item.quantity + q } : item;
-                    });
-                });
-                return true;
-            }
-            return false;
-        });
-
-        if (!isFound) {
-            notify();
-            setBasketItems((prevItems) => {
-                return [
-                    ...prevItems,
-                    {
-                        prevImg: product.prevImg,
-                        _id: product._id,
-                        quantity: q,
-                        name: product.name,
-                        brand: product.brand,
-                        price: product.price,
-                        isDiscount,
-                        priceBeforeDiscount: priceBeforeDiscount,
-                    },
-                ];
-            });
-        }
-    };
 
     return (
         <>
@@ -130,7 +92,7 @@ const ProductBuyContent = ({ product }) => {
                         handleClearItemsFilters={handleClearQuantity}
                     />
                     <BuyButtonMargin>
-                        <BuyButton onClick={() => addProduct()}>
+                        <BuyButton onClick={() => addProductToBasket(product, quantity)}>
                             <BuyIcon>
                                 <BsCartPlus />
                             </BuyIcon>
