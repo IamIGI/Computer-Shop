@@ -30,10 +30,6 @@ const ProductBuyContent = ({ product }) => {
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
 
-    useEffect(() => {
-        console.log(quantity);
-    }, [quantity]);
-
     const getPrice = (product) => {
         if (product.special_offer.mode) {
             setPriceBeforeDiscount(product.price + product.special_offer.price);
