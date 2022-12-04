@@ -17,6 +17,7 @@ import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
 import { initDeliveryCheckboxesOpt, initDeliveryCheckboxesPay, initRecipientDetails } from './Basket.logic';
 import useLocalStorage from 'hooks/useLocalStorage';
+import usePromoCodes from 'hooks/usePromoCodes';
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -24,8 +25,10 @@ const Basket = () => {
     const location = useLocation();
     const logout = useLogout();
 
-    const { priceToPay, basketItems, setBasketItems, promoCodeDisabled, promoCodeEnabled } = useBasket();
+    const { priceToPay, basketItems, removeBasket } = useBasket();
+    const { successfullyUsedPromoCode, promoCode, resetPromoCode } = usePromoCodes();
     const { auth } = useAuth();
+
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useMultiCheckboxMemory(
         'deliveryMethod',
         initDeliveryCheckboxesOpt
@@ -41,53 +44,7 @@ const Basket = () => {
     const [isOpen, setIsOpen] = useState([false]);
     const [orderId, setOrderId] = useState('');
     const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
-    const [promoCode, setPromoCode] = useState('');
-    const [successfullyUsedPromoCode, setSuccessfullyUsedPromoCode] = useState(false);
     const [orderReady, setOrderReady] = useState(false);
-    const [promoCodeAlert, setPromoCodeAlert] = useState('');
-
-    useEffect(() => {
-        setTimeout(() => {
-            setPromoCodeAlert('');
-        }, 4000);
-    }, [promoCodeAlert]);
-
-    const handlePromoCodeSubmit = async (e) => {
-        e.preventDefault();
-
-        const data = { code: promoCode, products: basketItems, auth: auth.id };
-        const response = await axiosPrivate.post('/promocodes/checkproducts', data);
-
-        const promoCodesResponse = response.data;
-        if (promoCodesResponse?.errCode === '001') {
-            setPromoCodeAlert('Podano zły kod');
-            return;
-        }
-        if (promoCodesResponse?.errCode === '002') {
-            setPromoCodeAlert('Podany kod nie przecenia żadnego z produktów');
-            return;
-        }
-        if (promoCodesResponse?.errCode === '003') {
-            setPromoCodeAlert('Podany kod został już użyty');
-            return;
-        }
-
-        promoCodeDisabled();
-        setSuccessfullyUsedPromoCode(true);
-        setPromoCodeAlert('Przeceniono produkt');
-
-        const discountProduct_Id = promoCodesResponse[0]._id;
-
-        const newBasketItems = basketItems.filter((item) => {
-            return item._id !== discountProduct_Id;
-        });
-        promoCodesResponse.map((item) => newBasketItems.push(item));
-        setBasketItems(newBasketItems);
-    };
-
-    const handlePromoCode = (value) => {
-        setPromoCode(value);
-    };
 
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -111,12 +68,10 @@ const Basket = () => {
     }, []);
 
     const resetAllData = () => {
-        setBasketItems([]);
+        removeBasket();
         setOrderData(initRecipientDetails);
         setFinishOrder(false);
-        promoCodeEnabled();
-        setSuccessfullyUsedPromoCode(false);
-        setPromoCode('');
+        resetPromoCode();
         setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
         setDeliveryCheckboxesPay(initDeliveryCheckboxesPay);
         localStorage.removeItem('basketItems');
@@ -280,10 +235,6 @@ const Basket = () => {
                     />
                     <PaymentPreview
                         orderReady={orderReady}
-                        promoCodeAlert={promoCodeAlert}
-                        handlePromoCodeSubmit={handlePromoCodeSubmit}
-                        handlePromoCode={handlePromoCode}
-                        promoCode={promoCode}
                         isUserLogIn={Boolean(auth.id)}
                         finishHandler={finishHandler}
                         priceForDelivery={priceForDelivery}

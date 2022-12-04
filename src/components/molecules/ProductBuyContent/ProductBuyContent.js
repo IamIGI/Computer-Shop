@@ -49,7 +49,7 @@ const ProductBuyContent = ({ product }) => {
         }
     };
 
-    const handleClearQuantity = (data) => {
+    const handleClearQuantity = () => {
         setQuantity(1);
     };
 

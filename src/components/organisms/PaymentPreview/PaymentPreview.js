@@ -17,29 +17,13 @@ import useAuth from 'hooks/useAuth';
 import PromoSectionComponent from 'components/molecules/PromoSection/PromoSection';
 import useBasket from 'hooks/useBasket';
 
-const PaymentPreview = ({
-    orderReady,
-    finishHandler,
-    priceForDelivery,
-    isUserLogIn,
-    handlePromoCode,
-    promoCode,
-    handlePromoCodeSubmit,
-    promoCodeAlert,
-}) => {
+const PaymentPreview = ({ orderReady, finishHandler, priceForDelivery, isUserLogIn }) => {
     const { priceToPay } = useBasket();
     const { auth } = useAuth();
     return (
         <Wrapper>
             <Section>
-                {Boolean(auth.id) && (
-                    <PromoSectionComponent
-                        handlePromoCodeSubmit={handlePromoCodeSubmit}
-                        promoCode={promoCode}
-                        handlePromoCode={handlePromoCode}
-                        promoCodeAlert={promoCodeAlert}
-                    />
-                )}
+                {Boolean(auth.id) && <PromoSectionComponent />}
 
                 <List>
                     <li>
