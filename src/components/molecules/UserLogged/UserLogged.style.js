@@ -6,10 +6,6 @@ export const Wrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l_plus};
     width: 100%;
     min-width: 260px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center; */
 `;
 
 export const TitleSection = styled.div`
@@ -17,7 +13,7 @@ export const TitleSection = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: ${({ theme }) => theme.fontSize.xl};
+    font-size: ${({ theme }) => theme.fontSize.l_plus};
     font-weight: 700;
 `;
 

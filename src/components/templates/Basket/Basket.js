@@ -24,7 +24,7 @@ const Basket = () => {
     const location = useLocation();
     const logout = useLogout();
 
-    const { basketItems, setBasketItems } = useBasket();
+    const { priceToPay, basketItems, setBasketItems, promoCodeDisabled, promoCodeEnabled } = useBasket();
     const { auth } = useAuth();
     const [deliveryCheckboxesOpt, setDeliveryCheckboxesOpt] = useMultiCheckboxMemory(
         'deliveryMethod',
@@ -35,10 +35,7 @@ const Basket = () => {
         initDeliveryCheckboxesPay
     );
     const [orderData, setOrderData] = useMultiCheckboxMemory('orderForm', initRecipientDetails);
-    const [priceToPay, setPriceToPay] = useState(0);
     const { street } = orderData;
-    const [theProducts, setProducts] = useState([]);
-    const [productsInBasket, setProductsInBasket] = useState(null);
     const [finishOrder, setFinishOrder] = useState(false);
     const [priceForDelivery, setPriceForDelivery] = useState();
     const [isOpen, setIsOpen] = useState([false]);
@@ -47,19 +44,7 @@ const Basket = () => {
     const [promoCode, setPromoCode] = useState('');
     const [successfullyUsedPromoCode, setSuccessfullyUsedPromoCode] = useState(false);
     const [orderReady, setOrderReady] = useState(false);
-    const [promoCodeInputDisabled, setPromoCodeInputDisabled] = useState(
-        JSON.parse(localStorage.getItem('promoCodeInputDisabled')) == null
-            ? false
-            : JSON.parse(localStorage.getItem('promoCodeInputDisabled'))
-    );
     const [promoCodeAlert, setPromoCodeAlert] = useState('');
-
-    useEffect(() => {
-        if (productsInBasket !== null && productsInBasket.length === 0) {
-            localStorage.setItem('promoCodeInputDisabled', JSON.stringify(false));
-            setPromoCodeInputDisabled(false);
-        }
-    }, [productsInBasket]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -87,8 +72,7 @@ const Basket = () => {
             return;
         }
 
-        localStorage.setItem('promoCodeInputDisabled', JSON.stringify(true));
-        setPromoCodeInputDisabled(true);
+        promoCodeDisabled();
         setSuccessfullyUsedPromoCode(true);
         setPromoCodeAlert('Przeceniono produkt');
 
@@ -127,11 +111,10 @@ const Basket = () => {
     }, []);
 
     const resetAllData = () => {
-        setProducts([]);
         setBasketItems([]);
         setOrderData(initRecipientDetails);
         setFinishOrder(false);
-        setPromoCodeInputDisabled(false);
+        promoCodeEnabled();
         setSuccessfullyUsedPromoCode(false);
         setPromoCode('');
         setDeliveryCheckboxesOpt(initDeliveryCheckboxesOpt);
@@ -140,7 +123,6 @@ const Basket = () => {
         localStorage.removeItem('orderData');
         localStorage.removeItem('deliveryMethod');
         localStorage.removeItem('paymentMethod');
-        localStorage.removeItem('promoCodeInputDisabled');
     };
 
     const onPopUpClose = () => {
@@ -207,7 +189,7 @@ const Basket = () => {
         const finalPrice = (priceToPay + priceForDelivery).toFixed(2);
         orderTemplateDocument = {
             status: 1, //all orders have to start from "In realization" status // for now
-            products: productsInBasket,
+            products: basketItems,
             transactionInfo: {
                 deliveryMethod: tempOpt,
                 paymentMethod: tempPay,
@@ -240,7 +222,7 @@ const Basket = () => {
                             );
 
                             const stripeObj = {
-                                products: productsInBasket,
+                                products: basketItems,
                                 delivery: orderTemplateDocument.transactionInfo.deliveryMethod,
                             };
 
@@ -271,7 +253,7 @@ const Basket = () => {
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, productsInBasket, finishOrder]);
+    }, [deliveryCheckboxesOpt, deliveryCheckboxesPay, orderData, priceToPay, basketItems, finishOrder]);
 
     return (
         <Wrapper>
@@ -290,12 +272,7 @@ const Basket = () => {
             </Main>
             <Prev>
                 <PrevWrapper>
-                    <BasketPreview
-                        setPriceToPay={setPriceToPay}
-                        setProductsInBasket={setProductsInBasket}
-                        theProducts={theProducts}
-                        setProducts={setProducts}
-                    />
+                    <BasketPreview />
                     <DeliveryPreview
                         deliveryCheckboxesPay={deliveryCheckboxesPay}
                         deliveryCheckboxesOpt={deliveryCheckboxesOpt}
@@ -304,12 +281,10 @@ const Basket = () => {
                     <PaymentPreview
                         orderReady={orderReady}
                         promoCodeAlert={promoCodeAlert}
-                        promoCodeInputDisabled={promoCodeInputDisabled}
                         handlePromoCodeSubmit={handlePromoCodeSubmit}
                         handlePromoCode={handlePromoCode}
                         promoCode={promoCode}
                         isUserLogIn={Boolean(auth.id)}
-                        priceToPay={priceToPay}
                         finishHandler={finishHandler}
                         priceForDelivery={priceForDelivery}
                     />

@@ -15,19 +15,19 @@ import {
 import { FiAlertCircle } from 'react-icons/fi';
 import useAuth from 'hooks/useAuth';
 import PromoSectionComponent from 'components/molecules/PromoSection/PromoSection';
+import useBasket from 'hooks/useBasket';
 
 const PaymentPreview = ({
     orderReady,
-    priceToPay,
     finishHandler,
     priceForDelivery,
     isUserLogIn,
     handlePromoCode,
     promoCode,
     handlePromoCodeSubmit,
-    promoCodeInputDisabled,
     promoCodeAlert,
 }) => {
+    const { priceToPay } = useBasket();
     const { auth } = useAuth();
     return (
         <Wrapper>
@@ -37,7 +37,6 @@ const PaymentPreview = ({
                         handlePromoCodeSubmit={handlePromoCodeSubmit}
                         promoCode={promoCode}
                         handlePromoCode={handlePromoCode}
-                        promoCodeInputDisabled={promoCodeInputDisabled}
                         promoCodeAlert={promoCodeAlert}
                     />
                 )}

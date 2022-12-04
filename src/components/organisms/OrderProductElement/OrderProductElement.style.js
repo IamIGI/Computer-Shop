@@ -67,9 +67,6 @@ export const ProductDescription = styled.div`
         }
 
         p:first-child {
-            font-size: ${({ theme }) => theme.fontSize.s};
-        }
-        p:last-child {
             font-size: ${({ theme }) => theme.fontSize.m};
         }
     }
