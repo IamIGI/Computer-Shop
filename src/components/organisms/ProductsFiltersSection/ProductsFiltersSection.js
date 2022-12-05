@@ -158,6 +158,7 @@ const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, Fi
                 handleItems={handleProducers}
                 handleClearItemsFilters={handleClearProducersFilters}
                 clearItems={clearProducers}
+                showConfirmButtonOnSmallScreen={true}
             />
 
             <SetFilterItems
@@ -168,6 +169,7 @@ const ProductsFiltersSection = ({ handleFilters, position, handleShowFilters, Fi
                 handleItems={handleProcessors}
                 handleClearItemsFilters={handleClearProcessorsFilters}
                 clearItems={clearProcessors}
+                showConfirmButtonOnSmallScreen={true}
             />
 
             <Title>RAM</Title>

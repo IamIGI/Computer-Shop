@@ -11,12 +11,10 @@ import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { OrderProvider } from 'context/OrderItemProvider';
 import { BasketProvider } from 'context/BasketProvider';
 import { ProductProvider } from 'context/ProductProvider';
-import { CommentsProvider } from 'context/CommentsProvider';
 import { RefreshProvider } from 'context/refreshProvider';
 import { BrowserRouter } from 'react-router-dom';
 import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
 import { Toaster } from 'react-hot-toast';
-import { PromoCodesProvider } from 'context/PromoCodesProvider';
 
 const MainTemplate = ({ children }) => {
     return (

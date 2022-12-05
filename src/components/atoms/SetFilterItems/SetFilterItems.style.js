@@ -48,12 +48,10 @@ export const FilterOptions = styled.div`
     top: 30px;
     right: 0px;
     background-color: white;
-    /* padding: 0 10px 8px 10px; */
     padding-bottom: 5px;
     border-left: 1px solid grey;
     border-bottom: 1px solid grey;
     border-right: 1px solid grey;
-    /* border: 1px solid grey; */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: white;
@@ -106,10 +104,10 @@ export const SmallScreen = styled.div`
     display: none;
     background-color: ${({ theme }) => theme.colors.lightLightGrey};
     @media screen and (max-width: 500px) {
+        display: ${(props) => (props.showConfirmButtonOnSmallScreen ? 'flex' : 'none')};
         border-radius: 10px;
         margin-top: 10px;
         font-size: ${({ theme }) => theme.fontSize.m_plus};
-        display: flex;
         width: 100%;
         padding: 3px;
     }
