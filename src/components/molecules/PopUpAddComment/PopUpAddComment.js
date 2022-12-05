@@ -34,8 +34,12 @@ import { sendCommentAPI } from 'api/comments';
 import { BiCommentError } from 'react-icons/bi';
 import { ACTIONS, INITIAL_STATE, reducerFunction } from './reducerLogic';
 import toast from 'react-hot-toast';
+import useComment from 'hooks/useComment';
+import useProduct from 'hooks/useProduct';
 
-const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComments }) => {
+const PopUpAddComment = ({ onClose }) => {
+    const { handleRefreshComments } = useComment();
+    const { product } = useProduct();
     const { auth } = useAuth();
     const [state, dispatch] = useReducer(reducerFunction, INITIAL_STATE);
     const [userName, setUserName] = useState(Boolean(auth.userName) ? auth.userName : '');
@@ -81,7 +85,7 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
             Object.keys(state.files).forEach((key) => {
                 formData.append(state.files.item(key).name, state.files.item(key));
             });
-            formData.append('productId', productId);
+            formData.append('productId', product._id);
             formData.append('userId', Boolean(auth.id) ? auth.id : '');
             formData.append('userName', userName);
             formData.append('rating', state.rating);
@@ -147,10 +151,10 @@ const PopUpAddComment = ({ name, prevImg, productId, onClose, handleRefreshComme
                 <form onSubmit={handleSubmit}>
                     <ProductDescription>
                         <Image>
-                            <img src={prevImg} alt="Prev product" />
+                            <img src={product.prevImg} alt="Prev product" />
                         </Image>
                         <ProductName>
-                            <p>{name}</p>
+                            <p>{product.name}</p>
                         </ProductName>
                     </ProductDescription>
 

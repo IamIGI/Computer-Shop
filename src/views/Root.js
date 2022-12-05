@@ -1,6 +1,5 @@
 import About from 'components/templates/About/About';
 import AllProducts from 'components/templates/AllProducts/AllProducts';
-import Basket from 'components/templates/Basket/Basket';
 import Home from 'components/templates/Home/Home';
 import MissingPage from 'components/templates/MissingPage/MissingPage';
 import Unauthorized from 'components/templates/Unauthorized/Unauthorized';
@@ -24,6 +23,7 @@ import NoRealWebsitePage from 'components/templates/NoRealWebsite/NoRealWebsiteP
 import Articles from 'components/templates/Articles/Articles';
 import Article from 'components/templates/Article/Article';
 import AccountRecipientTemplate from 'components/organisms/AccountRecipientTemplate/AccountRecipientTemplate';
+import BasketContextWrapper from 'components/templates/Basket/BasketContextWrapper';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -43,7 +43,7 @@ const Root = () => {
                     <Route path="articles/all/:type" element={<Articles />} />
                     <Route path="articles/:id" element={<Article />} />
                     <Route path="product/:id" element={<Product />} />
-                    <Route path="basket" element={<Basket />} />
+                    <Route path="basket" element={<BasketContextWrapper />} />
                     <Route path="contact" element={<ContactAuthor />} />
                     <Route path="authorization" element={<Authorization />} />
                     <Route path="noRealWebsite" element={<NoRealWebsitePage />} />

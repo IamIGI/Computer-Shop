@@ -1,6 +1,9 @@
 import { Bar, QuantityOfGivenScore, ScoreStar, Wrapper, Number, Icon } from './ProductEachScore.style';
 import { MdStar } from 'react-icons/md';
-const ProductEachScore = ({ averageScore, errorFix }) => {
+import useComment from 'hooks/useComment';
+
+const ProductEachScore = ({ errorFix }) => {
+    const { averageScore } = useComment();
     return (
         <Wrapper>
             {errorFix > 0 &&

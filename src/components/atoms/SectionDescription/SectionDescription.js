@@ -1,4 +1,4 @@
-import { checkBreakLine } from 'components/molecules/CommentItem/CommentItem.logic';
+import { checkBreakLine } from 'components/molecules/Comments/Comments.logic';
 import React from 'react';
 import { ContentDescription, ContentTitle, IconTitle, Line, Wrapper } from './SectionDescription.styles';
 

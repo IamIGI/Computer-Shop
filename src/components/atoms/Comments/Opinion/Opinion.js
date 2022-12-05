@@ -1,5 +1,5 @@
 import { Wrapper, UnWrap } from './Opinion.style';
-import { readMoreSplit, checkBreakLine } from 'components/molecules/CommentItem/CommentItem.logic';
+import { readMoreSplit, checkBreakLine } from 'components/molecules/Comments/Comments.logic';
 import { useState } from 'react';
 
 const Opinion = ({ comment }) => {
