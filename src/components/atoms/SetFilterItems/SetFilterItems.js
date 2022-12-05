@@ -23,6 +23,7 @@ const SetFilterItems = ({
     displayCheckbox = false,
     selectOptionsInCenter = false,
     afterClickWrap = false,
+    showConfirmButtonOnSmallScreen = false,
 }) => {
     const [toggle, setToggle] = useState(false);
     const [check, setCheck] = useState(filterData);
@@ -101,7 +102,10 @@ const SetFilterItems = ({
                             <OptionDescription>{item.label}</OptionDescription>
                         </FilterOption>
                     ))}
-                    <SmallScreen onClick={() => setToggle(false)}>
+                    <SmallScreen
+                        showConfirmButtonOnSmallScreen={showConfirmButtonOnSmallScreen}
+                        onClick={() => setToggle(false)}
+                    >
                         <ApproveButton>Zatwierdź</ApproveButton>
                     </SmallScreen>
                 </FilterOptions>

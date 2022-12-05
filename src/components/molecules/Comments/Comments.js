@@ -24,8 +24,8 @@ import { FaCommentSlash } from 'react-icons/fa';
 import { useState } from 'react';
 import useComment from 'hooks/useComment';
 
-const CommentItem = () => {
-    const { comments, handleRefreshComments, handleChosenImage, waitForFetchComments } = useComment();
+const Comments = () => {
+    const { comments, handleChosenImage, waitForFetchComments } = useComment();
     const { comments: commentsArray, length: displayedComments } = comments;
     const [limitViewedComments, setLimitViewedComments] = useState(5);
 
@@ -115,4 +115,4 @@ const CommentItem = () => {
     );
 };
 
-export default CommentItem;
+export default Comments;
