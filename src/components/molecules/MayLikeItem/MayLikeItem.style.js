@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
 
     &:hover {
         z-index: 5;
-        transform: scale(1.05, 1.05);
+        transform: scale(1.03, 1.03);
         border: 1px solid ${({ theme }) => theme.colors.grey};
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         border-radius: 10px;

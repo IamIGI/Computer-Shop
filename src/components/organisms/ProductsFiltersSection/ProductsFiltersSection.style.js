@@ -92,7 +92,7 @@ export const DiscountFilter = styled.div`
     justify-content: flex-start;
 `;
 export const DiscountDesc = styled.div`
-    margin-top: 9px;
+    margin-top: 8px;
     font-size: ${({ theme }) => theme.fontSize.l};
     color: ${({ theme }) => theme.colors.darkGrey};
 
