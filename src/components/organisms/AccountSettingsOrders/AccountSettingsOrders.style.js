@@ -71,10 +71,10 @@ export const OrderContent = styled(NavLink)`
     border-radius: 10px;
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     transform: scale(1, 1);
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
 
     &:hover {
-        transform: scale(1.03, 1.03);
+        transform: scale(1.015, 1.015);
         border: 1px solid ${({ theme }) => theme.colors.grey};
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         cursor: pointer;

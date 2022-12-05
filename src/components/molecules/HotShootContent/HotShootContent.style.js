@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
     transition: transform 0.5s ease;
 
     &:hover {
-        transform: scale(1.04, 1.04);
+        transform: scale(1.015, 1.015);
         border: 1px solid ${({ theme }) => theme.colors.grey};
         box-shadow: 7px 7px 12px 1px ${({ theme }) => theme.colors.grey};
         border-radius: 30px;

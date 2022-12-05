@@ -28,7 +28,7 @@ export const ArticleWrapper = styled(NavLink)`
 
     &:hover {
         cursor: pointer;
-        transform: scale(1.03, 1.03);
+        transform: scale(1.02, 1.02);
     }
 
     @media screen and (max-width: 685px) {

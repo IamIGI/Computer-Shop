@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Wrapper,
     NormalScreenSection,
@@ -39,6 +39,10 @@ const NavBar = () => {
     const logout = useLogout();
     const { basketItems } = useBasket();
     const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
+
+    useEffect(() => {
+        console.log(toggleMenu);
+    }, [toggleMenu]);
 
     const getQuantityOfItems = () => {
         let temp = 0;
@@ -122,6 +126,7 @@ const NavBar = () => {
                         </HamburgerMenu>
                     </SmallScreenMenuPreview>
                     <StyledLinksSmallScreenSection
+                        MenuInitPosition={MenuInitPosition}
                         position={toggleMenu}
                         onMouseLeave={() => setToggleMenu(MenuInitPosition)}
                     >

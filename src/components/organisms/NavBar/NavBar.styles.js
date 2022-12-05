@@ -130,7 +130,7 @@ export const StyledLinksSmallScreenSection = styled.div`
     border: 1px solid gray;
 
     background-color: white;
-    z-index: 5;
+    z-index: 8;
     gap: 10px;
 
     @media screen and (max-width: 650px) {
@@ -140,7 +140,7 @@ export const StyledLinksSmallScreenSection = styled.div`
         padding: 20px 0;
         height: 100%;
         right: 0px;
-        display: ${(props) => (props.position === '-230px' ? 'none' : 'flex')};
+        display: ${(props) => (props.position === props.MenuInitPosition ? 'none' : 'flex')};
 
         width: 100%;
         flex-direction: column;
