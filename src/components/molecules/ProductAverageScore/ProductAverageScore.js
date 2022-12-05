@@ -1,6 +1,8 @@
 import { NumberOfOpinions, Score, Stars, Wrapper } from './ProductAverageScore.style';
 import Star from 'components/atoms/Star/Star';
-const ProductAverageScore = ({ averageScore }) => {
+import useComment from 'hooks/useComment';
+const ProductAverageScore = () => {
+    const { averageScore } = useComment();
     return (
         <Wrapper>
             <Score>

@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom';
 import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandyMenu';
 import TitleContent from 'components/molecules/TitleContent/TitleContent';
 import { Separator } from 'components/atoms/Separator/Separator';
+import { CommentsProvider } from 'context/CommentsProvider';
 
 const Product = () => {
     const code = useParams().id;
@@ -61,7 +62,9 @@ const Product = () => {
                         <ProductMiddleContent product={product} />
                     </MidWrapper>
                     <BottomWrapper>
-                        <CommentsSection handleRefreshProduct={handleRefreshProduct} product={product} />
+                        <CommentsProvider>
+                            <CommentsSection handleRefreshProduct={handleRefreshProduct} />
+                        </CommentsProvider>
                     </BottomWrapper>
                 </>
             )}

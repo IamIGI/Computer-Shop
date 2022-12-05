@@ -4,9 +4,11 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useState } from 'react';
+import useComment from 'hooks/useComment';
 
-const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage, handleOpenModal }) => {
-    const sumOfElementsWidth = commentImages.length * 90 + (commentImages.length - 1) * 20;
+const CommentsImages = () => {
+    const { comments, isOpenGallery, handleChosenImage, handleOpenModalGallery } = useComment();
+    const sumOfElementsWidth = comments.images.length * 90 + (comments.images.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
     setInterval(async () => {
@@ -30,11 +32,11 @@ const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage,
 
     return (
         <>
-            {commentImages.length > 0 && (
+            {comments.images.length > 0 && (
                 <>
-                    <OutsideWrapper numberOfImages={commentImages.length}>
+                    <OutsideWrapper numberOfImages={comments.images.length}>
                         <Wrapper id="container">
-                            {commentImages.map((urlImage, index) => (
+                            {comments.images.map((urlImage, index) => (
                                 <Image
                                     id={`CommentImage_${index}`}
                                     key={index}
@@ -61,8 +63,8 @@ const CommentsImages = ({ commentImages, isOpen, chosenImage, handleChosenImage,
                             <AiOutlineLeft />
                         </ScrollButton>
                     </OutsideWrapper>
-                    <Modal open={isOpen} onClose={() => handleOpenModal([false])}>
-                        <PopUpGallery images={commentImages} addServerPrefix={true} initIndex={chosenImage} />
+                    <Modal open={isOpenGallery} onClose={() => handleOpenModalGallery([false])}>
+                        <PopUpGallery addServerPrefix={true} />
                     </Modal>
                 </>
             )}

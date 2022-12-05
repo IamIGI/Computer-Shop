@@ -12,7 +12,7 @@ import {
     SmallScreen,
     UserDataWhenSmallScreen,
     LoadCommentsButton,
-} from './CommentItem.style';
+} from './Comments.style';
 
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 
@@ -22,8 +22,10 @@ import Opinion from 'components/atoms/Comments/Opinion/Opinion';
 import CommentsScore from 'components/atoms/Comments/CommentScore/CommentsScore';
 import { FaCommentSlash } from 'react-icons/fa';
 import { useState } from 'react';
+import useComment from 'hooks/useComment';
 
-const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, handleChosenImage }) => {
+const CommentItem = () => {
+    const { comments, handleRefreshComments, handleChosenImage, waitForFetchComments } = useComment();
     const { comments: commentsArray, length: displayedComments } = comments;
     const [limitViewedComments, setLimitViewedComments] = useState(5);
 
@@ -90,10 +92,7 @@ const CommentItem = ({ comments, waitForFetchComments, handleRefreshComments, ha
                                                 <></>
                                             )}
                                         </ImagesSection>
-                                        <CommentsScore
-                                            comment={comment}
-                                            handleRefreshComments={handleRefreshComments}
-                                        />
+                                        <CommentsScore comment={comment} />
                                     </ContentSection>
                                 </CommentSection>
                             ))}

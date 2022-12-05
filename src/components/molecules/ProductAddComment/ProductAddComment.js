@@ -3,9 +3,13 @@ import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { FiThumbsUp } from 'react-icons/fi';
+import useComment from 'hooks/useComment';
+import useProduct from 'hooks/useProduct';
 
-const ProductAddComment = ({ productName, handleOpen, comments }) => {
+const ProductAddComment = ({ handleOpen }) => {
     const { auth } = useAuth();
+    const { comments } = useComment();
+    const { product } = useProduct();
     const [userAlreadyCommented, setUserAlreadyCommented] = useState(false);
 
     useEffect(() => {
@@ -22,7 +26,7 @@ const ProductAddComment = ({ productName, handleOpen, comments }) => {
         <Wrapper>
             <Description>
                 <h2>Masz ten produkt?</h2>
-                <p>Oceń {productName} i pomóż innym w wyborze</p>
+                <p>Oceń {product.name} i pomóż innym w wyborze</p>
             </Description>
             <AddComment>
                 {userAlreadyCommented ? (

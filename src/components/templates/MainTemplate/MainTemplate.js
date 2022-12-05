@@ -30,17 +30,15 @@ const MainTemplate = ({ children }) => {
                             <ProductProvider>
                                 <OrderProvider>
                                     <RefreshProvider>
-                                        <CommentsProvider>
-                                            <ChangeHotShootTimer />
-                                            <AuthProvider>
-                                                <NavBar />
-                                                <InsideWrapper>
-                                                    <PromoCodesProvider>{children}</PromoCodesProvider>
-                                                    <AccountPreviewSection />
-                                                </InsideWrapper>
-                                                <Footer />
-                                            </AuthProvider>
-                                        </CommentsProvider>
+                                        <ChangeHotShootTimer />
+                                        <AuthProvider>
+                                            <NavBar />
+                                            <InsideWrapper>
+                                                {children}
+                                                <AccountPreviewSection />
+                                            </InsideWrapper>
+                                            <Footer />
+                                        </AuthProvider>
                                     </RefreshProvider>
                                 </OrderProvider>
                             </ProductProvider>

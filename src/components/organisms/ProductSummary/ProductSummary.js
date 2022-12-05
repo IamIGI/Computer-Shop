@@ -11,17 +11,12 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpAddComment from 'components/molecules/PopUpAddComment/PopUpAddComment';
 import useProduct from 'hooks/useProduct';
 import { getProductAverageScore } from 'api/comments';
+import useComment from 'hooks/useComment';
 
-const ProductSummary = ({
-    refreshComments,
-    waitForFetchAS,
-    comments,
-    averageScore,
-    handleRefreshComments,
-    handleAverageScore,
-    handleWaitForFetchAS,
-}) => {
+const ProductSummary = () => {
     const { product } = useProduct();
+    const { comments, refreshComments, waitForFetchAS, handleAverageScore, handleWaitForFetchAS } = useComment();
+
     const [isOpen, setIsOpen] = useState([false]);
 
     const handleOpen = () => {
@@ -57,21 +52,15 @@ const ProductSummary = ({
                         </NoComments>
                     ) : (
                         <InsideWrapper>
-                            <ProductAverageScore averageScore={averageScore} />
-                            <ProductEachScore averageScore={averageScore} errorFix={comments.length_AllComments} />
+                            <ProductAverageScore />
+                            <ProductEachScore errorFix={comments.length_AllComments} />
                         </InsideWrapper>
                     )}
                 </>
             )}
-            <ProductAddComment productName={product.name} handleOpen={handleOpen} comments={comments} />
+            <ProductAddComment handleOpen={handleOpen} />
             <Modal open={isOpen} onClose={() => setIsOpen([false])}>
-                <PopUpAddComment
-                    onClose={() => setIsOpen([false])}
-                    name={product.name}
-                    prevImg={product.prevImg}
-                    productId={product._id}
-                    handleRefreshComments={handleRefreshComments}
-                />
+                <PopUpAddComment onClose={() => setIsOpen([false])} />
             </Modal>
         </Wrapper>
     );

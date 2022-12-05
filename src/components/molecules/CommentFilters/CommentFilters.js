@@ -13,8 +13,11 @@ import { useState, useEffect } from 'react';
 import useProduct from 'hooks/useProduct';
 import { ratingOptions, filterOptions } from './CommentFilters.logic';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
+import useComment from 'hooks/useComment';
 
-const CommentFilters = ({ handleFilters, comments }) => {
+const CommentFilters = () => {
+    const { comments, handleFilters } = useComment();
+
     const [rating, setRating] = useState(0);
     const [clearRating, setClearRating] = useState(false);
     const [clearSortBy, setClearSortBy] = useState(false);

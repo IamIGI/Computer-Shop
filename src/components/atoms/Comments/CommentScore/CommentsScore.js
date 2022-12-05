@@ -6,9 +6,11 @@ import { ImSad } from 'react-icons/im';
 
 import useAuth from 'hooks/useAuth';
 import { addLike } from 'api/comments';
+import useComment from 'hooks/useComment';
 
-const CommentsScore = ({ comment, handleRefreshComments }) => {
+const CommentsScore = ({ comment }) => {
     const { product } = useProduct();
+    const { handleRefreshComments } = useComment();
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
 
@@ -24,7 +26,6 @@ const CommentsScore = ({ comment, handleRefreshComments }) => {
 
         try {
             const response = await addLike(data);
-            console.log(response);
             if (response === 403) {
                 setNotLoggedIn([true, value[1]._id, 'Musisz być zalogowany']);
             } else if (response === 405) {
