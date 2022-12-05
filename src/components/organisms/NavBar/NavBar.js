@@ -40,10 +40,6 @@ const NavBar = () => {
     const { basketItems } = useBasket();
     const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
 
-    useEffect(() => {
-        console.log(toggleMenu);
-    }, [toggleMenu]);
-
     const getQuantityOfItems = () => {
         let temp = 0;
         basketItems.map((item) => (temp += item.quantity));
