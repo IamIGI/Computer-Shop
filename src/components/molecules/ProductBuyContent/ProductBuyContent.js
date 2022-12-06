@@ -23,8 +23,10 @@ import { TbShoppingCartDiscount } from 'react-icons/tb';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import { numberOptions } from './ProductBuyContent.logic';
 import formatPrices from 'helpers/formatPrices';
+import useProduct from 'hooks/useProduct';
 
-const ProductBuyContent = ({ product }) => {
+const ProductBuyContent = () => {
+    const { product } = useProduct();
     const [quantity, setQuantity] = useState(1);
     const { addProductToBasket } = useBasket();
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);

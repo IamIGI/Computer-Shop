@@ -15,28 +15,28 @@ import { Separator } from 'components/atoms/Separator/Separator';
 import ProductGallery from 'components/atoms/ProductGallery/ProductGallery';
 import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandyMenu';
 
-const ProductTopContent = ({ product }) => {
+const ProductTopContent = () => {
     return (
         <>
             <TopWrapper>
                 <CarouselBox>
-                    <ProductGallery images={product.img} />
+                    <ProductGallery />
                 </CarouselBox>
                 <HandyMenuSmallScreen>
-                    <ProductHandyMenu productId={product._id} />
+                    <ProductHandyMenu />
                 </HandyMenuSmallScreen>
             </TopWrapper>
             <BottomWrapper>
                 <Title>
-                    <TitleContent product={product} />
+                    <TitleContent />
                     <Separator />
                 </Title>
                 <DataBuyWrapper>
                     <PrevData>
-                        <PrevDataProduct productData={product.prevDataProduct} />
+                        <PrevDataProduct />
                     </PrevData>
                     <BuySelector>
-                        <ProductBuyContent product={product} />
+                        <ProductBuyContent />
                     </BuySelector>
                 </DataBuyWrapper>
             </BottomWrapper>

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import useComment from 'hooks/useComment';
 
 const CommentsImages = () => {
-    const { comments, isOpenGallery, handleChosenImage, handleOpenModalGallery } = useComment();
+    const { chosenImage, comments, isOpenGallery, handleChosenImage, handleOpenModalGallery } = useComment();
     const sumOfElementsWidth = comments.images.length * 90 + (comments.images.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
@@ -64,7 +64,7 @@ const CommentsImages = () => {
                         </ScrollButton>
                     </OutsideWrapper>
                     <Modal open={isOpenGallery} onClose={() => handleOpenModalGallery([false])}>
-                        <PopUpGallery addServerPrefix={true} />
+                        <PopUpGallery images={comments.images} addServerPrefix={true} initIndex={chosenImage} />
                     </Modal>
                 </>
             )}

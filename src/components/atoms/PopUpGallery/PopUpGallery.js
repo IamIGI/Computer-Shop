@@ -2,12 +2,10 @@ import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import React, { useEffect, useState } from 'react';
 import { Wrapper, ImageContainer, SmallImagesContainer, SmallImage, SmallImageWrapper } from './PopUpGallery.style';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import useComment from 'hooks/useComment';
 
-const PopUpGallery = ({ addServerPrefix }) => {
-    const { comments, chosenImage } = useComment();
-    const [index, setIndex] = useState(chosenImage);
-    const sumOfElementsWidth = comments.images.length * 90 + (comments.images.length - 1) * 20;
+const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
+    const [index, setIndex] = useState(initIndex);
+    const sumOfElementsWidth = images.length * 90 + (images.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
     useEffect(() => {
@@ -40,14 +38,14 @@ const PopUpGallery = ({ addServerPrefix }) => {
         <Wrapper>
             <ImageContainer>
                 <img
-                    src={addServerPrefix ? `http://localhost:5000/${comments.images[index]}` : comments.images[index]}
+                    src={addServerPrefix ? `http://localhost:5000/${images[index]}` : images[index]}
                     alt="Show product"
                     key={index}
                 />
             </ImageContainer>
             <SmallImageWrapper>
                 <SmallImagesContainer id="containerBigImage">
-                    {comments.images.map((item, i) => (
+                    {images.map((item, i) => (
                         <SmallImage
                             key={i}
                             src={addServerPrefix ? `http://localhost:5000/${item}` : item}

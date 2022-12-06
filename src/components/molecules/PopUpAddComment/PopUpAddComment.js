@@ -39,6 +39,7 @@ import useProduct from 'hooks/useProduct';
 
 const PopUpAddComment = ({ onClose }) => {
     const { handleRefreshComments } = useComment();
+    const { increaseNumberOfCommentsInProductMenu } = useProduct();
     const { product } = useProduct();
     const { auth } = useAuth();
     const [state, dispatch] = useReducer(reducerFunction, INITIAL_STATE);
@@ -119,6 +120,7 @@ const PopUpAddComment = ({ onClose }) => {
                     changeState(ACTIONS.SEND_COMMENT, false);
                     onClose();
                     handleRefreshComments();
+                    increaseNumberOfCommentsInProductMenu();
                     notify();
                 }
             } catch (err) {

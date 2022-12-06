@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
     Wrapper,
     TopWrapper,
@@ -12,7 +12,6 @@ import ProductMiddleContent from 'components/organisms/ProductMiddleContent/Prod
 import useProduct from 'hooks/useProduct';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import CommentsSection from 'components/templates/CommentsSection/CommentsSection';
-import { getProduct } from 'api/products';
 import { useParams } from 'react-router-dom';
 import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandyMenu';
 import TitleContent from 'components/molecules/TitleContent/TitleContent';
@@ -20,22 +19,10 @@ import { Separator } from 'components/atoms/Separator/Separator';
 import { CommentsProvider } from 'context/CommentsProvider';
 
 const Product = () => {
+    const { fetchProduct, waitForFetchProduct, refreshProduct } = useProduct();
     const code = useParams().id;
-    const [waitForFetchProduct, setWaitForFetchProduct] = useState(true);
-    const { product, setProduct } = useProduct();
-    const [refreshProduct, setRefreshProduct] = useState(false);
-
-    const handleRefreshProduct = () => {
-        setRefreshProduct(!refreshProduct);
-    };
 
     useEffect(() => {
-        const fetchProduct = async (code) => {
-            const response = await getProduct(code);
-            setProduct(response);
-            setWaitForFetchProduct(false);
-        };
-
         fetchProduct(code);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code, refreshProduct]);
@@ -43,27 +30,25 @@ const Product = () => {
     return (
         <Wrapper>
             {waitForFetchProduct ? (
-                <>
-                    <LoadingAnimation loadingSize={15} />
-                </>
+                <LoadingAnimation loadingSize={15} />
             ) : (
                 <>
                     <TitleWhenSmallScreen>
-                        <TitleContent product={product} />
+                        <TitleContent />
                         <Separator />
                     </TitleWhenSmallScreen>
                     <HandyMenuBigScreen>
-                        <ProductHandyMenu productId={product._id} />
+                        <ProductHandyMenu />
                     </HandyMenuBigScreen>
                     <TopWrapper id="Top">
-                        <ProductTopContent product={product} />
+                        <ProductTopContent />
                     </TopWrapper>
                     <MidWrapper>
-                        <ProductMiddleContent product={product} />
+                        <ProductMiddleContent />
                     </MidWrapper>
                     <BottomWrapper>
                         <CommentsProvider>
-                            <CommentsSection handleRefreshProduct={handleRefreshProduct} />
+                            <CommentsSection />
                         </CommentsProvider>
                     </BottomWrapper>
                 </>

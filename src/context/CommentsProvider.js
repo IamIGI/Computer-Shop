@@ -73,6 +73,7 @@ export const CommentsProvider = ({ children }) => {
                 isOpenGallery,
                 chosenImage,
                 waitForFetchComments,
+
                 setComments,
                 handleChosenImage,
                 handleOpenModalGallery,
