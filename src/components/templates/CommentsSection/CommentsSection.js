@@ -7,16 +7,11 @@ import { BiCommentDetail } from 'react-icons/bi';
 import CommentsImages from 'components/molecules/CommentsImages/CommentsImages';
 
 import useComment from 'hooks/useComment';
-import { useEffect } from 'react';
+
 import Comments from 'components/molecules/Comments/Comments';
 
-const CommentsSection = ({ handleRefreshProduct }) => {
-    const { comments, refreshComments } = useComment();
-
-    useEffect(() => {
-        handleRefreshProduct();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refreshComments]);
+const CommentsSection = () => {
+    const { comments } = useComment();
 
     return (
         <Wrapper id="Opinions">

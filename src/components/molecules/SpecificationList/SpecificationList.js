@@ -2,8 +2,10 @@ import React from 'react';
 import { LiDesc, LiName, List, LiWrapper } from './SpecificationList.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { VscListUnordered } from 'react-icons/vsc';
+import useProduct from 'hooks/useProduct';
 
-const SpecificationList = ({ product }) => {
+const SpecificationList = () => {
+    const { product } = useProduct();
     const PS = product.specification;
     return (
         <>

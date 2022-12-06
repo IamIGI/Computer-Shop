@@ -1,7 +1,9 @@
+import useProduct from 'hooks/useProduct';
 import React from 'react';
 import { Wrapper } from './TitleContent.style';
 
-const TitleContent = ({ product }) => {
+const TitleContent = () => {
+    const { product } = useProduct();
     return (
         <Wrapper>
             <h1>{product.name}</h1>

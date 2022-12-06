@@ -10,18 +10,18 @@ import {
     YouMayLikeSector,
 } from './ProductMIddleContent.style';
 
-const ProductMiddleContent = ({ product }) => {
+const ProductMiddleContent = () => {
     return (
         <>
             <MenuSector>
-                <ProductMenu numberOfOpinions={product.numberOfOpinions} />
+                <ProductMenu />
             </MenuSector>
             <AboutProductSector>
                 <Description id="Description">
-                    <ProductDescription product={product} />
+                    <ProductDescription />
                 </Description>
                 <Specification id="Specification">
-                    <SpecificationList product={product} />
+                    <SpecificationList />
                 </Specification>
                 <YouMayLikeSector>
                     <YouMayLike />

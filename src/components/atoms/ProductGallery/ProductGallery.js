@@ -4,12 +4,14 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
 import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import useProduct from 'hooks/useProduct';
 
-const ProductGallery = ({ images, addServerPrefix }) => {
+const ProductGallery = ({ addServerPrefix = false }) => {
+    const { product } = useProduct();
     const [index, setIndex] = useState(0);
     const [isOpen, setIsOpen] = useState([false]);
     const [chosenImage, setChoseImage] = useState(0);
-    const sumOfElementsWidth = images.length * 70 + (images.length - 1) * 20;
+    const sumOfElementsWidth = product.img.length * 70 + (product.img.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
     useEffect(() => {
@@ -44,11 +46,11 @@ const ProductGallery = ({ images, addServerPrefix }) => {
     return (
         <Wrapper>
             <ImageContainer>
-                <img src={images[index]} alt="Show product" key={index} onClick={() => handleChosenImage(index)} />
+                <img src={product.img[index]} alt="Show product" key={index} onClick={() => handleChosenImage(index)} />
             </ImageContainer>
             <SmallImageWrapper>
                 <SmallImagesContainer id="containerProductGallery">
-                    {images.map((item, i) => (
+                    {product.img.map((item, i) => (
                         <SmallImage
                             key={i}
                             src={addServerPrefix ? `http://localhost:5000/${item}` : item}
@@ -77,7 +79,7 @@ const ProductGallery = ({ images, addServerPrefix }) => {
                 </ScrollButton>
             </SmallImageWrapper>
             <Modal position={[25, -86]} open={isOpen} onClose={() => setIsOpen([false])}>
-                <PopUpGallery images={images} addServerPrefix={false} initIndex={chosenImage} />
+                <PopUpGallery images={product.img} addServerPrefix={false} initIndex={chosenImage} />
             </Modal>
         </Wrapper>
     );
