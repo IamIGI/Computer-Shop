@@ -16,6 +16,9 @@ import { BrowserRouter } from 'react-router-dom';
 import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
 import { Toaster } from 'react-hot-toast';
 
+import { Provider } from 'react-redux';
+import { store } from 'app/store';
+
 const MainTemplate = ({ children }) => {
     return (
         <>
@@ -28,15 +31,17 @@ const MainTemplate = ({ children }) => {
                             <ProductProvider>
                                 <OrderProvider>
                                     <RefreshProvider>
-                                        <ChangeHotShootTimer />
-                                        <AuthProvider>
-                                            <NavBar />
-                                            <InsideWrapper>
-                                                {children}
-                                                <AccountPreviewSection />
-                                            </InsideWrapper>
-                                            <Footer />
-                                        </AuthProvider>
+                                        <Provider store={store}>
+                                            <ChangeHotShootTimer />
+                                            <AuthProvider>
+                                                <NavBar />
+                                                <InsideWrapper>
+                                                    {children}
+                                                    <AccountPreviewSection />
+                                                </InsideWrapper>
+                                                <Footer />
+                                            </AuthProvider>
+                                        </Provider>
                                     </RefreshProvider>
                                 </OrderProvider>
                             </ProductProvider>
