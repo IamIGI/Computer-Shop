@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Wrapper, ArticleWrapper, Description, Image, ContentWrapper } from './HomePrevArticles.style';
 import articlesApi from 'api/articles';
-import { LoadingWrapper } from 'components/templates/Articles/Articles.style';
+import { LoadingWrapper } from 'components/organisms/ArticlesList/ArticlesList.style';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import ArticlesUtils from 'components/templates/Articles/Articles.utils';
 import useWindowSize from 'hooks/useWindowSize';

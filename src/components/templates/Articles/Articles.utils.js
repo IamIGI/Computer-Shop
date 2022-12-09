@@ -24,4 +24,4 @@ function trimText(desc, limit) {
     }
 }
 
-export default { getCategoryName, trimText };
+export default { trimText, getCategoryName };
