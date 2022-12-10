@@ -1,81 +1,55 @@
 import { useEffect, useState } from 'react';
 import { Wrapper, ArticleWrapper, Description, Image, ContentWrapper } from './HomePrevArticles.style';
-import articlesApi from 'api/articles';
 import { LoadingWrapper } from 'components/organisms/ArticlesList/ArticlesList.style';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import ArticlesUtils from 'components/templates/Articles/Articles.utils';
 import useWindowSize from 'hooks/useWindowSize';
 import { Author, Date, InfoWrapper } from 'components/templates/Article/Article.style';
+import { store } from 'app/store';
+import {
+    fetchArticlesForHomePage,
+    getArticlesErrors,
+    getArticlesStatus,
+    selectAllArticles,
+} from 'features/articles/articlesSlice';
+import { useSelector } from 'react-redux';
+import homePrevArticlesLogic from './homePrevArticles.logic';
 
 const initDescriptionSize = 70;
 
 const HomePrevArticles = () => {
-    const windowSize = useWindowSize();
-    const [articles, setArticles] = useState({});
-    const [numberOfArticles, setNumberOfArticles] = useState({});
-    const [waitForFetch, setWaitForFetch] = useState(true);
-    const [sizeOfPrevDescription, setSizeOfPrevDescription] = useState(initDescriptionSize);
-    let showArticles = [];
+    useEffect(() => {
+        store.dispatch(fetchArticlesForHomePage());
+    }, []);
 
-    const handleNumberOfArticles = () => {
-        if (windowSize.width <= 964 && windowSize.width > 685) {
-            setSizeOfPrevDescription(initDescriptionSize);
-            setNumberOfArticles(2);
-        } else if (windowSize.width <= 685 && windowSize.width > 475) {
-            setSizeOfPrevDescription(200);
-            setNumberOfArticles(1);
-        } else if (windowSize.width <= 475 && windowSize.width > 0) {
-            setSizeOfPrevDescription(100);
-            setNumberOfArticles(1);
-        } else {
-            setNumberOfArticles(3);
-            setSizeOfPrevDescription(initDescriptionSize);
-        }
-    };
+    const articles = useSelector(selectAllArticles);
+    const articlesStatus = useSelector(getArticlesStatus);
+    const error = useSelector(getArticlesErrors);
+
+    const windowSize = useWindowSize();
+    const [numberOfArticles, setNumberOfArticles] = useState({});
+    const [sizeOfPrevDescription, setSizeOfPrevDescription] = useState(initDescriptionSize);
 
     useEffect(() => {
-        handleNumberOfArticles();
+        const { sizeOfPrevDescr, quantity } = homePrevArticlesLogic.handleNumberOfArticles(
+            windowSize,
+            initDescriptionSize
+        );
+        setSizeOfPrevDescription(sizeOfPrevDescr);
+        setNumberOfArticles(quantity);
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowSize, articles]);
 
-    if (articles.length > 0) {
-        for (let i = 0; i < numberOfArticles; i++) {
-            showArticles.push(articles[i]);
-        }
-    }
-
-    useEffect(() => {
-        const fetchArticles = async () => {
-            try {
-                setWaitForFetch(true);
-                const response = await articlesApi.getAllArticles('none');
-                setArticles(response);
-                setWaitForFetch(false);
-            } catch (err) {
-                if (err.response) {
-                    console.log(err.response.data);
-                    console.log(err.response.status);
-                    console.log(err.response.headers);
-                } else {
-                    console.log(`Error: ${err.message}`);
-                }
-            }
-        };
-        fetchArticles();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <>
-            {waitForFetch ? (
+            {articlesStatus === 'loading' ? (
                 <LoadingWrapper>
                     <LoadingAnimation loadingSize={15} />
                 </LoadingWrapper>
-            ) : articles === {} ? (
-                <p>Błąd serwera</p>
-            ) : (
+            ) : articlesStatus === 'succeeded' ? (
                 <Wrapper>
-                    {showArticles.map((article) => (
+                    {articles.slice(0, numberOfArticles).map((article) => (
                         <ArticleWrapper to={`/articles/${article._id}`} key={article._id}>
                             <ContentWrapper>
                                 <Image>
@@ -93,6 +67,8 @@ const HomePrevArticles = () => {
                         </ArticleWrapper>
                     ))}
                 </Wrapper>
+            ) : (
+                <p>{error}</p>
             )}
         </>
     );

@@ -24,6 +24,10 @@ const ArticlesList = () => {
     const articleStatus = useSelector(getArticlesStatus);
     const error = useSelector(getArticlesErrors);
 
+    useEffect(() => {
+        console.log(articles);
+    }, [articles]);
+
     let content;
     if (articleStatus === 'loading') {
         content = (
