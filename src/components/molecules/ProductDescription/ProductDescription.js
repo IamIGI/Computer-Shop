@@ -2,10 +2,11 @@ import React from 'react';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { VscBook } from 'react-icons/vsc';
 import { Wrapper, InsideWrapper } from './ProductDescription.style';
-import useProduct from 'hooks/useProduct';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const ProductDescription = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     return (
         <>
             <Wrapper>

@@ -1,10 +1,11 @@
 import { Wrapper, OptionSection, OptionIcon, OptionDescription } from './ProductHandyMenu.style';
 import { BsPrinter } from 'react-icons/bs';
 import { BASE_URL } from 'data/GlobalVariables';
-import useProduct from 'hooks/useProduct';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const ProductHandyMenu = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     return (
         <Wrapper>
             <a href={`${BASE_URL}/products/pdf/${product._id}`}>

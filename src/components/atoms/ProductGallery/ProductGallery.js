@@ -4,10 +4,11 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
 import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import useProduct from 'hooks/useProduct';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const ProductGallery = ({ addServerPrefix = false }) => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const [index, setIndex] = useState(0);
     const [isOpen, setIsOpen] = useState([false]);
     const [chosenImage, setChoseImage] = useState(0);

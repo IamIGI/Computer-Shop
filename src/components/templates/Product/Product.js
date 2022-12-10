@@ -9,7 +9,6 @@ import {
 } from './Product.styles';
 import ProductTopContent from 'components/organisms/ProductTopContent/ProductTopContent';
 import ProductMiddleContent from 'components/organisms/ProductMiddleContent/ProductMiddleContent';
-import useProduct from 'hooks/useProduct';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import CommentsSection from 'components/templates/CommentsSection/CommentsSection';
 import { useParams } from 'react-router-dom';
@@ -17,21 +16,25 @@ import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandy
 import TitleContent from 'components/molecules/TitleContent/TitleContent';
 import { Separator } from 'components/atoms/Separator/Separator';
 import { CommentsProvider } from 'context/CommentsProvider';
+import { store } from 'app/store';
+import { fetchProductById, getProductByIdStatus, getProductsErrors } from 'features/products/productsSlice';
+import { useSelector } from 'react-redux';
 
 const Product = () => {
-    const { fetchProduct, waitForFetchProduct, refreshProduct } = useProduct();
     const code = useParams().id;
 
     useEffect(() => {
-        fetchProduct(code);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [code, refreshProduct]);
+        store.dispatch(fetchProductById(code));
+    }, [code]);
+
+    const productStatus = useSelector(getProductByIdStatus);
+    const productError = useSelector(getProductsErrors);
 
     return (
         <Wrapper>
-            {waitForFetchProduct ? (
+            {productStatus === 'loading' ? (
                 <LoadingAnimation loadingSize={15} />
-            ) : (
+            ) : productStatus === 'succeeded' ? (
                 <>
                     <TitleWhenSmallScreen>
                         <TitleContent />
@@ -52,6 +55,8 @@ const Product = () => {
                         </CommentsProvider>
                     </BottomWrapper>
                 </>
+            ) : (
+                <p>{productError}</p>
             )}
         </Wrapper>
     );

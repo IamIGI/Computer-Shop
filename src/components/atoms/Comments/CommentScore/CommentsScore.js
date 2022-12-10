@@ -1,15 +1,16 @@
 import { Wrapper, InsideWrapper, ScoreDescription, Icon3, LikeNumber, Alert, Icon4 } from './CommentScore.style';
 import { useState } from 'react';
-import useProduct from 'hooks/useProduct';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { ImSad } from 'react-icons/im';
 
 import useAuth from 'hooks/useAuth';
 import { addLike } from 'api/comments';
 import useComment from 'hooks/useComment';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const CommentsScore = ({ comment }) => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const { handleRefreshComments } = useComment();
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);

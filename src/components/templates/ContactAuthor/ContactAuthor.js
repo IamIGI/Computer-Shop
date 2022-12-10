@@ -30,7 +30,6 @@ import toast from 'react-hot-toast';
 
 const ContactAuthor = () => {
     const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
-    const [clearMessageType, setClearMessageType] = useState('false');
     const notify = () =>
         toast.success('Wiadomość została wysłana', {
             icon: '📧',
@@ -44,11 +43,6 @@ const ContactAuthor = () => {
                 break;
             }
         }
-    };
-
-    const handleClearMessageTypeFilters = (data) => {
-        dispatch({ type: ACTIONS.MESSAGE_CATEGORY, payload: 0 });
-        setClearMessageType(data);
     };
 
     const handleInput = (e) => {
@@ -185,8 +179,6 @@ const ContactAuthor = () => {
                                 description={'Typ wiadomości'}
                                 filterData={MESSAGE_OPTIONS}
                                 handleItems={handleMessageType}
-                                handleClearItemsFilters={handleClearMessageTypeFilters}
-                                clearItems={clearMessageType}
                             />
                         </SelectSection>
                         <FileSection>

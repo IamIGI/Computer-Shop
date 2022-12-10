@@ -24,6 +24,7 @@ import formatPrices from 'helpers/formatPrices';
 const ProductPreviewItem = ({ item, allProducts, MayLikeComponent }) => {
     const windowSize = useWindowSize();
     const [showCPUDesc, setShowCPUDesc] = useState(true);
+
     const handleWindowSize = () => {
         if (windowSize.width <= 550) {
             setShowCPUDesc(false);
@@ -34,7 +35,6 @@ const ProductPreviewItem = ({ item, allProducts, MayLikeComponent }) => {
 
     useEffect(() => {
         handleWindowSize();
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowSize]);
 
@@ -50,7 +50,7 @@ const ProductPreviewItem = ({ item, allProducts, MayLikeComponent }) => {
                     </div>
                 </Top>
                 <ProductInfo>
-                    {allProducts === 'yes' ? (
+                    {allProducts ? (
                         <>
                             <ProductOpinionsShort>
                                 <Rating>

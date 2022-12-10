@@ -1,9 +1,11 @@
-import useProduct from 'hooks/useProduct';
+import { getProductById } from 'features/products/productsSlice';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Wrapper } from './TitleContent.style';
 
 const TitleContent = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
+
     return (
         <Wrapper>
             <h1>{product.name}</h1>

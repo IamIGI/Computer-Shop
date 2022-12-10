@@ -1,10 +1,11 @@
 import React from 'react';
 import { Wrapper, SpecificationDescription, Icon, SpecificationLinkSection } from './PrevDataProduct.style';
 import { BsChevronDoubleDown } from 'react-icons/bs';
-import useProduct from 'hooks/useProduct';
+import { getProductById } from 'features/products/productsSlice';
+import { useSelector } from 'react-redux';
 
 const PrevDataProduct = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const { processor, ram, graphic_card, screen_size } = product.prevDataProduct;
     return (
         <Wrapper>
