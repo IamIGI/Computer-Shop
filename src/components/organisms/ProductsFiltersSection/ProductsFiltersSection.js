@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Producers, Processors, filterOptions } from 'data/ProductsFilters';
 import {
     InputField,
@@ -56,7 +56,6 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
                 <SearchField
                     placeholder="Czego szukasz?"
                     value={productsFilters.searchTerm}
-                    // onChange={(e) => setSearchTerm(e.target.value)}
                     onChange={(e) => dispatch(handleFilters({ name: 'searchTerm', value: e.target.value }))}
                 />
                 <SearchDescription>Wyszukiwanie</SearchDescription>
@@ -104,14 +103,12 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
             <Title>RAM</Title>
             <FilterVerticalSection>
                 <InputField
-                    // onChange={(e) => handleInput('ram', 'min', e.target.value)}
                     onChange={(e) => dispatch(handleFilters({ name: 'ram.min', value: e.target.value }))}
                     value={productsFilters.filters.ram.min}
                     placeholder="od GB"
                 />
                 -
                 <InputField
-                    // onChange={(e) => handleInput('ram', 'max', e.target.value)}
                     onChange={(e) => dispatch(handleFilters({ name: 'ram.max', value: e.target.value }))}
                     value={productsFilters.filters.ram.max}
                     placeholder="do GB"
@@ -120,14 +117,12 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
             <Title>Dysk</Title>
             <FilterVerticalSection>
                 <InputField
-                    // onChange={(e) => handleInput('disk', 'min', e.target.value)}
                     onChange={(e) => dispatch(handleFilters({ name: 'disk.min', value: e.target.value }))}
                     value={productsFilters.filters.disk.min}
                     placeholder="od GB"
                 />{' '}
                 -
                 <InputField
-                    // onChange={(e) => handleInput('disk', 'max', e.target.value)}
                     onChange={(e) => dispatch(handleFilters({ name: 'disk.max', value: e.target.value }))}
                     value={productsFilters.filters.disk.max}
                     placeholder="do GB"
