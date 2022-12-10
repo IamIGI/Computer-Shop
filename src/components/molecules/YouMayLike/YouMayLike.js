@@ -2,17 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Slider, SlideTrack, Slide, Items } from './YouMayLike.style';
 import useRefresh from 'hooks/useRefresh';
 import { filterInit } from 'data/Products';
-import ProductsApi from 'api/products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import MayLikeItem from 'components/molecules/MayLikeItem/MayLikeItem';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { BiBookHeart } from 'react-icons/bi';
 import { handleProductsArray, NumberOfProductOnWidthChange } from './YouMayLikeLogic';
+import { store } from 'app/store';
+import { fetchProducts, getAllProducts, getProductsErrors, getProductsStatus } from 'features/products/productsSlice';
+import { useSelector } from 'react-redux';
 
 const YouMayLike = () => {
-    const [products, setProducts] = useState([]);
-    const [waitForFetch, setWaitForFetch] = useState(true);
     const { refresh } = useRefresh();
+
+    const products = useSelector(getAllProducts);
+    const productsStatus = useSelector(getProductsStatus);
+    const productsError = useSelector(getProductsErrors);
+
+    useEffect(() => {
+        store.dispatch(fetchProducts(filterInit));
+    }, [refresh]);
+
     const [slidesOfProducts, setSlidesOfProducts] = useState([]);
     const [divWidth, setDivWidth] = useState(10000);
     setInterval(async () => {
@@ -25,27 +34,6 @@ const YouMayLike = () => {
     }, [divWidth]);
 
     useEffect(() => {
-        const fetchProducts = async (data) => {
-            try {
-                setWaitForFetch(true);
-                const response = await ProductsApi.post('/all', data);
-                setProducts(response.data);
-                setWaitForFetch(false);
-            } catch (err) {
-                if (err.response) {
-                    console.log(err.response.data);
-                    console.log(err.response.status);
-                    console.log(err.response.headers);
-                } else {
-                    console.log(`Error: ${err.message}`);
-                }
-            }
-        };
-        fetchProducts(filterInit);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refresh]);
-
-    useEffect(() => {
         if (products.length > 0) setSlidesOfProducts(handleProductsArray(products, 2, 4));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [products]);
@@ -53,11 +41,9 @@ const YouMayLike = () => {
     return (
         <>
             <SectionDescription title={'Polecamy również'} icon={<BiBookHeart />} />
-            {waitForFetch ? (
-                <>
-                    <LoadingAnimation loadingSize={15} />
-                </>
-            ) : (
+            {productsStatus === 'loading' ? (
+                <LoadingAnimation loadingSize={15} />
+            ) : productsStatus === 'succeeded' ? (
                 <>
                     {slidesOfProducts.length > 0 && (
                         <Slider id="Slider">
@@ -87,6 +73,8 @@ const YouMayLike = () => {
                         </Slider>
                     )}
                 </>
+            ) : (
+                <p>{productsError}</p>
             )}
         </>
     );

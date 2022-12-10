@@ -2,10 +2,11 @@ import React from 'react';
 import { LiDesc, LiName, List, LiWrapper } from './SpecificationList.style';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
 import { VscListUnordered } from 'react-icons/vsc';
-import useProduct from 'hooks/useProduct';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const SpecificationList = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const PS = product.specification;
     return (
         <>

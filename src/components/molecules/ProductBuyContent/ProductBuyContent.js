@@ -23,14 +23,20 @@ import { TbShoppingCartDiscount } from 'react-icons/tb';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import { numberOptions } from './ProductBuyContent.logic';
 import formatPrices from 'helpers/formatPrices';
-import useProduct from 'hooks/useProduct';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const ProductBuyContent = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const [quantity, setQuantity] = useState(1);
     const { addProductToBasket } = useBasket();
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
+
+    const handleAddProduct = () => {
+        setQuantity(1);
+        addProductToBasket(product, quantity);
+    };
 
     const getPrice = (product) => {
         if (product.special_offer.mode) {
@@ -51,10 +57,6 @@ const ProductBuyContent = () => {
         }
     };
 
-    const handleClearQuantity = () => {
-        setQuantity(1);
-    };
-
     useEffect(() => {
         getPrice(product);
     }, [product]);
@@ -71,11 +73,9 @@ const ProductBuyContent = () => {
                         </PriceSection>
                     </>
                 ) : (
-                    <>
-                        <PriceSection>
-                            <CurrentPrice> {formatPrices(product.price)} zł</CurrentPrice>
-                        </PriceSection>
-                    </>
+                    <PriceSection>
+                        <CurrentPrice> {formatPrices(product.price)} zł</CurrentPrice>
+                    </PriceSection>
                 )}
 
                 <BuySection>
@@ -87,10 +87,9 @@ const ProductBuyContent = () => {
                         description={''}
                         filterData={numberOptions}
                         handleItems={handleQuantity}
-                        handleClearItemsFilters={handleClearQuantity}
                     />
                     <BuyButtonMargin>
-                        <BuyButton onClick={() => addProductToBasket(product, quantity)}>
+                        <BuyButton onClick={() => handleAddProduct()}>
                             <BuyIcon>
                                 <BsCartPlus />
                             </BuyIcon>

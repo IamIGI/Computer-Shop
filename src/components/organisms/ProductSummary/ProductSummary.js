@@ -9,12 +9,13 @@ import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation
 import { BsArrowRight } from 'react-icons/bs';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpAddComment from 'components/molecules/PopUpAddComment/PopUpAddComment';
-import useProduct from 'hooks/useProduct';
 import { getProductAverageScore } from 'api/comments';
 import useComment from 'hooks/useComment';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const ProductSummary = () => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const { comments, refreshComments, waitForFetchAS, handleAverageScore, handleWaitForFetchAS } = useComment();
 
     const [isOpen, setIsOpen] = useState([false]);

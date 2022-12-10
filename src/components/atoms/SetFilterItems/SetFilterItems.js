@@ -17,7 +17,6 @@ const SetFilterItems = ({
     description,
     filterData,
     handleItems,
-    handleClearItemsFilters,
     clearItems,
     OneTimeChoice = false,
     displayCheckbox = false,
@@ -64,7 +63,6 @@ const SetFilterItems = ({
         handleItems(check);
 
         if (clearItems) {
-            handleClearItemsFilters(false);
             setCheck(filterData);
             handleItems(check);
         }

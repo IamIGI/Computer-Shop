@@ -4,12 +4,14 @@ import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { FiThumbsUp } from 'react-icons/fi';
 import useComment from 'hooks/useComment';
-import useProduct from 'hooks/useProduct';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const ProductAddComment = ({ handleOpen }) => {
     const { auth } = useAuth();
     const { comments } = useComment();
-    const { product } = useProduct();
+
+    const product = useSelector(getProductById);
     const [userAlreadyCommented, setUserAlreadyCommented] = useState(false);
 
     useEffect(() => {

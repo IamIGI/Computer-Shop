@@ -1,11 +1,12 @@
 import { getAllComments } from 'api/comments';
-import useProduct from 'hooks/useProduct';
+import { getProductById } from 'features/products/productsSlice';
 import { createContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const CommentsContext = createContext({});
 
 export const CommentsProvider = ({ children }) => {
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
 
     const [comments, setComments] = useState([]);
     const [waitForFetchComments, setWaitForFetchComments] = useState(false);
@@ -46,10 +47,6 @@ export const CommentsProvider = ({ children }) => {
         setFilterComments(data);
     };
 
-    const handleComments = (data) => {
-        setComments(data);
-    };
-
     const handleRefreshComments = () => {
         setRefreshComments(!refreshComments);
     };
@@ -74,11 +71,9 @@ export const CommentsProvider = ({ children }) => {
                 chosenImage,
                 waitForFetchComments,
 
-                setComments,
                 handleChosenImage,
                 handleOpenModalGallery,
                 handleFilters,
-                handleComments,
                 handleRefreshComments,
                 handleAverageScore,
                 handleWaitForFetchAS,

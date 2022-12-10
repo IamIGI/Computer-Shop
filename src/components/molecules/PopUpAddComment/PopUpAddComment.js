@@ -35,12 +35,13 @@ import { BiCommentError } from 'react-icons/bi';
 import { ACTIONS, INITIAL_STATE, reducerFunction } from './reducerLogic';
 import toast from 'react-hot-toast';
 import useComment from 'hooks/useComment';
-import useProduct from 'hooks/useProduct';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductById, handleAddedComment } from 'features/products/productsSlice';
 
 const PopUpAddComment = ({ onClose }) => {
+    const dispatchProducts = useDispatch();
     const { handleRefreshComments } = useComment();
-    const { increaseNumberOfCommentsInProductMenu } = useProduct();
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
     const { auth } = useAuth();
     const [state, dispatch] = useReducer(reducerFunction, INITIAL_STATE);
     const [userName, setUserName] = useState(Boolean(auth.userName) ? auth.userName : '');
@@ -120,7 +121,7 @@ const PopUpAddComment = ({ onClose }) => {
                     changeState(ACTIONS.SEND_COMMENT, false);
                     onClose();
                     handleRefreshComments();
-                    increaseNumberOfCommentsInProductMenu();
+                    dispatchProducts(handleAddedComment(true));
                     notify();
                 }
             } catch (err) {

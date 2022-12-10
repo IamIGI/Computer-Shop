@@ -24,7 +24,7 @@ const HomeTopContent = () => {
                     <Recommended>
                         <SectionDescription title={'Polecane'} icon={<AiOutlineHeart />} />
                         <ProductPrevWrapper>
-                            <ProductPreview filters={filterInit} allProducts={'no'} limitTheNumber={'yes'} />
+                            <ProductPreview filters={filterInit} limitTheNumber={true} />
                         </ProductPrevWrapper>
                     </Recommended>
                 </RightTopWrapper>
@@ -38,7 +38,7 @@ const HomeTopContent = () => {
                     <Recommended>
                         <SectionDescription title={'Polecane'} icon={<AiOutlineHeart />} />
                         <ProductPrevWrapper>
-                            <ProductPreview filters={filterInit} allProducts={'yes'} limitTheNumber={'yes'} />
+                            <ProductPreview filters={filterInit} allProducts={true} limitTheNumber={true} />
                         </ProductPrevWrapper>
                     </Recommended>
                 </RightTopWrapper>

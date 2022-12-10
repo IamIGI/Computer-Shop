@@ -8,15 +8,10 @@ import { MdOutlineEditNote } from 'react-icons/md';
 const FilterInitPosition = '-300px';
 
 const AllProducts = () => {
-    const [filters, setFilters] = useState(filterInit);
     const [showFilters, setShowFilters] = useState(FilterInitPosition);
 
     const handleShowFilters = (a) => {
         setShowFilters(a);
-    };
-
-    const handleFilters = (data) => {
-        setFilters(data);
     };
 
     return (
@@ -30,12 +25,11 @@ const AllProducts = () => {
                 </ButtonForFilters>
                 <ProductsFiltersSection
                     position={showFilters}
-                    handleFilters={handleFilters}
                     handleShowFilters={handleShowFilters}
                     FilterInitPosition={FilterInitPosition}
                 />
                 <Products>
-                    <ProductPreview filterInit={filterInit} allProducts="yes" limitTheNumber="no" filters={filters} />
+                    <ProductPreview filterInit={filterInit} allProducts={true} />
                 </Products>
             </Wrapper>
         </>

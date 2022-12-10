@@ -10,21 +10,20 @@ import {
     BigScreen,
 } from './CommentFilters.style';
 import { useState, useEffect } from 'react';
-import useProduct from 'hooks/useProduct';
 import { ratingOptions, filterOptions } from './CommentFilters.logic';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import useComment from 'hooks/useComment';
+import { useSelector } from 'react-redux';
+import { getProductById } from 'features/products/productsSlice';
 
 const CommentFilters = () => {
     const { comments, handleFilters } = useComment();
 
     const [rating, setRating] = useState(0);
-    const [clearRating, setClearRating] = useState(false);
-    const [clearSortBy, setClearSortBy] = useState(false);
     const [sortBy, setSortBy] = useState('date');
     const [confirmed, setConfirmed] = useState(false);
     const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
-    const { product } = useProduct();
+    const product = useSelector(getProductById);
 
     useEffect(() => {
         let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
@@ -41,11 +40,6 @@ const CommentFilters = () => {
         }
     };
 
-    const handleClearSortByFilters = (data) => {
-        setSortBy('date');
-        setClearSortBy(data);
-    };
-
     const handleRating = (data) => {
         for (let i = 0; i < data.length; i++) {
             if (data[i].checked) {
@@ -53,11 +47,6 @@ const CommentFilters = () => {
                 break;
             }
         }
-    };
-
-    const handleClearRatingFilters = (data) => {
-        setRating(0);
-        setClearRating(data);
     };
 
     return (
@@ -77,8 +66,6 @@ const CommentFilters = () => {
                                 description={'Oceny'}
                                 filterData={ratingOptions}
                                 handleItems={handleRating}
-                                handleClearItemsFilters={handleClearRatingFilters}
-                                clearItems={clearRating}
                             />
                         </Filters>
                         <BigScreen>
@@ -100,8 +87,6 @@ const CommentFilters = () => {
                                 description={'Sortuj'}
                                 filterData={filterOptions}
                                 handleItems={handleSortBy}
-                                handleClearItemsFilters={handleClearSortByFilters}
-                                clearItems={clearSortBy}
                             />
                         </Sort>
                     </Wrapper>
