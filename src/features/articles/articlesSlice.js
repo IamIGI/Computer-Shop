@@ -12,6 +12,11 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (a
     return response;
 });
 
+export const fetchArticlesForHomePage = createAsyncThunk('articles/homepage', async () => {
+    const response = await articlesApi.getArticlesForHomePage();
+    return response;
+});
+
 const articlesSlice = createSlice({
     name: 'articles', //does not matter
     initialState,
@@ -27,6 +32,17 @@ const articlesSlice = createSlice({
             .addCase(fetchArticles.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
+            })
+            .addCase(fetchArticlesForHomePage.pending, (state, action) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchArticlesForHomePage.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.data = action.payload;
+            })
+            .addCase(fetchArticlesForHomePage.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
             });
     },
 });
@@ -34,5 +50,6 @@ const articlesSlice = createSlice({
 export const selectAllArticles = (state) => state.articles.data;
 export const getArticlesStatus = (state) => state.articles.status;
 export const getArticlesErrors = (state) => state.articles.error;
+export const getArticleById = (state, articleId) => state.articles.data.find((article) => article._id === articleId);
 
 export default articlesSlice.reducer;

@@ -21,6 +21,21 @@ const getAllArticles = async (type) => {
     }
 };
 
+const getArticlesForHomePage = async (type) => {
+    try {
+        const response = await articlesApi.get('homepage');
+        return response.data;
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+        } else {
+            console.log(`Error: ${err.message}`);
+        }
+    }
+};
+
 const getArticle = async (id) => {
     try {
         const response = await articlesApi.get(`/${id}`);
@@ -37,4 +52,4 @@ const getArticle = async (id) => {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAllArticles, getArticle };
+export default { getAllArticles, getArticle, getArticlesForHomePage };
