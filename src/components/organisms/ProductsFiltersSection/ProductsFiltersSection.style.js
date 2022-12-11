@@ -52,38 +52,6 @@ export const InputField = styled.input`
     }
 `;
 
-export const SearchSection = styled.div`
-    position: relative;
-`;
-export const SearchDescription = styled.div`
-    position: absolute;
-    top: 1px;
-    right: 5px;
-    background-color: white;
-    padding: 0 5px;
-`;
-
-export const SearchField = styled.input`
-    margin: 10px 0;
-    height: 40px;
-    width: 250px;
-    border-radius: 10px;
-    border: 1px solid ${({ theme }) => theme.colors.grey};
-    color: ${({ theme }) => theme.colors.darkGrey};
-    text-align: left;
-    padding-left: 20px;
-    padding-right: 10px;
-
-    &:hover {
-        border: 1px solid grey;
-    }
-
-    &:focus {
-        outline-width: 0;
-        border: 1px solid grey;
-    }
-`;
-
 export const DiscountFilter = styled.div`
     margin: 0px 7px 5px 7px;
     display: flex;

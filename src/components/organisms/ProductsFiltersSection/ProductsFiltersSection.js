@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { Producers, Processors, filterOptions } from 'data/ProductsFilters';
 import {
     InputField,
-    SearchDescription,
-    SearchField,
-    SearchSection,
     Title,
     Wrapper,
     DiscountFilter,
@@ -19,10 +16,13 @@ import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFilters, getProductsFilters, handleFilters } from 'features/products/productsSlice';
 
+import SearchTermField from 'components/atoms/SearchTermField/SearchTermField';
+
 const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPosition }) => {
     const dispatch = useDispatch();
     const productsFilters = useSelector(getProductsFilters);
 
+    const [clearSearchField, setClearSearchField] = useState(false);
     const [clearSortBy, setClearSortBy] = useState(false);
     const [clearProducers, setClearProducers] = useState(false);
     const [clearProcessors, setClearProcessors] = useState(false);
@@ -45,6 +45,7 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
 
     const handleClearFilters = () => {
         dispatch(clearFilters());
+        setClearSearchField((prevValue) => !prevValue);
         setClearSortBy(true);
         setClearProducers(true);
         setClearProcessors(true);
@@ -52,14 +53,7 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
 
     return (
         <Wrapper position={position} onMouseLeave={() => handleShowFilters(FilterInitPosition)}>
-            <SearchSection>
-                <SearchField
-                    placeholder="Czego szukasz?"
-                    value={productsFilters.searchTerm}
-                    onChange={(e) => dispatch(handleFilters({ name: 'searchTerm', value: e.target.value }))}
-                />
-                <SearchDescription>Wyszukiwanie</SearchDescription>
-            </SearchSection>
+            <SearchTermField clearSearchField={clearSearchField} />
 
             <SetFilterItems
                 OneTimeChoice={true}
