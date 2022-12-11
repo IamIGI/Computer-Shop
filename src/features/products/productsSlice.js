@@ -30,7 +30,6 @@ const productsSlice = createSlice({
     reducers: {
         handleFilters(state, action) {
             const { name, value } = action.payload;
-
             switch (name) {
                 case 'searchTerm':
                     state.filters.searchTerm = value;
