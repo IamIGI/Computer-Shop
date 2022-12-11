@@ -14,7 +14,6 @@ const SearchTermField = ({ clearSearchField }) => {
         }, 1200);
 
         return () => clearTimeout(delayDebounceFn);
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchField]);
 
