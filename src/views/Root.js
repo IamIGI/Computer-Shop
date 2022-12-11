@@ -40,8 +40,10 @@ const Root = () => {
                     <Route path="" element={<Home />} />
                     <Route path="allProducts" element={<AllProducts />} />
                     <Route path="about" element={<About />} />
-                    <Route path="articles/all/:type" element={<Articles />} />
-                    <Route path="articles/:id" element={<Article />} />
+                    <Route path="articles">
+                        <Route index path="all/:type" element={<Articles />} />
+                        <Route path=":id" element={<Article />} />
+                    </Route>
                     <Route path="product/:id" element={<Product />} />
                     <Route path="basket" element={<BasketContextWrapper />} />
                     <Route path="contact" element={<ContactAuthor />} />
@@ -54,14 +56,12 @@ const Root = () => {
                     {/* protected routes */}
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin, ROLES.Editor]} />}>
-                        <Route path="adminSettings" element={<AdminSettings />} />
-                        <Route path="/accountSettings/settings" element={<AccountSettingsSettings />} />
-                        <Route path="/accountSettings/orders" element={<AccountSettingsOrders />} />
-                        <Route
-                            path={`/accountSettings/orders/history/:orderId`}
-                            element={<AccountOrderHistoryItem />}
-                        />
-                        <Route path="/accountSettings/recipientTemplates" element={<AccountRecipientTemplate />} />
+                        <Route path="accountSettings">
+                            <Route index path="settings" element={<AccountSettingsSettings />} />
+                            <Route path="orders" element={<AccountSettingsOrders />} />
+                            <Route path="orders/history/:orderId" element={<AccountOrderHistoryItem />} />
+                            <Route path="recipientTemplates" element={<AccountRecipientTemplate />} />
+                        </Route>
                     </Route>
 
                     <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
