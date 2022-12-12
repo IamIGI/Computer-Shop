@@ -12,12 +12,14 @@ import {
 } from './CartHint.style';
 import { Button } from 'components/atoms/Button/Button';
 import { IoTrashBinOutline } from 'react-icons/io5';
-import useBasket from 'hooks/useBasket';
 import { MdOutlineDelete } from 'react-icons/md';
 import ScrollTop from 'helpers/ScrollToTop';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProduct, getBasket, removeBasket } from 'features/basket/basketSlice';
 
 const CartHint = () => {
-    const { basketItems, removeBasket, deleteProduct } = useBasket();
+    const dispatchBasket = useDispatch();
+    const basketItems = useSelector(getBasket);
 
     const getQuantityOfItems = () => {
         let temp = 0;
@@ -41,7 +43,7 @@ const CartHint = () => {
                             {basketItems.map((item, index) => (
                                 <Image key={index}>
                                     <ProductQuantity>{item.quantity}</ProductQuantity>
-                                    <DeleteProduct onClick={() => deleteProduct(item._id)}>
+                                    <DeleteProduct onClick={() => dispatchBasket(deleteProduct({ id: item._id }))}>
                                         <MdOutlineDelete />
                                     </DeleteProduct>
                                     <Link to={`/product/${item._id}`} key={item._id} onClick={() => ScrollTop('Top')}>
@@ -54,7 +56,7 @@ const CartHint = () => {
                             <Link to={`/basket`}>
                                 <Button>Do koszyka</Button>
                             </Link>
-                            <RemoveBasket onClick={() => removeBasket()}>
+                            <RemoveBasket onClick={() => dispatchBasket(removeBasket())}>
                                 <IoTrashBinOutline />
                             </RemoveBasket>
                         </BottomWrapper>

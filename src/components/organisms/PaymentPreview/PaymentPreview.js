@@ -15,10 +15,12 @@ import {
 import { FiAlertCircle } from 'react-icons/fi';
 import useAuth from 'hooks/useAuth';
 import PromoSectionComponent from 'components/molecules/PromoSection/PromoSection';
-import useBasket from 'hooks/useBasket';
+import { useSelector } from 'react-redux';
+import { getPriceToPay } from 'features/basket/basketSlice';
 
 const PaymentPreview = ({ orderReady, finishHandler, priceForDelivery, isUserLogIn }) => {
-    const { priceToPay } = useBasket();
+    const priceToPay = useSelector(getPriceToPay);
+
     const { auth } = useAuth();
     return (
         <Wrapper>

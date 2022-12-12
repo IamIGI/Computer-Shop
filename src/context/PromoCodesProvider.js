@@ -1,13 +1,16 @@
 import { createContext, useState, useEffect } from 'react';
-import useBasket from 'hooks/useBasket';
 import useAuth from 'hooks/useAuth';
 import { axiosPrivate } from 'api/axios';
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBasket, replaceBasket } from 'features/basket/basketSlice';
 
 const PromoCodesContext = createContext({});
 
 export const PromoCodesProvider = ({ children }) => {
-    const { basketItems, setBasketItems } = useBasket();
+    const basketItems = useSelector(getBasket);
+    const dispatchBasket = useDispatch();
+
     const { auth } = useAuth();
     const [promoCodeInputDisabled, setPromoCodeInputDisabled] = useState(false);
     const [successfullyUsedPromoCode, setSuccessfullyUsedPromoCode] = useState(false);
@@ -67,7 +70,7 @@ export const PromoCodesProvider = ({ children }) => {
             return item._id !== discountProduct_Id;
         });
         promoCodesResponse.map((item) => newBasketItems.push(item));
-        setBasketItems(newBasketItems);
+        dispatchBasket(replaceBasket(newBasketItems));
     };
 
     const sendPromoCode = (value) => {

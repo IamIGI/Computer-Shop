@@ -12,7 +12,6 @@ import {
     ArticleLink,
     BuyButtonMargin,
 } from './ProductBuyContent.style';
-import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
 import { RiCoinLine } from 'react-icons/ri';
 import ProductBuyHint from 'components/atoms/ProductBuyHint/ProductBuyHint';
@@ -23,19 +22,21 @@ import { TbShoppingCartDiscount } from 'react-icons/tb';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
 import { numberOptions } from './ProductBuyContent.logic';
 import formatPrices from 'helpers/formatPrices';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from 'features/products/productsSlice';
+import { addProductToBasket } from 'features/basket/basketSlice';
 
 const ProductBuyContent = () => {
+    const dispatchBasket = useDispatch();
+
     const product = useSelector(getProductById);
     const [quantity, setQuantity] = useState(1);
-    const { addProductToBasket } = useBasket();
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
 
     const handleAddProduct = () => {
         setQuantity(1);
-        addProductToBasket(product, quantity);
+        dispatchBasket(addProductToBasket({ product, quantity }));
     };
 
     const getPrice = (product) => {
