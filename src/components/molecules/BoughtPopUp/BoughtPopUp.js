@@ -12,12 +12,13 @@ import {
     InsideWrapper,
 } from './BoughtPopUp.style';
 import { RiCake3Line } from 'react-icons/ri';
-import useBasket from 'hooks/useBasket';
 import useOrder from 'hooks/useOrder';
 import { BASE_URL } from 'data/GlobalVariables';
+import { useSelector } from 'react-redux';
+import { getBasket } from 'features/basket/basketSlice';
 
 const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
-    const { basketItems } = useBasket();
+    const basketItems = useSelector(getBasket);
     const { setOrderItem } = useOrder();
 
     const goToOrderItem = (order) => {

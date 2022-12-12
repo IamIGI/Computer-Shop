@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useLogout from 'hooks/useLogout';
-import useBasket from 'hooks/useBasket';
 import { Section, Wrapper, SectionTitle } from './AccountDangerSection.style';
 import { Button } from 'components/atoms/Button/Button';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
@@ -8,10 +7,13 @@ import { FiAlertCircle } from 'react-icons/fi';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpAccountDelete from '../PupUpAccountDelete/PopUpAccountDelete';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { removeBasket } from 'features/basket/basketSlice';
 
 const AccountDangerSection = () => {
+    const dispatchBasket = useDispatch();
+
     const logout = useLogout();
-    const { setBasketItems } = useBasket();
     const [isOpen, setIsOpen] = useState([false, { DataName: '', value: '' }]);
     const notify = () =>
         toast.success('Wylogowano', {
@@ -21,7 +23,7 @@ const AccountDangerSection = () => {
 
     const signOut = async () => {
         notify();
-        setBasketItems([]);
+        dispatchBasket(removeBasket());
         await logout();
     };
 

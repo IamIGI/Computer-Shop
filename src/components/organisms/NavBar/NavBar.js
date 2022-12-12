@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Wrapper,
     NormalScreenSection,
@@ -25,10 +25,11 @@ import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsBasket3 } from 'react-icons/bs';
 import { FiPackage, FiSettings } from 'react-icons/fi';
 import { BiNews, BiBuildingHouse } from 'react-icons/bi';
-import useBasket from 'hooks/useBasket';
 import StyledLink from 'components/atoms/StyledLink/StyledLink';
 import WebsiteLogo from 'components/atoms/WebsiteLogo/WebsiteLogo';
 import DropDownMenuSection from 'components/atoms/DropDownMenuSection/DropDownMenuSection';
+import { useSelector } from 'react-redux';
+import { getBasket } from 'features/basket/basketSlice';
 
 const Admin_entitlements = Number(process.env.REACT_APP_ADMIN_ROLE);
 const Editor_entitlements = Number(process.env.REACT_APP_EDITOR_ROLE);
@@ -37,7 +38,7 @@ const MenuInitPosition = '-270px';
 const NavBar = () => {
     const { auth } = useAuth();
     const logout = useLogout();
-    const { basketItems } = useBasket();
+    const basketItems = useSelector(getBasket);
     const [toggleMenu, setToggleMenu] = useState(MenuInitPosition);
 
     const getQuantityOfItems = () => {

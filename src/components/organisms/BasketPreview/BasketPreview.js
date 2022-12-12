@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     DescriptionArea,
     ImageArea,
@@ -15,13 +15,20 @@ import {
     Title,
     ItemSection,
 } from './BasketPreview.style';
-import useBasket from 'hooks/useBasket';
 import { BsBasket3 } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProduct, getBasket, updatePriceToPay } from 'features/basket/basketSlice';
 
 const BasketPreview = () => {
-    const { basketItems, deleteProduct } = useBasket();
+    const dispatchBasket = useDispatch();
+    const basketItems = useSelector(getBasket);
+
+    useEffect(() => {
+        dispatchBasket(updatePriceToPay());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [basketItems]);
 
     return (
         <>
@@ -50,7 +57,9 @@ const BasketPreview = () => {
                                         <DescriptionBottom>
                                             <div>{item.quantity} szt.</div>
                                             <div>
-                                                <StyledButton onClick={() => deleteProduct(item._id)}>
+                                                <StyledButton
+                                                    onClick={() => dispatchBasket(deleteProduct({ id: item._id }))}
+                                                >
                                                     <AiOutlineDelete />
                                                 </StyledButton>
                                             </div>

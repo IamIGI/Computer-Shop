@@ -11,13 +11,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useLogout from 'hooks/useLogout';
 import useMultiCheckboxMemory from 'hooks/useMultiCheckboxMemory';
 import { Prices } from 'data/Prices';
-import useBasket from 'hooks/useBasket';
 import Modal from 'components/atoms/Modal/Modal';
 import BoughtPopUp from 'components/molecules/BoughtPopUp/BoughtPopUp';
 import RecipientDetails from 'components/organisms/RecipientDetails/RecipientDetails';
 import { initDeliveryCheckboxesOpt, initDeliveryCheckboxesPay, initRecipientDetails } from './Basket.logic';
 import useLocalStorage from 'hooks/useLocalStorage';
 import usePromoCodes from 'hooks/usePromoCodes';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBasket, getPriceToPay, removeBasket } from 'features/basket/basketSlice';
 
 const Basket = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -25,7 +26,10 @@ const Basket = () => {
     const location = useLocation();
     const logout = useLogout();
 
-    const { priceToPay, basketItems, removeBasket } = useBasket();
+    const dispatchBasket = useDispatch();
+    const basketItems = useSelector(getBasket);
+    const priceToPay = useSelector(getPriceToPay);
+
     const { successfullyUsedPromoCode, promoCode, resetPromoCode } = usePromoCodes();
     const { auth } = useAuth();
 
@@ -68,7 +72,7 @@ const Basket = () => {
     }, []);
 
     const resetAllData = () => {
-        removeBasket();
+        dispatchBasket(removeBasket());
         setOrderData(initRecipientDetails);
         setFinishOrder(false);
         resetPromoCode();

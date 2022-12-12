@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyledButton } from './BuyButton.styles';
-import useBasket from 'hooks/useBasket';
 import { BsCartPlus } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { addProductToBasket } from 'features/basket/basketSlice';
 
 const BuyButton = ({ item }) => {
-    const { addProductToBasket } = useBasket();
+    const basketDispatch = useDispatch();
+
     const product = item;
 
     return (
-        <StyledButton onClick={() => addProductToBasket(product, 1)}>
+        <StyledButton onClick={() => basketDispatch(addProductToBasket({ product, quantity: 1 }))}>
             <BsCartPlus />
         </StyledButton>
     );
