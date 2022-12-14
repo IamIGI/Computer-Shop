@@ -6,7 +6,7 @@ const commentApi = axios.create({
     headers: { 'Content-Type': 'application/json' },
 });
 
-export const getAllComments = async (data) => {
+export const getAllCommentsAPI = async (data) => {
     try {
         const response = await commentApi.post(`/get`, data);
         return response.data;

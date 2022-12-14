@@ -5,13 +5,14 @@ import { ImSad } from 'react-icons/im';
 
 import useAuth from 'hooks/useAuth';
 import { addLike } from 'api/comments';
-import useComment from 'hooks/useComment';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from 'features/products/productsSlice';
+import { refreshComments } from 'features/comments/commentsSlice';
 
 const CommentsScore = ({ comment }) => {
+    const dispatchStore = useDispatch();
     const product = useSelector(getProductById);
-    const { handleRefreshComments } = useComment();
+
     const { auth } = useAuth();
     const [notLoggedIn, setNotLoggedIn] = useState([false, '']);
 
@@ -33,7 +34,7 @@ const CommentsScore = ({ comment }) => {
                 setNotLoggedIn([true, value[1]._id, 'Możesz tylko zmienić swój wybór']);
             } else {
                 setNotLoggedIn([false, '']);
-                handleRefreshComments();
+                dispatchStore(refreshComments());
             }
         } catch (err) {
             if (err.response) {

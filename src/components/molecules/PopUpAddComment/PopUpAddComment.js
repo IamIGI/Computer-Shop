@@ -34,13 +34,12 @@ import { sendCommentAPI } from 'api/comments';
 import { BiCommentError } from 'react-icons/bi';
 import { ACTIONS, INITIAL_STATE, reducerFunction } from './reducerLogic';
 import toast from 'react-hot-toast';
-import useComment from 'hooks/useComment';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductById, handleAddedComment } from 'features/products/productsSlice';
+import { refreshComments } from 'features/comments/commentsSlice';
 
 const PopUpAddComment = ({ onClose }) => {
-    const dispatchProducts = useDispatch();
-    const { handleRefreshComments } = useComment();
+    const dispatchStore = useDispatch();
     const product = useSelector(getProductById);
     const { auth } = useAuth();
     const [state, dispatch] = useReducer(reducerFunction, INITIAL_STATE);
@@ -120,8 +119,8 @@ const PopUpAddComment = ({ onClose }) => {
                     dispatch({ type: ACTIONS.RESET });
                     changeState(ACTIONS.SEND_COMMENT, false);
                     onClose();
-                    handleRefreshComments();
-                    dispatchProducts(handleAddedComment(true));
+                    dispatchStore(refreshComments());
+                    dispatchStore(handleAddedComment(true));
                     notify();
                 }
             } catch (err) {

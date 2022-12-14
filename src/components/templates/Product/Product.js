@@ -15,7 +15,6 @@ import { useParams } from 'react-router-dom';
 import ProductHandyMenu from 'components/molecules/ProductHandyMenu/ProductHandyMenu';
 import TitleContent from 'components/molecules/TitleContent/TitleContent';
 import { Separator } from 'components/atoms/Separator/Separator';
-import { CommentsProvider } from 'context/CommentsProvider';
 import { store } from 'app/store';
 import { fetchProductById, getProductByIdStatus, getProductsErrors } from 'features/products/productsSlice';
 import { useSelector } from 'react-redux';
@@ -50,9 +49,7 @@ const Product = () => {
                         <ProductMiddleContent />
                     </MidWrapper>
                     <BottomWrapper>
-                        <CommentsProvider>
-                            <CommentsSection />
-                        </CommentsProvider>
+                        <CommentsSection />
                     </BottomWrapper>
                 </>
             ) : (

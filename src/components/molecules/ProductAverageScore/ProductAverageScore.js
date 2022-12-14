@@ -1,8 +1,9 @@
 import { NumberOfOpinions, Score, Stars, Wrapper } from './ProductAverageScore.style';
 import Star from 'components/atoms/Star/Star';
-import useComment from 'hooks/useComment';
+import { useSelector } from 'react-redux';
+import { getAverageScore } from 'features/comments/commentsSlice';
 const ProductAverageScore = () => {
-    const { averageScore } = useComment();
+    const averageScore = useSelector(getAverageScore);
     return (
         <Wrapper>
             <Score>

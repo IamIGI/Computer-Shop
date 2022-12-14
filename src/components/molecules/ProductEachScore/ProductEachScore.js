@@ -1,10 +1,10 @@
 import { Bar, QuantityOfGivenScore, ScoreStar, Wrapper, Number, Icon } from './ProductEachScore.style';
 import { MdStar } from 'react-icons/md';
-import useComment from 'hooks/useComment';
+import { useSelector } from 'react-redux';
+import { getAverageScore } from 'features/comments/commentsSlice';
 
 const ProductEachScore = ({ errorFix }) => {
-    const { averageScore } = useComment();
-
+    const averageScore = useSelector(getAverageScore);
     return (
         <Wrapper>
             {errorFix > 0 &&
