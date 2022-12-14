@@ -8,7 +8,6 @@ const commentApi = axios.create({
 
 export const getAllCommentsAPI = async (data) => {
     try {
-        console.log(data);
         const response = await commentApi.post(`/get`, data);
         return response.data;
     } catch (err) {
