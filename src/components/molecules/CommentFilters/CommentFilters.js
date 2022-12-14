@@ -9,44 +9,29 @@ import {
     SmallScreen,
     BigScreen,
 } from './CommentFilters.style';
-import { useState, useEffect } from 'react';
 import { ratingOptions, filterOptions } from './CommentFilters.logic';
 import SetFilterItems from 'components/atoms/SetFilterItems/SetFilterItems';
-import useComment from 'hooks/useComment';
-import { useSelector } from 'react-redux';
-import { getProductById } from 'features/products/productsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCommentsData, getCommentsFiltersIsConfirmed, handleFilters } from 'features/comments/commentsSlice';
+import { ACTIONS as ACTIONS_COMMENT_FILTERS } from 'features/comments/commentFiltersActions';
 
 const CommentFilters = () => {
-    const { comments, handleFilters } = useComment();
+    const dispatch = useDispatch();
+    const comments = useSelector(getAllCommentsData);
+    const isConfirmed = useSelector(getCommentsFiltersIsConfirmed);
 
-    const [rating, setRating] = useState(0);
-    const [sortBy, setSortBy] = useState('date');
-    const [confirmed, setConfirmed] = useState(false);
     const { length: commentsSize, length_AllComments: totalNumberOfComments } = comments;
-    const product = useSelector(getProductById);
-
-    useEffect(() => {
-        let filters = { productId: product._id, filters: { rating, confirmed }, sortBy };
-        handleFilters(filters);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [rating, sortBy, confirmed, product]);
 
     const handleSortBy = (data) => {
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].checked) {
-                setSortBy(data[i].value);
-                break;
-            }
-        }
+        dispatch(handleFilters({ name: ACTIONS_COMMENT_FILTERS.SORT_BY, value: data }));
     };
 
     const handleRating = (data) => {
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].checked) {
-                setRating(data[i].value);
-                break;
-            }
-        }
+        dispatch(handleFilters({ name: ACTIONS_COMMENT_FILTERS.RATING, value: data }));
+    };
+
+    const handleConfirmed = (data) => {
+        dispatch(handleFilters({ name: ACTIONS_COMMENT_FILTERS.CONFIRMED, value: !isConfirmed }));
     };
 
     return (
@@ -70,14 +55,8 @@ const CommentFilters = () => {
                         </Filters>
                         <BigScreen>
                             <Confirmed>
-                                <Checkbox
-                                    type="checkbox"
-                                    onChange={() => setConfirmed(!confirmed)}
-                                    checked={confirmed}
-                                />
-                                <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>
-                                    Potwierdzone zakupy
-                                </ConfirmedDesc>
+                                <Checkbox type="checkbox" onChange={() => handleConfirmed()} checked={isConfirmed} />
+                                <ConfirmedDesc onClick={() => handleConfirmed()}>Potwierdzone zakupy</ConfirmedDesc>
                             </Confirmed>
                         </BigScreen>
                         <Sort>
@@ -92,8 +71,8 @@ const CommentFilters = () => {
                     </Wrapper>
                     <SmallScreen>
                         <Confirmed>
-                            <Checkbox type="checkbox" onChange={() => setConfirmed(!confirmed)} checked={confirmed} />
-                            <ConfirmedDesc onClick={() => setConfirmed(!confirmed)}>Potwierdzone zakupy</ConfirmedDesc>
+                            <Checkbox type="checkbox" onChange={() => handleConfirmed()} checked={isConfirmed} />
+                            <ConfirmedDesc onClick={() => handleConfirmed()}>Potwierdzone zakupy</ConfirmedDesc>
                         </Confirmed>
                     </SmallScreen>
                 </>

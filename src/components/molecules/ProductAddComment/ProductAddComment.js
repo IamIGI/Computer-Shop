@@ -3,13 +3,13 @@ import { BuyButton } from '../ProductBuyContent/ProductBuyContent.style';
 import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { FiThumbsUp } from 'react-icons/fi';
-import useComment from 'hooks/useComment';
 import { useSelector } from 'react-redux';
 import { getProductById } from 'features/products/productsSlice';
+import { getAllCommentsData } from 'features/comments/commentsSlice';
 
 const ProductAddComment = ({ handleOpen }) => {
     const { auth } = useAuth();
-    const { comments } = useComment();
+    const comments = useSelector(getAllCommentsData);
 
     const product = useSelector(getProductById);
     const [userAlreadyCommented, setUserAlreadyCommented] = useState(false);

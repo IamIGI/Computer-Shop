@@ -4,10 +4,21 @@ import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useState } from 'react';
-import useComment from 'hooks/useComment';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    chosenImageIndex,
+    closeGallery,
+    getAllCommentsData,
+    handleChooseImage,
+    isOpenGalleryStatus,
+} from 'features/comments/commentsSlice';
 
 const CommentsImages = () => {
-    const { chosenImage, comments, isOpenGallery, handleChosenImage, handleOpenModalGallery } = useComment();
+    const dispatchComments = useDispatch();
+    const comments = useSelector(getAllCommentsData);
+    const chosenImage = useSelector(chosenImageIndex);
+    const isOpenGallery = useSelector(isOpenGalleryStatus);
+
     const sumOfElementsWidth = comments.images.length * 90 + (comments.images.length - 1) * 20;
 
     const [divWidth, setDivWidth] = useState(10000);
@@ -42,7 +53,7 @@ const CommentsImages = () => {
                                     key={index}
                                     src={`http://localhost:5000/${urlImage}`}
                                     alt="z node"
-                                    onClick={() => handleChosenImage(index)}
+                                    onClick={() => dispatchComments(handleChooseImage(index))}
                                 />
                             ))}
                         </Wrapper>
@@ -63,7 +74,7 @@ const CommentsImages = () => {
                             <AiOutlineLeft />
                         </ScrollButton>
                     </OutsideWrapper>
-                    <Modal open={isOpenGallery} onClose={() => handleOpenModalGallery([false])}>
+                    <Modal open={isOpenGallery} onClose={() => dispatchComments(closeGallery([false]))}>
                         <PopUpGallery images={comments.images} addServerPrefix={true} initIndex={chosenImage} />
                     </Modal>
                 </>

@@ -21,17 +21,37 @@ import ContentData from 'components/atoms/Comments/ContentData/ContentData';
 import Opinion from 'components/atoms/Comments/Opinion/Opinion';
 import CommentsScore from 'components/atoms/Comments/CommentScore/CommentsScore';
 import { FaCommentSlash } from 'react-icons/fa';
-import { useState } from 'react';
-import useComment from 'hooks/useComment';
+import { useEffect, useState } from 'react';
+import {
+    fetchComments,
+    getAllCommentsData,
+    getCommentsErrors,
+    getCommentsFilters,
+    getCommentsStatus,
+    handleChooseImage,
+    isRefreshComments,
+} from 'features/comments/commentsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { store } from 'app/store';
 
 const Comments = () => {
-    const { comments, handleChosenImage, waitForFetchComments } = useComment();
+    const dispatch = useDispatch();
+    const comments = useSelector(getAllCommentsData);
+    const commentsStatus = useSelector(getCommentsStatus);
+    const commentsErrors = useSelector(getCommentsErrors);
+    const commentFilters = useSelector(getCommentsFilters);
+    const refreshComments = useSelector(isRefreshComments);
+
+    useEffect(() => {
+        store.dispatch(fetchComments());
+    }, [commentFilters, refreshComments]);
+
     const { comments: commentsArray, length: displayedComments } = comments;
     const [limitViewedComments, setLimitViewedComments] = useState(5);
 
     const findImage = (url) => {
         const searchedElement_Index = comments.images.indexOf(url, 0);
-        handleChosenImage(searchedElement_Index);
+        dispatch(handleChooseImage(searchedElement_Index));
     };
 
     const handleLimitOfViewedComments = () => {
@@ -42,9 +62,9 @@ const Comments = () => {
 
     return (
         <Wrapper>
-            {waitForFetchComments ? (
+            {commentsStatus === 'loading' ? (
                 <LoadingAnimation loadingSize={15} />
-            ) : (
+            ) : commentsStatus === 'succeeded' ? (
                 <>
                     {displayedComments === 0 ? (
                         <>
@@ -110,6 +130,8 @@ const Comments = () => {
                         </>
                     )}
                 </>
+            ) : (
+                <p>{commentsErrors}</p>
             )}
         </Wrapper>
     );
