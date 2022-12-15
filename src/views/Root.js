@@ -24,6 +24,7 @@ import Articles from 'components/templates/Articles/Articles';
 import Article from 'components/templates/Article/Article';
 import AccountRecipientTemplate from 'components/organisms/AccountRecipientTemplate/AccountRecipientTemplate';
 import BasketContextWrapper from 'components/templates/Basket/BasketContextWrapper';
+import Register from 'components/templates/Mobile/Register/Register';
 
 const ROLES = {
     User: Number(process.env.REACT_APP_USER_ROLE),
@@ -47,7 +48,10 @@ const Root = () => {
                     <Route path="product/:id" element={<Product />} />
                     <Route path="basket" element={<BasketContextWrapper />} />
                     <Route path="contact" element={<ContactAuthor />} />
-                    <Route path="authorization" element={<Authorization />} />
+                    <Route path="authorization">
+                        <Route index path="" element={<Authorization />} />
+                        <Route path="register" element={<Register />} />
+                    </Route>
                     <Route path="noRealWebsite" element={<NoRealWebsitePage />} />
 
                     <Route path="*" element={<MissingPage />} />

@@ -1,7 +1,8 @@
-import { Wrapper, Section, RegisterSection, BottomLogin } from './Authorization.style';
+import { Wrapper, Section, RegisterSection, BottomLogin, AuthorizationInstructions } from './Authorization.style';
 import { FaStopwatch20 } from 'react-icons/fa';
 import { TbFileInvoice, TbMapSearch, TbShoppingCartDiscount } from 'react-icons/tb';
 import { GreenButton } from 'components/atoms/GreenButton/GreenButton.style';
+import { GreenButtonLink } from 'components/atoms/GreenButtonLink/GreenButtonLink.style';
 import DescriptionSection from './DescriptionSection/DescriptionSection';
 import { Checkbox } from 'components/atoms/Checkbox/Checkbox';
 import useToggle from 'hooks/useToggle';
@@ -18,7 +19,6 @@ import {
     InputField,
     InputSection,
 } from 'components/atoms/InputWithDescription/InputWithDescription.style';
-import { Instructions } from 'components/templates/ContactAuthor/ContactAuthor.style';
 
 const Authorization = () => {
     const { setAuth } = useAuth();
@@ -67,7 +67,6 @@ const Authorization = () => {
             const id = response?.data?.id;
             setAuth({ id, userName, email, roles, accessToken });
             setPwd('');
-
             navigate('/', { replace: true });
         } catch (err) {
             if (!err?.response) {
@@ -98,10 +97,10 @@ const Authorization = () => {
 
     return (
         <>
-            {waitForLogIn ? (
-                <LoadingAnimation loadingSize={10} />
-            ) : (
-                <Wrapper>
+            <Wrapper>
+                {waitForLogIn ? (
+                    <LoadingAnimation loadingSize={10} />
+                ) : (
                     <Section>
                         <h1>Zaloguj się</h1>
                         <ErrMsgContainer ref={errRef}>
@@ -122,7 +121,7 @@ const Authorization = () => {
                                 <InputDescription>E-mail</InputDescription>
                             </InputSection>
                             {emailFocus && email && !validEmail && (
-                                <Instructions>Email jest nie poprawny.</Instructions>
+                                <AuthorizationInstructions>Email jest nie poprawny.</AuthorizationInstructions>
                             )}
                             <InputSection>
                                 <InputField
@@ -139,31 +138,34 @@ const Authorization = () => {
                                 />
                                 <InputDescription>Hasło</InputDescription>
                             </InputSection>
-                            {isCapsLockOn && pwdFocus && pwd && <Instructions>Caps Lock jest wciśnięty</Instructions>}
+                            {isCapsLockOn && pwdFocus && pwd && (
+                                <AuthorizationInstructions>Caps Lock jest wciśnięty</AuthorizationInstructions>
+                            )}
 
                             <BottomLogin onClick={() => toggleCheck()}>
                                 <Checkbox type="checkbox" checked={check} readOnly={true} />
                                 <div>Zaufaj temu urządzeniu</div>
                             </BottomLogin>
-                            <GreenButton>Zaloguj się</GreenButton>
+                            <GreenButton disabled={false}>Zaloguj się</GreenButton>
                         </form>
                         <RegisterSection>
-                            <p>Nie masz konta? </p> <GreenButton>Załóź konto</GreenButton>
+                            <p>Nie masz konta? </p>
+                            <GreenButtonLink to="/authorization/register">Załóź konto</GreenButtonLink>
                         </RegisterSection>
                     </Section>
-                    <Section>
-                        <h2>Dlaczego warto mieć konto w HotShoot</h2>
+                )}
+                <Section>
+                    <h2>Dlaczego warto mieć konto w HotShoot</h2>
 
-                        <DescriptionSection icon={<FaStopwatch20 />} description={'zamawiaj szybciej'} />
-                        <DescriptionSection icon={<TbFileInvoice />} description={'sprawdzaj poprzednie zamówienia'} />
-                        <DescriptionSection icon={<TbMapSearch />} description={'śledź status zamówienia'} />
-                        <DescriptionSection
-                            icon={<TbShoppingCartDiscount />}
-                            description={'korzystanie z rabatów i promocji'}
-                        />
-                    </Section>
-                </Wrapper>
-            )}
+                    <DescriptionSection icon={<FaStopwatch20 />} description={'zamawiaj szybciej'} />
+                    <DescriptionSection icon={<TbFileInvoice />} description={'sprawdzaj poprzednie zamówienia'} />
+                    <DescriptionSection icon={<TbMapSearch />} description={'śledź status zamówienia'} />
+                    <DescriptionSection
+                        icon={<TbShoppingCartDiscount />}
+                        description={'korzystanie z rabatów i promocji'}
+                    />
+                </Section>
+            </Wrapper>
         </>
     );
 };

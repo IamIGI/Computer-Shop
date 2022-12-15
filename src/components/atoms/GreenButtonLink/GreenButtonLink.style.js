@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Button } from 'components/atoms/Button/Button';
+import { NavLink } from 'react-router-dom';
 
-export const GreenButton = styled(Button)`
+export const GreenButtonLink = styled(NavLink)`
     margin: 0px;
     color: white;
     background-color: green;
@@ -14,12 +14,13 @@ export const GreenButton = styled(Button)`
     align-items: center;
     width: 100%;
     padding: 10px 0;
+    color: white;
+    text-decoration: none;
     border-radius: 10px;
 
     &:hover {
-        cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
-        /* background-color: ${({ theme }) => theme.colors.success}; */
-        background-color: ${({ disabled }) => (disabled ? 'green' : '#8FCB81')};
+        cursor: pointer;
+        background-color: ${({ theme }) => theme.colors.success};
     }
 
     @media screen and (max-width: 1400px) {
