@@ -42,7 +42,7 @@ export const Section = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     height: fit-content;
-    padding: 10px 50px;
+    padding: 10px 50px 30px 50px;
     box-shadow: rgb(0 0 0 / 24%) 0px 2px 4px 0px, rgb(0 0 0 / 8%) 0px 0px 2px 1px;
     border-radius: 10px;
     gap: 15px;
@@ -104,4 +104,41 @@ export const RegisterSection = styled.div`
             font-size: ${({ theme }) => theme.fontSize.m_plus};
         }
     }
+`;
+
+export const AuthorizationInstructions = styled.div`
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
+`;
+
+export const RegisterInstructions = styled.div`
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
+    border-radius: 0.5rem;
+    background: ${({ theme }) => theme.colors.grey};
+    color: ${({ theme }) => theme.colors.white};
+    padding: 0.25rem;
+    position: relative;
+    margin-left: 10%;
+    margin-top: 7px;
+    margin-bottom: 10px;
+`;
+
+export const ErrMsg = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${({ theme }) => theme.colors.grey};
+    color: ${({ theme }) => theme.colors.white};
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: ${({ theme }) => theme.fontSize.m_plus};
 `;
