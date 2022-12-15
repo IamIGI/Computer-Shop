@@ -33,10 +33,17 @@ const ProductBuyContent = () => {
     const [quantity, setQuantity] = useState(1);
     const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
     const [isDiscount, setIsDiscount] = useState(false);
+    const [resetProductQuantity, setResetProductQuantity] = useState(false);
 
     const handleAddProduct = () => {
         setQuantity(1);
         dispatchBasket(addProductToBasket({ product, quantity }));
+
+        handleResetProductQuantity(true);
+    };
+
+    const handleResetProductQuantity = (value) => {
+        setResetProductQuantity(value);
     };
 
     const getPrice = (product) => {
@@ -88,6 +95,8 @@ const ProductBuyContent = () => {
                         description={''}
                         filterData={numberOptions}
                         handleItems={handleQuantity}
+                        handleReset={handleResetProductQuantity}
+                        reset={resetProductQuantity}
                     />
                     <BuyButtonMargin>
                         <BuyButton onClick={() => handleAddProduct()}>

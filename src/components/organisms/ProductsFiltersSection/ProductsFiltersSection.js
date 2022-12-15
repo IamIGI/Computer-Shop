@@ -26,6 +26,11 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
     const [clearSortBy, setClearSortBy] = useState(false);
     const [clearProducers, setClearProducers] = useState(false);
     const [clearProcessors, setClearProcessors] = useState(false);
+    const [resetSortBy, setResetSortBy] = useState(false);
+
+    const handleResetSortBy = (value) => {
+        setResetSortBy(value);
+    };
 
     const handleSortBy = (data) => {
         dispatch(handleFilters({ name: 'sortBy', value: data }));
@@ -43,7 +48,18 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
         dispatch(handleFilters({ name: 'discounts', value: productsFilters.filters.discounts }));
     };
 
+    const handleClearSortBy = () => {
+        setClearSortBy(false);
+    };
+    const handleClearProducers = () => {
+        setClearProducers(false);
+    };
+    const handleClearProcessors = () => {
+        setClearProcessors(false);
+    };
+
     const handleClearFilters = () => {
+        handleResetSortBy(true);
         dispatch(clearFilters());
         setClearSearchField((prevValue) => !prevValue);
         setClearSortBy(true);
@@ -62,6 +78,9 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
                 filterData={filterOptions}
                 handleItems={handleSortBy}
                 clearItems={clearSortBy}
+                handleReset={handleResetSortBy}
+                reset={resetSortBy}
+                handleClearItems={handleClearSortBy}
             />
 
             <Title>Status</Title>
@@ -82,6 +101,7 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
                 handleItems={handleProducers}
                 clearItems={clearProducers}
                 showConfirmButtonOnSmallScreen={true}
+                handleClearItems={handleClearProducers}
             />
 
             <SetFilterItems
@@ -92,6 +112,7 @@ const ProductsFiltersSection = ({ position, handleShowFilters, FilterInitPositio
                 handleItems={handleProcessors}
                 clearItems={clearProcessors}
                 showConfirmButtonOnSmallScreen={true}
+                handleClearItems={handleClearProcessors}
             />
 
             <Title>RAM</Title>
