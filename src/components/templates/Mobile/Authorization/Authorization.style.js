@@ -80,18 +80,6 @@ export const BottomLogin = styled.div`
     }
 `;
 
-export const Title = styled.div`
-    width: 100%;
-    padding: 5px 0;
-`;
-
-export const Paragraph = styled.div`
-    display: flex;
-    align-items: center;
-    height: 10px;
-    padding-bottom: 8px;
-`;
-
 export const RegisterSection = styled.div`
     width: 100%;
     display: flex;
@@ -117,48 +105,3 @@ export const RegisterSection = styled.div`
         }
     }
 `;
-
-export const RegisterParagraph = styled.div``;
-
-export const Button = styled.div``;
-
-// export const Wrapper = styled.div`
-//     padding-top: 20px;
-
-//     min-width: 600px;
-//     width: 30%;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-around;
-
-//     align-items: flex-start;
-
-//     @media screen and (max-width: 650px) {
-//         min-width: 200px;
-//         width: 100%;
-//         justify-content: flex-start;
-//         align-items: center;
-//         flex-direction: column;
-//     }
-// `;
-
-// export const LoginWrapper = styled.div`
-//     max-width: 240px;
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: flex-start;
-//     align-items: center;
-//     text-align: center;
-// `;
-
-// export const RegisterWrapper = styled.div`
-//     max-width: 240px;
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     text-align: center;
-// `;
