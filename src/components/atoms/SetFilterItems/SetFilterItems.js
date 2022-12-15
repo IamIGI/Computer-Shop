@@ -33,10 +33,7 @@ const SetFilterItems = ({
     const [placeholder, setPlaceHolder] = useState(OneTimeChoice ? filterData[0].label : '');
 
     useEffect(() => {
-        console.log(filterData);
-        console.log(reset);
         if (reset) {
-            console.log('reseting field');
             setCheck(filterData);
             setPlaceHolder(filterData[0].label);
             handleReset(false);
