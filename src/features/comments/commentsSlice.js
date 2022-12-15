@@ -80,7 +80,6 @@ const commentsSlice = createSlice({
             })
             .addCase(fetchComments.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                console.log(action.payload);
                 state.data = action.payload;
             })
             .addCase(fetchComments.rejected, (state, action) => {

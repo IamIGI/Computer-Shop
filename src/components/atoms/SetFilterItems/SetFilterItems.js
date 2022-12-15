@@ -18,16 +18,27 @@ const SetFilterItems = ({
     filterData,
     handleItems,
     clearItems,
+    handleClearItems,
     OneTimeChoice = false,
     displayCheckbox = false,
     selectOptionsInCenter = false,
     afterClickWrap = false,
     showConfirmButtonOnSmallScreen = false,
+    handleReset,
+    reset,
 }) => {
     const [toggle, setToggle] = useState(false);
     const [check, setCheck] = useState(filterData);
     const [quantity, setQuantity] = useState(0);
     const [placeholder, setPlaceHolder] = useState(OneTimeChoice ? filterData[0].label : '');
+
+    useEffect(() => {
+        if (reset) {
+            setCheck(filterData);
+            setPlaceHolder(filterData[0].label);
+            handleReset(false);
+        }
+    }, [reset]);
 
     const handleCheck = (key, value) => {
         if (!OneTimeChoice) {
@@ -65,6 +76,7 @@ const SetFilterItems = ({
         if (clearItems) {
             setCheck(filterData);
             handleItems(check);
+            handleClearItems();
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
