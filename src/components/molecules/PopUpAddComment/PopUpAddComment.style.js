@@ -279,7 +279,7 @@ export const TextArea = styled.textarea`
     margin-top: 10px;
     padding: 12px 20px;
     border: 1px solid lightgrey;
-    font-size: ${({ theme }) => theme.fontSize.l_plus};
+    font-size: ${({ theme }) => theme.fontSize.l};
     color: grey;
     border-radius: 20px;
     resize: none;
@@ -305,7 +305,6 @@ export const TextArea = styled.textarea`
     }
 
     @media screen and (max-width: 900px) {
-        font-size: ${({ theme }) => theme.fontSize.l};
         height: 130px;
     }
 

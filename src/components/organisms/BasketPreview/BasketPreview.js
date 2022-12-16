@@ -20,6 +20,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from '../CartHint/CartHint.style';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, getBasket, updatePriceToPay } from 'features/basket/basketSlice';
+import formatPrices from 'helpers/formatPrices';
 
 const BasketPreview = () => {
     const dispatchBasket = useDispatch();
@@ -69,13 +70,13 @@ const BasketPreview = () => {
                                         {item.isDiscount ? (
                                             <>
                                                 <OldPrice>
-                                                    <span>{item.priceBeforeDiscount} zł</span>
+                                                    <span>{formatPrices(item.priceBeforeDiscount)} zł</span>
                                                 </OldPrice>
-                                                <CurrentPrice>{item.price} zł</CurrentPrice>
+                                                <CurrentPrice>{formatPrices(item.price)} zł</CurrentPrice>
                                             </>
                                         ) : (
                                             <CurrentPrice>
-                                                <p>{item.price} zł</p>
+                                                <p>{formatPrices(item.price)} zł</p>
                                             </CurrentPrice>
                                         )}
                                     </PriceArea>

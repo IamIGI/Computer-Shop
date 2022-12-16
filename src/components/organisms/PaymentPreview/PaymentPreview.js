@@ -17,6 +17,7 @@ import useAuth from 'hooks/useAuth';
 import PromoSectionComponent from 'components/molecules/PromoSection/PromoSection';
 import { useSelector } from 'react-redux';
 import { getPriceToPay } from 'features/basket/basketSlice';
+import formatPrices from 'helpers/formatPrices';
 
 const PaymentPreview = ({ orderReady, finishHandler, priceForDelivery, isUserLogIn }) => {
     const priceToPay = useSelector(getPriceToPay);
@@ -31,13 +32,13 @@ const PaymentPreview = ({ orderReady, finishHandler, priceForDelivery, isUserLog
                     <li>
                         <ListSection>
                             <Name>Wartość koszyka:</Name>
-                            <Price>{priceToPay.toFixed(2)} zł</Price>
+                            <Price>{formatPrices(priceToPay.toFixed(2))} zł</Price>
                         </ListSection>
                     </li>
                     <li>
                         <ListSection>
                             <Name>Dostawa:</Name>
-                            <Price>{priceForDelivery} zł</Price>
+                            <Price>{formatPrices(priceForDelivery)} zł</Price>
                         </ListSection>
                     </li>
                     <li>
@@ -49,7 +50,7 @@ const PaymentPreview = ({ orderReady, finishHandler, priceForDelivery, isUserLog
                     <li>
                         <ListSection>
                             <Name>Podsumowanie:</Name>
-                            <Price>{(priceToPay + priceForDelivery).toFixed(2)} zł</Price>
+                            <Price>{formatPrices((priceToPay + priceForDelivery).toFixed(2))} zł</Price>
                         </ListSection>
                     </li>
                 </List>

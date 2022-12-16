@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Slider, SlideTrack, Slide, Items } from './YouMayLike.style';
-import useRefresh from 'hooks/useRefresh';
+
 import { filterInit } from 'data/Products';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import MayLikeItem from 'components/molecules/MayLikeItem/MayLikeItem';
@@ -8,19 +8,22 @@ import SectionDescription from 'components/atoms/SectionDescription/SectionDescr
 import { BiBookHeart } from 'react-icons/bi';
 import { handleProductsArray, NumberOfProductOnWidthChange } from './YouMayLikeLogic';
 import { store } from 'app/store';
-import { fetchProducts, getAllProducts, getProductsErrors, getProductsStatus } from 'features/products/productsSlice';
+import {
+    fetchMayLikeItems,
+    getMayLikeProducts,
+    getMayLikeProductsStatus,
+    getProductsErrors,
+} from 'features/products/productsSlice';
 import { useSelector } from 'react-redux';
 
 const YouMayLike = () => {
-    const { refresh } = useRefresh();
-
-    const products = useSelector(getAllProducts);
-    const productsStatus = useSelector(getProductsStatus);
+    const products = useSelector(getMayLikeProducts);
+    const productsStatus = useSelector(getMayLikeProductsStatus);
     const productsError = useSelector(getProductsErrors);
 
     useEffect(() => {
-        store.dispatch(fetchProducts(filterInit));
-    }, [refresh]);
+        store.dispatch(fetchMayLikeItems(filterInit));
+    }, []);
 
     const [slidesOfProducts, setSlidesOfProducts] = useState([]);
     const [divWidth, setDivWidth] = useState(10000);

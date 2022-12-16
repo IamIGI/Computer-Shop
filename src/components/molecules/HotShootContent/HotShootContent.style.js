@@ -157,16 +157,19 @@ export const Timer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 10px;
 `;
 export const GivenTime = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     border-radius: 15px;
     background-color: ${({ theme }) => theme.colors.lightLightGrey};
     font-size: ${({ theme }) => theme.fontSize.xl};
-    margin: 0 10px;
-    padding-top: 17px;
+    padding-bottom: 5px;
     width: 70px;
     height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media screen and (max-width: 730px) {
         width: 60px;

@@ -15,7 +15,7 @@ const OrderSummarySection = ({ value }) => {
                             (
                                 value.transactionInfo.price - getDeliveryPrice(value.transactionInfo.deliveryMethod)
                             ).toFixed(2)
-                        )}{' '}
+                        )}
                         zł
                     </div>
                 </li>

@@ -14,7 +14,7 @@ import {
 import BuyButton from 'components/atoms/BuyButton/BuyButton';
 import ScrollTop from 'helpers/ScrollToTop';
 
-const ProductPreviewItem = ({ item }) => {
+const MayLikeItem = ({ item }) => {
     return (
         <Wrapper>
             <Link to={`/product/${item._id}`} onClick={() => ScrollTop('Top')}>
@@ -50,4 +50,4 @@ const ProductPreviewItem = ({ item }) => {
     );
 };
 
-export default ProductPreviewItem;
+export default MayLikeItem;

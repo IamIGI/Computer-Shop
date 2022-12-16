@@ -48,8 +48,8 @@ export const Close = styled.div`
     position: absolute;
     font-size: ${({ theme }) => theme.fontSize.m_plus};
     border-radius: 50%;
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
