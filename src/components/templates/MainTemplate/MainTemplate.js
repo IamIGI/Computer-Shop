@@ -8,7 +8,6 @@ import { ThemeProvider } from 'styled-components';
 import { AuthProvider } from 'context/AuthProvider';
 import { InsideWrapper, Wrapper } from './MainTemplate.styles';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
-import { OrderProvider } from 'context/OrderItemProvider';
 import { RefreshProvider } from 'context/refreshProvider';
 import { BrowserRouter } from 'react-router-dom';
 import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
@@ -26,19 +25,17 @@ const MainTemplate = ({ children }) => {
                 <BrowserRouter>
                     <ThemeProvider theme={theme}>
                         <Provider store={store}>
-                            <OrderProvider>
-                                <RefreshProvider>
-                                    <ChangeHotShootTimer />
-                                    <AuthProvider>
-                                        <NavBar />
-                                        <InsideWrapper>
-                                            {children}
-                                            <AccountPreviewSection />
-                                        </InsideWrapper>
-                                        <Footer />
-                                    </AuthProvider>
-                                </RefreshProvider>
-                            </OrderProvider>
+                            <RefreshProvider>
+                                <ChangeHotShootTimer />
+                                <AuthProvider>
+                                    <NavBar />
+                                    <InsideWrapper>
+                                        {children}
+                                        <AccountPreviewSection />
+                                    </InsideWrapper>
+                                    <Footer />
+                                </AuthProvider>
+                            </RefreshProvider>
                         </Provider>
                     </ThemeProvider>
                 </BrowserRouter>

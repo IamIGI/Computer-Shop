@@ -30,7 +30,6 @@ import { useEffect, useState } from 'react';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { BsBox } from 'react-icons/bs';
 import SectionDescription from 'components/atoms/SectionDescription/SectionDescription';
-import useOrder from 'hooks/useOrder';
 import { BsLaptop } from 'react-icons/bs';
 import { getStatus, getDate } from './AccountSettingsOrders.logic';
 import { HiDotsVertical } from 'react-icons/hi';
@@ -42,7 +41,6 @@ import formatPrices from 'helpers/formatPrices';
 
 const AccountSettingsOrders = () => {
     const { auth } = useAuth();
-    const { setOrderItem } = useOrder();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -87,11 +85,6 @@ const AccountSettingsOrders = () => {
         countPageButtons.push(i);
     }
 
-    const goToOrderItem = (order) => {
-        setOrderItem(order);
-        setIsActiveLink(true);
-    };
-
     return (
         <AccountSettings>
             <Wrapper onClick={() => setShowHandyOptions('')}>
@@ -113,7 +106,6 @@ const AccountSettingsOrders = () => {
                             {orderHistory.map((item, index) => (
                                 <InsideWrapper key={item._id}>
                                     <OrderContent
-                                        onClick={() => goToOrderItem(item)}
                                         to={isActiveLink ? `/accountSettings/orders/history/${item._id}` : ''}
                                     >
                                         <OrderDescription>
