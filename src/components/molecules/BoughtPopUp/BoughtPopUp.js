@@ -12,18 +12,12 @@ import {
     InsideWrapper,
 } from './BoughtPopUp.style';
 import { RiCake3Line } from 'react-icons/ri';
-import useOrder from 'hooks/useOrder';
 import { BASE_URL } from 'data/GlobalVariables';
 import { useSelector } from 'react-redux';
 import { getBasket } from 'features/basket/basketSlice';
 
 const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
     const basketItems = useSelector(getBasket);
-    const { setOrderItem } = useOrder();
-
-    const goToOrderItem = (order) => {
-        setOrderItem(order);
-    };
 
     return (
         <Wrapper>
@@ -52,7 +46,6 @@ const BoughtPopUp = ({ onClose, orderId, isUserLogIn }) => {
                             <Link
                                 onClick={() => {
                                     onClose();
-                                    goToOrderItem({ _id: orderId });
                                 }}
                                 to={`/accountSettings/orders/history/${orderId}`}
                             >

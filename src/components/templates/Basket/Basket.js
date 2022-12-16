@@ -44,7 +44,7 @@ const Basket = () => {
     const [orderData, setOrderData] = useMultiCheckboxMemory('orderForm', initRecipientDetails);
     const { street } = orderData;
     const [finishOrder, setFinishOrder] = useState(false);
-    const [priceForDelivery, setPriceForDelivery] = useState();
+    const [priceForDelivery, setPriceForDelivery] = useState(0);
     const [isOpen, setIsOpen] = useState([false]);
     const [orderId, setOrderId] = useState('');
     const [orderTemplateData, setOrderTemplateData] = useLocalStorage('orderData', '');
