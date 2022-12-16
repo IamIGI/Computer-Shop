@@ -11,11 +11,19 @@ const initialState = {
     productById: {},
     productById_status: 'idle',
     addedCommentFlag: false,
+    mayLikeProducts: [],
+    mayLikeStatus: 'idle',
 };
 
 export const fetchProducts = createAsyncThunk('products/all', async (arg, { getState }) => {
     const state = getState();
     const response = await ProductsApi.post('/all', state.products.filters);
+    return response.data;
+});
+
+//for now fetch all products
+export const fetchMayLikeItems = createAsyncThunk('products/mayLikeItems', async () => {
+    const response = await ProductsApi.post('/all', filterInit);
     return response.data;
 });
 
@@ -101,6 +109,17 @@ const productsSlice = createSlice({
             .addCase(fetchProductById.rejected, (state, action) => {
                 state.productById_status = 'failed';
                 state.error = action.error.message;
+            })
+            .addCase(fetchMayLikeItems.pending, (state, action) => {
+                state.mayLikeStatus = 'loading';
+            })
+            .addCase(fetchMayLikeItems.fulfilled, (state, action) => {
+                state.mayLikeStatus = 'succeeded';
+                state.mayLikeProducts = action.payload;
+            })
+            .addCase(fetchMayLikeItems.rejected, (state, action) => {
+                state.mayLikeStatus = 'failed';
+                state.error = action.error.message;
             });
     },
 });
@@ -113,6 +132,9 @@ export const getProductsFilters = (state) => state.products.filters;
 export const getProductById = (state) => state.products.productById;
 export const getProductByIdStatus = (state) => state.products.productById_status;
 export const getProductAddCommentFlag = (state) => state.products.addedCommentFlag;
+
+export const getMayLikeProducts = (state) => state.products.mayLikeProducts;
+export const getMayLikeProductsStatus = (state) => state.products.mayLikeStatus;
 
 export const { clearFilters, handleFilters, handleAddedComment } = productsSlice.actions;
 

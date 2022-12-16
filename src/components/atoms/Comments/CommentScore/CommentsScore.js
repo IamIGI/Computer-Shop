@@ -63,18 +63,7 @@ const CommentsScore = ({ comment }) => {
                 </Icon3>
                 <LikeNumber>{comment.likes.down}</LikeNumber>
             </InsideWrapper>
-            <Alert>
-                {notLoggedIn[0] && notLoggedIn[1] === comment._id ? (
-                    <>
-                        <>{notLoggedIn[2]}</>
-                        <Icon4>
-                            <ImSad />
-                        </Icon4>
-                    </>
-                ) : (
-                    <></>
-                )}
-            </Alert>
+            <Alert>{notLoggedIn[0] && notLoggedIn[1] === comment._id ? <>{notLoggedIn[2]}</> : <></>}</Alert>
         </Wrapper>
     );
 };

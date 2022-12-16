@@ -59,8 +59,9 @@ export const Top = styled.div`
         height: fit-content;
         width: 95%;
         margin-left: 2.5%;
+        color: red;
 
-        font-size: ${({ theme }) => theme.fontSize.l};
+        font-size: ${({ theme }) => theme.fontSize.m};
         font-weight: 400;
         color: ${({ theme }) => theme.colors.black};
     }
@@ -80,13 +81,13 @@ export const Top = styled.div`
         }
 
         h1 {
-            font-size: ${({ theme }) => theme.fontSize.l};
+            font-size: ${({ theme }) => theme.fontSize.m_plus};
         }
     }
 
     @media screen and (max-width: 1100px) {
         h1 {
-            font-size: ${({ theme }) => theme.fontSize.m_plus};
+            font-size: ${({ theme }) => theme.fontSize.s};
         }
     }
 
@@ -98,7 +99,8 @@ export const Top = styled.div`
         }
 
         h1 {
-            font-size: ${({ theme }) => theme.fontSize.m};
+            margin: 0px;
+            font-size: ${({ theme }) => theme.fontSize.s};
         }
     }
 
@@ -107,13 +109,7 @@ export const Top = styled.div`
     }
 `;
 
-export const ItemName = styled.div`
-    @media screen and (max-width: 1100px) {
-        h1 {
-            margin: 0px;
-        }
-    }
-`;
+export const ItemName = styled.div``;
 
 export const ItemImage = styled.div`
     display: flex;

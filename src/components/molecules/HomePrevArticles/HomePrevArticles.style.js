@@ -53,7 +53,8 @@ export const ContentWrapper = styled.div`
     justify-content: flex-start;
     align-items: center;
     gap: 6px;
-    height: fit-content;
+    height: 100%;
+    max-height: 350px;
 
     @media screen and (max-width: 685px) {
         flex-direction: row;
