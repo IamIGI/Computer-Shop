@@ -8,7 +8,6 @@ import { ThemeProvider } from 'styled-components';
 import { AuthProvider } from 'context/AuthProvider';
 import { InsideWrapper, Wrapper } from './MainTemplate.styles';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
-import { RefreshProvider } from 'context/refreshProvider';
 import { BrowserRouter } from 'react-router-dom';
 import ChangeHotShootTimer from 'data/ChangeHotShootTimer';
 import { Toaster } from 'react-hot-toast';
@@ -25,17 +24,15 @@ const MainTemplate = ({ children }) => {
                 <BrowserRouter>
                     <ThemeProvider theme={theme}>
                         <Provider store={store}>
-                            <RefreshProvider>
-                                <ChangeHotShootTimer />
-                                <AuthProvider>
-                                    <NavBar />
-                                    <InsideWrapper>
-                                        {children}
-                                        <AccountPreviewSection />
-                                    </InsideWrapper>
-                                    <Footer />
-                                </AuthProvider>
-                            </RefreshProvider>
+                            <ChangeHotShootTimer />
+                            <AuthProvider>
+                                <NavBar />
+                                <InsideWrapper>
+                                    {children}
+                                    <AccountPreviewSection />
+                                </InsideWrapper>
+                                <Footer />
+                            </AuthProvider>
                         </Provider>
                     </ThemeProvider>
                 </BrowserRouter>

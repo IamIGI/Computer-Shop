@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import BadFiltersInfo from 'components/molecules/BadFiltersInfo/BadFiltersInfo';
-import useRefresh from 'hooks/useRefresh';
 import useWindowSize from 'hooks/useWindowSize';
 import ProductPreviewItem from 'components/molecules/ProductPreviewItem/ProductPreviewItem';
 import { store } from 'app/store';
@@ -12,12 +11,12 @@ import {
     getProductsErrors,
     getProductsFilters,
     getProductsStatus,
+    getRefreshProduct,
 } from 'features/products/productsSlice';
 import { useSelector } from 'react-redux';
 import productsPreviewLogic from './productsPreview.logic';
 
 const ProductPreview = ({ allProducts = false, limitTheNumber = false }) => {
-    const { refresh } = useRefresh();
     const [numberOfProducts, setNumberOfProducts] = useState(0);
     const windowSize = useWindowSize();
 
@@ -25,6 +24,7 @@ const ProductPreview = ({ allProducts = false, limitTheNumber = false }) => {
     const products = useSelector(getAllProducts);
     const productsStatus = useSelector(getProductsStatus);
     const productsError = useSelector(getProductsErrors);
+    const refresh = useSelector(getRefreshProduct);
 
     useEffect(() => {
         store.dispatch(fetchProducts(productFilters));
