@@ -16,14 +16,15 @@ import {
 import { getHotShootPromotion } from 'api/hotShoot';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
 import { TimerCount } from './HotShootContent.logic';
-import useRefresh from 'hooks/useRefresh';
 import formatPrices from 'helpers/formatPrices';
+import { useSelector } from 'react-redux';
+import { getRefreshProduct } from 'features/products/productsSlice';
 
 const HotShootContent = () => {
     const [counters, setCounters] = useState([1, 2, 3]);
     const [isFetchHotShoot, setIsFetchHotShoot] = useState(true);
     const [hotShoot, setHotShoot] = useState({});
-    const { refresh } = useRefresh();
+    const refresh = useSelector(getRefreshProduct);
 
     useEffect(() => {
         const fetchHotShoot = async () => {

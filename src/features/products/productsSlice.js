@@ -13,6 +13,7 @@ const initialState = {
     addedCommentFlag: false,
     mayLikeProducts: [],
     mayLikeStatus: 'idle',
+    refreshProducts: false,
 };
 
 export const fetchProducts = createAsyncThunk('products/all', async (arg, { getState }) => {
@@ -85,6 +86,9 @@ const productsSlice = createSlice({
         handleAddedComment(state, action) {
             state.addedCommentFlag = action.payload;
         },
+        handleRefreshProducts(state, action) {
+            state.refreshProducts = !state.refreshProducts;
+        },
     },
     extraReducers(builder) {
         builder
@@ -136,6 +140,8 @@ export const getProductAddCommentFlag = (state) => state.products.addedCommentFl
 export const getMayLikeProducts = (state) => state.products.mayLikeProducts;
 export const getMayLikeProductsStatus = (state) => state.products.mayLikeStatus;
 
-export const { clearFilters, handleFilters, handleAddedComment } = productsSlice.actions;
+export const getRefreshProduct = (state) => state.products.refreshProducts;
+
+export const { clearFilters, handleFilters, handleAddedComment, handleRefreshProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;
