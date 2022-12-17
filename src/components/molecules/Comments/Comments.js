@@ -33,6 +33,7 @@ import {
 } from 'features/comments/commentsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { store } from 'app/store';
+import { BASE_URL } from 'data/URL';
 
 const Comments = () => {
     const dispatch = useDispatch();
@@ -101,7 +102,7 @@ const Comments = () => {
                                                 <>
                                                     {comment.image.images.map((url, index) => (
                                                         <Image
-                                                            src={`http://localhost:5000/${url}`}
+                                                            src={`${BASE_URL}/${url}`}
                                                             key={index}
                                                             alt="comment"
                                                             onClick={() => findImage(url)}
