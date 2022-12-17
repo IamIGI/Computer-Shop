@@ -1,5 +1,5 @@
 import { OrderSectionTitle } from 'components/organisms/AccountOrderHistoryItem/AccountOrderHistoryItem.style';
-import { BASE_URL } from 'data/GlobalVariables';
+import { BASE_URL } from 'data/URL';
 import { OrderSection, UserDataDescription } from './UserOrderSection.style';
 
 const UserOrderSection = ({ value, title }) => {

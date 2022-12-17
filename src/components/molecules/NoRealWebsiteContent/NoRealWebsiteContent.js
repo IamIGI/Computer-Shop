@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getWebUpdates } from 'api/webUpdates';
 import LoadingAnimation from 'components/atoms/LoadingAnimation/LoadingAnimation';
-import { BASE_URL } from 'data/GlobalVariables';
+import { BASE_URL } from 'data/URL';
 import { Title, Subtitle, ListSection, BottomWrapper, GitLink, GetPDF } from './NoRealWebsiteContent.style';
 import { InsideWrapper } from './NoRealWebsiteContent.style';
 

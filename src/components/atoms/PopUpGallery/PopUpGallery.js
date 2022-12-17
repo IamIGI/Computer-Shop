@@ -2,6 +2,7 @@ import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import React, { useEffect, useState } from 'react';
 import { Wrapper, ImageContainer, SmallImagesContainer, SmallImage, SmallImageWrapper } from './PopUpGallery.style';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { BASE_URL } from 'data/URL';
 
 const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
     const [index, setIndex] = useState(initIndex);
@@ -38,7 +39,7 @@ const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
         <Wrapper>
             <ImageContainer>
                 <img
-                    src={addServerPrefix ? `http://localhost:5000/${images[index]}` : images[index]}
+                    src={addServerPrefix ? `${BASE_URL}/${images[index]}` : images[index]}
                     alt="Show product"
                     key={index}
                 />
@@ -48,7 +49,7 @@ const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
                     {images.map((item, i) => (
                         <SmallImage
                             key={i}
-                            src={addServerPrefix ? `http://localhost:5000/${item}` : item}
+                            src={addServerPrefix ? `${BASE_URL}/${item}` : item}
                             alt="products gallery"
                             onMouseEnter={() => setIndex(i)}
                             border={i === index ? true : false}

@@ -12,7 +12,7 @@ import {
     InsideWrapper,
 } from './BoughtPopUp.style';
 import { RiCake3Line } from 'react-icons/ri';
-import { BASE_URL } from 'data/GlobalVariables';
+import { BASE_URL } from 'data/URL';
 import { useSelector } from 'react-redux';
 import { getBasket } from 'features/basket/basketSlice';
 

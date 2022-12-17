@@ -6,6 +6,7 @@ import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { getProductById } from 'features/products/productsSlice';
+import { BASE_URL } from 'data/URL';
 
 const ProductGallery = ({ addServerPrefix = false }) => {
     const product = useSelector(getProductById);
@@ -54,7 +55,7 @@ const ProductGallery = ({ addServerPrefix = false }) => {
                     {product.img.map((item, i) => (
                         <SmallImage
                             key={i}
-                            src={addServerPrefix ? `http://localhost:5000/${item}` : item}
+                            src={addServerPrefix ? `${BASE_URL}/${item}` : item}
                             alt="products gallery"
                             onMouseEnter={() => setIndex(i)}
                             border={i === index ? true : false}
