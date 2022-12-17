@@ -4,7 +4,7 @@ import { Wrapper, ImageContainer, SmallImagesContainer, SmallImage, SmallImageWr
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { BASE_URL } from 'data/URL';
 
-const PopUpGallery = ({ images, addServerPrefix, initIndex }) => {
+const PopUpGallery = ({ images, addServerPrefix = false, initIndex }) => {
     const [index, setIndex] = useState(initIndex);
     const sumOfElementsWidth = images.length * 90 + (images.length - 1) * 20;
 
