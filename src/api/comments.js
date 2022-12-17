@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from 'data/GlobalVariables';
+import { BASE_URL } from 'data/URL';
 
 const commentApi = axios.create({
     baseURL: `${BASE_URL}/comments/`,

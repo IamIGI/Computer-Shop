@@ -1,4 +1,5 @@
 import { Wrapper, Image, OutsideWrapper } from './CommentsImages.style';
+import { BASE_URL } from 'data/URL';
 import { ScrollButton } from 'components/atoms/ScrollButton/ScrollButton.style';
 import Modal from 'components/atoms/Modal/Modal';
 import PopUpGallery from 'components/atoms/PopUpGallery/PopUpGallery';
@@ -51,7 +52,7 @@ const CommentsImages = () => {
                                 <Image
                                     id={`CommentImage_${index}`}
                                     key={index}
-                                    src={`http://localhost:5000/${urlImage}`}
+                                    src={`${BASE_URL}/${urlImage}`}
                                     alt="z node"
                                     onClick={() => dispatchComments(handleChooseImage(index))}
                                 />
@@ -75,7 +76,7 @@ const CommentsImages = () => {
                         </ScrollButton>
                     </OutsideWrapper>
                     <Modal open={isOpenGallery} onClose={() => dispatchComments(closeGallery([false]))}>
-                        <PopUpGallery images={comments.images} addServerPrefix={true} initIndex={chosenImage} />
+                        <PopUpGallery images={comments.images} initIndex={chosenImage} />
                     </Modal>
                 </>
             )}

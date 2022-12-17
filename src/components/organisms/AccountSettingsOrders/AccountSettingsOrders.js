@@ -34,7 +34,7 @@ import { BsLaptop } from 'react-icons/bs';
 import { getStatus, getDate } from './AccountSettingsOrders.logic';
 import { HiDotsVertical } from 'react-icons/hi';
 import { GrDocumentPdf } from 'react-icons/gr';
-import { BASE_URL } from 'data/GlobalVariables';
+import { BASE_URL } from 'data/URL';
 
 import PageMenu from 'components/molecules/PageMenu/PageMenu';
 import formatPrices from 'helpers/formatPrices';

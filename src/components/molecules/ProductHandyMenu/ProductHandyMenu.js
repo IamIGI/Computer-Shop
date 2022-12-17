@@ -1,6 +1,6 @@
 import { Wrapper, OptionSection, OptionIcon, OptionDescription } from './ProductHandyMenu.style';
 import { BsPrinter } from 'react-icons/bs';
-import { BASE_URL } from 'data/GlobalVariables';
+import { BASE_URL } from 'data/URL';
 import { useSelector } from 'react-redux';
 import { getProductById } from 'features/products/productsSlice';
 
