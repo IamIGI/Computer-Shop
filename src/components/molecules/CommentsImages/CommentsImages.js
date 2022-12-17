@@ -76,7 +76,7 @@ const CommentsImages = () => {
                         </ScrollButton>
                     </OutsideWrapper>
                     <Modal open={isOpenGallery} onClose={() => dispatchComments(closeGallery([false]))}>
-                        <PopUpGallery images={comments.images} initIndex={chosenImage} />
+                        <PopUpGallery images={comments.images} addServerPrefix={true} initIndex={chosenImage} />
                     </Modal>
                 </>
             )}
